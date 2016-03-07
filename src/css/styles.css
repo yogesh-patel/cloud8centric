@@ -1,0 +1,114 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+}
+
+.logo {
+    padding: 10px;
+}
+
+.splashScreen {
+    background-image: url('../../img/header-bg.jpg') ;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    background-size: cover;
+    -o-background-size: cover;
+    background-color: #CCC;
+}
+
+.splashScreen .jumbotron {
+    background-color: transparent;
+    color: white;
+    display: table;
+    min-height: 720px;
+    width: 100%;
+}
+
+.menu {
+    background-color: rgba(0, 0, 0, 0);
+    background-image: inherit;
+    border: none;
+}
+
+.inverse-menu,
+.menu {
+    margin: 10px;
+}
+
+.menu.navbar-inverse .navbar-nav>.active>a,
+.menu.navbar-inverse .navbar-nav>.open>a {
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: 0 0 10px #D4D2D0;
+}
+
+.productContainer {
+    display: table;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.menu.navbar-inverse .navbar-nav>.active>a:focus,
+.menu.navbar-inverse .navbar-nav>.active>a:hover,
+.menu.navbar-inverse .navbar-nav>.open>a:focus,
+.menu.navbar-inverse .navbar-nav>.open>a:hover {
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: 0 0 10px #D4D2D0;
+}
+
+.products .content,
+.splashScreen .content{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.products .productContainer h1,
+.products .productContainer p,
+.products .productContainer button {
+    margin: 25px;
+}
+
+.splashScreen .jumbotron h1,
+.splashScreen .jumbotron p,
+.splashScreen .jumbotron button {
+    margin: 25px;
+}
+
+.smallText {
+    font-size: 15px !important;
+}
+
+.react-animation-appear {
+    opacity: 0.01;
+}
+
+.react-animation-appear.react-animation-appear-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+}
+
+.react-addition-animation-enter {
+    opacity: 0.01;
+}
+
+.react-addition-animation-enter.react-addition-animation-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.react-addition-animation-leave {
+    opacity: 1;
+}
+
+.react-addition-animation-leave.react-addition-animation-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}
+
+.btn-primary {
+    border-radius: 30px;
+    padding: 15px;
+    width: 150px;
+}

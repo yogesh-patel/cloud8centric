@@ -26,7 +26,7 @@ export default class SplashScreen extends Component {
                                                          transitionLeave={false}
                                 >
                                     <h1>Welcome To Centric SAAS!</h1>
-                                    <p className="smallText">It's simply the best plm software for retail, fashion, footwear and consumer goods makers, too.</p>
+                                    <p className="smallText">Its simply the best plm software for retail, fashion, footwear and consumer goods makers, too.</p>
                                     <p><Button bsStyle="primary">Learn more</Button></p>
                                 </ReactCSSTransitionGroup>
                             </div>

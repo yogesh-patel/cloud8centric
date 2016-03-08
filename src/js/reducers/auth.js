@@ -32,7 +32,7 @@ export default createReducer(initialState, {
             'authenticationStatus':'passed',
             'token': payload.token,
             'userName': payload.userName,
-            'statusText': 'You have been successfully logged in.'
+            'statusText': payload.statusText
         });
 
     },

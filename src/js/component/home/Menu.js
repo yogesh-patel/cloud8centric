@@ -15,8 +15,17 @@ import { connect } from 'react-redux';
 
 class Menu extends Component {
 
+  constructor(props){
+    super(props);
+    this.state={};
+  }
+
   gotoLoginPage(){
     this.props.routeDispatch(push("login"));
+  }
+
+  onOptionSelected(selectedKey){
+    this.setState({selectedOption:selectedKey});
   }
 
   render() {
@@ -32,9 +41,13 @@ class Menu extends Component {
           <Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Nav pullRight>
-            <li role="presentation"><Link to="products" href="#" smooth duration={500}>Product</Link></li>
-            <NavItem eventKey={2} active>Contact</NavItem>
+          <Nav onSelect={this.onOptionSelected.bind(this)}
+               activeKey={this.state.selectedOption}
+               pullRight>
+            <li role="presentation">
+              <Link to="products" href="#" smooth duration={500}>Product</Link>
+            </li>
+            <NavItem eventKey={2}>Contact</NavItem>
             <NavItem eventKey={3} onClick={this.gotoLoginPage.bind(this)}>Login</NavItem>
           </Nav>
         </Navbar.Collapse>

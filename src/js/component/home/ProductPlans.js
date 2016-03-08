@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
+import {Grid, Row, Col, Panel, Button} from 'react-bootstrap';
 
 class ProductPlans extends Component {
   render() {
@@ -21,9 +22,9 @@ class ProductPlans extends Component {
       }.bind(this));
 
     return(
-      <div>
-        {products}
-      </div>
+        <Row className="text-center">
+            {products}
+        </Row>
     );
 
   }

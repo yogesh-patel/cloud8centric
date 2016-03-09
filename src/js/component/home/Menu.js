@@ -33,7 +33,7 @@ class Menu extends Component {
     let inverseClass = this.props.inverseMenu ? 'inverse-menu' : 'menu';
 
     return (
-      <Navbar inverse fixedTop fluid className={inverseClass}>
+      <Navbar inverse fixedTop fluid className={'home-menu '+inverseClass}>
         <Navbar.Header>
           <Navbar.Brand>
               {brandImg}
@@ -45,10 +45,12 @@ class Menu extends Component {
                activeKey={this.state.selectedOption}
                pullRight>
             <li role="presentation">
-              <Link to="products" href="#" smooth duration={500}>Product</Link>
+              <Link to="products" href="#" smooth duration={500}>PRODUCTS</Link>
             </li>
-            <NavItem eventKey={2}>Contact</NavItem>
-            <NavItem eventKey={3} onClick={this.gotoLoginPage.bind(this)}>Login</NavItem>
+            <li role="presentation">
+              <Link to="contact" href="#" smooth duration={500}>CONTACT</Link>
+            </li>
+            <NavItem eventKey={3} onClick={this.gotoLoginPage.bind(this)}>LOGIN</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

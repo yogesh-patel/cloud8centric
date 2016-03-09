@@ -8,8 +8,10 @@ import SplashScreen from './home/SplashScreen';
 import Products from './home/Products';
 import HomeFooter from './home/HomeFooter';
 import ContactUs from './home/ContactUs';
+import Login from './Login';
+import { connect } from 'react-redux';
 
-export default class Home extends Component {
+class Home extends Component {
 
     constructor() {
         super();
@@ -38,13 +40,20 @@ export default class Home extends Component {
     }
 
     render() {
+        var topScreen = null;
+        var {homeScreen,loginScreen} = this.props;
+        if(loginScreen){
+            topScreen = <Login />;
+        }else if(homeScreen){
+            topScreen = <SplashScreen />;
+        }
         return (
             <Grid fluid>
                 <Row>
                     <Menu logo='img/logo.png' inverseMenu={this.state.inverseMenu}/>
                     {this.props.children}
 
-                    <SplashScreen />
+                    {topScreen}
 
                     <Products />
 
@@ -56,3 +65,14 @@ export default class Home extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    loginScreen:state.app.loginScreen,
+    homeScreen:state.app.homeScreen
+});
+
+const mapDispatchToProps = (dispatch) => ({
+
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

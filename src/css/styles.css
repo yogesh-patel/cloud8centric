@@ -140,6 +140,18 @@ body {
     padding: 20px 40px;
 }
 
+.login-box{
+    color: #fff !important;
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 20px 40px;
+}
+
 ul.social-buttons li a {
     display: block;
     background-color: #222;

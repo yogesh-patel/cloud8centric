@@ -51,12 +51,7 @@ body {
     margin: 10px;
 }
 
-.menu.navbar-inverse .navbar-nav>.active>a,
-.menu.navbar-inverse .navbar-nav>.open>a {
-    background-image: none;
-    background-color: rgba(0, 0, 0, 0);
-    box-shadow: 0 0 10px #D4D2D0;
-}
+
 
 .productContainer {
     display: table;
@@ -64,14 +59,13 @@ body {
     margin-top: 30px;
 }
 
-.menu.navbar-inverse .navbar-nav>.active>a:focus,
-.menu.navbar-inverse .navbar-nav>.active>a:hover,
-.menu.navbar-inverse .navbar-nav>.open>a:focus,
-.menu.navbar-inverse .navbar-nav>.open>a:hover {
-    background-image: none;
-    background-color: rgba(0, 0, 0, 0);
-    box-shadow: 0 0 10px #D4D2D0;
+
+
+.products{
+    margin-top:35px;
+    margin-bottom: 35px;
 }
+
 
 .products .content,
 .splashScreen .content{
@@ -201,10 +195,4 @@ a.btn-xl{
     cursor: pointer;
 }
 
-.home-menu .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a{
-    color: white;
-}
 
-.home-menu .nav>li>a:focus, .nav>li>a:hover{
-    background-color: black !important;
-}

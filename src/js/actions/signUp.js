@@ -2,12 +2,11 @@
 import {DATA_ADDED_SUCCESSFULLY} from '../constants';
 import { pushState } from 'redux-router';
 
-export function signUp(emp){
+export function signUp(profile){
     return (dispatch)=>{
-        dispatch({
-            type:DATA_ADDED_SUCCESSFULLY,
-            payload:emp
-        });
+        //Submit data
+        // on Success - > Login
+        //On success login -> local storage save token
         dispatch(pushState(null,"/"));
     }
 

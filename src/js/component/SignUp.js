@@ -10,14 +10,6 @@ import Header from './common/Header'
 
 class SignUp extends Component{
 
-  // onSubmit(){
-  //   r="Smith"
-  //                                   required/>
-  //   // this.props.addData.empActionCreators({
-  //   //   username : this.state.username,
-  //   //   password : this.state.password});
-  // }
-
   constructor(props){
         super(props);
         this.state= {
@@ -92,6 +84,8 @@ class SignUp extends Component{
     e.preventDefault();
     if(this.state.password != this.state.confirmPassword){
       this.setState({ showResults: true });
+    }else{
+      console.log(this.state);
     }
   }
 
@@ -111,26 +105,13 @@ class SignUp extends Component{
     this.setState({confirmPassword: e.target.value});
   }
 
-  // validationState() {
-  //   let length = this.state.value.length;
-  //   if (length > 10){
-  //     return 'success';
-  //   }
-  //   else if (length > 5) return 'warning';
-  //   else if (length > 0) return 'error';
-  // }
-  //
-  // handleChange(e) {
-  //     this.setState({value: e.target.value});
-  // }
-
   render(){
     return(
       <div>
         <Header/>
           <div className="container-fluid top-header-margin" >
             <div className="row top-buffer">
-              <form name="signup">
+              <form name="signup" onSubmit={this.onSubmit.bind(this)}>
                 <Col xs={12} md={12} sm={12}>
                   <Row>
                     <div className="col col-xs-12 col-sm-12 col-md-6">
@@ -342,7 +323,7 @@ class SignUp extends Component{
                   </Row>
 
                   <div className="col col-xs-12 col-sm-12 col-md-12">
-                    <button type="submit" className="btn btn-primary pull-right left-buffer" onClick={this.onSubmit.bind(this)}>Sign Up</button>
+                    <button type="submit" className="btn btn-primary pull-right left-buffer">Sign Up</button>
                     <button type="button" className="btn btn-default pull-right left-buffer" >Back</button>
                   </div>
 

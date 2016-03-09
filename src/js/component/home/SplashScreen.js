@@ -27,7 +27,9 @@ class SplashScreen extends Component {
                                          transitionLeave={false}>
                   <h1>Welcome To Centric SAAS!</h1>
                   <p className="smallText">Its simply the best plm software for retail, fashion, footwear and consumer goods makers, too.</p>
-                  <p><Link to="products" className="btn-xl pointer" smooth duration={500}>Show Me Products</Link></p>
+                  <p>
+                    <Link to="products" className="btn-xl pointer" smooth duration={500}>Show Me Products</Link>
+                  </p>
                 </ReactCSSTransitionGroup>
               </div>
             </Jumbotron>

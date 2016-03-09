@@ -46,37 +46,7 @@ export default class Home extends Component {
 
                     <SplashScreen />
 
-                    <Row>
-                        <Col xs={12}>&nbsp;</Col>
-                    </Row>
-                    <Row>
-                        <Col xs={12}>&nbsp;</Col>
-                    </Row>
-                    <Row>
-                        <Col xs={12}>&nbsp;</Col>
-                    </Row>
-                    <Row>
-                        <Col xs={12}>&nbsp;</Col>
-                    </Row>
-                    <Row>
-                        <Col xs={12}>&nbsp;</Col>
-                    </Row>
                     <Products />
-                    <Row>
-                        <Col xs={12}>&nbsp;</Col>
-                    </Row>
-                    <Row>
-                        <Col xs={12}>&nbsp;</Col>
-                    </Row>
-                    <Row>
-                        <Col xs={12}>&nbsp;</Col>
-                    </Row>
-                    <Row>
-                        <Col xs={12}>&nbsp;</Col>
-                    </Row>
-                    <Row>
-                        <Col xs={12}>&nbsp;</Col>
-                    </Row>
 
                     <ContactUs />
 

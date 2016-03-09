@@ -25,6 +25,22 @@ body {
     width: 100%;
 }
 
+.footer {
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background-color: black;
+  padding: 15px 0px;
+  text-align: center;
+}
+
+.left-buffer {
+    margin-left: 10px;
+}
+
 .menu {
     background-color: rgba(0, 0, 0, 0);
     background-image: inherit;
@@ -106,13 +122,16 @@ body {
     transition: opacity 300ms ease-in;
 }
 
-/*.btn-primary {
-    border-radius: 30px;
-    padding: 15px;
-    width: 150px;
-}
-*/
-
 .top-buffer {
     margin-top: 10px;
+}
+
+.form-group.required .control-label:after {
+  content:"*";
+  color:red;
+}
+
+.top-header-margin {
+     top: 50px;
+     position: relative; 
 }

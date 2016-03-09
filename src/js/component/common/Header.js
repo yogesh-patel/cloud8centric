@@ -1,0 +1,32 @@
+'use strict';
+
+import React, {Component,View} from 'react';
+import {Navbar, NavItem, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
+
+class Header extends Component{
+  render(){
+    return(
+      <Navbar inverse fixedTop fluid >
+        <Navbar.Header>
+          <Navbar.Brand>
+              <img className='logo' src='img/logo.png' alt="" />
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav pullRight>
+            <NavItem eventKey={1}>Login</NavItem>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+
+
+
+
+
+
+
+    );
+  }
+}
+export default Header;

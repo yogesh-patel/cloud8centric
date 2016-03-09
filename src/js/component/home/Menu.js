@@ -19,7 +19,9 @@ class Menu extends Component {
     super(props);
     this.state={};
   }
-
+  gotoSignUpPage(){
+    this.props.routeDispatch(push("signup"));
+  }
   gotoLoginPage(){
     this.props.routeDispatch(push("login"));
   }
@@ -48,7 +50,8 @@ class Menu extends Component {
               <Link to="products" href="#" smooth duration={500}>Product</Link>
             </li>
             <NavItem eventKey={2}>Contact</NavItem>
-            <NavItem eventKey={3} onClick={this.gotoLoginPage.bind(this)}>Login</NavItem>
+            <NavItem eventKey={3} onClick={this.gotoSignUpPage.bind(this)}>SignUp</NavItem>
+            <NavItem eventKey={4} onClick={this.gotoLoginPage.bind(this)}>Login</NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

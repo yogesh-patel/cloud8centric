@@ -23,7 +23,7 @@ class Menu extends Component {
     this.props.routeDispatch(push("signup"));
   }
   gotoLoginPage(){
-    this.props.routeDispatch(push("Products"));
+    this.props.routeDispatch(push("login"));
   }
 
   onOptionSelected(selectedKey){
@@ -31,14 +31,15 @@ class Menu extends Component {
   }
 
   render() {
-    let brandImg = (<img className='logo' src={this.props.logo} alt="" />);
+    let brandImg = (<img style={{marginTop:-10}} src={this.props.logo} alt="" />);
     let inverseClass = this.props.inverseMenu ? 'inverse-menu' : 'menu';
+    let itemColor = this.props.inverseMenu ? '' : '#FFFFFF';
 
     return (
-      <Navbar inverse fixedTop fluid className={'home-menu '+inverseClass}>
+      <Navbar inverse fixedTop  className={'home-menu '+inverseClass}>
         <Navbar.Header>
           <Navbar.Brand>
-              {brandImg}
+              <Link to="splashScreen" href="#" smooth duration={500}>{brandImg}</Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
@@ -47,13 +48,18 @@ class Menu extends Component {
                activeKey={this.state.selectedOption}
                pullRight>
             <li role="presentation">
-              <Link to="products" href="#" smooth duration={500}>PRODUCTS</Link>
+              <Link to="products" href="#" style={{color:itemColor}} smooth duration={500}>PRODUCTS</Link>
             </li>
             <li role="presentation">
-              <Link to="contact" href="#" smooth duration={500}>CONTACT</Link>
+              <Link to="contact" href="#" style={{color:itemColor}} smooth duration={500}>CONTACT</Link>
             </li>
-            <NavItem eventKey={3} onClick={this.gotoSignUpPage.bind(this)}>SIGNUP</NavItem>
-            <NavItem eventKey={4} onClick={this.gotoLoginPage.bind(this)}>LOGIN</NavItem>
+            <NavItem eventKey={3} onClick={this.gotoSignUpPage.bind(this)}>
+              <span style={{color:itemColor}}>SIGNUP</span></NavItem>
+            <NavItem eventKey={4} onClick={this.gotoLoginPage.bind(this)}>
+              <span style={{color:itemColor}}>
+                LOGIN
+              </span>
+            </NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

@@ -15,27 +15,13 @@ import { connect } from 'react-redux';
 import ProductPlans from './ProductPlans';
 import _ from 'lodash';
 import Product from './Product';
-import Login from '../Login';
 import { bindActionCreators } from 'redux';
 import * as authActionCreators from '../../actions/auth';
 
 
 class Products extends Component {
 
-    authenticateUser(username, password) {
-        this.props.authActions.authenticateUser(username, password);
-    }
-
     render() {
-
-        let {statusText, isAuthenticated} = this.props.auth;
-        //let {authe} = this.props.auth;
-
-        if(!isAuthenticated) {
-            return (
-                <Login authenticateUser={this.authenticateUser.bind(this)}/>
-            );
-        }
 
         var {productList} = this.props;
         var products = _.map(productList,(product)=>{
@@ -66,14 +52,11 @@ class Products extends Component {
 
 
 const mapStateToProps = (state) => ({
-    auth: state.auth,
     productList: state.product.products,
 });
 
-//const mapDispatchToProps = (dispatch) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
-    authActions: bindActionCreators(authActionCreators, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

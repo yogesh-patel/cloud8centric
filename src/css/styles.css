@@ -46,7 +46,9 @@ body {
     background-image: inherit;
     border: none;
 }
-
+.inverse-menu{
+    margin:0 15px;
+}
 .menu {
     margin: 10px;
 }

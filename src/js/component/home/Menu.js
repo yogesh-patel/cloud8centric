@@ -23,7 +23,7 @@ class Menu extends Component {
     this.props.routeDispatch(push("signup"));
   }
   gotoLoginPage(){
-    this.props.routeDispatch(push("login"));
+    this.props.routeDispatch(push("Products"));
   }
 
   onOptionSelected(selectedKey){

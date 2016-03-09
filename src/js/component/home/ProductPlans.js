@@ -2,11 +2,13 @@
 
 import React, {Component} from 'react';
 import {Grid, Row, Col, Panel, Button} from 'react-bootstrap';
+import _ from 'lodash';
 
 class ProductPlans extends Component {
   render() {
-
-    var products = this.props.plans.map(function(plan, i) {
+   var {plans} = this.props;
+   // alert(plans);
+    var products = _.map(plans, (plan)=>{
       return (
               <div className="col-md-4" key={plan.planId}>
 
@@ -19,8 +21,7 @@ class ProductPlans extends Component {
                 <Button bsStyle={plan.planButtonClass}><i className={plan.planButtonClass == 'primary' ?'fa fa-shopping-cart': ''}></i>{plan.planButtonText}</Button>
 
               </div>
-        );
-      }.bind(this));
+        )});
 
     return(
         <Row className="text-center">

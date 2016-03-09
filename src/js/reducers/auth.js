@@ -6,8 +6,10 @@
  */
 
 import {createReducer} from '../utils';
-import {LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE} from '../constants';
+import constants from '../constants';
 import {pushState} from 'redux-router';
+
+let {LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE} = constants;
 
 const initialState = {
     token: null,
@@ -26,6 +28,7 @@ export default createReducer(initialState, {
         });
     },
     [LOGIN_USER_SUCCESS]: (state, payload) => {
+        console.log('payload::', payload);
         return Object.assign({}, state, {
             'isAuthenticating': false,
             'isAuthenticated': true,

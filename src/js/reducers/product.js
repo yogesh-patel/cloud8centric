@@ -14,19 +14,25 @@ const initialState = {
           planId: 1,
           planIconClass: "fa fa-shopping-cart fa-stack-1x fa-inverse",
           planTitle: "Bronze",
-          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          planButtonClass: "primary",
+          planButtonText: "Buy"
         },
         {
           planId: 2,
           planIconClass: "fa fa-laptop fa-stack-1x fa-inverse",
           planTitle: "Silver",
-          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          planButtonClass: "danger",
+          planButtonText: "Coming Soon!"
         },
         {
           planId: 3,
           planIconClass: "fa fa-lock fa-stack-1x fa-inverse",
           planTitle: "Gold",
-          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          planButtonClass: "danger",
+          planButtonText: "Coming Soon!"
         }
       ]
     },
@@ -40,19 +46,25 @@ const initialState = {
           planId: 1,
           planIconClass: "fa fa-shopping-cart fa-stack-1x fa-inverse",
           planTitle: "Bronze",
-          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          planButtonClass: "danger",
+          planButtonText: "Coming Soon!"
         },
         {
           planId: 2,
           planIconClass: "fa fa-laptop fa-stack-1x fa-inverse",
           planTitle: "Silver",
-          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          planButtonClass: "danger",
+          planButtonText: "Coming Soon!"
         },
         {
           planId: 3,
           planIconClass: "fa fa-lock fa-stack-1x fa-inverse",
           planTitle: "Gold",
-          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          planButtonClass: "danger",
+          planButtonText: "Coming Soon!"
         }
       ]
     },
@@ -66,19 +78,25 @@ const initialState = {
           planId: 1,
           planIconClass: "fa fa-shopping-cart fa-stack-1x fa-inverse",
           planTitle: "Bronze",
-          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          planButtonClass: "danger",
+          planButtonText: "Coming Soon!"
         },
         {
           planId: 2,
           planIconClass: "fa fa-laptop fa-stack-1x fa-inverse",
           planTitle: "Silver",
-          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          planButtonClass: "danger",
+          planButtonText: "Coming Soon!"
         },
         {
           planId: 3,
           planIconClass: "fa fa-lock fa-stack-1x fa-inverse",
           planTitle: "Gold",
-          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+          planInfo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+          planButtonClass: "danger",
+          planButtonText: "Coming Soon!"
         }
       ]
     }

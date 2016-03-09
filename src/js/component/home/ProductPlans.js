@@ -11,12 +11,13 @@ class ProductPlans extends Component {
               <div className="col-md-4" key={plan.planId}>
 
                 <span className="fa-stack fa-4x">
-                    <i className="fa fa-circle fa-stack-2x text-primary"></i>
-                    <i className={plan.planIconClass}></i>
+                  <i className="fa fa-circle fa-stack-2x text-yellow"></i>
+                  <i className={plan.planIconClass}></i>
                 </span>
                 <h4 className="service-heading">{plan.planTitle}</h4>
                 <p className="text-muted">{plan.planInfo}</p>
-                <button type="button" className="btn btn-primary"><i className="fa fa-shopping-cart"></i> Buy</button>
+                <Button bsStyle={plan.planButtonClass}><i className={plan.planButtonClass == 'primary' ?'fa fa-shopping-cart': ''}></i>{plan.planButtonText}</Button>
+
               </div>
         );
       }.bind(this));

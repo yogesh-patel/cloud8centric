@@ -91,10 +91,6 @@ body {
     margin: 25px;
 }
 
-.smallText {
-    font-size: 15px !important;
-}
-
 .react-animation-appear {
     opacity: 0.01;
 }
@@ -133,5 +129,82 @@ body {
 
 .top-header-margin {
      top: 50px;
-     position: relative; 
+     position: relative;
+}
+
+.btn-xl {
+    color: #fff !important;
+    background-color: #fed136 !important;
+    border-color: #fed136 !important;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 20px 40px;
+}
+
+ul.social-buttons li a {
+    display: block;
+    background-color: #222;
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    line-height: 40px;
+    color: #fff;
+    outline: 0;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+}
+
+.home-footer {
+    padding: 25px 0;
+    text-align: center;
+}
+
+.contact {
+    background-color: #222;
+    background-image: url("../../img/map-image.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 100px 0;
+}
+
+.contact .form-group input, .form-group textarea {
+    padding: 30px;
+}
+
+.contact .section-heading {
+    color: #fff;
+}
+
+.contact h2.section-heading {
+    font-size: 40px;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.contact .form-group textarea.form-control {
+    height: 216px;
+}
+
+.text-yellow{
+    color: #fed136;
+}
+
+a.btn-xl{
+    text-decoration: none;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.home-menu .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a{
+    color: white;
+}
+
+.home-menu .nav>li>a:focus, .nav>li>a:hover{
+    background-color: black !important;
 }

@@ -7,6 +7,7 @@ import {App} from './js/containers';
 import Home from './js/component/Home';
 import SignUp from './js/component/SignUp';
 import Login from './js/component/Login';
+import Products from './js/component/home/Products';
 
 var Routes = (
   <Router>
@@ -14,6 +15,7 @@ var Routes = (
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
       <Route path="signup" component={SignUp}/>
+      <Route path="products" component={Products}/>
       <Route path="login" component={Login}/>
     </Route>
 

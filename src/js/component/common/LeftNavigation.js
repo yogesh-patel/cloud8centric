@@ -15,10 +15,10 @@ class LeftNavigation extends Component{
                         <Navbar.Brand>
                             <span className="small-nav">
                               <span className="logo">
-                                C
+
                               </span>
                             </span>
-                            <span className="full-nav"> Centric </span>
+                            <span className="full-nav">  </span>
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav>

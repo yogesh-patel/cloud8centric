@@ -51,7 +51,8 @@ class Menu extends Component {
             <Navbar inverse fixedTop fluid className={'home-menu '+inverseClass}>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <Link to="splashScreen" href="#" smooth duration={500}>{brandImg}</Link>
+                        <Link to="splashScreen" href="#" smooth duration={500}
+                            onClick={this.onProductSelected.bind(this)}>{brandImg}</Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
@@ -63,7 +64,7 @@ class Menu extends Component {
                             <Link to="products" href="#" onClick={this.onProductSelected.bind(this)} style={{color:itemColor}} smooth duration={500}>PRODUCTS</Link>
                         </li>
                         <li role="presentation">
-                            <Link to="contact" href="#" style={{color:itemColor}} smooth duration={500}>CONTACT</Link>
+                            <Link to="contact" href="#" onClick={this.onProductSelected.bind(this)} style={{color:itemColor}} smooth duration={500}>CONTACT</Link>
                         </li>
                         <NavItem onClick={this.gotoSignUpPage.bind(this)}>
                             <span style={{color:itemColor}}>SIGNUP</span>

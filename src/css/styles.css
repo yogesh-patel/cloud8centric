@@ -370,5 +370,5 @@ a.btn-xl{
 /*TODO: temporary fix, margin given is negative*/
 .common-header-logo{
     margin-left: 60px !important;
-    margin-top: -50px;
+    margin-top: -40px;
 }

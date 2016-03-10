@@ -11,7 +11,7 @@ class LeftNavigation extends Component{
         return(
             <div className="left-navigation">
                 <Navbar inverse className={'navbar-twitch '+toggleClass} role="navigation">
-                    <Navbar.Header>
+                    {/* <Navbar.Header>
                         <Navbar.Brand>
                             <span className="small-nav">
                               <span className="logo">
@@ -20,9 +20,9 @@ class LeftNavigation extends Component{
                             </span>
                             <span className="full-nav">  </span>
                         </Navbar.Brand>
-                    </Navbar.Header>
+                    </Navbar.Header>*/}
                     <Nav>
-                        <li className="active">
+                        <li className="active" style={{marginTop:15}}>
                             <a href="#">
                                 <span className="small-nav" data-toggle="tooltip" data-placement="right" title="Home">
                                     <span className="glyphicon glyphicon-home"></span>

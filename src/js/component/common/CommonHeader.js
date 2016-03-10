@@ -28,11 +28,6 @@ class CommonHeader extends Component{
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
-                    <Navbar.Collapse>
-                        <Nav pullRight>
-
-                        </Nav>
-                    </Navbar.Collapse>
                 </Navbar>
             </div>
         );

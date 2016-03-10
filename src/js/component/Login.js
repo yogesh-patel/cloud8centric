@@ -7,6 +7,7 @@ import {Element} from 'react-scroll';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as appActionCreators from '../actions/app';
+import { pushState } from 'redux-router';
 
 class Login extends Component {
 
@@ -22,7 +23,7 @@ class Login extends Component {
     }
 
     gotoSignUpPage(e) {
-        this.props.routeDispatch(push("signup"));
+        this.props.routeDispatch(pushState(null,"signup"));
     }
 
     gotoForgotPasswordPage(e) {

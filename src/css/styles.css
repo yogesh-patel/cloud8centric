@@ -17,6 +17,12 @@ body {
     background-color: #CCC;
 }
 
+.text-danger{
+    font-size:15px;
+    margin-bottom:10px;
+    text-align: left;
+}
+
 .splashScreen .jumbotron {
     background-color: transparent;
     color: white;

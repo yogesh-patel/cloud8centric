@@ -9,5 +9,6 @@ export default createConstants(
     'FETCH_ACCOUNT_DATA_REQUEST_COMPLETE',
     'FETCH_ACCOUNT_DATA_REQUEST_FAILURE',
     'SHOW_LOGIN',
-    'SHOW_HOME'
+    'SHOW_HOME',
+    'SHOW_FORGOT_PASSWORD'
 );

@@ -6,8 +6,7 @@ let { Router, Route, IndexRoute } = require('react-router');
 import {App} from './js/containers';
 import Home from './js/component/Home';
 import SignUp from './js/component/SignUp';
-import Login from './js/component/Login';
-import Products from './js/component/home/Products';
+import Dashboard from './js/component/Dashboard';
 
 var Routes = (
   <Router>
@@ -15,7 +14,13 @@ var Routes = (
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
       <Route path="signup" component={SignUp}/>
+
+      <Route path="dashboard" component={Dashboard}>
+
+      </Route>
     </Route>
+
+
 
   </Router> );
 

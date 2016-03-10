@@ -51,6 +51,7 @@ class Home extends Component {
             <Grid fluid>
                 <Row>
                     <Menu logo='img/logo.png' inverseMenu={this.state.inverseMenu}/>
+
                     {this.props.children}
 
                     {topScreen}

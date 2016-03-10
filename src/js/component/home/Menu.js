@@ -68,12 +68,12 @@ class Menu extends Component {
                         <NavItem onClick={this.gotoSignUpPage.bind(this)}>
                             <span style={{color:itemColor}}>SIGNUP</span>
                         </NavItem>
-
-                        <NavItem onClick={this.gotoLoginPage.bind(this)}>
-                              <span style={{color:itemColor}}>
+                        <li role="presentation">
+                            <Link to="splashScreen" href="#" onClick={this.gotoLoginPage.bind(this)} style={{color:itemColor}} smooth duration={500}>
                                 LOGIN
-                              </span>
-                        </NavItem>
+                            </Link>
+                        </li>
+
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

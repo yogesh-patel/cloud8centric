@@ -145,8 +145,6 @@ body {
     background-color: #000000 !important;
     border-color: #000000 !important;
     font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
-    font-weight: 700;
     border-radius: 3px;
     font-size: 18px;
     padding: 20px 40px;
@@ -209,4 +207,47 @@ a.btn-xl{
     cursor: pointer;
 }
 
+.login-label{
+    margin:20px 0;
+}
+
+.login-button {
+    color: #fff !important;
+    background-color: #fed136 !important;
+    border-color: #fed136 !important;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 10px 40px;
+    margin-top:15px;
+}
+.signup-button {
+    color: #fff !important;
+    background-color: #46b8da !important;
+    border-color: #46b8da !important;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 10px 40px;
+    margin-top:15px;
+}
+
+.forgot-password{
+    color: #fff !important;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    border-radius: 3px;
+    font-size: 18px;
+    padding: 10px 40px;
+    margin-top:15px;
+    cursor:pointer;
+}
+
+.forgot-password:hover{
+    color: #46b8da !important;
+}
 

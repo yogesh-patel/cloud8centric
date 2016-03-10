@@ -4,7 +4,7 @@
 
 import constants from '../constants';
 
-let {SHOW_LOGIN,SHOW_HOME} = constants;
+let {SHOW_LOGIN, SHOW_HOME} = constants;
 
 export function showLogin(){
     return {

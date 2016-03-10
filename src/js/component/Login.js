@@ -3,6 +3,9 @@
 import React, {Component, View} from 'react';
 import {Grid, Row, Col,Jumbotron,Glyphicon,Input} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as authActionCreators from '../actions/auth';
 
 import {Element} from 'react-scroll';
 
@@ -17,10 +20,9 @@ class Login extends Component {
     }
 
     authenticate(e) {
-        //alert(this.state.username);
         if (this.state.username == "" || this.state.password == "") return;
         e.preventDefault();
-        this.props.authenticateUser(this.state.username, this.state.password);
+        this.props.authActions.authenticateUser(this.state.username, this.state.password);
     }
 
     onUsernameChange(e) {
@@ -55,14 +57,16 @@ class Login extends Component {
                                                             <Col xs={12}>
                                                                 <Input type="text"
                                                                        addonBefore={<Glyphicon glyph="user" />}
-                                                                       placeholder="User Name"/>
+                                                                       placeholder="User Name"
+                                                                       onChange={this.onUsernameChange.bind(this)}/>
                                                             </Col>
                                                         </Row>
                                                         <Row>
                                                             <Col xs={12}>
                                                                 <Input type="password"
                                                                        addonBefore={<Glyphicon glyph="asterisk" />}
-                                                                       placeholder="Password"/>
+                                                                       placeholder="Password"
+                                                                       onChange={this.onPasswordChange.bind(this)}/>
                                                             </Col>
                                                         </Row>
                                                         <Row>
@@ -72,7 +76,7 @@ class Login extends Component {
                                                                 </div>
                                                             </Col>
                                                             <Col xs={12} sm={6}>
-                                                                <div className="login-button pointer">
+                                                                <div className="login-button pointer" onClick={this.authenticate.bind(this)}>
                                                                     Login
                                                                 </div>
                                                             </Col>
@@ -103,13 +107,13 @@ class Login extends Component {
 }
 ;
 
-//const mapStateToProps = (state) => ({
-//    statusText: state.auth.statusText
-//});
-//
-//const mapDispatchToProps = (dispatch) => ({
-//    authActions: bindActionCreators(authActionCreators, dispatch)
-//});
+const mapStateToProps = (state) => ({
+});
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+   authActions: bindActionCreators(authActionCreators, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
 

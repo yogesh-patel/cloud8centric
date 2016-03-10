@@ -41,27 +41,30 @@ body {
     margin-left: 10px;
 }
 
+.right-buffer {
+    margin-right: 10px;
+}
+
 .menu {
     background-color: rgba(0, 0, 0, 0);
     background-image: inherit;
     border: none;
-}
-.inverse-menu{
-    margin:0 15px;
-}
-.menu {
     margin: 10px;
 }
 
+.inverse-menu{
+    margin:0 15px;
+}
 
+.common-header .inverse-menu{
+    margin:0;
+}
 
 .productContainer {
     display: table;
     width: 100%;
     margin-top: 30px;
 }
-
-
 
 .products{
     margin-top:35px;
@@ -118,13 +121,17 @@ body {
     margin-top: 10px;
 }
 
+.bottom-buffer {
+    margin-bottom: 10px;
+}
+
 .form-group.required .control-label:after {
   content:"*";
   color:red;
 }
 
-.top-header-margin {
-     top: 50px;
+.content-margin {
+     margin: 100px;
      position: relative;
 }
 
@@ -251,3 +258,117 @@ a.btn-xl{
     color: #46b8da !important;
 }
 
+
+/* LEFT NAVIGATION CSS */
+.navbar-twitch {
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    width: 50px;
+    height: 100%;
+    border-radius: 0px;
+    border: 0px;
+    z-index: 1030;
+}
+.navbar-twitch.open {
+    width: 240px;
+}
+.navbar-twitch > .container {
+    padding: 0px;
+    width: 100%;
+}
+.navbar-twitch .navbar-header,
+.navbar-twitch .navbar-brand {
+    float: none;
+    display: block;
+    width: 100%;
+    margin: 0px;
+}
+.navbar-twitch .navbar-brand {
+    height: 50px;
+}
+.navbar-twitch > .container .navbar-brand {
+    padding: 0px;
+    margin: 0px;
+}
+.navbar-twitch > .container .navbar-brand > .small-nav {
+    display: block;
+}
+.navbar-twitch > .container .navbar-brand > .small-nav > span.logo,
+.navbar-twitch.open > .container .navbar-brand > .full-nav {
+    display: block;
+    font-weight: bold;
+    padding: 15px 2px 15px 3px;
+    font-size: 18pt;
+}
+.navbar-twitch.open > .container .navbar-brand {
+    width: 100%;
+    padding: 15px 15px 60px;
+    text-align: center;
+}
+.navbar-twitch.navbar-inverse > .container .navbar-brand > .small-nav > span.logo {
+    /*color: rgb(255, 255, 255);*/
+}
+.navbar-twitch .navbar-nav > li {
+    float: none;
+}
+.navbar-twitch > .container .full-nav {
+    display: none;
+}
+.navbar-twitch.open > .container .full-nav {
+    display: block;
+}
+.navbar-twitch.open > .container .small-nav {
+    display: none;
+}
+.navbar-twitch .navbar-collapse {
+    padding: 0px;
+}
+.navbar-twitch .navbar-nav {
+    float: none;
+    margin: 0px;
+}
+.navbar-twitch .navbar-nav > li > a {
+    padding: 0px;
+}
+.navbar-twitch .navbar-nav > li > a > span {
+    display: block;
+    font-size: 11pt;
+    padding: 13px 15px 13px 12px;
+}
+.navbar-twitch .tooltip,
+.navbar-twitch .tooltip .tooltip-inner {
+    max-width: auto;
+    white-space:nowrap;
+}
+.navbar-twitch-toggle {
+    position: fixed;
+    top: 60px;
+    left: 55px;
+}
+.navbar-twitch ~ .navbar-twitch-toggle > .nav-open {
+    display: inline-block;
+}
+.navbar-twitch ~ .navbar-twitch-toggle > .nav-close {
+    display: none;
+}
+.navbar-twitch.open ~ .navbar-twitch-toggle {
+    left: 245px;
+}
+.navbar-twitch.open ~ .navbar-twitch-toggle > .nav-open {
+    display: none;
+}
+.navbar-twitch.open ~ .navbar-twitch-toggle > .nav-close {
+    display: inline-block;
+}
+
+.left-navigation .navbar {
+    background-image: none !important;
+}
+/* LEFT NAVIGATION CSS */
+
+/*TODO: temporary fix, margin given is negative*/
+.common-header-logo{
+    margin-left: 60px !important;
+    margin-top: -50px;
+}

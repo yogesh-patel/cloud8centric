@@ -25,13 +25,13 @@ class SubscriptionList extends Component{
                     <Button bsStyle="primary" className="pull-right bottom-buffer" onClick={this.gotoAddSubscriptions.bind(this)}><Glyphicon glyph="plus"/> Add Subscription</Button>
                 </Row>
                 <Row>
-                    <Col sm={2}>
+                    <Col xs={2}>
                         <h4>Serial No.</h4>
                     </Col>
-                    <Col sm={4}>
+                    <Col xs={4}>
                         <h4>Subscription Name</h4>
                     </Col>
-                    <Col sm={4}>
+                    <Col xs={4}>
                         <h4>Subscription Status</h4>
                     </Col>
                 </Row>

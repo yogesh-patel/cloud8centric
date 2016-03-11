@@ -10,14 +10,11 @@ class Dashboard extends Component{
     render(){
 
         return(
-            <div>
+            <div className="container">
                 <CommonHeader />
                 <LeftNavigation />
-
-                <div className="content-margin">
-                    <Grid fluid>
-                        {this.props.children}
-                    </Grid>
+                <div className="container" style={{marginTop:60}}>
+                    {this.props.children}
                 </div>
             </div>
         );

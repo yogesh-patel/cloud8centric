@@ -9,36 +9,41 @@ import * as subscriptionActionCreators from '../../actions/subscription';
 import _ from 'lodash';
 import SubscriptionDetails from './SubscriptionDetails';
 
-class SubscriptionList extends Component{
+class SubscriptionList extends Component {
 
-    gotoAddSubscriptions(){
+    gotoAddSubscriptions() {
 
         this.props.subscriptionActions.fetchProductsAndPlans();
 
     }
 
-    render(){
+    render() {
 
-        return(
-            <div>
+        return (
+            <Grid>
                 <Row>
-                    <Button bsStyle="primary" className="pull-right bottom-buffer" onClick={this.gotoAddSubscriptions.bind(this)}><Glyphicon glyph="plus"/> Add Subscription</Button>
+                    <Col xs={12}>
+                        <Button bsStyle="primary"
+                                className="pull-right"
+                                onClick={this.gotoAddSubscriptions.bind(this)}><Glyphicon glyph="plus"/> Add
+                            Subscription</Button>
+                    </Col>
                 </Row>
                 <Row>
-                    <Col xs={2}>
-                        <h4>Serial No.</h4>
+                    <Col xs={1} xsHidden>
+                        <h4 style={{fontWeight:'bold'}}>#Serial</h4>
                     </Col>
-                    <Col xs={4}>
-                        <h4>Subscription Name</h4>
+                    <Col xs={7} xsHidden>
+                        <h4 style={{fontWeight:'bold'}}>Subscription Name</h4>
                     </Col>
-                    <Col xs={4}>
-                        <h4>Subscription Status</h4>
+                    <Col xs={4} xsHidden>
+                        <h4 style={{fontWeight:'bold'}}>Subscription Status</h4>
                     </Col>
                 </Row>
 
                 <SubscriptionDetails />
 
-            </div>
+            </Grid>
         );
 
     }
@@ -46,8 +51,7 @@ class SubscriptionList extends Component{
 }
 
 
-const mapStateToProps = (state) => ({
-});
+const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
     subscriptionActions: bindActionCreators(subscriptionActionCreators, dispatch)

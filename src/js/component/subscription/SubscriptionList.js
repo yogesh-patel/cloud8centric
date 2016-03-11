@@ -1,47 +1,57 @@
 'use strict';
 
 import React, {Component, View} from 'react';
-import {Grid, Row, Col, Button, Table} from 'react-bootstrap';
+import {Grid, Row, Col, Button, Table, Glyphicon} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { push } from 'redux-router';
+import * as subscriptionActionCreators from '../../actions/subscription';
+import _ from 'lodash';
+import SubscriptionDetails from './SubscriptionDetails';
 
 class SubscriptionList extends Component{
+
+    gotoAddSubscriptions(){
+
+        this.props.subscriptionActions.fetchProductsAndPlans();
+
+    }
 
     render(){
 
         return(
-            <Table striped bordered condensed hover>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Jacob</td>
-                    <td>Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-            </Table>
+            <div>
+                <Row>
+                    <Button bsStyle="primary" className="pull-right bottom-buffer" onClick={this.gotoAddSubscriptions.bind(this)}><Glyphicon glyph="plus"/> Add Subscription</Button>
+                </Row>
+                <Row>
+                    <Col sm={2}>
+                        <h4>Serial No.</h4>
+                    </Col>
+                    <Col sm={4}>
+                        <h4>Subscription Name</h4>
+                    </Col>
+                    <Col sm={4}>
+                        <h4>Subscription Status</h4>
+                    </Col>
+                </Row>
+
+                <SubscriptionDetails />
+
+            </div>
         );
 
     }
 
 }
 
-export default SubscriptionList;
+
+const mapStateToProps = (state) => ({
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    subscriptionActions: bindActionCreators(subscriptionActionCreators, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionList);
+

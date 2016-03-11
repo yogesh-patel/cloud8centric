@@ -5,7 +5,7 @@ let {LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS} = constants;
 
 export function authenticateUser(username, password){
-  return(dispatch) => {
+    return(dispatch) => {
         dispatch({
             type: LOGIN_USER_SUCCESS,
             payload: {

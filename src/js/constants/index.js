@@ -11,5 +11,7 @@ export default createConstants(
     'SHOW_LOGIN',
     'SHOW_HOME',
     'SHOW_NAVIGATION_MENU',
-    'HIDE_NAVIGATION_MENU'
+    'HIDE_NAVIGATION_MENU',
+    'FETCH_SUBSCRIPTIONS',
+    'FETCH_PRODUCTS_AND_PLANS'
 );

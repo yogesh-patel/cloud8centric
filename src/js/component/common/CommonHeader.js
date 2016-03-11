@@ -23,16 +23,11 @@ class CommonHeader extends Component{
                 <Navbar inverse fixedTop fluid className={'home-menu inverse-menu'}>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <Button onClick={this.toggleLeftNavigation.bind(this)}><Glyphicon glyph="align-justify" /></Button>
+                            <Glyphicon glyph="align-justify" onClick={this.toggleLeftNavigation.bind(this)}/>
                             <img className='logo common-header-logo' src='img/logo.png' alt="" />
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
-                    <Navbar.Collapse>
-                        <Nav pullRight>
-
-                        </Nav>
-                    </Navbar.Collapse>
                 </Navbar>
             </div>
         );

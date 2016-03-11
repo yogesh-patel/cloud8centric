@@ -4,11 +4,14 @@ import auth from './auth';
 import product from './product';
 import signUp from './signUpData';
 import app from './app';
+import signUpData from './signUpData';
+import header from './header';
 
 export default combineReducers({
     auth,
     app,
-    signUp,
+    signUpData,
     product,
+    header,
     router: routerStateReducer
 });

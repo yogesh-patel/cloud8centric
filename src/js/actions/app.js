@@ -3,7 +3,6 @@
  */
 
 import constants from '../constants';
-
 let {SHOW_LOGIN,SHOW_HOME,SHOW_FORGOT_PASSWORD} = constants;
 
 export function showLogin() {

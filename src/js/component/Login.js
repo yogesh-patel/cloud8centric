@@ -3,9 +3,10 @@
 import React, {Component, View} from 'react';
 import {Grid, Row, Col,Jumbotron,Glyphicon,Input} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {Element} from 'react-scroll';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import * as authActionCreators from '../actions/auth';
+import {Element} from 'react-scroll';
 import * as appActionCreators from '../actions/app';
 import { pushState } from 'redux-router';
 
@@ -23,7 +24,7 @@ class Login extends Component {
     }
 
     gotoSignUpPage(e) {
-        this.props.routeDispatch(pushState(null,"signup"));
+        this.props.routeDispatch(pushState(null, "signup"));
     }
 
     gotoForgotPasswordPage(e) {
@@ -32,16 +33,28 @@ class Login extends Component {
     }
 
     authenticate(e) {
+        let usernameError = "";
+        let passwordError = "";
+        let invalidError = "";
+
         if (this.state.username == "") {
-            this.setState({usernameError: "Please enter username"});
+            usernameError = "Please enter username";
         }
         if (this.state.password == "") {
-            this.setState({passwordError: "Please enter password"});
+            passwordError = "Please enter password";
         }
         else if (this.state.username != "test" || this.state.password != "test") {
-            this.setState({invalidError: "Invalid username or password"});
+            invalidError = "Invalid username or password";
         }
-        e.preventDefault();
+
+        this.setState({
+            usernameError: usernameError,
+            passwordError: passwordError,
+            invalidError: invalidError
+
+        });
+        if (usernameError == "" && passwordError == "" && invalidError == "")
+        this.props.authActions.authenticateUser(this.state.username, this.state.password);
     }
 
     onUsernameChange(e) {
@@ -155,8 +168,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     appActions: bindActionCreators(appActionCreators, dispatch),
+    authActions: bindActionCreators(authActionCreators, dispatch),
     routeDispatch: dispatch
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
+
 

@@ -7,21 +7,26 @@ import {App} from './js/containers';
 import Home from './js/component/Home';
 import SignUp from './js/component/SignUp';
 import Dashboard from './js/component/Dashboard';
+import DashboardHome from './js/component/DashboardHome';
+import SubscriptionList from './js/component/subscription/SubscriptionList';
+import CreateSubscriptions from './js/component/subscription/CreateSubscriptions';
 
 var Routes = (
-  <Router>
+    <Router>
 
-    <Route path="/" component={App}>
-      <IndexRoute component={Home}/>
-      <Route path="signup" component={SignUp}/>
+        <Route path="/" component={App}>
+            <IndexRoute component={Home}/>
+            <Route path="signup" component={SignUp}/>
 
-      <Route path="dashboard" component={Dashboard}>
+            <Route path="dashboard" component={Dashboard}>
+                <IndexRoute component={DashboardHome}/>
+                <Route path="subscriptions" component={SubscriptionList}/>
+                <Route path="subscriptions/create" component={CreateSubscriptions}/>
+            </Route>
 
-      </Route>
-    </Route>
+        </Route>
 
-
-
-  </Router> );
+    </Router>
+);
 
 export default Routes;

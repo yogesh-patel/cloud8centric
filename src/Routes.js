@@ -20,6 +20,7 @@ var Routes = (
 
             <Route path="dashboard" component={Dashboard}>
                 <IndexRoute component={DashboardHome}/>
+                <Route path="home" component={DashboardHome}/>
                 <Route path="subscriptions" component={SubscriptionList}/>
                 <Route path="subscriptions/create" component={CreateSubscriptions}/>
             </Route>

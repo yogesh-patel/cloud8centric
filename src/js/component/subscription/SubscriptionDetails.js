@@ -11,24 +11,56 @@ import SubscriptionItem from './SubscriptionItem';
 
 class SubscriptionDetails extends Component {
 
+    componentDidMount(){
+        var {subscription,subscriptionAction} = this.props;
+        if(!subscription.detail){
+            subscriptionAction.getDetail(subscription.id);
+        }
 
+    }
+
+    onStatusClick(){
+
+    }
 
     render() {
+        let {subscription} = this.props;
+        var rows = [];
 
-        let {subscriptionList} = this.props;
-        let subscriptionDetails = _.map(_.keys(subscriptionList), (subscriptionId) => {
-            var subscription = subscriptionList[subscriptionId];
-            return (
-                <SubscriptionItem subscription={subscription} key={subscription.id} />
-            );
-        });
+        if(subscription.detail){
+            rows = _.map(subscription.detail,(data)=>{
+
+                return (
+                    <tr key={data.productId}>
+                        <td>{data.productName}</td>
+                        <td>{data.productURL}</td>
+                        <td>{data.username}</td>
+                        <td><Button className="status-btn-width"
+                                    bsStyle={ data.status=='Ready' ? 'success' :(data.status=='In Progress' ? 'warning' : (data.status=='Error' ? 'danger': '')) }
+                                    onClick={ this.onStatusClick.bind(this)}>
+                            {data.status}
+                        </Button></td>
+                    </tr>
+                );
+            })
+        }
 
         return (
             <Row>
                 <Col sm={12}>
-                    <div>
-                        {subscriptionDetails}
-                    </div>
+                    <Table responsive striped bordered condensed hover>
+                        <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Product URL</th>
+                            <th>User Name</th>
+                            <th>Product Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {rows}
+                        </tbody>
+                    </Table>
                 </Col>
             </Row>
         );
@@ -39,10 +71,12 @@ class SubscriptionDetails extends Component {
 
 
 const mapStateToProps = (state) => ({
-    subscriptionList: state.subscription.subscriptionList
+
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+    subscriptionAction:bindActionCreators(subscriptionActionCreators,dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionDetails);
 

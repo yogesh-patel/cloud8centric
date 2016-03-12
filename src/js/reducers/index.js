@@ -7,9 +7,11 @@ import app from './app';
 import signUpData from './signUpData';
 import header from './header';
 import subscription from './subscription';
+import dashboard from './dashboard';
 
 export default combineReducers({
     auth,
+    dashboard,
     app,
     signUpData,
     product,

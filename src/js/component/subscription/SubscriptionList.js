@@ -7,9 +7,13 @@ import { bindActionCreators } from 'redux';
 import { push } from 'redux-router';
 import * as subscriptionActionCreators from '../../actions/subscription';
 import _ from 'lodash';
-import SubscriptionDetails from './SubscriptionDetails';
+import SubscriptionItem from './SubscriptionItem';
 
 class SubscriptionList extends Component {
+
+    componentDidMount(){
+        this.props.subscriptionActions.fetchSubscriptions();
+    }
 
     gotoAddSubscriptions() {
 
@@ -18,7 +22,13 @@ class SubscriptionList extends Component {
     }
 
     render() {
-
+        let {subscriptionList} = this.props;
+        let subscriptionDetails = _.map(_.keys(subscriptionList), (subscriptionId) => {
+            var subscription = subscriptionList[subscriptionId];
+            return (
+                <SubscriptionItem subscription={subscription} key={subscription.id} />
+            );
+        });
         return (
             <Grid>
                 <Row>
@@ -29,11 +39,11 @@ class SubscriptionList extends Component {
                             Subscription</Button>
                     </Col>
                 </Row>
-                <Row>
-                    <Col xs={1} xsHidden>
+                <Row style={{borderBottom:'2px solid #CCCCCC'}}>
+                    <Col xs={2} xsHidden>
                         <h4 style={{fontWeight:'bold'}}>#Serial</h4>
                     </Col>
-                    <Col xs={7} xsHidden>
+                    <Col xs={6} xsHidden>
                         <h4 style={{fontWeight:'bold'}}>Subscription Name</h4>
                     </Col>
                     <Col xs={4} xsHidden>
@@ -41,7 +51,13 @@ class SubscriptionList extends Component {
                     </Col>
                 </Row>
 
-                <SubscriptionDetails />
+                <Row>
+                    <Col sm={12}>
+                        <div>
+                            {subscriptionDetails}
+                        </div>
+                    </Col>
+                </Row>
 
             </Grid>
         );
@@ -51,7 +67,9 @@ class SubscriptionList extends Component {
 }
 
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+    subscriptionList: state.subscription.subscriptionList
+});
 
 const mapDispatchToProps = (dispatch) => ({
     subscriptionActions: bindActionCreators(subscriptionActionCreators, dispatch)

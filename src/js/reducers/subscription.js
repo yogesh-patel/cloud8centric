@@ -1,25 +1,11 @@
 import {createReducer} from '../utils';
 import constants from '../constants';
+import _ from 'lodash';
 
 let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS} = constants;
 
 const initialState = {
-    subscriptionList: {
-
-                        1:{
-                            id: 1,
-                            name: 'C8 Service',
-                            status: 'Ready',
-                            detail:null
-                        },
-                        2:{
-                            id: 2,
-                            name: 'Field Test Service',
-                            status: 'In Progress',
-                            detail:null
-                        }
-                    }
-                    ,
+    subscriptionList: null,
     productList:[
                     {
                         'productID': 1,
@@ -54,17 +40,35 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-    [FETCH_SUBSCRIPTIONS]: (state, payload) => {
+    'SUBSCRIPTIONS_RECEIVED': (state, payload) => {
         return Object.assign({}, state, {
-            //'subscriptionList': payload.subscriptionList
+            'subscriptionList': payload
         });
 
     },
-    [FETCH_PRODUCTS_AND_PLANS]: (state, payload) => {
+    'FETCH_PRODUCTS_AND_PLANS': (state, payload) => {
         return Object.assign({}, state, {
             // 'productList': payload.productList,
             // 'paymentPlans': payload.paymentPlans
         });
 
-    }
+    },
+
+    'SUBSCRIPTION_DETAIL_RECEIVED': (state, payload) => {
+        var _state = _.cloneDeep(state);
+        _state.subscriptionDetailLoading = false;
+
+        _state.subscriptionList[payload.subscriptionId].detail = payload.detail;
+
+        return _state;
+
+    },
+    'LOG_OUT':(state, payload) => {
+        return Object.assign({}, state, {
+            'subscriptionList': null,
+            'productList':null,
+            'paymentPlans':null
+        });
+
+    },
 });

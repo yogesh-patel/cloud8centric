@@ -1,88 +1,91 @@
 'use strict';
 
 import React, {Component, View} from 'react';
-import {Grid, Row, Col, Button, Table, Glyphicon, Panel, Input} from 'react-bootstrap';
+import {Grid, Row, Col, Button, Table, Glyphicon,
+    Panel, Input,OverlayTrigger,Popover} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as subscriptionActionCreators from '../../actions/subscription';
 import _ from 'lodash';
+import AddProductRow from './AddProductRow';
 
-class CreateSubscriptions extends Component{
+class CreateSubscriptions extends Component {
 
-  render(){
+    constructor(props){
+        super(props);
+        this.count = 1;
+        this.state = {
+            selectedProducts:{
+                1:<AddProductRow key={1} onDeleteProduct={this.onDeleteProduct.bind(this,1)}/>
+            }
+        }
+    }
 
-    let productList = this.props.products;
-    let paymentPlans = this.props.plans;
+    onAddProduct(){
+        this.count++;
+        this.state.selectedProducts[this.count] = <AddProductRow key={this.count}
+                                                                 onDeleteProduct={this.onDeleteProduct.bind(this,this.count)}/>
+        this.setState({selectedProducts:this.state.selectedProducts});
+    }
 
-    let productsDropDownValues = _.map(productList, (product) =>{
+    onDeleteProduct(count){
+        delete this.state.selectedProducts[count];
+        this.setState({selectedProducts:this.state.selectedProducts});
+    }
+
+    render() {
+        var selectedProductComps = _.map(_.keys(this.state.selectedProducts),(productComp)=>{
+            return this.state.selectedProducts[productComp];
+        });
+
         return (
-            <option value={product.productID}>{product.name}</option>
+            <Grid>
+                <Row>
+                    <Col sm={12} md={12} lg={12} xsHidden>
+                        <h3 className="section-title">
+                            Subscriptions / Create New
+                        </h3>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12}>
+                        <form>
+                            <Panel header={"Add New Subscription"}>
+                                <Row>
+                                    <Col xs={12} sm={12} md={6}>
+                                        <Input type="text" label="Subscription Name:" placeholder="Subscription Name*"/>
+                                    </Col>
+                                </Row>
+                            </Panel>
+                            <Panel header="Add Products">
+                                <Row>
+                                    <Button bsStyle="success" className="pull-right right-buffer"
+                                            onClick={this.onAddProduct.bind(this)}>
+                                        <Glyphicon
+                                        glyph="plus"/> Add More</Button>
+                                </Row>
+                                {selectedProductComps}
+                                <Row>
+                                    <Button bsStyle="primary" className="pull-right right-buffer">Register</Button>
+                                </Row>
+                            </Panel>
+                        </form>
+                    </Col>
+                </Row>
+
+            </Grid>
         );
-    });
 
-    let plandDropDownValues = _.map(paymentPlans, (plan) =>{
-        return (
-            <option value={plan.planID}>{plan.name}</option>
-        );
-    });
-
-    return(
-        <Row>
-            <Col xs={12}>
-                <form>
-                    <Panel header="Add New Subscription" bsStyle="info">
-                        <Row>
-                            <Col xs={12} sm={12} md={6}>
-                                <Input type="text" label="Subscription Name:" placeholder="Subscription Name*"/>
-                            </Col>
-                        </Row>
-                    </Panel>
-                    <Panel header="Add Products" bsStyle="info">
-                        <Row>
-                            <Button bsStyle="success" className="pull-right right-buffer"><Glyphicon glyph="plus"/>  Add More</Button>
-                        </Row>
-                        <Row>
-                            <Col xs={12} sm={5} md={4}>
-                                <Input type="select" label="Select Product" placeholder="Select Product">
-                                    <option value="select">Select Product</option>
-
-                                    {productsDropDownValues}
-
-                                </Input>
-                            </Col>
-                            <Col xs={12} sm={5} md={4}>
-                                <Input type="select" label="Select Payment Plan" placeholder="Select Payment Plan">
-                                    <option value="select">Select Payment Plan</option>
-
-                                    {plandDropDownValues}
-
-                                </Input>
-                            </Col>
-                            <Col xs={12} sm={5} md={4}>
-                                <Glyphicon glyph="minus subscription-minus-icon pointer"/>
-                                <Glyphicon glyph="question-sign subscription-question-icon pointer"/>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Button bsStyle="primary" className="pull-right right-buffer">Register</Button>
-                        </Row>
-                    </Panel>
-                </form>
-            </Col>
-        </Row>
-    );
-
-  }
+    }
 
 }
 
 
 const mapStateToProps = (state) => ({
-    products:state.subscription.productList,
-    plans:state.subscription.paymentPlans
+    products: state.subscription.productList,
+    plans: state.subscription.paymentPlans
 });
 
-const mapDispatchToProps = (dispatch) => ({
-});
+const mapDispatchToProps = (dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateSubscriptions);

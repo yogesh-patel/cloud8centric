@@ -10,13 +10,17 @@ import { connect } from 'react-redux';
 class Dashboard extends Component {
 
     render() {
-        var {showProducts} = this.props;
+        var {showProducts,toggleClass} = this.props;
+        var leftMargin = 50;
+        if(toggleClass == 'open'){
+            leftMargin = 200;
+        }
         return (
-            <div className="container">
+            <div>
                 <CommonHeader />
                 <LeftNavigation />
 
-                <div className="container" style={{marginTop:60}}>
+                <div style={{marginTop:60,marginLeft:leftMargin}}>
                     {this.props.children}
                 </div>
                 <div className="container" style={{display:showProducts ? 'block' : 'none'}}>
@@ -29,7 +33,8 @@ class Dashboard extends Component {
 
 }
 const mapStateToProps = (state) => ({
-    showProducts: state.dashboard.showProducts
+    showProducts: state.dashboard.showProducts,
+    toggleClass:state.header.toggleClass
 });
 
 const mapDispatchToProps = (dispatch) => ({});

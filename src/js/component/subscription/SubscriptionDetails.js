@@ -36,7 +36,9 @@ class SubscriptionDetails extends Component {
                         <td>{data.productURL}</td>
                         <td>{data.username}</td>
                         <td><Button className="status-btn-width"
-                                    bsStyle={ data.status=='Ready' ? 'success' :(data.status=='In Progress' ? 'warning' : (data.status=='Error' ? 'danger': '')) }
+                                    bsStyle={ data.status=='Ready' ?
+                                    'success' :(data.status=='In Progress' ? 'warning' :
+                                    (data.status=='Error' ? 'danger': '')) }
                                     onClick={ this.onStatusClick.bind(this)}>
                             {data.status}
                         </Button></td>
@@ -48,13 +50,13 @@ class SubscriptionDetails extends Component {
         return (
             <Row>
                 <Col sm={12}>
-                    <Table responsive striped bordered condensed hover>
-                        <thead>
+                    <Table responsive striped bordered condensed hover style={{backgroundColor:'#FFFFFF'}}>
+                        <thead style={{backgroundColor:'#CCC'}}>
                         <tr>
-                            <th>Product Name</th>
-                            <th>Product URL</th>
-                            <th>User Name</th>
-                            <th>Product Status</th>
+                            <th><b>Product Name</b></th>
+                            <th><b>Product URL</b></th>
+                            <th><b>User Name</b></th>
+                            <th><b>Product Status</b></th>
                         </tr>
                         </thead>
                         <tbody>

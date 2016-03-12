@@ -18,44 +18,37 @@ class SubscriptionItem extends React.Component {
         };
     }
 
-    onStatusClick(){
-        this.setState({ open: !this.state.open })
+    onStatusClick() {
+        this.setState({open: !this.state.open})
     }
 
     render() {
         var {subscription} = this.props;
         return (
-            <Row style={{paddingTop:15,borderBottom:'1px solid #dddddd'}}>
-                <Col xs={12}>
-                    <Grid>
-                        <Row>
-                            <Col xs={2}>
-                                <span>{subscription.id}</span>
-                            </Col>
-                            <Col xs={6}>
-                                <span>{subscription.name}</span>
-                            </Col>
-                            <Col xs={4}>
-                                <Button className="status-btn-width"
-                                        bsStyle={ subscription.status=='Ready' ? 'success' :(subscription.status=='In Progress' ? 'warning' : (subscription.status=='Error' ? 'danger': '')) }
-                                        onClick={ this.onStatusClick.bind(this)}>
-                                    {subscription.status}
-                                </Button>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={12}>
-                                <Panel style={{marginTop:10,border:'none !important',boxShadow:'none'}} collapsible expanded={this.state.open}>
-                                    {
-                                        this.state.open ? <SubscriptionDetails subscription={subscription}/> : <span />
-                                    }
+            <div style={{clear:'both',borderBottom:'1px solid #CCC'}}>
+                <div style={{padding:20,width:'10%',float:'left',borderRight:'1px solid #CCC'}}>
+                    {subscription.id}</div>
+                <div style={{padding:20,width:'60%',float:'left',borderRight:'1px solid #CCC'}}>
+                    {subscription.name}</div>
+                <div style={{padding:12,width:'30%',float:'left'}}>
+                    <Button className="status-btn-width"
+                            bsStyle={ subscription.status=='Ready' ? 'success' :(subscription.status=='In Progress' ? 'warning' : (subscription.status=='Error' ? 'danger': '')) }
+                            onClick={ this.onStatusClick.bind(this)}>
+                        {subscription.status}
+                    </Button>
+                </div>
+                <div style={{clear:'both',marginTop:-30}}>
+                    <Panel className="subscription-detail-box" collapsible
+                           expanded={this.state.open}>
+                        {
+                            this.state.open ? <SubscriptionDetails subscription={subscription}/> : <span />
+                        }
 
-                                </Panel>
-                            </Col>
-                        </Row>
-                    </Grid>
-                </Col>
-            </Row>
+
+                    </Panel>
+                </div>
+            </div>
+
         )
     }
 }

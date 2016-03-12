@@ -32,32 +32,42 @@ class SubscriptionList extends Component {
         return (
             <Grid>
                 <Row>
-                    <Col xs={12}>
+                    <Col sm={12} md={12} lg={12} xsHidden>
+                        <h3 className="section-title">
+                            Subscriptions
+                        </h3>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} sm={12} md={12} lg={12}>
                         <Button bsStyle="primary"
                                 className="pull-right"
                                 onClick={this.gotoAddSubscriptions.bind(this)}><Glyphicon glyph="plus"/> Add
                             Subscription</Button>
                     </Col>
                 </Row>
-                <Row style={{borderBottom:'2px solid #CCCCCC'}}>
-                    <Col xs={2} xsHidden>
-                        <h4 style={{fontWeight:'bold'}}>#Serial</h4>
+                <Row>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <div style={{marginTop:15,border:'1px solid #CCC'}}>
+                            <div style={{borderBottom:'1px solid #CCC'}} className="main-table-header">
+                                <div style={{padding:20,width:'10%',float:'left',borderRight:'1px solid #CCC'}}>Serial #</div>
+                                <div style={{padding:20,width:'60%',float:'left',borderRight:'1px solid #CCC'}}>Subscription Name</div>
+                                <div style={{padding:20,width:'30%',float:'left'}}>Subscription Status</div>
+                                <div style={{clear:'both'}} />
+                            </div>
+                            {subscriptionDetails}
+                        </div>
                     </Col>
-                    <Col xs={6} xsHidden>
-                        <h4 style={{fontWeight:'bold'}}>Subscription Name</h4>
-                    </Col>
-                    <Col xs={4} xsHidden>
-                        <h4 style={{fontWeight:'bold'}}>Subscription Status</h4>
-                    </Col>
+
                 </Row>
 
-                <Row>
+                {/*<Row>
                     <Col sm={12}>
                         <div>
                             {subscriptionDetails}
                         </div>
                     </Col>
-                </Row>
+                </Row>*/}
 
             </Grid>
         );

@@ -17,6 +17,26 @@ body {
     background-color: #CCC;
 }
 
+.text-danger{
+    position: absolute;
+    bottom: 36px;
+    z-index: 9;
+    font-size: 15px;
+}
+
+.txt-danger {
+    position: absolute;
+    bottom: 52px;
+    z-index: 9;
+    font-size: 15px;
+    color: #a94442;
+}
+
+.login-tbox{
+    position: relative;
+    margin-bottom: 30px;
+}
+
 .splashScreen .jumbotron {
     background-color: transparent;
     color: white;
@@ -215,8 +235,9 @@ a.btn-xl{
 }
 
 .login-label{
-    margin:20px 0;
+    margin:29px 0;
 }
+.f-right{float: right;}
 
 .login-button {
     color: #fff !important;
@@ -228,7 +249,7 @@ a.btn-xl{
     border-radius: 3px;
     font-size: 18px;
     padding: 10px 40px;
-    margin-top:15px;
+    /*margin-top:7px;*/
 }
 .signup-button {
     color: #fff !important;
@@ -240,7 +261,7 @@ a.btn-xl{
     border-radius: 3px;
     font-size: 18px;
     padding: 10px 40px;
-    margin-top:15px;
+    /*margin-top:7px;*/
 }
 
 .forgot-password{
@@ -248,10 +269,11 @@ a.btn-xl{
     font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 400;
     border-radius: 3px;
-    font-size: 18px;
+    font-size: 14px;
     padding: 10px 40px;
     margin-top:15px;
     cursor:pointer;
+    font-style: italic;
 }
 
 .forgot-password:hover{
@@ -435,6 +457,10 @@ a.btn-xl{
     margin-top: -40px;
 }
 
+.forgot-password-message{
+    font-size: 16px;
+}
+
 .subscription-minus-icon{
     background: #C76868;
     color: #FFF;
@@ -564,4 +590,8 @@ a.btn-xl{
 
 .subscription-products-table-thead{
     background-color:#CCC;
+}
+
+.login-error-msg{
+    font-size: 15px;
 }

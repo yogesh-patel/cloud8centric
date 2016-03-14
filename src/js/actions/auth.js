@@ -56,7 +56,23 @@ export function authenticateUser(username, password) {
                 })
 
             }).catch(error=> {
-                console.log(error);
+
+                var errorDescription = '';
+
+                if(error.message == 'Failed to fetch'){
+                    errorDescription ='Server is down. Please try again after some time.';
+                }
+
+                if(error.message == 'Unauthorized') {
+                    errorDescription = 'Bad Credentials.';
+                }
+
+                dispatch({
+                    type: 'LOGIN_USER_FAILURE',
+                    payload: {
+                        statusText: errorDescription
+                    }
+                });
             })
     }
 }

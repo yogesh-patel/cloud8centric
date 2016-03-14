@@ -12,7 +12,8 @@ import SubscriptionItem from './SubscriptionItem';
 class SubscriptionList extends Component {
 
     componentDidMount(){
-        this.props.subscriptionActions.fetchSubscriptions();
+        var {orgObject} = this.props;
+        this.props.subscriptionActions.fetchSubscriptions(orgObject.content[0].id);
     }
 
     gotoAddSubscriptions() {
@@ -78,7 +79,8 @@ class SubscriptionList extends Component {
 
 
 const mapStateToProps = (state) => ({
-    subscriptionList: state.subscription.subscriptionList
+    subscriptionList: state.subscription.subscriptionList,
+    orgObject: state.auth.orgObject
 });
 
 const mapDispatchToProps = (dispatch) => ({

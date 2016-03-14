@@ -6,7 +6,6 @@ import config from '../../config';
 
 
 export function get(nodeURL) {
-    //get token
     let accessToken = localStorage.getItem('access_token');
     if (accessToken !== null) {
         return fetch(config.BASE_URL + nodeURL, {
@@ -31,7 +30,6 @@ export function get(nodeURL) {
 }
 
 export function deleteRequest(nodeURL) {
-    //get token
     let loggedinUser = localStorage.getItem('ccmLoggedinUser');
     if (loggedinUser !== null) {
         var loggedinUserObj = JSON.parse(loggedinUser);
@@ -59,7 +57,6 @@ export function deleteRequest(nodeURL) {
 }
 
 export function post(nodeURL,data) {
-    //get token
     let loggedinUser = localStorage.getItem('ccmLoggedinUser');
     if (loggedinUser !== null) {
         var loggedinUserObj = JSON.parse(loggedinUser);

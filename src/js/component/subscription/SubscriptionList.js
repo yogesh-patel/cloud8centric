@@ -51,7 +51,7 @@ class SubscriptionList extends Component {
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <div style={{marginTop:15,border:'1px solid #CCC'}}>
                             <div style={{borderBottom:'1px solid #CCC'}} className="main-table-header">
-                                <div style={{padding:20,width:'10%',float:'left',borderRight:'1px solid #CCC'}}>Serial #</div>
+                                <div style={{padding:20,width:'10%',float:'left',borderRight:'1px solid #CCC'}}>Serial No.</div>
                                 <div style={{padding:20,width:'60%',float:'left',borderRight:'1px solid #CCC'}}>Subscription Name</div>
                                 <div style={{padding:20,width:'30%',float:'left'}}>Subscription Status</div>
                                 <div style={{clear:'both'}} />

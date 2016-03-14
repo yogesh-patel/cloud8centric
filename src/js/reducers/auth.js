@@ -22,13 +22,10 @@ const initialState = {
 export default createReducer(initialState, {
     [LOGIN_USER_REQUEST]: (state, payload) => {
         return Object.assign({}, state, {
-            'isAuthenticating': true,
-            'authenticationStatus':null,
             'statusText': null
         });
     },
     [LOGIN_USER_SUCCESS]: (state, payload) => {
-        console.log('payload::', payload);
         return Object.assign({}, state, {
             'username': payload.username,
             'userObject': payload.userObject,
@@ -40,9 +37,6 @@ export default createReducer(initialState, {
     },
     [LOGIN_USER_FAILURE]: (state, payload) => {
         return Object.assign({}, state, {
-            'isAuthenticating': false,
-            'isAuthenticated': false,
-            'authenticationStatus':'failed',
             'token': null,
             'userName': null,
             'statusText': payload.statusText

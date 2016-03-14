@@ -1,6 +1,7 @@
 import {createReducer} from '../utils';
-import {SHOW_LOGIN} from '../constants';
-import {pushState} from 'redux-router';
+import constants from '../constants';
+
+let {SHOW_NAVIGATION_MENU, HIDE_NAVIGATION_MENU} = constants;
 
 const initialState = {
     toggleClass: ''

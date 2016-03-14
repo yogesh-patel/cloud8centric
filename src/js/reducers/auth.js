@@ -12,10 +12,10 @@ import {pushState} from 'redux-router';
 let {LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE} = constants;
 
 const initialState = {
+    username: null,
+    userObject: null,
+    orgObject: null,
     token: null,
-    userName: null,
-    isAuthenticated: false,
-    isAuthenticating: false,
     statusText: null
 };
 
@@ -30,11 +30,10 @@ export default createReducer(initialState, {
     [LOGIN_USER_SUCCESS]: (state, payload) => {
         console.log('payload::', payload);
         return Object.assign({}, state, {
-            'isAuthenticating': false,
-            'isAuthenticated': true,
-            'authenticationStatus':'passed',
+            'username': payload.username,
+            'userObject': payload.userObject,
+            'orgObject': payload.orgObject,
             'token': payload.token,
-            'userName': payload.userName,
             'statusText': payload.statusText
         });
 

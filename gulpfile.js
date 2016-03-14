@@ -58,6 +58,7 @@ gulp.task('jswatch', function() {
 gulp.task('style', function() {
     return gulp.src([modulesPath + "/bootstrap/dist/css/bootstrap.min.css",
             modulesPath + "/bootstrap/dist/css/bootstrap-theme.min.css",
+            modulesPath + "/font-awesome/css/font-awesome.min.css",
             srcPath + "/css/*.css"
         ])
         .pipe(concatCss('animate.css'))
@@ -73,6 +74,7 @@ gulp.task('copy', function() {
     gulp.src(srcPath + "/img/**/*.*").pipe(gulp.dest(distPath + "/img"));
     gulp.src(srcPath + "/img/*.*").pipe(gulp.dest(distPath + "/img"));
     gulp.src(srcPath + "/css/fonts/*.*").pipe(gulp.dest(distPath + "/fonts"));
+    gulp.src(srcPath + "/css/font-awesome/*.*").pipe(gulp.dest(distPath + "/font-awesome/fonts"));
     return gulp.src(srcPath + "/*.html").pipe(gulp.dest(distPath));
 });
 

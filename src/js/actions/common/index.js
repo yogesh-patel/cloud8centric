@@ -59,23 +59,21 @@ export function deleteRequest(nodeURL) {
 }
 
 export function post(nodeURL,data) {
-    //get token
-    let loggedinUser = localStorage.getItem('ccmLoggedinUser');
-    if (loggedinUser !== null) {
-        var loggedinUserObj = JSON.parse(loggedinUser);
+    let accessToken = localStorage.getItem('access_token');
+    let tokenType = 'Bearer ';
+
+    if (tokenType !== null || accessToken !== null) {
         return fetch(config.BASE_URL + nodeURL, {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-AUTH-TOKEN': loggedinUserObj.token
+                 'Authorization': tokenType + accessToken
             },
             body:JSON.stringify(data)
 
         }).then(checkHttpStatus)
             .then((response) => {
-                var token = response.headers.get('X-AUTH-TOKEN');
-                updateAccessToken(token);
                 return parseJSON(response);
             })
             .then(result => {
@@ -84,8 +82,6 @@ export function post(nodeURL,data) {
             .catch(error => {
                 throw error;
             })
-    } else {
-        dispatch(pushState(null, '/login'));
     }
 }
 

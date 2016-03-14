@@ -63,7 +63,9 @@ class Menu extends Component {
                          activeKey={this.state.selectedOption}
                          pullRight>
                         <li role="presentation">
-                            <Link to="products" href="#" onClick={this.onProductSelected.bind(this)} style={{color:itemColor}} smooth duration={500}>PRODUCTS</Link>
+                            <Link to="products" href="#"
+                                  onClick={this.onProductSelected.bind(this)}
+                                  style={{color:itemColor}} smooth duration={500}>PRODUCTS</Link>
                         </li>
                         <li role="presentation">
                             <Link to="contact" href="#" onClick={this.onProductSelected.bind(this)} style={{color:itemColor}} smooth duration={500}>CONTACT</Link>

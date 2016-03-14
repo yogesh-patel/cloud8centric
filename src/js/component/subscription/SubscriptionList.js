@@ -1,47 +1,89 @@
 'use strict';
 
 import React, {Component, View} from 'react';
-import {Grid, Row, Col, Button, Table} from 'react-bootstrap';
+import {Grid, Row, Col, Button, Table, Glyphicon} from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { push } from 'redux-router';
+import * as subscriptionActionCreators from '../../actions/subscription';
+import _ from 'lodash';
+import SubscriptionItem from './SubscriptionItem';
 
-class SubscriptionList extends Component{
+class SubscriptionList extends Component {
 
-    render(){
+    componentDidMount(){
+        this.props.subscriptionActions.fetchSubscriptions();
+    }
 
-        return(
-            <Table striped bordered condensed hover>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Username</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Jacob</td>
-                    <td>Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-            </Table>
+    gotoAddSubscriptions() {
+
+        this.props.subscriptionActions.fetchProductsAndPlans();
+
+    }
+
+    render() {
+        let {subscriptionList} = this.props;
+        let subscriptionDetails = _.map(_.keys(subscriptionList), (subscriptionId) => {
+            var subscription = subscriptionList[subscriptionId];
+            return (
+                <SubscriptionItem subscription={subscription} key={subscription.id} />
+            );
+        });
+        return (
+            <Grid>
+                <Row>
+                    <Col sm={12} md={12} lg={12} xsHidden>
+                        <h3 className="section-title">
+                            Subscriptions
+                        </h3>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <Button bsStyle="primary"
+                                className="pull-right"
+                                onClick={this.gotoAddSubscriptions.bind(this)}><Glyphicon glyph="plus"/> Add
+                            Subscription</Button>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} sm={12} md={12} lg={12}>
+                        <div style={{marginTop:15,border:'1px solid #CCC'}}>
+                            <div style={{borderBottom:'1px solid #CCC'}} className="main-table-header">
+                                <div style={{padding:20,width:'10%',float:'left',borderRight:'1px solid #CCC'}}>Serial #</div>
+                                <div style={{padding:20,width:'60%',float:'left',borderRight:'1px solid #CCC'}}>Subscription Name</div>
+                                <div style={{padding:20,width:'30%',float:'left'}}>Subscription Status</div>
+                                <div style={{clear:'both'}} />
+                            </div>
+                            {subscriptionDetails}
+                        </div>
+                    </Col>
+
+                </Row>
+
+                {/*<Row>
+                    <Col sm={12}>
+                        <div>
+                            {subscriptionDetails}
+                        </div>
+                    </Col>
+                </Row>*/}
+
+            </Grid>
         );
 
     }
 
 }
 
-export default SubscriptionList;
+
+const mapStateToProps = (state) => ({
+    subscriptionList: state.subscription.subscriptionList
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    subscriptionActions: bindActionCreators(subscriptionActionCreators, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionList);
+

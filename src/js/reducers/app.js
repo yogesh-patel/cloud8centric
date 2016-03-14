@@ -8,7 +8,11 @@ import {pushState} from 'redux-router';
 const initialState = {
     loginScreen:false,
     homeScreen:true,
+<<<<<<< HEAD
     signUpScreen:false
+=======
+    loading:false
+>>>>>>> upstream/master
 };
 
 export default createReducer(initialState, {
@@ -26,6 +30,7 @@ export default createReducer(initialState, {
             homeScreen:true
         });
     },
+<<<<<<< HEAD
     'SHOW_SIGN_UP': (state, payload) => {
         return Object.assign({}, state, {
             loginScreen:false,
@@ -33,4 +38,40 @@ export default createReducer(initialState, {
             homeScreen:false
         });
     },
+=======
+    'LOGIN_USER_REQUEST': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:true
+        });
+    },
+    'LOGIN_USER_SUCCESS': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:false
+        });
+    },
+    'SUBSCRIPTION_DETAIL_REQUEST_SENT': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:true
+        });
+
+    },
+    'SUBSCRIPTION_DETAIL_RECEIVED': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:false
+        });
+
+    },
+    'FETCH_SUBSCRIPTIONS': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:true
+        });
+
+    },
+    'SUBSCRIPTIONS_RECEIVED': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:false
+        });
+
+    },
+>>>>>>> upstream/master
 });

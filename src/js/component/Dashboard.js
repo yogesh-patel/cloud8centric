@@ -3,24 +3,28 @@
 import React, {Component} from 'react';
 import LeftNavigation from './common/LeftNavigation';
 import CommonHeader from './common/CommonHeader';
-import SubscriptionList from './subscription/SubscriptionList';
 import {Grid, Row, Col, Button} from 'react-bootstrap';
+import Products from './home/Products';
+import { connect } from 'react-redux';
 
-class Dashboard extends Component{
+class Dashboard extends Component {
 
-    render(){
-
-        return(
+    render() {
+        var {showProducts,toggleClass} = this.props;
+        var leftMargin = 50;
+        if(toggleClass == 'open'){
+            leftMargin = 200;
+        }
+        return (
             <div>
                 <CommonHeader />
                 <LeftNavigation />
 
-                <div className="content-margin">
-                    <Grid>
-                        <Row>
-                            <SubscriptionList />
-                        </Row>
-                    </Grid>
+                <div style={{marginTop:60,marginLeft:leftMargin}}>
+                    {this.props.children}
+                </div>
+                <div className="container" style={{display:showProducts ? 'block' : 'none'}}>
+                    <Products />
                 </div>
             </div>
         );
@@ -28,5 +32,11 @@ class Dashboard extends Component{
     }
 
 }
+const mapStateToProps = (state) => ({
+    showProducts: state.dashboard.showProducts,
+    toggleClass:state.header.toggleClass
+});
 
-export default Dashboard;
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

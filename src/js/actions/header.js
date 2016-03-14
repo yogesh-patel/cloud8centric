@@ -13,3 +13,19 @@ export function hideNavigationMenu(){
         type:HIDE_NAVIGATION_MENU
     }
 }
+
+export function showProducts(){
+    return (
+    {
+        type:'SHOW_PRODUCTS'
+    }
+    )
+}
+
+export function hideProducts(){
+    return (
+    {
+        type:'HIDE_PRODUCTS'
+    }
+    )
+}

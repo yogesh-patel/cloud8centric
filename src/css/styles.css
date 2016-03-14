@@ -1,6 +1,6 @@
 body {
     font-family: 'Open Sans', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .logo {
@@ -57,7 +57,7 @@ body {
 }
 
 .common-header .inverse-menu{
-    margin:0;
+    margin:0 15px;
 }
 
 .productContainer {
@@ -315,7 +315,7 @@ a.btn-xl{
     z-index: 1030;
 }
 .navbar-twitch.open {
-    width: 240px;
+    width: 200px;
 }
 .navbar-twitch > .container {
     padding: 0px;
@@ -377,7 +377,8 @@ a.btn-xl{
 }
 .navbar-twitch .navbar-nav > li > a > span {
     display: block;
-    font-size: 11pt;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
     padding: 13px 15px 13px 12px;
 }
 .navbar-twitch .tooltip,
@@ -408,11 +409,127 @@ a.btn-xl{
 
 .left-navigation .navbar {
     background-image: none !important;
+    margin-left:15px;
+    background-color: #616D7E;
+}
+
+.left-navigation .navbar li.active{
+    color: #fff;
+    background-color: #4863A0;
+}
+
+.left-navigation .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.open>a{
+    background-repeat: repeat-x;
+    box-shadow: inset 0 3px 9px rgba(0,0,0,.25);
+    background-image:none;
+}
+
+.left-navigation .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover{
+    background-color: #4863A0;
 }
 /* LEFT NAVIGATION CSS */
 
 /*TODO: temporary fix, margin given is negative*/
 .common-header-logo{
-    margin-left: 60px !important;
+    margin-left: 30px !important;
     margin-top: -40px;
+}
+
+.subscription-minus-icon{
+    background: #C76868;
+    color: #FFF;
+    font-weight: bold;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    padding: 4px 9px;
+    vertical-align: top;
+    line-height: 100%;
+    top:27px;
+    font-size: small;
+}
+
+.subscription-question-icon{
+    font-size: x-large;
+    top:25px;
+}
+
+.status-btn-width {
+    width: 100px;
+}
+
+.spinner {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    margin: 250px auto;
+    z-index: 999999;
+}
+
+.double-bounce1, .double-bounce2 {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #333;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+}
+
+@-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+    0%, 100% {
+        transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    } 50% {
+          transform: scale(1.0);
+          -webkit-transform: scale(1.0);
+      }
+}
+
+.app-mask{
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+        
+}
+
+.section-title{
+    color: #4863A0;
+    border-bottom: 1px solid #ccc;
+    background-repeat: repeat-x;
+    background-image: none;
+    padding:15px;
+}
+
+.subscription-detail-box{
+    box-shadow: none;
+    margin-bottom: 0px;
+    border-right: none;
+    border-left: none;
+    border-bottom: none;
+    /* border-top: 1px solid; */
+    border-radius: 0;
+    background-color: #E2EAF5;
+}
+
+.main-table-header{
+    border-bottom: 1px solid #CCC;
+    background-color: #A4B4C9;
+    color:#FFFFFF;
 }

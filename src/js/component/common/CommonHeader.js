@@ -34,6 +34,7 @@ class CommonHeader extends Component{
 
 	render(){
 		var productLink = <span onClick={this.onProductSelected.bind(this)}>Products</span>;
+		var {userObject} = this.props;
 		return(
 			<div className="common-header">
 				<Navbar inverse fixedTop fluid className={'home-menu inverse-menu'}>
@@ -52,7 +53,7 @@ class CommonHeader extends Component{
 								{productLink}
 								{/*</Link>*/}
 							</NavItem>
-							<NavDropdown eventKey={2} title="Welcome Username" id="basic-nav-dropdown">
+							<NavDropdown eventKey={2} title={"Welcome "+userObject.firstName } id="basic-nav-dropdown">
 								<MenuItem eventKey={2.1}>Profile</MenuItem>
 								<MenuItem divider />
 								<MenuItem eventKey={2.2} onClick={this.onLogout.bind(this)}>Logout</MenuItem>
@@ -66,7 +67,9 @@ class CommonHeader extends Component{
 }
 
 const mapStateToProps = (state) => ({
-	toggleClass:state.header.toggleClass
+	toggleClass:state.header.toggleClass,
+	userObject:state.auth.userObject
+
 });
 
 const mapDispatchToProps = (dispatch) => ({

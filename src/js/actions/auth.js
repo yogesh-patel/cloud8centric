@@ -2,6 +2,7 @@ import constants from '../constants';
 import { pushState,push } from 'redux-router';
 import config from '../config';
 import { checkHttpStatus, parseJSON } from '../utils';
+import {get} from './common';
 
 let {LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS} = constants;
@@ -27,47 +28,47 @@ export function authenticateUser(username, password) {
                 return parseJSON(response);
             })
             .then(result => {
-                console.log(result);
+
                 var access_token = result.access_token;
                 localStorage.setItem('access_token', access_token);
                 var token_type = result.token_type;
                 localStorage.setItem('token_type', token_type);
 
-                dispatch({
-                    type: 'LOGIN_USER_SUCCESS',
-                    payload: {
-                        username: username,
-                        token: "access_token",
-                        statusText: "You have been successfully logged in."
-                    }
-                });
+                getMe()
+                .then((meResponse)=>{
+
+                    getOrganizations()
+                    .then((orgResponse)=>{
+                        dispatch({
+                            type: 'LOGIN_USER_SUCCESS',
+                            payload: {
+                                username: username,
+                                userObject:meResponse,
+                                orgObject:orgResponse,
+                                token: "access_token",
+                                statusText: "You have been successfully logged in."
+                            }
+                        });
+
+                        dispatch(push("dashboard"));
+
+                    })
+                })
+
             }).catch(error=> {
                 console.log(error);
             })
-
-        //return $http({
-        //    method: "post",
-        //    url: url,
-        //    headers: {
-        //        'Authorization': 'Basic bW9iaWxlOmNlbnRyaWM4'
-        //    },
-
-
-        //var interval = setInterval(()=> {
-        //    clearInterval(interval);
-        //    dispatch({
-        //        type: 'LOGIN_USER_SUCCESS',
-        //        payload: {
-        //            username: username,
-        //            token: "123",
-        //            statusText: "You have been successfully logged in.",
-        //            password: password
-        //        }
-        //    });
-        //    dispatch(push("dashboard"));
-        //}, 2000);
-
     }
+}
+
+function getMe(){
+    var endPointURL = 'api/v1/me';
+    return get(endPointURL);
+}
+
+function getOrganizations(){
+    var endPointURL = 'api/v1/organizations';
+    return get(endPointURL);
 }
 
 export function logout() {

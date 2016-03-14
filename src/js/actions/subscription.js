@@ -1,33 +1,32 @@
 import constants from '../constants';
 import { push } from 'redux-router';
+import {get} from './common';
+import _ from 'lodash';
 
 let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS} = constants;
 
-export function fetchSubscriptions(){
+export function fetchSubscriptions(organizationId){
 
     return(dispatch) => {
         dispatch({type:'FETCH_SUBSCRIPTIONS'});
+        var endPointURL = 'api/v1/organizations/'+organizationId+'/subscriptions';
 
-        var interval = setInterval(()=>{
-            clearInterval(interval);
-            dispatch({type:'SUBSCRIPTIONS_RECEIVED',
-                payload:{
-                    1:{
-                        id: 1,
-                        name: 'C8 Service',
-                        status: 'Ready',
-                        detail:null
-                    },
-                    2:{
-                        id: 2,
-                        name: 'Field Test Service',
-                        status: 'In Progress',
-                        detail:null
-                    }
+        get(endPointURL).
+        then((response)=>{
+            var dataObject = {};
+            var contents = response.content;
+            _.each(contents,(content)=>{
+                dataObject[content.subscriptionOption.product.id] = {
+                    id:content.subscriptionOption.product.id,
+                    name:content.subscriptionOption.product.name,
+                    detail:null,
+                    status:'Ready'
                 }
             });
-        },1000);
-
+            dispatch({type:'SUBSCRIPTIONS_RECEIVED',
+                payload:dataObject
+            });
+        })
     }
 
 }

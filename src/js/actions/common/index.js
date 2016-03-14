@@ -7,21 +7,16 @@ import config from '../../config';
 
 export function get(nodeURL) {
     //get token
-    let loggedinUser = localStorage.getItem('ccmLoggedinUser');
-    if (loggedinUser !== null) {
-        var loggedinUserObj = JSON.parse(loggedinUser);
+    let accessToken = localStorage.getItem('access_token');
+    if (accessToken !== null) {
         return fetch(config.BASE_URL + nodeURL, {
             method: 'get',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'X-AUTH-TOKEN': loggedinUserObj.token
+                'Authorization':'Bearer '+ accessToken
             }
 
         }).then(checkHttpStatus)
             .then((response) => {
-                var token = response.headers.get('X-AUTH-TOKEN');
-                updateAccessToken(token);
                 return parseJSON(response);
             })
             .then(result => {

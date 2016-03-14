@@ -76,6 +76,7 @@ class Login extends Component {
         });
     }
 
+
     render() {
 
         var {statusText} = this.props;
@@ -184,5 +185,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
-
-

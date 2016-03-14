@@ -5,7 +5,7 @@ import {Grid, Row, Col,Jumbotron,Glyphicon,Input} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as SaveStatus from '../actions/signUp';
+import * as SaveStatus from '../../actions/signUp';
 
 import {Element} from 'react-scroll';
 

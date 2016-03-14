@@ -6,7 +6,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Element} from 'react-scroll';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as SaveStatus from '../actions/signUp';
+import * as SaveStatus from '../../actions/signUp';
 
 class Step1 extends Component {
 
@@ -45,6 +45,7 @@ class Step1 extends Component {
                 username:this.state.username,
                 password:this.state.password,
                 confirmPassword:this.state.confirmPassword,
+                roles: ["AccountOwner"]
             }
         );
     }
@@ -69,8 +70,9 @@ class Step1 extends Component {
     }
 
     render() {
+        var {userinfo} = this.props;
         return (
-                <form name="signup">
+                <form name="signup" onSubmit={this.onHandleNextClick.bind(this)}>
                     <Row className="text-center">
                         <Col md={6} sm={8} xs={12} smPush={1} lgPush={3} className="signUp-box">
 
@@ -79,12 +81,14 @@ class Step1 extends Component {
                                     <Col xs={12}>
                                         <Input type="text"
                                                addonBefore={<Glyphicon glyph="user" />}
+                                               defaultValue={userinfo.firstName}
                                                placeholder="First Name" required onChange={this.onFirstNameChange.bind(this)}/>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
                                         <Input type="text"
+                                               defaultValue={userinfo.lastName}
                                                addonBefore={<Glyphicon glyph="user" />}
                                                placeholder="Last Name" required onChange={this.onLastNameChange.bind(this)}/>
                                     </Col>
@@ -92,36 +96,40 @@ class Step1 extends Component {
                                 <Row>
                                     <Col xs={12}>
                                         <Input type="email"
-                                               addonBefore={<Glyphicon glyph="user" />}
+                                               defaultValue={userinfo.emailAddress}
+                                               addonBefore={<Glyphicon glyph="envelope" />}
                                                placeholder="Email" required onChange={this.onEmailChange.bind(this)}/>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
                                         <Input type="text"
-                                               addonBefore={<Glyphicon glyph="user" />}
+                                               defaultValue={userinfo.username}
+                                               addonBefore={<Glyphicon glyph="asterisk" />}
                                                placeholder="User Name" required onChange={this.onUsernameChange.bind(this)}/>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
                                         <Input type="password"
-                                            addonBefore={<Glyphicon glyph="asterisk" />}
-                                               placeholder="Password" required onChange={this.onConfirmPasswordChange.bind(this)}/>
+                                               defaultValue={userinfo.Password}
+                                               addonBefore={<Glyphicon glyph="asterisk" />}
+                                               placeholder="Password" required onChange={this.onPasswordChange.bind(this)}/>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
                                         <Input type="password"
-                                            addonBefore={<Glyphicon glyph="asterisk" />}
-                                               placeholder="Confirm Password" required onChange={this.onPasswordChange.bind(this)}/>
+                                               defaultValue={userinfo.confirmPassword}
+                                               addonBefore={<Glyphicon glyph="asterisk" />}
+                                               placeholder="Confirm Password" required onChange={this.onConfirmPasswordChange.bind(this)}/>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <div className="signup-button" onClick={this.onHandleNextClick.bind(this)}>
+                                        <button className="Next-button pointer">
                                             Next
-                                        </div>
+                                        </button>
                                     </Col>
                                 </Row>
                         </Col>
@@ -133,6 +141,7 @@ class Step1 extends Component {
 }
 
 const mapStateToProps = (state) => ({
+    userinfo:state.signUpData.signupInfo.userinfo
 });
 
 const mapDispatchToProps = (dispatch) => ({

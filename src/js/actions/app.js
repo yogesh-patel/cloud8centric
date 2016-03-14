@@ -3,17 +3,11 @@
  */
 
 import constants from '../constants';
-let {SHOW_LOGIN,SHOW_HOME,SHOW_FORGOT_PASSWORD, SHOW_FORGOT_MESSAGE} = constants;
+let {SHOW_LOGIN,SHOW_HOME,SHOW_FORGOT_PASSWORD, SHOW_FORGOT_MESSAGE,SHOW_SIGN_UP} = constants;
 
 export function showLogin() {
     return {
         type: SHOW_LOGIN
-    }
-}
-
-export function showForgotPassword() {
-    return {
-        type: SHOW_FORGOT_PASSWORD
     }
 }
 
@@ -28,3 +22,17 @@ export function showForgotMessage(){
         type: SHOW_FORGOT_MESSAGE
     }
 }
+
+export function showForgotPassword() {
+    return {
+        type: SHOW_FORGOT_PASSWORD
+    }
+}
+
+export function showSignUp(){
+    return {
+        type:SHOW_SIGN_UP
+    }
+}
+
+

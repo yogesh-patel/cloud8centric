@@ -10,6 +10,7 @@ const initialState = {
     homeScreen: true,
     forgotPasswordScreen: false,
     forgotMessageScreen: false,
+    signUpScreen:false,
     loading:false
 };
 
@@ -23,12 +24,8 @@ export default createReducer(initialState, {
         });
     },
     'SHOW_FORGOT_PASSWORD': (state, payload) => {
-        console.log('payload::', payload);
         return Object.assign({}, state, {
-            loginScreen: false,
-            forgotPasswordScreen: true,
-            forgotMessageScreen: false,
-            homeScreen: false
+
         });
     },
     'SHOW_HOME': (state, payload) => {
@@ -45,7 +42,15 @@ export default createReducer(initialState, {
             loginScreen: false,
             forgotPasswordScreen: false,
             forgotMessageScreen: true,
-            homeScreen: false
+            homeScreen: false,
+            signUpScreen:false,
+        });
+    },
+    'SHOW_SIGN_UP': (state, payload) => {
+        return Object.assign({}, state, {
+            loginScreen:false,
+            signUpScreen:true,
+            homeScreen:false
         });
     },
     'LOGIN_USER_REQUEST': (state, payload) => {

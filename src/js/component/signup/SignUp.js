@@ -4,9 +4,7 @@ import React, {Component,View} from 'react';
 import {Grid, Row, Col,Jumbotron,Button,Input,ButtonInput,Panel} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as SaveStatus from '../actions/signUp';
-import Footer from './common/Footer'
-import Header from './common/Header'
+import * as SaveStatus from '../../actions/signUp';
 import StepStatus from './StepStatus'
 import Step1 from './Step1'
 import Step2 from './Step2'
@@ -24,7 +22,7 @@ class SignUp extends Component{
   render(){
     //alert(this.props.status);
     return(
-          <Element className="splashScreen " name="splashScreen">
+          <Element className="splashScreen" name="splashScreen">
               <Grid fluid>
                   <Row>
                       <Jumbotron className="text-center">

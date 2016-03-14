@@ -13,10 +13,7 @@ var Routes = (
 
     <Route path="/" component={App}>
       <IndexRoute component={Home}/>
-      <Route path="signup" component={SignUp}/>
-
       <Route path="dashboard" component={Dashboard}>
-
       </Route>
     </Route>
 

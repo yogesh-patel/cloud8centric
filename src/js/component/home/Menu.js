@@ -24,7 +24,9 @@ class Menu extends Component {
 
     gotoSignUpPage(e) {
         e.preventDefault();
-        this.props.routeDispatch(push("signup"));
+        // this.props.routeDispatch(push("signup"));
+        this.props.appActions.showSignUp();
+        this.setState({selectedOption: 'signup'});
     }
 
     gotoLoginPage(e) {
@@ -66,9 +68,11 @@ class Menu extends Component {
                         <li role="presentation">
                             <Link to="contact" href="#" onClick={this.onProductSelected.bind(this)} style={{color:itemColor}} smooth duration={500}>CONTACT</Link>
                         </li>
-                        <NavItem onClick={this.gotoSignUpPage.bind(this)}>
-                            <span style={{color:itemColor}}>SIGNUP</span>
-                        </NavItem>
+                        <li role="presentation">
+                            <Link to="splashScreen" href="#" onClick={this.gotoSignUpPage.bind(this)} style={{color:itemColor}} smooth duration={500}>
+                                SIGNUP
+                            </Link>
+                        </li>
                         <li role="presentation">
                             <Link to="splashScreen" href="#" onClick={this.gotoLoginPage.bind(this)} style={{color:itemColor}} smooth duration={500}>
                                 LOGIN

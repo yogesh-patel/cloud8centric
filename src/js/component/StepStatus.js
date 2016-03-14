@@ -11,92 +11,133 @@ import {Element} from 'react-scroll';
 
 class StepStatus extends Component {
 
+    onStep1(){ 
+        //alert("onclick");
+        if(this.props.circleStatus.step1 === "Step_1_Completed"){
+            this.props.empActions.saveStatus({
+                    step1: "OnBackStep1",
+                    step2: "",
+                    step3: ""}
+                );
+        }
+    }
+
+    onStep2(){ 
+        if(this.props.circleStatus.step2 === "Step_2_Completed"){
+            this.props.empActions.saveStatus({
+                    step1: "",
+                    step2: "OnBackStep2",
+                    step3: ""}
+                );
+        }
+    }
+
+    onStep3(){ 
+        if(this.props.circleStatus.step3 === "Step_3_Completed"){
+            this.props.empActions.saveStatus({
+                    step1: "",
+                    step2: "",
+                    step3: "OnBackStep3"}
+                );
+        }
+    }
+
     render() {
         return (
-            <Grid>
-              <Row className="text-center">
-                <Col md={4} sm={4} xs={4}>
-                  <h4>1</h4>
-                  <NextStep1 status={this.props.status}/>
-                </Col>
-                <Col md={4} sm={4} xs={4}>
-                    <h4>2</h4>
-                    <NextStep2 status={this.props.status}/>
-                </Col>
-                <Col md={4} sm={4} xs={4}>
-                  <h4>3</h4>
-                  <NextStep3 status={this.props.status}/>
-                </Col>
-              </Row>
 
-            </Grid>
+                <Row>
+                    <Col Col md={6} sm={8} xs={12} smPush={1} lgPush={3} className="signUp-box">
+                        <Row>
+                            <Col md={4} sm={4} xs={4}>
+                                <h4>1</h4>
+                                <NextStep1 circleStatus={this.props.circleStatus}
+                                    onStep1={this.onStep1.bind(this)}/>
+                            </Col>
+                            <Col md={4} sm={4} xs={4}>
+                                <h4>2</h4>
+                                <NextStep2 circleStatus={this.props.circleStatus}
+                                    onStep2={this.onStep2.bind(this)}/>
+                            </Col>
+                            <Col md={4} sm={4} xs={4}>
+                                <h4>3</h4>
+                                <NextStep3 circleStatus={this.props.circleStatus}
+                                    onStep3={this.onStep3.bind(this)}/>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+
         )
     }
 
 };
 
-class NextStep1 extends Component{
-  constructor(props){
-        super(props);
-        this.state= {step2:''}
+    class NextStep1 extends Component{
+        constructor(props){
+            super(props);
+            this.state= {step1:''}
+        }
+
+        render(){
+            //alert(this.props.circleStatus.step1);
+            this.state.step1 = <div className="circleBase type1"></div>;
+            if(this.props.circleStatus.step1 === "Step_1_Completed"){
+                this.state.step1 = <div className="circleBase type2"></div>;
+            }
+            return(
+                <div onClick={this.props.onStep1}>
+                    {this.state.step1}
+                </div>
+            );
+        }
     }
 
-  render(){
-      this.state.step2 = <div className="circleBase type1"></div>;
-      if(this.props.status==="Step1Completed"){
-       this.state.step2 = <div className="circleBase type2"></div>;
-      }
-      return(
-        <div>
-          {this.state.step2}
-        </div>
-      );
-    }
-}
+    class NextStep2 extends Component{
+        constructor(props){
+            super(props);
+            this.state= {step2:''}
+        }
 
-class NextStep2 extends Component{
-  constructor(props){
-        super(props);
-        this.state= {step2:''}
-    }
-
-  render(){
-      this.state.step2 = <div className="circleBase type1"></div>;
-      if(this.props.status==="Step_2_Completed"){
-       this.state.step2 = <div className="circleBase type2"></div>;
-      }
-      return(
-        <div>
-          {this.state.step2}
-        </div>
-      );
-    }
-}
-
-
-class NextStep3 extends Component{
-  constructor(props){
-        super(props);
-        this.state= {step2:''}
+        render(){
+            this.state.step2 = <div className="circleBase type1"></div>;
+            if(this.props.circleStatus.step2 === "Step_2_Completed"){
+                this.state.step2 = <div className="circleBase type2"></div>;
+            }
+            return(
+                <div onClick={this.props.onStep2}>
+                    {this.state.step2}
+                </div>
+            );
+        }
     }
 
-  render(){
-      this.state.step2 = <div className="circleBase type1"></div>;
-      if(this.props.status==="Step_3_Completed"){
-       this.state.step2 = <div className="circleBase type2"></div>;
-      }
-      return(
-        <div>
-          {this.state.step2}
-        </div>
-      );
+
+    class NextStep3 extends Component{
+        constructor(props){
+            super(props);
+            this.state= {step3:''}
+        }
+
+        render(){
+            this.state.step3 = <div className="circleBase type1"></div>;
+            if(this.props.circleStatus.step3 == "Step_3_Completed"){
+                this.state.step3 = <div className="circleBase type2"></div>;
+            }
+            return(
+                <div onClick={this.props.onStep3}>
+                    {this.state.step3}
+                </div>
+            );
+        }
     }
-}
+
 const mapStateToProps = (state) => ({
-    status:state.signUpData.status
+    //status:state.signUpData.status,
+    circleStatus:state.signUpData.circleStatus
 });
 
 const mapDispatchToProps = (dispatch) => ({
+    empActions: bindActionCreators(SaveStatus, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(StepStatus);

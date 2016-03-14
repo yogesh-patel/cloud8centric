@@ -100,7 +100,7 @@ body {
 }
 
 .react-addition-animation-enter {
-    opacity: 0.01;
+    opacity: 0.5;
 }
 
 .react-addition-animation-enter.react-addition-animation-enter-active {

@@ -4,11 +4,17 @@
 
 import constants from '../constants';
 
-let {SHOW_LOGIN, SHOW_HOME} = constants;
+let {SHOW_LOGIN, SHOW_HOME,SHOW_SIGN_UP} = constants;
 
 export function showLogin(){
     return {
         type:SHOW_LOGIN
+    }
+}
+
+export function showSignUp(){
+    return {
+        type:SHOW_SIGN_UP
     }
 }
 

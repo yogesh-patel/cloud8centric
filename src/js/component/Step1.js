@@ -10,14 +10,26 @@ import * as SaveStatus from '../actions/signUp';
 
 class Step1 extends Component {
 
-    onNext(e){ 
+    onHandleNextClick(e){ 
        e.preventDefault();
-       this.props.empActions.saveStatus("Step1Completed");
+       this.props.empActions.saveStatus(
+           {
+                step1: "Step1",
+                step2: "",
+                step3: ""
+            });
+        this.props.empActions.saveCircleStatus(
+            {
+                 step1: "Step_1_Completed",
+                 step2: "",
+                 step3: ""
+             }
+
+             );
      }
 
     render() {
         return (
-            <Grid>
                 <Row className="text-center">
                     <Col md={6} sm={8} xs={12} smPush={1} lgPush={3} className="signUp-box">
 
@@ -25,31 +37,33 @@ class Step1 extends Component {
                             <Row>
                                 <Col xs={12}>
                                     <Input type="text"
+                                           addonBefore={<Glyphicon glyph="user" />}
                                            placeholder="User Name"/>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={12}>
                                     <Input type="password"
+                                        addonBefore={<Glyphicon glyph="asterisk" />}
                                            placeholder="Password"/>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={12}>
                                     <Input type="password"
+                                        addonBefore={<Glyphicon glyph="asterisk" />}
                                            placeholder="Confirm Password"/>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={12}>
-                                    <div className="signup-button" onClick={this.onNext.bind(this)}>
+                                    <div className="signup-button" onClick={this.onHandleNextClick.bind(this)}>
                                         Next
                                     </div>
                                 </Col>
                             </Row>
                     </Col>
                 </Row>
-            </Grid>
         )
     }
 

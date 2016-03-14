@@ -9,6 +9,7 @@ import Products from './home/Products';
 import HomeFooter from './home/HomeFooter';
 import ContactUs from './home/ContactUs';
 import Login from './Login';
+import SignUp from './SignUp';
 import { connect } from 'react-redux';
 
 class Home extends Component {
@@ -41,11 +42,13 @@ class Home extends Component {
 
     render() {
         var topScreen = null;
-        var {homeScreen,loginScreen} = this.props;
+        var {homeScreen,loginScreen,signUpScreen} = this.props;
         if(loginScreen){
             topScreen = <Login />;
         }else if(homeScreen){
             topScreen = <SplashScreen />;
+        }else if(signUpScreen){
+            topScreen = <SignUp />;
         }
         return (
             <Grid fluid>
@@ -69,6 +72,7 @@ class Home extends Component {
 
 const mapStateToProps = (state) => ({
     loginScreen:state.app.loginScreen,
+    signUpScreen:state.app.signUpScreen,
     homeScreen:state.app.homeScreen
 });
 

@@ -8,7 +8,8 @@ import {pushState} from 'redux-router';
 const initialState = {
     loginScreen: false,
     homeScreen: true,
-    forgotPasswordScreen: false
+    forgotPasswordScreen: false,
+    forgotMessageScreen: false
 };
 
 export default createReducer(initialState, {
@@ -16,6 +17,7 @@ export default createReducer(initialState, {
         return Object.assign({}, state, {
             loginScreen: true,
             forgotPasswordScreen: false,
+            forgotMessageScreen: false,
             homeScreen: false
         });
     },
@@ -24,6 +26,7 @@ export default createReducer(initialState, {
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: true,
+            forgotMessageScreen: false,
             homeScreen: false
         });
     },
@@ -31,7 +34,17 @@ export default createReducer(initialState, {
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,
+            forgotMessageScreen: false,
             homeScreen: true
+        });
+    },
+    'SHOW_FORGOT_MESSAGE': (state, payload) => {
+        console.log(payload);
+        return Object.assign({}, state, {
+            loginScreen: false,
+            forgotPasswordScreen: false,
+            forgotMessageScreen: true,
+            homeScreen: false
         });
     },
 });

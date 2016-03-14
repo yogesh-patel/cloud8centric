@@ -19,13 +19,23 @@ class Login extends Component {
             password: '',
             usernameError: '',
             passwordError: '',
-            invalidError: ''
+            invalidError: '',
+            displayBox:'block'
         };
     }
 
     gotoSignUpPage(e) {
         this.props.routeDispatch(pushState(null, "signup"));
     }
+
+    //LoginBoxState()
+    //{
+    //    if(this.state.displayBox ==  'block')
+    //    this.setState({displayBox :  'none'});
+    //    else
+    //    alert(this.state.displayBox);
+    //}
+
 
     gotoForgotPasswordPage(e) {
         e.preventDefault();
@@ -38,13 +48,10 @@ class Login extends Component {
         let invalidError = "";
 
         if (this.state.username == "") {
-            usernameError = "Please enter username";
+            usernameError = "Username is mandatory";
         }
         if (this.state.password == "") {
-            passwordError = "Please enter password";
-        }
-        else if (this.state.username != "test" || this.state.password != "test") {
-            invalidError = "Invalid username or password";
+            passwordError = "Password is mandatory";
         }
 
         this.setState({
@@ -59,23 +66,24 @@ class Login extends Component {
 
     onUsernameChange(e) {
         this.setState({username: e.target.value});
-        this.setState({usernameError: (e.target.value !== "") ? "" : "Please enter username"});
+        this.setState({usernameError: (e.target.value !== "") ? "" : "Username is mandatory"});
         this.setState({invalidError: (e.target.value !== "") ? "" : ""});
     }
 
     onPasswordChange(e) {
         this.setState({password: e.target.value});
-        this.setState({passwordError: (e.target.value !== "") ? "" : "Please enter password"});
+        this.setState({passwordError: (e.target.value !== "") ? "" : "Password is mandatory"});
         this.setState({invalidError: (e.target.value !== "") ? "" : ""});
     }
 
     render() {
+
         return (
             <Element className="splashScreen" name="splashScreen">
                 <Grid fluid>
                     <Row>
                         <Jumbotron className="text-center">
-                            <div className="content">
+                            <div  className="content" >
                                 <ReactCSSTransitionGroup transitionName="react-animation"
                                                          transitionAppear
                                                          transitionAppearTimeout={500}
@@ -84,41 +92,34 @@ class Login extends Component {
                                     <Grid>
                                         <form name="signup">
                                             <Row>
-                                                <Col md={6} sm={8} xs={12} smPush={1} lgPush={3} className="login-box">
+                                                <Col md={6} sm={8} xs={12} smPush={1} lgPush={3} className="login-box" id="testScreen">
                                                     <div className="login-label text-center">LOGIN</div>
                                                     <Grid>
+
                                                         <Row>
-                                                            <Col xs={12} sm={6}>
-                                                                <div className='text-danger'>
-                                                                    {this.state.invalidError}</div>
-                                                            </Col>
-                                                        </Row>
-                                                        <Row>
-                                                            <Col xs={12}>
+                                                            <Col xs={12}><div className="login-tbox">  <div className='text-danger'>
+                                                                {this.state.invalidError}</div>
                                                                 <Input type="text"
                                                                        addonBefore={<Glyphicon glyph="user" />}
-                                                                       placeholder="User Name"
+                                                                       placeholder="Username"
                                                                        onChange={this.onUsernameChange.bind(this)}/>
+                                                                        <div className='text-danger'>
+                                                                            {this.state.usernameError}</div>
+                                                                </div>
+
                                                             </Col>
                                                         </Row>
-                                                        <Row>
-                                                            <Col xs={12} sm={6}>
-                                                                <div className='text-danger'>
-                                                                    {this.state.usernameError}</div>
-                                                            </Col>
-                                                        </Row>
+
                                                         <Row>
                                                             <Col xs={12}>
+                                                                <div className="login-tbox">
                                                                 <Input type="password"
                                                                        addonBefore={<Glyphicon glyph="asterisk" />}
                                                                        placeholder="Password"
                                                                        onChange={this.onPasswordChange.bind(this)}/>
-                                                            </Col>
-                                                        </Row>
-                                                        <Row>
-                                                            <Col xs={12} sm={6}>
-                                                                <div className='text-danger'>
-                                                                    {this.state.passwordError}</div>
+                                                                        <div className='text-danger'>
+                                                                            {this.state.passwordError}</div>
+                                                                </div>
                                                             </Col>
                                                         </Row>
                                                         <Row>

@@ -18,9 +18,23 @@ body {
 }
 
 .text-danger{
-    font-size:15px;
-    margin-bottom:10px;
-    text-align: left;
+    position: absolute;
+    bottom: 36px;
+    z-index: 9;
+    font-size: 15px;
+}
+
+.txt-danger {
+    position: absolute;
+    bottom: 52px;
+    z-index: 9;
+    font-size: 15px;
+    color: #a94442;
+}
+
+.login-tbox{
+    position: relative;
+    margin-bottom: 30px;
 }
 
 .splashScreen .jumbotron {
@@ -221,8 +235,9 @@ a.btn-xl{
 }
 
 .login-label{
-    margin:20px 0;
+    margin:29px 0;
 }
+.f-right{float: right;}
 
 .login-button {
     color: #fff !important;
@@ -234,7 +249,7 @@ a.btn-xl{
     border-radius: 3px;
     font-size: 18px;
     padding: 10px 40px;
-    margin-top:15px;
+    /*margin-top:7px;*/
 }
 .signup-button {
     color: #fff !important;
@@ -246,7 +261,7 @@ a.btn-xl{
     border-radius: 3px;
     font-size: 18px;
     padding: 10px 40px;
-    margin-top:15px;
+    /*margin-top:7px;*/
 }
 
 .forgot-password{
@@ -254,10 +269,11 @@ a.btn-xl{
     font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-weight: 400;
     border-radius: 3px;
-    font-size: 18px;
+    font-size: 14px;
     padding: 10px 40px;
     margin-top:15px;
     cursor:pointer;
+    font-style: italic;
 }
 
 .forgot-password:hover{
@@ -421,4 +437,7 @@ a.btn-xl{
 .common-header-logo{
     margin-left: 60px !important;
     margin-top: -40px;
+}
+.forgot-password-message{
+    font-size: 16px;
 }

@@ -12,5 +12,6 @@ export default createConstants(
     'SHOW_HOME',
     'SHOW_FORGOT_PASSWORD',
     'SHOW_NAVIGATION_MENU',
-    'HIDE_NAVIGATION_MENU'
+    'HIDE_NAVIGATION_MENU',
+    'SHOW_FORGOT_MESSAGE'
 );

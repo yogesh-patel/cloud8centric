@@ -49,17 +49,17 @@ class StepStatus extends Component {
                     <Col Col md={6} sm={8} xs={12} smPush={1} lgPush={3} className="signUp-box">
                         <Row>
                             <Col md={4} sm={4} xs={4}>
-                                <h4>1</h4>
+                                <h5>Contact Details</h5>
                                 <NextStep1 circleStatus={this.props.circleStatus}
                                     onStep1={this.onStep1.bind(this)}/>
                             </Col>
                             <Col md={4} sm={4} xs={4}>
-                                <h4>2</h4>
+                                <h5>Organization Details</h5>
                                 <NextStep2 circleStatus={this.props.circleStatus}
                                     onStep2={this.onStep2.bind(this)}/>
                             </Col>
                             <Col md={4} sm={4} xs={4}>
-                                <h4>3</h4>
+                                <h5>Organization Details</h5>
                                 <NextStep3 circleStatus={this.props.circleStatus}
                                     onStep3={this.onStep3.bind(this)}/>
                             </Col>
@@ -85,7 +85,7 @@ class StepStatus extends Component {
                 this.state.step1 = <div className="circleBase type2"></div>;
             }
             return(
-                <div onClick={this.props.onStep1}>
+                <div onClick={this.props.onStep1} className="pointer">
                     {this.state.step1}
                 </div>
             );
@@ -104,7 +104,7 @@ class StepStatus extends Component {
                 this.state.step2 = <div className="circleBase type2"></div>;
             }
             return(
-                <div onClick={this.props.onStep2}>
+                <div onClick={this.props.onStep2} className="pointer">
                     {this.state.step2}
                 </div>
             );
@@ -124,7 +124,7 @@ class StepStatus extends Component {
                 this.state.step3 = <div className="circleBase type2"></div>;
             }
             return(
-                <div onClick={this.props.onStep3}>
+                <div onClick={this.props.onStep3} className="pointer">
                     {this.state.step3}
                 </div>
             );

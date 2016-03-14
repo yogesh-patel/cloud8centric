@@ -8,7 +8,7 @@ import {pushState} from 'redux-router';
 const initialState = {
     loginScreen:false,
     homeScreen:true,
-    signUpScreen:false
+    signUpScreen:false,
     loading:false
 };
 

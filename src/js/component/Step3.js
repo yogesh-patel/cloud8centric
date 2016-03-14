@@ -10,19 +10,43 @@ import * as SaveStatus from '../actions/signUp';
 
 class Step3 extends Component {
 
+    constructor(props){
+        super(props);
+        this.state= {
+          city:'',
+          province:'',
+          zipCode:'',
+          country:'',
+          phoneNumber:''}
+    }
+
     onNext(e){ 
+        var {step_2_data} = this.props;
         e.preventDefault();
         this.props.empActions.saveStatus({
-                step1: "Step1",
-                step2: "Step2",
-                step3: "Step3"}
-            );
+            step1: "Step1",
+            step2: "Step2",
+            step3: "Step3"}
+        );
         this.props.empActions.saveCircleStatus({
-                 step1: "Step_1_Completed",
-                 step2: "Step_2_Completed",
-                 step3: "Step_3_Completed"}
-             );
-        }
+            step1: "Step_1_Completed",
+            step2: "Step_2_Completed",
+            step3: "Step_3_Completed"}
+        );
+        this.props.empActions.step_3_Data(
+        {
+            organizationName:step_2_data.organizationName,
+            organizationURL:step_2_data.organizationURL,
+            addressLine1:step_2_data.addressLine1,
+            addressLine2:step_2_data.addressLine2,
+            addressLine3:step_2_data.addressLine3,
+            city:this.state.city,
+            province:this.state.province,
+            zipCode:this.state.zipCode,
+            country:this.state.country,
+            phoneNumber:this.state.phoneNumber,
+        });
+    }
 
     onBack(e){ 
         e.preventDefault();
@@ -33,6 +57,26 @@ class Step3 extends Component {
           );
         }
 
+      onCountryChange(e) {
+        this.setState({country: e.target.value});
+      }
+
+      onPhoneNumberChange(e) {
+        this.setState({phoneNumber: e.target.value});
+      }
+
+      onCityChange(e) {
+        this.setState({city: e.target.value});
+      }
+
+      onProvinceChange(e) {
+        this.setState({province: e.target.value});
+      }
+
+      onZipCodeChange(e) {
+        this.setState({zipCode: e.target.value});
+      }
+
     render() {
         return (
                 <Row className="text-center">
@@ -42,21 +86,35 @@ class Step3 extends Component {
                             <Col xs={12}>
                             <Input type="text"
                                 addonBefore={<Glyphicon glyph="asterisk" />}
-                            placeholder="Company Name"/>
+                            placeholder="City" required onChange={this.onCityChange.bind(this)}/>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12}>
+                            <Input type="text"
+                                addonBefore={<Glyphicon glyph="asterisk" />}
+                            placeholder="Province" required onChange={this.onProvinceChange.bind(this)}/>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
                                 <Input type="text"
                                     addonBefore={<Glyphicon glyph="asterisk" />}
-                                placeholder="Company url"/>
+                                placeholder="Zip Code" required onChange={this.onZipCodeChange.bind(this)}/>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
                                 <Input type="text"
                                     addonBefore={<Glyphicon glyph="asterisk" />}
-                                placeholder="Company Address"/>
+                                placeholder="Country" required onChange={this.onCountryChange.bind(this)}/>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12}>
+                                <Input type="number"
+                                    addonBefore={<Glyphicon glyph="asterisk" />}
+                                placeholder="Phone Number" required onChange={this.onPhoneNumberChange.bind(this)}/>
                             </Col>
                         </Row>
                         <Row>
@@ -79,7 +137,7 @@ class Step3 extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    // status:state.signUpData.status
+     step_2_data:state.signUpData.signupInfo.organizationInfo
 });
 
 const mapDispatchToProps = (dispatch) => ({

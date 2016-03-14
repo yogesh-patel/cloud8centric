@@ -2,17 +2,42 @@
 import { pushState } from 'redux-router';
 import constants from '../constants';
 
-let {DATA_ADDED_SUCCESSFULLY,CIRCLE_STATUS_ADDED} = constants;
+let {STEP_1_DATA_ADDED_SUCCESSFULLY,STEP_2_DATA_ADDED_SUCCESSFULLY,STEP_3_DATA_ADDED_SUCCESSFULLY,
+    CIRCLE_STATUS_ADDED,STATUS_ADDED_SUCCESSFULLY} = constants;
 
 export function saveStatus(status){
     return (dispatch)=>{
         dispatch( {
-            type:DATA_ADDED_SUCCESSFULLY,
+            type:STATUS_ADDED_SUCCESSFULLY,
             payload:status
         });
-        //Submit data
-        // on Success - > Login
-        //On success login -> local storage save token
+    }
+}
+
+export function step_1_Data(data){
+    return (dispatch)=>{
+        dispatch( {
+            type:STEP_1_DATA_ADDED_SUCCESSFULLY,
+            payload:data
+        });
+    }
+}
+
+export function step_2_Data(data){
+    return (dispatch)=>{
+        dispatch( {
+            type:STEP_2_DATA_ADDED_SUCCESSFULLY,
+            payload:data
+        });
+    }
+}
+
+export function step_3_Data(data){
+    return (dispatch)=>{
+        dispatch( {
+            type:STEP_3_DATA_ADDED_SUCCESSFULLY,
+            payload:data
+        });
     }
 }
 
@@ -22,8 +47,5 @@ export function saveCircleStatus(circleStatus){
             type:CIRCLE_STATUS_ADDED,
             payload:circleStatus
         });
-        //Submit data
-        // on Success - > Login
-        //On success login -> local storage save token
     }
 }

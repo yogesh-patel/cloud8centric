@@ -8,11 +8,8 @@ import {pushState} from 'redux-router';
 const initialState = {
     loginScreen:false,
     homeScreen:true,
-<<<<<<< HEAD
     signUpScreen:false
-=======
     loading:false
->>>>>>> upstream/master
 };
 
 export default createReducer(initialState, {
@@ -30,7 +27,6 @@ export default createReducer(initialState, {
             homeScreen:true
         });
     },
-<<<<<<< HEAD
     'SHOW_SIGN_UP': (state, payload) => {
         return Object.assign({}, state, {
             loginScreen:false,
@@ -38,7 +34,6 @@ export default createReducer(initialState, {
             homeScreen:false
         });
     },
-=======
     'LOGIN_USER_REQUEST': (state, payload) => {
         return Object.assign({}, state, {
             loading:true
@@ -73,5 +68,4 @@ export default createReducer(initialState, {
         });
 
     },
->>>>>>> upstream/master
 });

@@ -3,17 +3,28 @@
  */
 
 import constants from '../constants';
+let {SHOW_LOGIN,SHOW_HOME,SHOW_FORGOT_PASSWORD, SHOW_FORGOT_MESSAGE} = constants;
 
-let {SHOW_LOGIN, SHOW_HOME} = constants;
-
-export function showLogin(){
+export function showLogin() {
     return {
-        type:SHOW_LOGIN
+        type: SHOW_LOGIN
     }
 }
 
-export function showHome(){
+export function showForgotPassword() {
     return {
-        type:SHOW_HOME
+        type: SHOW_FORGOT_PASSWORD
+    }
+}
+
+export function showHome() {
+    return {
+        type: SHOW_HOME
+    }
+}
+
+export function showForgotMessage(){
+    return {
+        type: SHOW_FORGOT_MESSAGE
     }
 }

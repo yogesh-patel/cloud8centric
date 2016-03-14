@@ -85,8 +85,7 @@ body {
 }
 
 .splashScreen .jumbotron h1,
-.splashScreen .jumbotron p,
-.splashScreen .jumbotron button {
+.splashScreen .jumbotron p{
     margin: 25px;
 }
 
@@ -280,19 +279,6 @@ a.btn-xl{
   font-size: 18px;
   margin-top: 10px;
   padding: 20px 40px;
-}
-
-.next-button {
-    color: #fff !important;
-    background-color: #00897B !important;
-    border-color: #46b8da !important;
-    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    text-transform: uppercase;
-    font-weight: 400;
-    border-radius: 3px;
-    font-size: 18px;
-    padding: 10px 40px;
-    margin-top:15px;
 }
 
 .type2 {
@@ -532,4 +518,32 @@ a.btn-xl{
     border-bottom: 1px solid #CCC;
     background-color: #A4B4C9;
     color:#FFFFFF;
+}
+
+.Back-button{
+    color: #fff !important;
+    background-color: #fed136 !important;
+    border-color: #fed136 !important;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    width:100%;
+    border-radius: 3px;
+    font-size: 18px;
+    margin-top:15px;
+    padding: 10px 40px;
+}
+
+.Next-button{
+    color: #fff !important;
+    background-color: #46b8da !important;
+    border-color: #46b8da !important;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 400;
+    width:100%;
+    border-radius: 3px;
+    font-size: 18px;
+    margin-top:15px;
+    padding: 10px 40px;
 }

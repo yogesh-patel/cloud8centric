@@ -9,7 +9,7 @@ import Products from './home/Products';
 import HomeFooter from './home/HomeFooter';
 import ContactUs from './home/ContactUs';
 import Login from './Login';
-import SignUp from './SignUp';
+import SignUp from './signup/SignUp';
 import { connect } from 'react-redux';
 
 class Home extends Component {

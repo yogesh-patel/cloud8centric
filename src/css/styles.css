@@ -535,7 +535,6 @@ a.btn-xl{
     border-right: none;
     border-left: none;
     border-bottom: none;
-    /* border-top: 1px solid; */
     border-radius: 0;
     background-color: #E2EAF5;
 }
@@ -544,6 +543,43 @@ a.btn-xl{
     border-bottom: 1px solid #CCC;
     background-color: #A4B4C9;
     color:#FFFFFF;
+}
+
+.subscriptions-table{
+    clear:'both';
+    border-bottom:1px solid #CCC;
+}
+
+.subscriptions-table-serial-no{
+    width:10%;
+    padding:20px;
+    float:left;
+    border-right:1px solid #CCC;
+}
+
+.subscriptions-table-name{
+    width:60%;
+    padding:20px;
+    float:left;
+    border-right:1px solid #CCC;
+}
+
+.subscription-table-status{
+    padding:12px;
+    width:30%;
+    float:left;
+}
+
+.subscription-products-table{
+    background-color:#FFFFFF;
+}
+
+.subscription-products-table-thead{
+    background-color:#CCC;
+}
+
+.login-error-msg{
+    font-size: 15px;
 }
 
 .Back-button{

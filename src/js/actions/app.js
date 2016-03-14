@@ -11,12 +11,6 @@ export function showLogin() {
     }
 }
 
-export function showForgotPassword() {
-    return {
-        type: SHOW_FORGOT_PASSWORD
-    }
-}
-
 export function showHome() {
     return {
         type: SHOW_HOME
@@ -24,10 +18,17 @@ export function showHome() {
 }
 
 export function showForgotMessage(){
-     return {
+    return {
         type: SHOW_FORGOT_MESSAGE
     }
 }
+
+export function showForgotPassword() {
+    return {
+        type: SHOW_FORGOT_PASSWORD
+    }
+}
+
 export function showSignUp(){
     return {
         type:SHOW_SIGN_UP

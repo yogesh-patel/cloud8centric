@@ -25,13 +25,13 @@ class SubscriptionItem extends React.Component {
     render() {
         var {subscription} = this.props;
         return (
-            <div style={{clear:'both',borderBottom:'1px solid #CCC'}}>
-                <div style={{padding:20,width:'10%',float:'left',borderRight:'1px solid #CCC'}}>
+            <div className="subscriptions-table">
+                <div className="subscriptions-table-serial-no">
                     {subscription.id}</div>
-                <div style={{padding:20,width:'60%',float:'left',borderRight:'1px solid #CCC'}}>
+                <div className="subscriptions-table-name">
                     {subscription.name}</div>
-                <div style={{padding:12,width:'30%',float:'left'}}>
-                    <Button className="status-btn-width"
+                <div className="subscription-table-status">
+                    <Button bsSize="small" className="status-btn-width"
                             bsStyle={ subscription.status=='Ready' ? 'success' :(subscription.status=='In Progress' ? 'warning' : (subscription.status=='Error' ? 'danger': '')) }
                             onClick={ this.onStatusClick.bind(this)}>
                         {subscription.status}

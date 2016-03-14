@@ -88,8 +88,7 @@ class ForgotPassword extends Component {
                                                                <div> <div className="signup-button pointer"
                                                                      onClick={this.authenticateEmail.bind(this)}>
                                                                     Submit
-                                                                </div><div className="forgot-password  text-center"
-                                                                           onClick={this.gotoLoginPage.bind(this)}>Go to login page</div></div>
+                                                                </div><div className="forgot-password  text-center" onClick={this.gotoLoginPage.bind(this)}>Back to login</div></div>
                                                             </Col>
                                                         </Row>
                                                     </Grid>

@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, View} from 'react';
-import {Grid, Row, Col,Jumbotron,Glyphicon,Input} from 'react-bootstrap';
+import {Grid, Row, Col, Jumbotron, Glyphicon, Input, Alert} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -9,6 +9,7 @@ import * as authActionCreators from '../actions/auth';
 import {Element} from 'react-scroll';
 import * as appActionCreators from '../actions/app';
 import { pushState } from 'redux-router';
+import AlertError from './common/AlertError';
 
 class Login extends Component {
 
@@ -20,22 +21,14 @@ class Login extends Component {
             usernameError: '',
             passwordError: '',
             invalidError: '',
-            displayBox:'block'
+            displayBox:'block',
+            serverErrorMessage: false
         };
     }
 
     gotoSignUpPage(e) {
         this.props.routeDispatch(pushState(null, "signup"));
     }
-
-    //LoginBoxState()
-    //{
-    //    if(this.state.displayBox ==  'block')
-    //    this.setState({displayBox :  'none'});
-    //    else
-    //    alert(this.state.displayBox);
-    //}
-
 
     gotoForgotPasswordPage(e) {
         e.preventDefault();
@@ -62,21 +55,38 @@ class Login extends Component {
         });
         if (usernameError == "" && passwordError == "" && invalidError == "")
         this.props.authActions.authenticateUser(this.state.username, this.state.password);
+
     }
 
     onUsernameChange(e) {
-        this.setState({username: e.target.value});
-        this.setState({usernameError: (e.target.value !== "") ? "" : "Username is mandatory"});
-        this.setState({invalidError: (e.target.value !== "") ? "" : ""});
+        this.setState({
+            username: e.target.value,
+            usernameError: (e.target.value !== "") ? "" : "Username is mandatory",
+            invalidError: (e.target.value !== "") ? "" : "",
+            serverErrorMessage: false
+        });
     }
 
     onPasswordChange(e) {
-        this.setState({password: e.target.value});
-        this.setState({passwordError: (e.target.value !== "") ? "" : "Password is mandatory"});
-        this.setState({invalidError: (e.target.value !== "") ? "" : ""});
+        this.setState({
+            password: e.target.value,
+            passwordError: (e.target.value !== "") ? "" : "Password is mandatory",
+            invalidError: (e.target.value !== "") ? "" : "",
+            serverErrorMessage: false
+        });
     }
 
+
     render() {
+
+        var {statusText} = this.props;
+
+        if(statusText !== null){
+            this.state.serverErrorMessage = true;
+        }
+        else{
+            this.state.serverErrorMessage = false;
+        }
 
         return (
             <Element className="splashScreen" name="splashScreen">
@@ -95,7 +105,7 @@ class Login extends Component {
                                                 <Col md={6} sm={8} xs={12} smPush={1} lgPush={3} className="login-box" id="testScreen">
                                                     <div className="login-label text-center">LOGIN</div>
                                                     <Grid>
-
+                                                        {this.state.serverErrorMessage ? <AlertError message={this.props.statusText}/> : null}
                                                         <Row>
                                                             <Col xs={12}><div className="login-tbox">  <div className='text-danger'>
                                                                 {this.state.invalidError}</div>
@@ -160,8 +170,9 @@ class Login extends Component {
         )
     }
 
-}
-;
+};
+
+
 
 const mapStateToProps = (state) => ({
     statusText: state.auth.statusText

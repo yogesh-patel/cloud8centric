@@ -58,6 +58,12 @@ class Home extends Component {
         else if(forgotMessageScreen){
             topScreen = <ForgotMessage />;
         }
+        else if(forgotPasswordScreen){
+            topScreen = <ForgotPassword />;
+        }
+        else if(forgotMessageScreen){
+            topScreen = <ForgotMessage />;
+        }
         return (
             <Grid fluid>
                 <Row>

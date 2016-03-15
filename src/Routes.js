@@ -9,6 +9,7 @@ import Dashboard from './js/component/Dashboard';
 import DashboardHome from './js/component/DashboardHome';
 import SubscriptionList from './js/component/subscription/SubscriptionList';
 import CreateSubscriptions from './js/component/subscription/CreateSubscriptions';
+import OrganizationList from './js/component/organization/OrganizationList';
 
     var Routes = (
         <Router>
@@ -20,6 +21,7 @@ import CreateSubscriptions from './js/component/subscription/CreateSubscriptions
                 <Route path="home" component={DashboardHome}/>
                 <Route path="subscriptions" component={SubscriptionList}/>
                 <Route path="subscriptions/create" component={CreateSubscriptions}/>
+                <Route path="organizations" component={OrganizationList}/>
             </Route>
             </Route>
         </Router>

@@ -15,6 +15,7 @@ class CreateSubscriptions extends Component {
         super(props);
         this.count = 1;
         this.state = {
+            subscriptionName: null,
             selectedProducts:{
                 1:<AddProductRow key={1} onDeleteProduct={this.onDeleteProduct.bind(this,1)}/>
             }
@@ -33,11 +34,18 @@ class CreateSubscriptions extends Component {
         this.setState({selectedProducts:this.state.selectedProducts});
     }
 
+    onSubscriptionNameChange(e) {
+        this.setState({
+            subscriptionName: e.target.value
+        });
+    }
+
     render() {
         var selectedProductComps = _.map(_.keys(this.state.selectedProducts),(productComp)=>{
             return this.state.selectedProducts[productComp];
         });
 
+        var {disabled} = this.props;
         return (
             <Grid>
                 <Row>
@@ -53,20 +61,23 @@ class CreateSubscriptions extends Component {
                             <Panel header={"Add New Subscription"}>
                                 <Row>
                                     <Col xs={12} sm={12} md={6}>
-                                        <Input type="text" label="Subscription Name:" placeholder="Subscription Name*"/>
+                                        <Input  type="text" label="Subscription Name"
+                                                placeholder="Subscription Name*"
+                                                onChange={this.onSubscriptionNameChange.bind(this)}/>
                                     </Col>
                                 </Row>
                             </Panel>
                             <Panel header="Add Products">
                                 <Row>
                                     <Button bsStyle="success" className="pull-right right-buffer"
-                                            onClick={this.onAddProduct.bind(this)}>
-                                        <Glyphicon
-                                        glyph="plus"/> Add More</Button>
+                                            onClick={this.onAddProduct.bind(this)}
+                                            disabled={this.props.disabled}>
+                                            <Glyphicon glyph="plus"/> Add More
+                                    </Button>
                                 </Row>
                                 {selectedProductComps}
                                 <Row>
-                                    <Button bsStyle="primary" className="pull-right right-buffer">Register</Button>
+                                    <Button bsStyle="primary" className="pull-right right-buffer" disabled={this.props.disabled}>Register</Button>
                                 </Row>
                             </Panel>
                         </form>
@@ -83,7 +94,8 @@ class CreateSubscriptions extends Component {
 
 const mapStateToProps = (state) => ({
     products: state.subscription.productList,
-    plans: state.subscription.paymentPlans
+    plans: state.subscription.paymentPlans,
+    disabled: state.subscription.disabled
 });
 
 const mapDispatchToProps = (dispatch) => ({});

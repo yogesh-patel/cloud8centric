@@ -314,7 +314,7 @@ a.btn-xl{
 /* LEFT NAVIGATION CSS */
 .navbar-twitch {
     position: fixed;
-    top: 50px;
+    top: 51px;
     left: 0px;
     width: 50px;
     height: 100%;
@@ -387,7 +387,7 @@ a.btn-xl{
     display: block;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
-    padding: 13px 15px 13px 12px;
+    padding: 13px 15px 13px 16px;
 }
 .navbar-twitch .tooltip,
 .navbar-twitch .tooltip .tooltip-inner {
@@ -539,15 +539,15 @@ a.btn-xl{
     background-color: #E2EAF5;
 }
 
-.main-table-header{
+.subscription-table{
+    margin-top:15px;
+    border:1px solid #CCC;
+}
+
+.subscription-table-header{
     border-bottom: 1px solid #CCC;
     background-color: #A4B4C9;
     color:#FFFFFF;
-}
-
-.subscriptions-table{
-    clear:'both';
-    border-bottom:1px solid #CCC;
 }
 
 .subscriptions-table-serial-no{
@@ -580,6 +580,8 @@ a.btn-xl{
 
 .login-error-msg{
     font-size: 15px;
+    height: 38px;
+    padding: 8px;
 }
 
 .back-button{
@@ -609,6 +611,23 @@ a.btn-xl{
     margin-top:10px;
     padding: 10px 40px;
 }
+
+.cursor-default{
+    cursor: default;
+}
+
+.full-width{
+    width: 100%;
+}
+
+.clear-both{
+    clear: both;
+}
+
+.normal-font{
+    font-size: 14px !important;
+}
+
 .danger-text{
   position: absolute;;
   top: 36px;

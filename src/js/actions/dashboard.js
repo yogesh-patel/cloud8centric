@@ -16,3 +16,9 @@ export function showSubscription(){
         dispatch(push("/dashboard/subscriptions"));
     })
 }
+
+export function showOrganization(){
+    return (dispatch=>{
+        dispatch(push("/dashboard/organizations"));
+    })
+}

@@ -1,5 +1,5 @@
 import constants from '../constants';
-import { pushState,push } from 'redux-router';
+import { push } from 'redux-router';
 import config from '../config';
 import { checkHttpStatus, parseJSON } from '../utils';
 import { get } from './common';
@@ -63,7 +63,7 @@ export function authenticateUser(username, password) {
                     errorDescription ='Server is down. Please try again after some time.';
                 }
 
-                if(error.message == 'Unauthorized') {
+                if(error.message == 'Unauthorized' || error.message == 'Bad Request') {
                     errorDescription = 'Bad Credentials.';
                 }
 
@@ -87,12 +87,30 @@ function getOrganizations(){
     return get(endPointURL);
 }
 
+
+export function emptyStatuxText(){
+    return (dispatch) => {
+        dispatch({
+            type: 'CLEAR_LOGIN_ERROR_MESSAGE',
+            payload: {
+                statusText: null
+            }
+        });
+    }
+}
+
 export function logout() {
     return (dispatch) => {
         localStorage.clear();
         dispatch({
             type: 'LOG_OUT'
         });
-        dispatch(pushState(null, "/"));
+        dispatch({
+            type: 'CLEAR_LOGIN_ERROR_MESSAGE',
+            payload: {
+                statusText: null
+            }
+        });
+        dispatch(push(null, "/"));
     }
 }

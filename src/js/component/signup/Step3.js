@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as SaveStatus from '../../actions/signUp';
 import * as appActionCreators from '../../actions/app';
-import AlertError from '../common/AlertError';
 
 class Step3 extends Component {
 

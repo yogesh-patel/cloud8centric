@@ -43,33 +43,26 @@ class SubscriptionList extends Component {
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Button bsStyle="primary"
                                 className="pull-right"
-                                onClick={this.gotoAddSubscriptions.bind(this)}><Glyphicon glyph="plus"/> Add
-                            Subscription</Button>
+                                onClick={this.gotoAddSubscriptions.bind(this)}>
+                                <Glyphicon glyph="plus"/> Add Subscription
+                        </Button>
                     </Col>
                 </Row>
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
-                        <div style={{marginTop:15,border:'1px solid #CCC'}}>
-                            <div style={{borderBottom:'1px solid #CCC'}} className="main-table-header">
-                                <div style={{padding:20,width:'10%',float:'left',borderRight:'1px solid #CCC'}}>Serial No.</div>
-                                <div style={{padding:20,width:'60%',float:'left',borderRight:'1px solid #CCC'}}>Subscription Name</div>
-                                <div style={{padding:20,width:'30%',float:'left'}}>Subscription Status</div>
-                                <div style={{clear:'both'}} />
+                        <div className="subscription-table">
+                            <div className="subscription-table-header">
+                                <div className="subscriptions-table-serial-no">Serial No.</div>
+                                <div className="subscriptions-table-name">Subscription Name</div>
+                                <div className="subscription-table-status">Subscription Status</div>
+                                <div className="clear-both"/>
                             </div>
+
                             {subscriptionDetails}
+
                         </div>
                     </Col>
-
                 </Row>
-
-                {/*<Row>
-                    <Col sm={12}>
-                        <div>
-                            {subscriptionDetails}
-                        </div>
-                    </Col>
-                </Row>*/}
-
             </Grid>
         );
 

@@ -6,6 +6,7 @@ let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS} = constants;
 
 const initialState = {
     subscriptionList: null,
+    disabled: true,
     productList:[
                     {
                         'productID': 1,

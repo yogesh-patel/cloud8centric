@@ -4,33 +4,53 @@
 'use strict';
 
 import React, {Component, View} from 'react';
-import {Grid, Row, Col, Button, Table, Glyphicon,
-    Panel, Input,OverlayTrigger,Popover} from 'react-bootstrap';
+import {Grid, Row, Col, Button, Table, Glyphicon, Panel, Input, OverlayTrigger, Popover} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as subscriptionActionCreators from '../../actions/subscription';
 import _ from 'lodash';
 
 class AddProductRow extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            selectedProducts: []
+        }
+    }
+
+    onProductSelected(e){
+        // let arrProducts = [];
+        // arrProducts.push(e.target.value);
+
+        // this.setState({
+        //     selectedProducts: arrProducts
+        // });
+
+    }
+
     render(){
         let productList = this.props.products;
         let paymentPlans = this.props.plans;
 
         let productsDropDownValues = _.map(productList, (product) => {
             return (
-                <option key={product.productID} value={product.productID}>{product.name}</option>
+                <option key={product.productID} value={product.name}>{product.name}</option>
             );
         });
 
         let plandDropDownValues = _.map(paymentPlans, (plan) => {
             return (
-                <option key={plan.planID} value={plan.planID}>{plan.name}</option>
+                <option key={plan.planID} value={plan.name}>{plan.name}</option>
             );
         });
+
         return (
             <Row>
                 <Col xs={12} sm={5} md={4}>
-                    <Input type="select" label="Select Product" placeholder="Select Product">
+                    <Input  type="select" label="Select Product"
+                            placeholder="Select Product"
+                            onChange={this.onProductSelected.bind(this)}>
                         <option value="select">Select Product</option>
 
                         {productsDropDownValues}
@@ -49,7 +69,7 @@ class AddProductRow extends React.Component{
                 <Col xs={12} sm={5} md={4}>
                     <Glyphicon glyph="minus subscription-minus-icon pointer" onClick={()=>this.props.onDeleteProduct()}/>
                     <span> </span>
-                    <OverlayTrigger trigger="hover" placement="right"
+                    <OverlayTrigger trigger={['hover', 'focus']} placement="right"
                                     overlay={<Popover title="Popover bottom" id="1"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
                         <Glyphicon glyph="question-sign subscription-question-icon pointer"/>
                     </OverlayTrigger>
@@ -57,7 +77,9 @@ class AddProductRow extends React.Component{
                 </Col>
             </Row>
         )
+
     }
+
 }
 
 const mapStateToProps = (state) => ({

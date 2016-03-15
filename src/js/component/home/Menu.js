@@ -24,13 +24,11 @@ class Menu extends Component {
 
     gotoSignUpPage(e) {
         e.preventDefault();
-        // this.props.routeDispatch(push("signup"));
         this.props.appActions.showSignUp();
         this.setState({selectedOption: 'signup'});
     }
 
     gotoLoginPage(e) {
-        //this.props.routeDispatch(push("login"));
         e.preventDefault();
         this.props.appActions.showLogin();
         this.setState({selectedOption: 'login'});

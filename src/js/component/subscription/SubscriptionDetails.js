@@ -35,7 +35,7 @@ class SubscriptionDetails extends Component {
                         <td>{data.productName}</td>
                         <td>{data.productURL}</td>
                         <td>{data.username}</td>
-                        <td><Button bsSize="xsmall" className="status-btn-width"
+                        <td><Button bsSize="xsmall" className="cursor-default status-btn-width"
                                     bsStyle={ data.status=='Ready' ?
                                     'success' :(data.status=='In Progress' ? 'warning' :
                                     (data.status=='Error' ? 'danger': '')) }

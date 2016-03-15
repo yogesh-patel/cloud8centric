@@ -25,7 +25,16 @@ class LeftNavigation extends Component{
 
     }
 
+    getOrganizationsList(){
+
+        this.props.dashboardActions.showOrganization();
+        this.props.headerActions.hideProducts();
+        this.setState({selectedOption:'organization'});
+
+    }
+
     showHome(){
+
         this.props.dashboardActions.showHome();
         this.props.headerActions.hideProducts();
         this.setState({selectedOption:'home'});
@@ -54,6 +63,14 @@ class LeftNavigation extends Component{
                                     <span className="fa-fw fa fa-rss"></span>
                                 </span>
                                 <span className="full-nav"> Subscriptions </span>
+                            </a>
+                        </li>
+                        <li onClick={this.getOrganizationsList.bind(this)} className={selectedOption == 'organization' ? "active":""}>
+                            <a className="pointer">
+                                <span className="small-nav" data-toggle="tooltip" data-placement="right" title="Organizations">
+                                    <span className="fa fa-users"></span>
+                                </span>
+                                <span className="full-nav"> Organizations </span>
                             </a>
                         </li>
                         <li>

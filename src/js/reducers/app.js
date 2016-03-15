@@ -92,4 +92,16 @@ export default createReducer(initialState, {
         });
 
     },
+    'FETCH_ORGANIZATIONS': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:true
+        });
+
+    },
+    'ORGANIZATIONS_RECEIVED': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:false
+        });
+
+    },
 });

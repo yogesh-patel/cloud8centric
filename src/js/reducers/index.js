@@ -8,6 +8,7 @@ import signUpData from './signUpData';
 import header from './header';
 import subscription from './subscription';
 import dashboard from './dashboard';
+import organization from './organization';
 
 export default combineReducers({
     auth,
@@ -17,5 +18,6 @@ export default combineReducers({
     product,
     header,
     subscription,
+    organization,
     router: routerStateReducer
 });

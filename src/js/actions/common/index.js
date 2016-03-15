@@ -59,12 +59,10 @@ export function deleteRequest(nodeURL) {
 export function post(nodeURL,data) {
     let accessToken = localStorage.getItem('access_token');
     let tokenType = 'Bearer ';
-
     if (tokenType !== null || accessToken !== null) {
         return fetch(config.BASE_URL + nodeURL, {
             method: 'post',
             headers: {
-                'Accept': 'application/json',
                 'Content-Type': 'application/json',
                  'Authorization': tokenType + accessToken
             },

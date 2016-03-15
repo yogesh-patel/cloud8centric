@@ -4,7 +4,7 @@ import constants from '../constants';
  import { post } from './common';
 
 let {STEP_1_DATA_ADDED_SUCCESSFULLY,STEP_2_DATA_ADDED_SUCCESSFULLY,STEP_3_DATA_ADDED_SUCCESSFULLY,SIGNUP_USER_REQUEST,
-    SIGNUP_USER_SUCCESS,CIRCLE_STATUS_ADDED,STATUS_ADDED_SUCCESSFULLY} = constants;
+    SHOW_LOGIN,SIGNUP_USER_FAILURE,SIGNUP_USER_SUCCESS,ON_BACK_CLICK,STATUS_ADDED_SUCCESSFULLY} = constants;
 
 export function saveStatus(status){
     return (dispatch)=>{
@@ -42,10 +42,10 @@ export function step_3_Data(data){
     }
 }
 
-export function saveCircleStatus(circleStatus){
+export function onBackClick(circleStatus){
     return (dispatch)=>{
         dispatch( {
-            type:CIRCLE_STATUS_ADDED,
+            type:ON_BACK_CLICK,
             payload:circleStatus
         });
     }
@@ -58,6 +58,12 @@ export function submitSignupForm(signupData){
         post(endPointURL,signupData)
         .then((response)=>{
             dispatch({type:'SIGNUP_USER_SUCCESS'});
-        });
+            dispatch({type:'SHOW_LOGIN'});
+        }).catch(error => {
+            dispatch({
+                type:'SIGNUP_USER_FAILURE',
+                payload: error.message
+            });
+        })
     }
 }

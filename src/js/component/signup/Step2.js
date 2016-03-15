@@ -23,16 +23,6 @@ class Step2 extends Component {
 
     onNext(e){ 
        e.preventDefault();
-       this.props.empActions.saveStatus({
-                step1: "Step1",
-                step2: "Step2",
-                step3: ''}
-            );
-        this.props.empActions.saveCircleStatus({
-                 step1: "Step_1_Completed",
-                 step2: "Step_2_Completed",
-                 step3: ""}
-             );
          this.props.empActions.step_2_Data(
              {
                  organizationName:this.state.organizationName,
@@ -46,11 +36,7 @@ class Step2 extends Component {
 
       onBack(e){ 
          e.preventDefault();
-         this.props.empActions.saveStatus({
-                  step1: "OnBackStep1",
-                  step2: "",
-                  step3: ""}
-              );
+         this.props.empActions.onBackClick("step1");
         }
 
     onOrganizationNameChange(e) {
@@ -84,53 +70,64 @@ class Step2 extends Component {
                         <div className="login-label text-center">Organization Details</div>
                             <Row>
                                 <Col xs={12}>
-                                    <Input type="text"
-                                        defaultValue={this.state.organizationName}
-                                        addonBefore={<Glyphicon glyph="asterisk" />}
-                                           placeholder="Name" required onChange={this.onOrganizationNameChange.bind(this)}/>
+                                    <div className="login-tbox">
+                                        <Input type="text"
+                                            defaultValue={step_2_data.organizationName}
+                                            addonBefore={<span className="fa fa-users"></span>}
+                                               placeholder="Organization Name*" required onChange={this.onOrganizationNameChange.bind(this)}/>
+                                   </div>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={12}>
-                                    <Input type="url"
-                                        defaultValue={this.state.organizationURL}
-                                        addonBefore={<Glyphicon glyph="asterisk" />}
-                                           placeholder="url" required onChange={this.onOrganizationURLChange.bind(this)}/>
+                                    <div className="login-tbox">
+                                        <Input type="url"
+                                            defaultValue={step_2_data.organizationURL}
+                                            addonBefore={<span className="fa fa-link --- URL"></span>}
+                                               placeholder="url" onChange={this.onOrganizationURLChange.bind(this)}/>
+                                   </div>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={12}>
-                                    <Input type="text"
-                                        defaultValue={this.state.addressLine1}
-                                        addonBefore={<Glyphicon glyph="asterisk" />}
-                                           placeholder="Address Line1" required onChange={this.onAddressLine1Change.bind(this)}/>
+                                    <div className="login-tbox">
+                                        <Input type="text"
+                                            defaultValue={step_2_data.addressLine1}
+                                            addonBefore={<span className="fa fa-home"></span>}
+                                               placeholder="Address Line1*" required onChange={this.onAddressLine1Change.bind(this)}/>
+                                   </div>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={12}>
-                                    <Input type="text"
-                                        defaultValue={this.state.addressLine2}
-                                        addonBefore={<Glyphicon glyph="asterisk" />}
-                                           placeholder="Address Line2" required onChange={this.onAddressLine2Change.bind(this)}/>
+                                    <div className="login-tbox">
+                                        <Input type="text"
+                                            defaultValue={step_2_data.addressLine2}
+                                            addonBefore={<span className="fa fa-home"></span>}
+                                               placeholder="Address Line2"  onChange={this.onAddressLine2Change.bind(this)}/>
+                                   </div>
                                 </Col>
                             </Row>
 
                             <Row>
                                 <Col xs={12}>
-                                    <Input type="text"
-                                        defaultValue={this.state.addressLine3}
-                                           addonBefore={<Glyphicon glyph="asterisk" />}
-                                           placeholder="Address Line3" onChange={this.onAddressLine3Change.bind(this)}/>
+                                    <div className="login-tbox">
+                                        <Input type="text"
+                                            defaultValue={step_2_data.addressLine3}
+                                               addonBefore={<span className="fa fa-home"></span>}
+                                               users
+                                               placeholder="Address Line3" onChange={this.onAddressLine3Change.bind(this)}/>
+                                   </div>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={6} sm={6} md={6} >
-                                    <button className="Back-button pointer" onClick={this.onBack.bind(this)}>
+                                    <button type= "submit" className="back-button pointer" onClick={this.onBack.bind(this)}>
                                         Back
                                     </button>
                                 </Col>
                                 <Col xs={6} sm={6} md={6} >
-                                    <button className="Next-button pointer">
+                                    <button type= "submit" className="next-button pointer">
                                         Next
                                     </button>
                                 </Col>
@@ -144,8 +141,7 @@ class Step2 extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    // status:state.signUpData.status
-    step_2_data:state.signUpData.signupInfo.organizationInfo,
+    step_2_data:state.signUpData.signupInfo.organizationInfo
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -584,7 +584,7 @@ a.btn-xl{
     padding: 8px;
 }
 
-.Back-button{
+.back-button{
     color: #fff !important;
     background-color: #fed136 !important;
     border-color: #fed136 !important;
@@ -594,11 +594,11 @@ a.btn-xl{
     width:100%;
     border-radius: 3px;
     font-size: 18px;
-    margin-top:15px;
+    margin-top:10px;
     padding: 10px 40px;
 }
 
-.Next-button{
+.next-button{
     color: #fff !important;
     background-color: #46b8da !important;
     border-color: #46b8da !important;
@@ -608,7 +608,7 @@ a.btn-xl{
     width:100%;
     border-radius: 3px;
     font-size: 18px;
-    margin-top:15px;
+    margin-top:10px;
     padding: 10px 40px;
 }
 
@@ -626,4 +626,12 @@ a.btn-xl{
 
 .normal-font{
     font-size: 14px !important;
+}
+
+.danger-text{
+  position: absolute;;
+  top: 36px;
+  z-index: 9;
+  font-size: 15px;
+  color: #a94442;
 }

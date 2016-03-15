@@ -135,11 +135,11 @@ class Login extends Component {
                                                             <Col xs={12}>
                                                                 <div className="login-tbox">
                                                                     <Input type="password"
-                                                                           addonBefore={<Glyphicon glyph="lock" />}
-                                                                           placeholder="Password"
-                                                                           onChange={this.onPasswordChange.bind(this)}/>
+                                                                       addonBefore={<Glyphicon glyph="lock" />}
+                                                                       placeholder="Password"
+                                                                       onChange={this.onPasswordChange.bind(this)}/>
                                                                     <div className='text-danger'>
-                                                                        {this.state.passwordError}
+                                                                            {this.state.passwordError}
                                                                     </div>
                                                                 </div>
                                                             </Col>

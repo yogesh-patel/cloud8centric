@@ -50,7 +50,7 @@ export function authenticateUser(username, password) {
                             }
                         });
 
-                        dispatch(push("dashboard"));
+                        //dispatch(push("dashboard"));
 
                     })
                 })
@@ -58,13 +58,18 @@ export function authenticateUser(username, password) {
             }).catch(error=> {
 
                 var errorDescription = '';
+                var errorCode = error.response.status;
 
-                if(error.message == 'Failed to fetch'){
+                if(errorCode == '503'){
                     errorDescription ='Server is down. Please try again after some time.';
                 }
 
-                if(error.message == 'Unauthorized') {
+                if(errorCode == '401') {
                     errorDescription = 'Bad Credentials.';
+                }
+
+                if(errorCode == '400') {
+                    errorDescription = 'Bad Request.';
                 }
 
                 dispatch({

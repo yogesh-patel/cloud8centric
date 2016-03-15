@@ -248,7 +248,8 @@ a.btn-xl{
     border-radius: 3px;
     font-size: 18px;
     padding: 10px 40px;
-    /*margin-top:7px;*/
+    height:50px;
+    width: 100%;
 }
 .signup-button {
     color: #fff !important;

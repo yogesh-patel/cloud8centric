@@ -10,6 +10,7 @@ import {Element} from 'react-scroll';
 import * as appActionCreators from '../actions/app';
 import { pushState } from 'redux-router';
 import AlertError from './common/AlertError';
+import Dashboard from './Dashboard'
 
 class Login extends Component {
 
@@ -27,7 +28,8 @@ class Login extends Component {
     }
 
     gotoSignUpPage(e) {
-        this.props.routeDispatch(pushState(null, "signup"));
+       // this.props.routeDispatch(pushState(null, "signup"));
+        this.props.appActions.showSignUp();
     }
 
     gotoForgotPasswordPage(e) {
@@ -53,9 +55,9 @@ class Login extends Component {
             invalidError: invalidError
 
         });
+        e.preventDefault();
         if (usernameError == "" && passwordError == "" && invalidError == "")
         this.props.authActions.authenticateUser(this.state.username, this.state.password);
-
     }
 
     onUsernameChange(e) {
@@ -79,8 +81,12 @@ class Login extends Component {
 
     render() {
 
-        var {statusText} = this.props;
+        var {statusText, isAuthenticated} = this.props;
 
+        if(isAuthenticated)
+        {
+            return <Dashboard />
+        }
         if(statusText !== null){
             this.state.serverErrorMessage = true;
         }
@@ -140,10 +146,8 @@ class Login extends Component {
                                                                 </div>
                                                             </Col>
                                                             <Col xs={12} sm={6}>
-                                                                <div className="login-button pointer"
-                                                                     onClick={this.authenticate.bind(this)}>
-                                                                    Login
-                                                                </div>
+                                                               <Input type="submit" className="login-button pointer"
+                                                                     onClick={this.authenticate.bind(this)} value="Login"/>
                                                             </Col>
                                                         </Row>
                                                         <Row>
@@ -175,6 +179,7 @@ class Login extends Component {
 
 
 const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated,
     statusText: state.auth.statusText
 });
 

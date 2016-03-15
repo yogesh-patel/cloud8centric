@@ -27,6 +27,7 @@ export default createReducer(initialState, {
     },
     [LOGIN_USER_SUCCESS]: (state, payload) => {
         return Object.assign({}, state, {
+            'isAuthenticated':true,
             'username': payload.username,
             'userObject': payload.userObject,
             'orgObject': payload.orgObject,
@@ -37,6 +38,7 @@ export default createReducer(initialState, {
     },
     [LOGIN_USER_FAILURE]: (state, payload) => {
         return Object.assign({}, state, {
+            'isAuthenticated':false,
             'statusText': payload.statusText
         });
     }

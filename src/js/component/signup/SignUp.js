@@ -10,6 +10,7 @@ import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
 import {Element} from 'react-scroll';
+import NextStep from './NextStep';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class SignUp extends Component{
@@ -20,7 +21,16 @@ class SignUp extends Component{
     }
 
   render(){
-    //alert(this.props.status);
+    var comp = null;
+    if(this.props.currentStep == 'step1'){
+      comp = <Step1 />;
+    }
+    else if(this.props.currentStep == 'step2'){
+      comp = <Step2 />;
+    }
+    else if(this.props.currentStep == 'step3'){
+      comp = <Step3 />;
+    }
     return(
           <Element className="splashScreen" name="splashScreen">
               <Grid fluid>
@@ -40,7 +50,7 @@ class SignUp extends Component{
                                                               </Row>
                                                               <Row>
                                                                 <Col md={12}>
-                                                                  <NextStep status={this.props.status}/>
+                                                                  {comp}
                                                                 </Col>
                                                               </Row>
                                                           </Grid>
@@ -54,47 +64,8 @@ class SignUp extends Component{
     }
 }
 
-  class NextStep extends Component{
-    constructor(props){
-      super(props);
-      this.state= {currentComponent:<Step1/>}
-    }
-
-    render(){
-      if(this.props.status.step1 === "Step1"){
-        this.state.currentComponent = <Step2/>;
-      }
-
-      if(this.props.status.step2 === "Step2"){
-        this.state.currentComponent = <Step3/>;
-      }
-
-      if(this.props.status.step3 === "Step3"){
-        //alert("DATA_LOADED_SUCCESSFULLY")
-      }
-
-      if(this.props.status.step1 === "OnBackStep1"){
-        this.state.currentComponent = <Step1/>;
-      }
-
-      else if(this.props.status.step2 === "OnBackStep2"){
-        this.state.currentComponent = <Step2/>;
-      }
-
-      else if(this.props.status.step3 === "OnBackStep3"){
-        this.state.currentComponent = <Step3/>;
-      }
-
-      return(
-        <div>
-          {this.state.currentComponent}
-        </div>
-      );
-    }
-  }
-
 const mapStateToProps = (state) => ({
-    status:state.signUpData.status
+    currentStep:state.signUpData.currentStep
 });
 
 const mapDispatchToProps = (dispatch) => ({

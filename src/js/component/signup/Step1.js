@@ -13,41 +13,35 @@ class Step1 extends Component {
     constructor(props){
         super(props);
         this.state= {
-              username:'',
-              password:'',
-              confirmPassword:'',
-              firstName:'',
-              lastName:'',
-              emailAddress:''
+              username:props.userinfo.username,
+              password:props.userinfo.password,
+              confirmPassword:props.userinfo.confirmPassword,
+              firstName:props.userinfo.firstName,
+              lastName:props.userinfo.lastName,
+              passwordError:'',
+              emailAddress:props.userinfo.emailAddress
           }
     }
 
     onHandleNextClick(e){
         e.preventDefault();
-        this.props.empActions.saveStatus(
-            {
-                step1: "Step1",
-                step2: "",
-                step3: ""
-            });
-        this.props.empActions.saveCircleStatus(
-            {
-                step1: "Step_1_Completed",
-                step2: "",
-                step3: ""
-            }
-        );
-        this.props.empActions.step_1_Data(
-            {
-                firstName:this.state.firstName,
-                lastName:this.state.lastName,
-                emailAddress:this.state.emailAddress,
-                username:this.state.username,
-                password:this.state.password,
-                confirmPassword:this.state.confirmPassword,
-                roles: ["AccountOwner"]
-            }
-        );
+        if(this.state.confirmPassword !== this.state.password){
+            this.setState({passwordError:"Password Not match"});
+        }
+        else{
+            this.props.empActions.step_1_Data(
+                {
+                    firstName:this.state.firstName,
+                    lastName:this.state.lastName,
+                    emailAddress:this.state.emailAddress,
+                    username:this.state.username,
+                    password:this.state.password,
+                    confirmPassword:this.state.confirmPassword,
+                    roles: ["AccountOwner"]
+                }
+            );
+        }
+
     }
 
     onFirstNameChange(e) {
@@ -63,10 +57,10 @@ class Step1 extends Component {
         this.setState({username: e.target.value});
     }
     onPasswordChange(e) {
-        this.setState({password: e.target.value});
+        this.setState({password: e.target.value,passwordError:''});
     }
     onConfirmPasswordChange(e) {
-        this.setState({confirmPassword: e.target.value});
+        this.setState({confirmPassword: e.target.value,passwordError:''});
     }
 
     render() {
@@ -79,55 +73,70 @@ class Step1 extends Component {
                             <div className="login-label text-center">Contact Details</div>
                                 <Row>
                                     <Col xs={12}>
-                                        <Input type="text"
-                                               addonBefore={<Glyphicon glyph="user" />}
-                                               defaultValue={userinfo.firstName}
-                                               placeholder="First Name" required onChange={this.onFirstNameChange.bind(this)}/>
+                                        <div className="login-tbox">
+                                            <Input type="text"
+                                                defaultValue={userinfo.firstName}
+                                                   addonBefore={<Glyphicon glyph="user" />}
+                                                   placeholder="First Name*" required onChange={this.onFirstNameChange.bind(this)}/>
+                                        </div>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <Input type="text"
-                                               defaultValue={userinfo.lastName}
-                                               addonBefore={<Glyphicon glyph="user" />}
-                                               placeholder="Last Name" required onChange={this.onLastNameChange.bind(this)}/>
+                                        <div className="login-tbox">
+                                            <Input type="text"
+                                                    defaultValue={userinfo.lastName}
+                                                   addonBefore={<Glyphicon glyph="user" />}
+                                                   placeholder="Last Name*" required onChange={this.onLastNameChange.bind(this)}/>
+                                         </div>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <Input type="email"
-                                               defaultValue={userinfo.emailAddress}
-                                               addonBefore={<Glyphicon glyph="envelope" />}
-                                               placeholder="Email" required onChange={this.onEmailChange.bind(this)}/>
+                                        <div className="login-tbox">
+                                            <Input type="email"
+                                                defaultValue={userinfo.emailAddress}
+                                                   addonBefore={<Glyphicon glyph="envelope" />}
+                                                   placeholder="Email*" required onChange={this.onEmailChange.bind(this)}/>
+                                        </div>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <Input type="text"
-                                               defaultValue={userinfo.username}
-                                               addonBefore={<Glyphicon glyph="asterisk" />}
-                                               placeholder="User Name" required onChange={this.onUsernameChange.bind(this)}/>
+                                        <div className="login-tbox">
+                                            <Input type="text"
+                                                defaultValue={userinfo.username}
+                                                   addonBefore={<Glyphicon glyph="user" />}
+                                                   placeholder="Username*" required onChange={this.onUsernameChange.bind(this)}/>
+                                       </div>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <Input type="password"
-                                               defaultValue={userinfo.Password}
-                                               addonBefore={<Glyphicon glyph="asterisk" />}
-                                               placeholder="Password" required onChange={this.onPasswordChange.bind(this)}/>
+                                        <div className="login-tbox">
+                                            <Input type="password"
+                                                defaultValue={userinfo.password}
+                                                addonBefore={<Glyphicon glyph="lock" />}
+                                                   placeholder="Password*" required onChange={this.onConfirmPasswordChange.bind(this)}/>
+                                         </div>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <Input type="password"
-                                               defaultValue={userinfo.confirmPassword}
-                                               addonBefore={<Glyphicon glyph="asterisk" />}
-                                               placeholder="Confirm Password" required onChange={this.onConfirmPasswordChange.bind(this)}/>
+                                        <div className="login-tbox">
+                                            <Input type="password"
+                                                defaultValue={userinfo.confirmPassword}
+                                                addonBefore={<Glyphicon glyph="lock" />}
+                                                   placeholder="Confirm Password*" required onChange={this.onPasswordChange.bind(this)}/>
+                                               <div className='text-danger'>
+                                                   {this.state.passwordError}
+                                               </div>
+                                         </div>
                                     </Col>
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <button className="Next-button pointer">
+                                        <button type= "submit" className="next-button pointer">
                                             Next
                                         </button>
                                     </Col>

@@ -15,17 +15,46 @@ class AddProductRow extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            selectedProducts: []
+            errorMessage: null
         }
     }
 
     onProductSelected(e){
-        // let arrProducts = [];
-        // arrProducts.push(e.target.value);
+        var count = 0;
+        var hasDuplicate = false;
 
-        // this.setState({
-        //     selectedProducts: arrProducts
-        // });
+        this.setState({product: e.target.value});
+        this.props.productSelected(this.props.rowNumber, e.target.value);
+
+        _.map(this.props.selectedProducts,prod=>{
+            if(prod.product == e.target.value){
+                count++;
+                if(count > 1){
+                    this.setState({errorMessage: 'This product is already selected, select some other product.'});
+                    this.props.isDuplicateProduct(true);
+                    hasDuplicate = true;
+                }
+            }
+        });
+        if(hasDuplicate == false){
+            this.setState({errorMessage: null});
+            this.props.isDuplicateProduct(false);
+        }
+
+    }
+
+    onPlanSelected(e){
+        this.setState({plan: e.target.value})
+        this.props.planSelected(this.props.rowNumber, e.target.value);
+    }
+
+    onProductDeleted(){
+
+        this.props.productDeleted(this.props.rowNumber);
+
+        if(Object.keys(this.props.selectedProducts).length == 1){
+            this.setState({errorMessage: null});
+        }
 
     }
 
@@ -50,16 +79,21 @@ class AddProductRow extends React.Component{
                 <Col xs={12} sm={5} md={4}>
                     <Input  type="select" label="Select Product"
                             placeholder="Select Product"
+                            value={this.state.product}
                             onChange={this.onProductSelected.bind(this)}>
                         <option value="select">Select Product</option>
 
                         {productsDropDownValues}
 
                     </Input>
+                    <div className="duplicate-product">{this.state.errorMessage}</div>
                 </Col>
                 <Col xs={12} sm={5} md={4}>
                     <Input type="select" label="Select Payment Plan"
-                           placeholder="Select Payment Plan">
+                           placeholder="Select Payment Plan"
+                           value={this.state.plan}
+                           onChange={this.onPlanSelected.bind(this)}
+                           >
                         <option value="select">Select Payment Plan</option>
 
                         {plandDropDownValues}
@@ -67,10 +101,11 @@ class AddProductRow extends React.Component{
                     </Input>
                 </Col>
                 <Col xs={12} sm={5} md={4}>
-                    <Glyphicon glyph="minus subscription-minus-icon pointer" onClick={()=>this.props.onDeleteProduct()}/>
+                    {this.props.rowCount == 1 ? <span> </span> : <Glyphicon glyph="minus subscription-minus-icon pointer" onClick={this.onProductDeleted.bind(this)}/>}
+
                     <span> </span>
                     <OverlayTrigger trigger={['hover', 'focus']} placement="right"
-                                    overlay={<Popover title="Popover bottom" id="1"><strong>Holy guacamole!</strong> Check this info.</Popover>}>
+                                    overlay={<Popover title={this.props.selectedProducts[this.props.rowNumber].product ? this.props.selectedProducts[this.props.rowNumber].product : 'Select a product'} id="1">{this.props.selectedProducts[this.props.rowNumber].description ? this.props.selectedProducts[this.props.rowNumber].description : ''}</Popover>}>
                         <Glyphicon glyph="question-sign subscription-question-icon pointer"/>
                     </OverlayTrigger>
 

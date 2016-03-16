@@ -4,7 +4,8 @@ import constants from '../constants';
  import { post } from './common';
 
 let {STEP_1_DATA_ADDED_SUCCESSFULLY,STEP_2_DATA_ADDED_SUCCESSFULLY,STEP_3_DATA_ADDED_SUCCESSFULLY,SIGNUP_USER_REQUEST,
-    SHOW_LOGIN,SIGNUP_USER_FAILURE,SIGNUP_USER_SUCCESS,ON_BACK_CLICK,STATUS_ADDED_SUCCESSFULLY} = constants;
+    SHOW_LOGIN,SIGNUP_USER_FAILURE,SIGNUP_USER_SUCCESS,ON_BACK_CLICK,STATUS_ADDED_SUCCESSFULLY,
+    SHOW_SIGN_UP_SUCCESS_COMP} = constants;
 
 export function saveStatus(status){
     return (dispatch)=>{
@@ -58,7 +59,8 @@ export function submitSignupForm(signupData){
         post(endPointURL,signupData)
         .then((response)=>{
             dispatch({type:'SIGNUP_USER_SUCCESS'});
-            dispatch({type:'SHOW_LOGIN'});
+            // dispatch({type:'SHOW_LOGIN'});
+            dispatch({type:'SHOW_SIGN_UP_SUCCESS_COMP'});
         }).catch(error => {
             dispatch({
                 type:'SIGNUP_USER_FAILURE',

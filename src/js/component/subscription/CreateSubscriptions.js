@@ -16,36 +16,83 @@ class CreateSubscriptions extends Component {
         this.count = 1;
         this.state = {
             subscriptionName: null,
+            isDuplicate: false,
             selectedProducts:{
-                1:<AddProductRow key={1} onDeleteProduct={this.onDeleteProduct.bind(this,1)}/>
+                1:{}
             }
         }
     }
 
     onAddProduct(){
         this.count++;
-        this.state.selectedProducts[this.count] = <AddProductRow key={this.count}
-                                                                 onDeleteProduct={this.onDeleteProduct.bind(this,this.count)}/>
+        this.state.selectedProducts[this.count] = {};
         this.setState({selectedProducts:this.state.selectedProducts});
     }
 
-    onDeleteProduct(count){
+    productDeleted(count){
         delete this.state.selectedProducts[count];
         this.setState({selectedProducts:this.state.selectedProducts});
     }
 
     onSubscriptionNameChange(e) {
-        this.setState({
-            subscriptionName: e.target.value
+        this.setState({subscriptionName: e.target.value});
+    }
+
+    productSelected(rowNumber, product){
+        var productDescription = null;
+        _.each(this.props.products, prod=>{
+            if(prod.name == product){
+                productDescription = prod.description;
+            }
         });
+
+        this.state.selectedProducts[rowNumber].product = product;
+        this.state.selectedProducts[rowNumber].description = productDescription;
+        this.setState({selectedProducts: this.state.selectedProducts});
+    }
+
+    planSelected(rowNumber, plan){
+        this.state.selectedProducts[rowNumber].plan = plan;
+        this.setState({selectedProducts: this.state.selectedProducts});
+    }
+
+    isDuplicateProduct(value){
+        this.setState({isDuplicate: value});
+    }
+
+    createSubscriptions(){
+
     }
 
     render() {
-        var selectedProductComps = _.map(_.keys(this.state.selectedProducts),(productComp)=>{
-            return this.state.selectedProducts[productComp];
+        var rowCount = _.keys(this.state.selectedProducts).length;
+
+        var selectedProductComps = _.map(_.keys(this.state.selectedProducts),(rowNumber)=>{
+            return <AddProductRow key={rowNumber}
+                           rowCount={rowCount}
+                           rowNumber={rowNumber}
+                           productSelected={this.productSelected.bind(this)}
+                           planSelected={this.planSelected.bind(this)}
+                           selectedProducts={this.state.selectedProducts}
+                           isDuplicateProduct={this.isDuplicateProduct.bind(this)}
+                           productDeleted={this.productDeleted.bind(this,rowNumber)}/>
         });
 
-        var {disabled} = this.props;
+        var disabled = false;
+        var registerDisabled = false;
+
+        _.each(this.state.selectedProducts, (data)=>{
+            if(!data.product || !data.plan || !this.state.subscriptionName || this.state.isDuplicate){
+                disabled = true;
+                registerDisabled = true;
+            }
+
+        });
+
+        if(this.state.isDuplicate == false && (Object.keys(this.state.selectedProducts).length == this.props.products.length)){
+            disabled = true;
+        }
+
         return (
             <Grid>
                 <Row>
@@ -71,13 +118,17 @@ class CreateSubscriptions extends Component {
                                 <Row>
                                     <Button bsStyle="success" className="pull-right right-buffer"
                                             onClick={this.onAddProduct.bind(this)}
-                                            disabled={this.props.disabled}>
+                                            disabled={disabled}>
                                             <Glyphicon glyph="plus"/> Add More
                                     </Button>
                                 </Row>
                                 {selectedProductComps}
                                 <Row>
-                                    <Button bsStyle="primary" className="pull-right right-buffer" disabled={this.props.disabled}>Register</Button>
+                                    <Button bsStyle="primary" className="pull-right right-buffer"
+                                            disabled={registerDisabled}
+                                            onClick={this.createSubscriptions.bind(this)}>
+                                            Register
+                                    </Button>
                                 </Row>
                             </Panel>
                         </form>
@@ -95,7 +146,6 @@ class CreateSubscriptions extends Component {
 const mapStateToProps = (state) => ({
     products: state.subscription.productList,
     plans: state.subscription.paymentPlans,
-    disabled: state.subscription.disabled
 });
 
 const mapDispatchToProps = (dispatch) => ({});

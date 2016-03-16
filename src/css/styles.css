@@ -642,3 +642,7 @@ a.btn-xl{
     margin: 0 auto;
     border: 3px solid black;
 }
+
+.duplicate-product{
+    color: #a94442;
+}

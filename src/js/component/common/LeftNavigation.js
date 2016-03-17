@@ -18,11 +18,9 @@ class LeftNavigation extends Component{
     }
 
     getSubscriptionList(){
-
         this.props.dashboardActions.showSubscription();
         this.props.headerActions.hideProducts();
         this.setState({selectedOption:'subscription'});
-
     }
 
     getOrganizationsList(){
@@ -101,4 +99,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeftNavigation);
-

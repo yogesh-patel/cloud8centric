@@ -4,6 +4,7 @@
 import {createReducer} from '../utils';
 import {SHOW_LOGIN} from '../constants';
 import {pushState} from 'redux-router';
+import _ from 'lodash';
 
 const initialState = {
     loginScreen: false,
@@ -11,7 +12,8 @@ const initialState = {
     forgotPasswordScreen: false,
     forgotMessageScreen: false,
     signUpScreen:false,
-    loading:false
+    loading:false,
+    signupSuccessComponent:false
 };
 
 export default createReducer(initialState, {
@@ -98,24 +100,33 @@ export default createReducer(initialState, {
         return Object.assign({}, state, {
             loading:true
         });
-
     },
     'SUBSCRIPTIONS_RECEIVED': (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });
-
     },
     'FETCH_ORGANIZATIONS': (state, payload) => {
         return Object.assign({}, state, {
             loading:true
         });
-
     },
     'ORGANIZATIONS_RECEIVED': (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });
-
+    },
+    'SHOW_SIGN_UP_SUCCESS_COMP': (state, payload) => {
+        return Object.assign({}, state, {
+            loginScreen: false,
+            forgotPasswordScreen: false,
+            forgotMessageScreen: false,
+            homeScreen: false,
+            signUpScreen:false,
+            signupSuccessComponent:true
+        });
+    },
+    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+        return _.cloneDeep(initialState);
     },
 });

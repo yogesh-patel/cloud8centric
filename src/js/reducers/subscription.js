@@ -70,6 +70,9 @@ export default createReducer(initialState, {
             'paymentPlans':null
         });
     },
+    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+        return _.cloneDeep(initialState);
+    },
     'ADD_NEW_SUBSCRIPTION': (state, payload) => {
         var _state = _.cloneDeep(state);
         _state.count++;

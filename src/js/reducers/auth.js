@@ -1,6 +1,7 @@
 import {createReducer} from '../utils';
 import constants from '../constants';
 import {pushState} from 'redux-router';
+import _ from 'lodash';
 
 let {LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE} = constants;
 
@@ -37,5 +38,8 @@ export default createReducer(initialState, {
         return Object.assign({}, state, {
             'statusText': payload.statusText
         });
-    }
+    },
+    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+        return _.cloneDeep(initialState);
+    },
 });

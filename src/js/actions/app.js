@@ -3,7 +3,8 @@
  */
 
 import constants from '../constants';
-let {SHOW_LOGIN,SHOW_HOME,SHOW_FORGOT_PASSWORD, SHOW_FORGOT_MESSAGE,SHOW_SIGN_UP} = constants;
+let {SHOW_LOGIN,SHOW_HOME,SHOW_FORGOT_PASSWORD, SHOW_FORGOT_MESSAGE,
+     SHOW_SIGN_UP, SHOW_SIGN_UP_SUCCESS_COMP} = constants;
 
 export function showLogin() {
     return {
@@ -29,10 +30,15 @@ export function showForgotPassword() {
     }
 }
 
-export function showSignUp(){
+export function showSignUpSuccessFully() {
     return {
-        type:SHOW_SIGN_UP
+        type: SHOW_SIGN_UP_SUCCESS_COMP
     }
 }
 
-
+export function showSignUp(){
+    return (dispatch)=>{
+        dispatch({type:'SHOW_SIGN_UP'});
+        dispatch({type:'SIGNUP_USER_SUCCESS'});
+    }
+}

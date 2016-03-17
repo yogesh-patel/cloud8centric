@@ -12,37 +12,55 @@ import {Element} from 'react-scroll';
 class StepStatus extends Component {
 
     onStep1(){ 
-        this.props.empActions.saveStatus("step1");
+        var {step_1_Status} = this.props;
+        if(step_1_Status){
+            this.props.empActions.saveStatus("step1");
+        }
     }
 
     onStep2(){ 
-        this.props.empActions.saveStatus("step2");
+        var {step_2_Status} = this.props;
+        if(step_2_Status){
+            this.props.empActions.saveStatus("step2");
+        }
     }
 
     onStep3(){ 
-        this.props.empActions.saveStatus("step3");
+        var {step_3_Status} = this.props;
+        if(step_3_Status){
+            this.props.empActions.saveStatus("step3");
+        }
     }
 
     render() {
-        var step_1_class = "circleBase type1";
-        var step_2_class = "circleBase type1";
-        var step_3_class = "circleBase type1";
+        var step_1_class = "circleBase white-circle-color";
+        var step_2_class = "circleBase white-circle-color";
+        var step_3_class = "circleBase white-circle-color";
 
         var {step_1_Status,step_2_Status,step_3_Status,currentStep} = this.props;
+
         if(currentStep == "step1"){
-            // step_1_class+ =
-            //
+             step_1_class += " blue-circle-color"
         }
+
+        else if(currentStep == "step2"){
+             step_2_class += " blue-circle-color"
+        }
+
+        else if(currentStep == "step3"){
+             step_3_class += " blue-circle-color"
+        }
+
         if(step_1_Status){
-            step_1_class += " type2";
+            step_1_class += " green-circle-color";
         }
 
         if(step_2_Status){
-            step_2_class += " type2";
+            step_2_class += " green-circle-color";
         }
 
         if(step_3_Status){
-            step_3_class += " type2";
+            step_3_class += " green-circle-color";
         }
 
         return (
@@ -62,7 +80,7 @@ class StepStatus extends Component {
                                     </div>
                             </Col>
                             <Col md={4} sm={4} xs={4}>
-                                <h5>Organization Details</h5>
+                                <h5>Organization Address</h5>
                                     <div onClick={this.onStep3.bind(this)} className="pointer">
                                         <div className={step_3_class}></div>
                                     </div>

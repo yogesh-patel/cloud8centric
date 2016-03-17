@@ -3,7 +3,7 @@ import { push } from 'redux-router';
 import { get } from './common';
 import _ from 'lodash';
 
-let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS} = constants;
+let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS, ADD_NEW_SUBSCRIPTION, PRODUCT_SELECTED, SUBSCRIPTIONS_NAME_ADDED, PLAN_SELECTED, PRODUCT_DELETED} = constants;
 
 export function fetchSubscriptions(organizationId){
 
@@ -36,6 +36,7 @@ export function fetchSubscriptions(organizationId){
 }
 
 export function getDetail(subscriptionId){
+
     return(dispatch) => {
         dispatch({type:'SUBSCRIPTION_DETAIL_REQUEST_SENT'});
 
@@ -63,6 +64,7 @@ export function getDetail(subscriptionId){
         },200);
 
     }
+
 }
 
 export function fetchProductsAndPlans(){
@@ -70,6 +72,49 @@ export function fetchProductsAndPlans(){
     return(dispatch) => {
         dispatch({type:'FETCH_PRODUCTS_AND_PLANS'});
         dispatch(push("dashboard/subscriptions/create"));
+    }
+
+}
+
+export function addNewSubscription() {
+
+    return {
+        type: 'ADD_NEW_SUBSCRIPTION'
+    }
+
+}
+
+export function productSelected(rowNumber, productName){
+
+    return {
+        type: 'PRODUCT_SELECTED',
+        payload: {
+            rowNumber: rowNumber,
+            productName: productName
+        }
+    }
+
+}
+
+export function planSelected(rowNumber, planName){
+
+    return {
+        type: 'PLAN_SELECTED',
+        payload: {
+            rowNumber: rowNumber,
+            planName: planName
+        }
+    }
+
+}
+
+export function productDeleted(rowNumber){
+
+    return {
+        type: 'PRODUCT_DELETED',
+        payload: {
+            rowNumber: rowNumber,
+        }
     }
 
 }

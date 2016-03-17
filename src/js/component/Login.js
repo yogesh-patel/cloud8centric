@@ -123,6 +123,7 @@ class Login extends Component {
                                                                     <Input type="text"
                                                                            addonBefore={<Glyphicon glyph="user" />}
                                                                            placeholder="Username"
+                                                                           value={this.state.username}
                                                                            onChange={this.onUsernameChange.bind(this)}/>
                                                                     <div className='text-danger'>
                                                                         {this.state.usernameError}
@@ -136,6 +137,7 @@ class Login extends Component {
                                                                 <div className="login-tbox">
                                                                     <Input type="password"
                                                                        addonBefore={<Glyphicon glyph="lock" />}
+                                                                        value={this.state.password}
                                                                        placeholder="Password"
                                                                        onChange={this.onPasswordChange.bind(this)}/>
                                                                     <div className='text-danger'>

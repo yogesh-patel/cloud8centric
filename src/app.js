@@ -1,6 +1,3 @@
-/**
- * Created by nikhila on 02/24/2016.
- */
 import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';

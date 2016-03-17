@@ -19,10 +19,6 @@ class SubscriptionDetails extends Component {
 
     }
 
-    onStatusClick(){
-
-    }
-
     render() {
         let {subscription} = this.props;
         var rows = [];
@@ -38,8 +34,7 @@ class SubscriptionDetails extends Component {
                         <td><Button bsSize="xsmall" className="cursor-default status-btn-width"
                                     bsStyle={ data.status=='Ready' ?
                                     'success' :(data.status=='In Progress' ? 'warning' :
-                                    (data.status=='Error' ? 'danger': '')) }
-                                    onClick={ this.onStatusClick.bind(this)}>
+                                    (data.status=='Error' ? 'danger': '')) }>
                             {data.status}
                         </Button></td>
                     </tr>
@@ -81,4 +76,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionDetails);
-

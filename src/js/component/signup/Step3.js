@@ -14,90 +14,107 @@ class Step3 extends Component {
     constructor(props){
         super(props);
         this.state= {
-          city:'',
-          province:'',
-          zipCode:'',
-          country:'',
-          serverErrorMessage:'',
-          phoneNumberError:'',
-          phoneNumber:''}
+            city:props.step_2_data.city,
+            province:props.step_2_data.province,
+            zipCode:props.step_2_data.zipCode,
+            country:props.step_2_data.country,
+            serverErrorMessage:'',
+            addressLine1:props.step_2_data.addressLine1,
+            addressLine2:props.step_2_data.addressLine2,
+            addressLine3:props.step_2_data.addressLine3,
+        }
     }
 
     onNext(e){ 
         var {step_2_data,userinfo} = this.props;
         e.preventDefault();
-        if(this.state.phoneNumber.length !== 10){
-            this.setState({phoneNumberError:"PhoneNumber must be 10 digits only"});
+        var step3Data = {
+            organizationName:step_2_data.organizationName,
+            organizationURL:step_2_data.organizationURL,
+            phoneNumber:step_2_data.phoneNumber,
+            city:this.state.city,
+            province:this.state.province,
+            zipCode:this.state.zipCode,
+            country:this.state.country,
+            addressLine1:this.state.addressLine1,
+            addressLine2:this.state.addressLine2,
+            addressLine3:this.state.addressLine3,
         }
-        else{
-            var step3Data = {
+
+        var signupInfo = {
+            organizationInfo: {
                 organizationName:step_2_data.organizationName,
                 organizationURL:step_2_data.organizationURL,
-                addressLine1:step_2_data.addressLine1,
-                addressLine2:step_2_data.addressLine2,
-                addressLine3:step_2_data.addressLine3,
+                phoneNumber:step_2_data.phoneNumber,
                 city:this.state.city,
                 province:this.state.province,
                 zipCode:this.state.zipCode,
                 country:this.state.country,
-                phoneNumber:this.state.phoneNumber,
+                addressLine1:this.state.addressLine1,
+                addressLine2:this.state.addressLine2,
+                addressLine3:this.state.addressLine3,
+            },
+            userinfo : {
+                firstName:userinfo.firstName,
+                lastName:userinfo.lastName,
+                emailAddress:userinfo.emailAddress,
+                username:userinfo.username,
+                password:userinfo.password,
+                confirmPassword:userinfo.confirmPassword,
+                roles: ["AccountOwner"]
             }
-
-            var signupInfo = {
-                organizationInfo: {
-                    organizationName:step_2_data.organizationName,
-                    organizationURL:step_2_data.organizationURL,
-                    addressLine1:step_2_data.addressLine1,
-                    addressLine2:step_2_data.addressLine2,
-                    addressLine3:step_2_data.addressLine3,
-                    city:this.state.city,
-                    province:this.state.province,
-                    zipCode:this.state.zipCode,
-                    country:this.state.country,
-                    phoneNumber:this.state.phoneNumber,
-                },
-                userinfo : {
-                    firstName:userinfo.firstName,
-                    lastName:userinfo.lastName,
-                    emailAddress:userinfo.emailAddress,
-                    username:userinfo.username,
-                    password:userinfo.password,
-                    confirmPassword:userinfo.confirmPassword,
-                    roles: ["AccountOwner"]
-                }
-              }
-
-            this.props.signupActions.step_3_Data(step3Data);
-            console.log(signupInfo);
-            this.props.signupActions.submitSignupForm(signupInfo);
         }
 
+        this.props.signupActions.step_3_Data(step3Data);
+        this.props.signupActions.submitSignupForm(signupInfo);
     }
 
     onBack(e){ 
-       e.preventDefault();
-       this.props.signupActions.onBackClick("step2");
-      }
+        e.preventDefault();
+        var {step_2_data,userinfo} = this.props;
+        this.props.signupActions.onBackClick("step2");
+        var step3Data = {
+            organizationName:step_2_data.organizationName,
+            organizationURL:step_2_data.organizationURL,
+            phoneNumber:step_2_data.phoneNumber,
+            city:this.state.city,
+            province:this.state.province,
+            zipCode:this.state.zipCode,
+            country:this.state.country,
+            addressLine1:this.state.addressLine1,
+            addressLine2:this.state.addressLine2,
+            addressLine3:this.state.addressLine3,
+        }
+        this.props.signupActions.step_3_Data(step3Data);
+    }
 
-      onCountryChange(e) {
+    onCountryChange(e) {
         this.setState({country: e.target.value});
-      }
+    }
 
-      onPhoneNumberChange(e) {
-        this.setState({phoneNumber: e.target.value,phoneNumberError:''});
-      }
-
-      onCityChange(e) {
+    onCityChange(e) {
         this.setState({city: e.target.value});
-      }
+    }
 
-      onProvinceChange(e) {
+    onProvinceChange(e) {
         this.setState({province: e.target.value});
-      }
+    }
 
-      onZipCodeChange(e) {
+    onZipCodeChange(e) {
         this.setState({zipCode: e.target.value});
-      }
+    }
+
+    onAddressLine1Change(e) {
+        this.setState({addressLine1: e.target.value});
+    }
+
+    onAddressLine2Change(e) {
+        this.setState({addressLine2: e.target.value});
+    }
+
+    onAddressLine3Change(e) {
+        this.setState({addressLine3: e.target.value});
+    }
 
     render() {
         var {statusText} = this.props;
@@ -111,7 +128,7 @@ class Step3 extends Component {
             <form name="signup" onSubmit={this.onNext.bind(this)}>
                 <Row className="text-center">
                     <Col md={6} sm={8} xs={12} smPush={1} lgPush={3} className="signUp-box">
-                        <div className="login-label text-center">Company Details</div>
+                        <div className="login-label text-center">Organization Address</div>
                         <Row>
                             <Col xs={12}>
                                 <div className="login-tbox">
@@ -119,9 +136,40 @@ class Step3 extends Component {
                                         {this.props.statusText}
                                     </div>
                                     <Input type="text"
+                                        defaultValue={this.state.addressLine1}
+                                        addonBefore={<span className="fa fa-home"></span>}
+                                           placeholder="Address Line1*" required onChange={this.onAddressLine1Change.bind(this)}/>
+                               </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12}>
+                                <div className="login-tbox">
+                                    <Input type="text"
+                                        defaultValue={this.state.addressLine2}
+                                        addonBefore={<span className="fa fa-home"></span>}
+                                           placeholder="Address Line2"  onChange={this.onAddressLine2Change.bind(this)}/>
+                               </div>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col xs={12}>
+                                <div className="login-tbox">
+                                    <Input type="text"
+                                        defaultValue={this.state.addressLine3}
+                                           addonBefore={<span className="fa fa-home"></span>}
+                                           placeholder="Address Line3" onChange={this.onAddressLine3Change.bind(this)}/>
+                               </div>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col xs={12}>
+                                <div className="login-tbox">
+                                    <Input type="text"
                                         defaultValue={this.state.city}
                                         addonBefore={<span className="fa fa-road"></span>}
-                                    placeholder="City*" onChange={this.onCityChange.bind(this)}/>
+                                    placeholder="City*" required onChange={this.onCityChange.bind(this)}/>
                                 </div>
                             </Col>
                         </Row>
@@ -141,7 +189,7 @@ class Step3 extends Component {
                                     <Input type="text"
                                         defaultValue={this.state.zipCode}
                                         addonBefore={<span className="fa fa-barcode"></span>}
-                                    placeholder="Zip Code*" onChange={this.onZipCodeChange.bind(this)}/>
+                                    placeholder="Zip Code*" required onChange={this.onZipCodeChange.bind(this)}/>
                                 </div>
                             </Col>
                         </Row>
@@ -152,19 +200,6 @@ class Step3 extends Component {
                                         defaultValue={this.state.country}
                                         addonBefore={<span className="fa fa-globe"></span>}
                                     placeholder="Country*" required onChange={this.onCountryChange.bind(this)}/>
-                                </div>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col xs={12}>
-                                <div className="login-tbox">
-                                    <Input type="number"
-                                        defaultValue={this.state.phoneNumber}
-                                        addonBefore={<Glyphicon glyph="phone-alt" />}
-                                    placeholder="Phone Number*" required onChange={this.onPhoneNumberChange.bind(this)}/>
-                                <div className='danger-text'>
-                                        {this.state.phoneNumberError}
-                                    </div>
                                 </div>
                             </Col>
                         </Row>
@@ -190,9 +225,9 @@ class Step3 extends Component {
 }
 
 const mapStateToProps = (state) => ({
-     step_2_data:state.signUpData.signupInfo.organizationInfo,
-     userinfo:state.signUpData.signupInfo.userinfo,
-     statusText:state.signUpData.statusText
+    step_2_data:state.signUpData.signupInfo.organizationInfo,
+    userinfo:state.signUpData.signupInfo.userinfo,
+    statusText:state.signUpData.statusText
 });
 
 const mapDispatchToProps = (dispatch) => ({

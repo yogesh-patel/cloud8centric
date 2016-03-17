@@ -13,31 +13,31 @@ class Step2 extends Component {
     constructor(props){
         super(props);
         this.state= {
-          organizationName:'',
-          organizationURL:'',
-          addressLine1:'',
-          addressLine2:'',
-          addressLine3:'',
-          }
+          organizationName:props.step_2_data.organizationName,
+          organizationURL:props.step_2_data.organizationURL,
+          phoneNumberError:'',
+          phoneNumber:props.step_2_data.phoneNumber
+      }
     }
 
     onNext(e){ 
-       e.preventDefault();
-         this.props.empActions.step_2_Data(
-             {
-                 organizationName:this.state.organizationName,
-                 organizationURL:this.state.organizationURL,
-                 addressLine1:this.state.addressLine1,
-                 addressLine2:this.state.addressLine2,
-                 addressLine3:this.state.addressLine3,
-             }
-         );
-      }
-
-      onBack(e){ 
-         e.preventDefault();
-         this.props.empActions.onBackClick("step1");
+        e.preventDefault();
+        if(this.state.phoneNumber.length !== 10){
+            this.setState({phoneNumberError:"Phone number must be 10 digits"});
         }
+        else{
+            this.props.empActions.step_2_Data({
+                organizationName:this.state.organizationName,
+                organizationURL:this.state.organizationURL,
+                phoneNumber:this.state.phoneNumber
+            });
+        }
+    }
+
+    onBack(e){ 
+        e.preventDefault();
+        this.props.empActions.onBackClick("step1");
+    }
 
     onOrganizationNameChange(e) {
        this.setState({organizationName: e.target.value});
@@ -47,18 +47,9 @@ class Step2 extends Component {
        this.setState({organizationURL: e.target.value});
      }
 
-     onAddressLine1Change(e) {
-       this.setState({addressLine1: e.target.value});
+     onPhoneNumberChange(e) {
+       this.setState({phoneNumber: e.target.value,phoneNumberError:''});
      }
-
-     onAddressLine2Change(e) {
-       this.setState({addressLine2: e.target.value});
-     }
-
-     onAddressLine3Change(e) {
-       this.setState({addressLine3: e.target.value});
-     }
-
 
     render() {
         var {step_2_data} = this.props;
@@ -84,40 +75,21 @@ class Step2 extends Component {
                                         <Input type="url"
                                             defaultValue={step_2_data.organizationURL}
                                             addonBefore={<span className="fa fa-link --- URL"></span>}
-                                               placeholder="url" onChange={this.onOrganizationURLChange.bind(this)}/>
+                                               placeholder="URL" onChange={this.onOrganizationURLChange.bind(this)}/>
                                    </div>
                                 </Col>
                             </Row>
                             <Row>
                                 <Col xs={12}>
                                     <div className="login-tbox">
-                                        <Input type="text"
-                                            defaultValue={step_2_data.addressLine1}
-                                            addonBefore={<span className="fa fa-home"></span>}
-                                               placeholder="Address Line1*" required onChange={this.onAddressLine1Change.bind(this)}/>
-                                   </div>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col xs={12}>
-                                    <div className="login-tbox">
-                                        <Input type="text"
-                                            defaultValue={step_2_data.addressLine2}
-                                            addonBefore={<span className="fa fa-home"></span>}
-                                               placeholder="Address Line2"  onChange={this.onAddressLine2Change.bind(this)}/>
-                                   </div>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col xs={12}>
-                                    <div className="login-tbox">
-                                        <Input type="text"
-                                            defaultValue={step_2_data.addressLine3}
-                                               addonBefore={<span className="fa fa-home"></span>}
-                                               users
-                                               placeholder="Address Line3" onChange={this.onAddressLine3Change.bind(this)}/>
-                                   </div>
+                                        <Input type="number"
+                                            defaultValue={step_2_data.phoneNumber}
+                                            addonBefore={<Glyphicon glyph="phone-alt" />}
+                                        placeholder="Phone Number*" required onChange={this.onPhoneNumberChange.bind(this)}/>
+                                    <div className='danger-text'>
+                                            {this.state.phoneNumberError}
+                                        </div>
+                                    </div>
                                 </Col>
                             </Row>
                             <Row>

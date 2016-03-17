@@ -1,6 +1,3 @@
-/**
- * Created by nikhila on 02/24/2016.
- */
 import rootReducer from '../reducers';
 import thunk from 'redux-thunk';
 import routes from '../../Routes';

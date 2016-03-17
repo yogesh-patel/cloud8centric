@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as headerActionCreators from '../../actions/header';
 import * as authActionCreator from '../../actions/auth';
+import * as appActionCreator from '../../actions/app';
 import {Link, Events,scroller} from 'react-scroll';
 
 class CommonHeader extends Component{
@@ -20,7 +21,8 @@ class CommonHeader extends Component{
 	}
 
 	onLogout(){
-		this.props.authActions.logout();
+		this.props.appActions.cleanReducer();
+		this.props.authActions.logout()
 	}
 	onProductSelected(e){
 		e.preventDefault();
@@ -74,7 +76,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	headerActions: bindActionCreators(headerActionCreators, dispatch),
-	authActions: bindActionCreators(authActionCreator, dispatch)
+	authActions: bindActionCreators(authActionCreator, dispatch),
+	appActions : bindActionCreators(appActionCreator, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommonHeader);

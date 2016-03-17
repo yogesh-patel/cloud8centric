@@ -1,7 +1,7 @@
 {
   "name": "react",
   "version": "1.0.0",
-  "description": "Sample react + flux",
+  "description": "Centric SAAS",
   "private": true,
   "scripts": {
     "postinstall": "gulp build",

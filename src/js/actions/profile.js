@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2016-present, SYNERZIP SOFTECH PVT, LTD.
- * All rights reserved.
- *
- * Created by nikhila on 24/02/16.
- */
-
 import { checkHttpStatus, parseJSON, get, post } from '../utils';
 import {
     FETCH_ACCOUNT_DATA_REQUEST,

@@ -15,7 +15,7 @@ class CreateSubscriptions extends Component {
         super(props);
         this.count = 1;
         this.state = {
-            subscriptionName: null,
+            subscriptionName: '',
             isDuplicate: false,
             selectedProducts:{
                 1:{}
@@ -35,10 +35,16 @@ class CreateSubscriptions extends Component {
     }
 
     onSubscriptionNameChange(e) {
-        this.setState({subscriptionName: e.target.value});
+        this.setState({subscriptionName: e.target.value,status:'success'});
     }
 
     productSelected(rowNumber, product){
+        if(this.state.subscriptionName === ''){
+            this.setState({status:'error'});
+        }
+        else {
+            this.setState({status:'success'});
+        }
         var productDescription = null;
         _.each(this.props.products, prod=>{
             if(prod.name == product){
@@ -110,6 +116,11 @@ class CreateSubscriptions extends Component {
                                     <Col xs={12} sm={12} md={6}>
                                         <Input  type="text" label="Subscription Name"
                                                 placeholder="Subscription Name*"
+                                                bsStyle={this.state.status}
+                                                hasFeedback
+                                                ref="input"
+                                                groupClassName="group-class"
+                                                labelClassName="label-class"
                                                 onChange={this.onSubscriptionNameChange.bind(this)}/>
                                     </Col>
                                 </Row>

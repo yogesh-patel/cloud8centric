@@ -12,6 +12,7 @@ import Login from './Login';
 import ForgotPassword from './ForgotPassword';
 import ForgotMessage from './ForgotMessage';
 import SignUp from './signup/SignUp';
+import SignUpSuccess from './signup/SignUpSuccess';
 import { connect } from 'react-redux';
 
 class Home extends Component {
@@ -44,7 +45,7 @@ class Home extends Component {
 
     render() {
         var topScreen = null;
-        var {homeScreen,loginScreen,forgotPasswordScreen,forgotMessageScreen,signUpScreen} = this.props;
+        var {homeScreen,loginScreen,forgotPasswordScreen,forgotMessageScreen,signUpScreen,signupSuccessComponent} = this.props;
         if(loginScreen){
             topScreen = <Login />;
         }else if(homeScreen){
@@ -63,6 +64,9 @@ class Home extends Component {
         }
         else if(forgotMessageScreen){
             topScreen = <ForgotMessage />;
+        }
+        else if(signupSuccessComponent){
+            topScreen = <SignUpSuccess />;
         }
         return (
             <Grid fluid>
@@ -89,7 +93,8 @@ const mapStateToProps = (state) => ({
     forgotPasswordScreen:state.app.forgotPasswordScreen,
     forgotMessageScreen:state.app.forgotMessageScreen,
     signUpScreen:state.app.signUpScreen,
-    homeScreen:state.app.homeScreen
+    homeScreen:state.app.homeScreen,
+    signupSuccessComponent:state.app.signupSuccessComponent
 });
 
 const mapDispatchToProps = (dispatch) => ({

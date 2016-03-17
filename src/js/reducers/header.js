@@ -1,5 +1,6 @@
 import {createReducer} from '../utils';
 import constants from '../constants';
+import _ from 'lodash';
 
 let {SHOW_NAVIGATION_MENU, HIDE_NAVIGATION_MENU} = constants;
 
@@ -17,5 +18,8 @@ export default createReducer(initialState, {
         return Object.assign({}, state, {
             toggleClass: ''
         });
+    },
+    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+        return _.cloneDeep(initialState);
     },
 });

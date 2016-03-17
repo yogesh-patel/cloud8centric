@@ -10,6 +10,8 @@ export default createReducer(initialState, {
         return Object.assign({}, state, {
             'organizationList': payload.organizationList
         });
-
-    }
+    },
+    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+        return _.cloneDeep(initialState);
+    },
 });

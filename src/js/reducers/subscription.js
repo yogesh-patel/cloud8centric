@@ -70,6 +70,8 @@ export default createReducer(initialState, {
             'productList':null,
             'paymentPlans':null
         });
-
+    },
+    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+        return _.cloneDeep(initialState);
     },
 });

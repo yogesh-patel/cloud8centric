@@ -66,6 +66,7 @@ export function submitSignupForm(signupData){
                 type:'SIGNUP_USER_FAILURE',
                 payload: error.message
             });
+            //dispatch({type:'SHOW_SIGN_UP_SUCCESS_COMP'});
         })
     }
 }

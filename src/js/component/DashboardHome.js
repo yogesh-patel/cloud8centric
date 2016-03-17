@@ -8,7 +8,7 @@ class  DashboardHome extends Component{
 
         return(
             <div>
-                <h1>Welcome to Centric SAAS!!!</h1>
+                <h1 className="text-center">Welcome to Centric SAAS!!!</h1>
             </div>
         );
 

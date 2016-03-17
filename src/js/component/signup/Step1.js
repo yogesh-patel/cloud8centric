@@ -26,7 +26,7 @@ class Step1 extends Component {
     onHandleNextClick(e){
         e.preventDefault();
         if(this.state.confirmPassword !== this.state.password){
-            this.setState({passwordError:"Password Not match"});
+            this.setState({passwordError:"Password and confirm password should be same"});
         }
         else{
             this.props.empActions.step_1_Data(

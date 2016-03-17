@@ -23,7 +23,7 @@ class Step2 extends Component {
     onNext(e){ 
         e.preventDefault();
         if(this.state.phoneNumber.length !== 10){
-            this.setState({phoneNumberError:"PhoneNumber must be 10 digits only"});
+            this.setState({phoneNumberError:"Phone number must be 10 digits"});
         }
         else{
             this.props.empActions.step_2_Data({

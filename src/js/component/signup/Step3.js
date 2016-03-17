@@ -169,7 +169,7 @@ class Step3 extends Component {
                                     <Input type="text"
                                         defaultValue={this.state.city}
                                         addonBefore={<span className="fa fa-road"></span>}
-                                    placeholder="City*" onChange={this.onCityChange.bind(this)}/>
+                                    placeholder="City*" required onChange={this.onCityChange.bind(this)}/>
                                 </div>
                             </Col>
                         </Row>
@@ -189,7 +189,7 @@ class Step3 extends Component {
                                     <Input type="text"
                                         defaultValue={this.state.zipCode}
                                         addonBefore={<span className="fa fa-barcode"></span>}
-                                    placeholder="Zip Code*" onChange={this.onZipCodeChange.bind(this)}/>
+                                    placeholder="Zip Code*" required onChange={this.onZipCodeChange.bind(this)}/>
                                 </div>
                             </Col>
                         </Row>

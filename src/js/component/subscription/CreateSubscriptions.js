@@ -13,91 +13,40 @@ class CreateSubscriptions extends Component {
 
     constructor(props){
         super(props);
-        this.count = 1;
         this.state = {
-            subscriptionName: '',
-            isDuplicate: false,
-            selectedProducts:{
-                1:{}
-            }
+            subscriptionName: null
+
         }
     }
 
-    onAddProduct(){
-        this.count++;
-        this.state.selectedProducts[this.count] = {};
-        this.setState({selectedProducts:this.state.selectedProducts});
-    }
 
-    productDeleted(count){
-        delete this.state.selectedProducts[count];
-        this.setState({selectedProducts:this.state.selectedProducts});
+    onAddProduct(){
+        this.props.subscriptionAction.addNewSubscription();
     }
 
     onSubscriptionNameChange(e) {
-        this.setState({subscriptionName: e.target.value,status:'success'});
-    }
-
-    productSelected(rowNumber, product){
-        if(this.state.subscriptionName === ''){
-            this.setState({status:'error'});
-        }
-        else {
-            this.setState({status:'success'});
-        }
-        var productDescription = null;
-        _.each(this.props.products, prod=>{
-            if(prod.name == product){
-                productDescription = prod.description;
-            }
-        });
-
-        this.state.selectedProducts[rowNumber].product = product;
-        this.state.selectedProducts[rowNumber].description = productDescription;
-        this.setState({selectedProducts: this.state.selectedProducts});
-    }
-
-    planSelected(rowNumber, plan){
-        this.state.selectedProducts[rowNumber].plan = plan;
-        this.setState({selectedProducts: this.state.selectedProducts});
-    }
-
-    isDuplicateProduct(value){
-        this.setState({isDuplicate: value});
-    }
-
-    createSubscriptions(){
-
+       this.setState({subscriptionName:e.target.value});
     }
 
     render() {
-        var rowCount = _.keys(this.state.selectedProducts).length;
 
-        var selectedProductComps = _.map(_.keys(this.state.selectedProducts),(rowNumber)=>{
-            return <AddProductRow key={rowNumber}
-                           rowCount={rowCount}
-                           rowNumber={rowNumber}
-                           productSelected={this.productSelected.bind(this)}
-                           planSelected={this.planSelected.bind(this)}
-                           selectedProducts={this.state.selectedProducts}
-                           isDuplicateProduct={this.isDuplicateProduct.bind(this)}
-                           productDeleted={this.productDeleted.bind(this,rowNumber)}/>
+        var {selectedProducts} = this.props;
+
+
+
+        var selectedProductComps = _.map(_.keys(selectedProducts),(rowNumber)=>{
+            return <AddProductRow   key={rowNumber}
+                                    rowNumber={rowNumber}/>
         });
 
-        var disabled = false;
-        var registerDisabled = false;
-
-        _.each(this.state.selectedProducts, (data)=>{
-            if(!data.product || !data.plan || !this.state.subscriptionName || this.state.isDuplicate){
-                disabled = true;
-                registerDisabled = true;
+        var addBtnDisabled = false, registerBtnDisabled=false;
+         _.each(selectedProducts, (data)=>{
+            if(!data.product || !data.plan || !this.state.subscriptionName ){
+                addBtnDisabled = true;
+                registerBtnDisabled = true;
             }
 
         });
-
-        if(this.state.isDuplicate == false && (Object.keys(this.state.selectedProducts).length == this.props.products.length)){
-            disabled = true;
-        }
 
         return (
             <Grid>
@@ -116,11 +65,6 @@ class CreateSubscriptions extends Component {
                                     <Col xs={12} sm={12} md={6}>
                                         <Input  type="text" label="Subscription Name"
                                                 placeholder="Subscription Name*"
-                                                bsStyle={this.state.status}
-                                                hasFeedback
-                                                ref="input"
-                                                groupClassName="group-class"
-                                                labelClassName="label-class"
                                                 onChange={this.onSubscriptionNameChange.bind(this)}/>
                                     </Col>
                                 </Row>
@@ -129,15 +73,14 @@ class CreateSubscriptions extends Component {
                                 <Row>
                                     <Button bsStyle="success" className="pull-right right-buffer"
                                             onClick={this.onAddProduct.bind(this)}
-                                            disabled={disabled}>
+                                            disabled={addBtnDisabled}>
                                             <Glyphicon glyph="plus"/> Add More
                                     </Button>
                                 </Row>
                                 {selectedProductComps}
                                 <Row>
                                     <Button bsStyle="primary" className="pull-right right-buffer"
-                                            disabled={registerDisabled}
-                                            onClick={this.createSubscriptions.bind(this)}>
+                                            disabled={registerBtnDisabled}>
                                             Register
                                     </Button>
                                 </Row>
@@ -155,10 +98,11 @@ class CreateSubscriptions extends Component {
 
 
 const mapStateToProps = (state) => ({
-    products: state.subscription.productList,
-    plans: state.subscription.paymentPlans,
+    selectedProducts: state.subscription.selectedProducts
 });
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+    subscriptionAction:bindActionCreators(subscriptionActionCreators,dispatch)
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateSubscriptions);

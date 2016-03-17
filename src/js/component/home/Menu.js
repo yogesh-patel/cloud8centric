@@ -1,10 +1,3 @@
-/**
- * Copyright (c) 2016-present, SYNERZIP SOFTECH PVT, LTD.
- * All rights reserved.
- *
- * Created by nikhila on 26/02/16.
- */
-
 'use strict';
 
 import React, {Component,View} from 'react';

@@ -92,7 +92,6 @@ class ForgotPassword extends Component {
                                                             </Col>
                                                         </Row>
                                                     </Grid>
-
                                                 </Col>
                                             </Row>
                                         </form>
@@ -119,4 +118,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ForgotPassword);
-

@@ -8,13 +8,45 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {Element} from 'react-scroll';
 
-class ForgotMessage extends Component {
+class SignUpSuccess extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            emailError: ''
+        };
+    }
+
+    gotoForgotMessagePage(e) {
+        e.preventDefault();
+        this.props.appActions.showForgotMessage();
+        this.setState({selectedOption: 'forgotMessage'});
+    }
 
     gotoLoginPage(e) {
-        //this.props.routeDispatch(push("login"));
         e.preventDefault();
         this.props.appActions.showLogin();
         this.setState({selectedOption: 'login'});
+    }
+
+    authenticateEmail(e) {
+        if (this.state.email == "") {
+            this.setState({emailError: "Email is mandatory"});
+            return;
+        }
+        else if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email))) {
+            this.setState({emailError: "You have entered an invalid email address!"});
+            return;
+        }
+        else {
+            this.props.appActions.showForgotMessage();
+        }
+    }
+
+    onEmailChange(e) {
+        this.setState({email: e.target.value});
+        this.setState({emailError: (e.target.value !== "") ? "" : "Please enter email"});
     }
 
     render() {
@@ -39,14 +71,24 @@ class ForgotMessage extends Component {
                                                     <Grid>
                                                         <Row>
                                                             <Col xs={12}>
-                                                                <div className="forgot-password-message">
-                                                                    We have sent you a reset email to the email address you have on file for your account.</div>
+                                                                <Input type="text"
+                                                                       addonBefore={<Glyphicon glyph="user" />}
+                                                                       placeholder="Email"
+                                                                       onChange={this.onEmailChange.bind(this)}/>
+                                                            </Col>
+                                                        </Row>
+                                                        <Row>
+                                                            <Col xs={12}>
+                                                                <div className='txt-danger'>
+                                                                    {this.state.emailError}</div>
                                                             </Col>
                                                         </Row>
                                                         <Row>
                                                             <Col smOffset={3} xs={12} sm={6}>
-                                                                <div className="forgot-password  text-center"
-                                                                     onClick={this.gotoLoginPage.bind(this)}>Go to login page</div>
+                                                               <div> <div className="signup-button pointer"
+                                                                     onClick={this.authenticateEmail.bind(this)}>
+                                                                    Submit
+                                                                </div><div className="forgot-password  text-center" onClick={this.gotoLoginPage.bind(this)}>Back to login</div></div>
                                                             </Col>
                                                         </Row>
                                                     </Grid>
@@ -58,10 +100,13 @@ class ForgotMessage extends Component {
                             </div>
                         </Jumbotron>
                     </Row>
+
                 </Grid>
             </Element>
+
         )
     }
+
 }
 ;
 
@@ -72,8 +117,4 @@ const mapDispatchToProps = (dispatch) => ({
     routeDispatch:dispatch
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ForgotMessage);
-
-/**
- * Created by sonalb on 3/14/2016.
- */
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpSuccess);

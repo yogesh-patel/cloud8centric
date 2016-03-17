@@ -284,7 +284,7 @@ a.btn-xl{
     behavior: url(PIE.htc); /* remove if you don't care about IE8 */
 }
 
-.type1 {
+.white-circle-color {
     width: 30px;
     height: 30px;
     background: white;
@@ -303,10 +303,10 @@ a.btn-xl{
   padding: 20px 40px;
 }
 
-.type2 {
+.green-circle-color {
     width: 30px;
     height: 30px;
-    background: green;
+    background: #449D44;
     margin: 0 auto;
     border: 3px solid black;
 }
@@ -633,6 +633,13 @@ a.btn-xl{
   z-index: 9;
   font-size: 15px;
   color: #a94442;
+}
+.blue-circle-color {
+    width: 30px;
+    height: 30px;
+    background: #46b8da;
+    margin: 0 auto;
+    border: 3px solid black;
 }
 
 .duplicate-product{

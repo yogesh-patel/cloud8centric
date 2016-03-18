@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, View} from 'react';
-import {Grid, Row, Col,Jumbotron,Glyphicon,Panel,Input} from 'react-bootstrap';
+import {Grid, Row, Col,Jumbotron,Button,Glyphicon,Panel,Input} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Element} from 'react-scroll';
 import { connect } from 'react-redux';
@@ -64,28 +64,13 @@ class Step3 extends Component {
                 roles: ["AccountOwner"]
             }
         }
-
         this.props.signupActions.step_3_Data(step3Data);
         this.props.signupActions.submitSignupForm(signupInfo);
     }
 
     onBack(e){ 
         e.preventDefault();
-        var {step_2_data,userinfo} = this.props;
         this.props.signupActions.onBackClick("step2");
-        var step3Data = {
-            organizationName:step_2_data.organizationName,
-            organizationURL:step_2_data.organizationURL,
-            phoneNumber:step_2_data.phoneNumber,
-            city:this.state.city,
-            province:this.state.province,
-            zipCode:this.state.zipCode,
-            country:this.state.country,
-            addressLine1:this.state.addressLine1,
-            addressLine2:this.state.addressLine2,
-            addressLine3:this.state.addressLine3,
-        }
-        this.props.signupActions.step_3_Data(step3Data);
     }
 
     onCountryChange(e) {
@@ -114,6 +99,23 @@ class Step3 extends Component {
 
     onAddressLine3Change(e) {
         this.setState({addressLine3: e.target.value});
+    }
+
+    componentWillUnmount(){
+        var {step_2_data} = this.props;
+        var step3Data = {
+            organizationName:step_2_data.organizationName,
+            organizationURL:step_2_data.organizationURL,
+            phoneNumber:step_2_data.phoneNumber,
+            city:this.state.city,
+            province:this.state.province,
+            zipCode:this.state.zipCode,
+            country:this.state.country,
+            addressLine1:this.state.addressLine1,
+            addressLine2:this.state.addressLine2,
+            addressLine3:this.state.addressLine3,
+        }
+        this.props.signupActions.onComponentRemoved(step3Data);
     }
 
     render() {
@@ -206,14 +208,15 @@ class Step3 extends Component {
                         <Row>
                         <Col xs={12} sm={6}>
 
-                            <button type= "submit" className="back-button pointer" onClick={this.onBack.bind(this)}>
-                                Back
-                            </button>
+                            <Button bsStyle="warning" bsSize="large" className="full-width"
+                                onClick={this.onBack.bind(this)}>
+                                BACK
+                            </Button>
                         </Col>
                         <Col xs={12} sm={6}>
-                            <button type= "submit" className="next-button pointer">
-                                Submit
-                            </button>
+                            <Button bsStyle="primary" type="submit" bsSize="large" className="full-width">
+                                SUBMIT
+                            </Button>
                         </Col>
                         </Row>
                     </Col>

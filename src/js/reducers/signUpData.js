@@ -69,6 +69,11 @@ export default createReducer(initialState, {
         newState.step_3_Status = true;
         return newState;
     },
+    'DATA_ADDED_ON_BACK_CLICK':(state,payload)=>{
+        var newState = _.cloneDeep(state);
+        newState.signupInfo.organizationInfo = payload;
+        return newState;
+    },
     'SIGNUP_USER_FAILURE':(state,payload)=>{
         var newState = _.cloneDeep(state);
         newState.statusText = payload;

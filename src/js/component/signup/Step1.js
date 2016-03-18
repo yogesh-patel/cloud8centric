@@ -136,9 +136,9 @@ class Step1 extends Component {
                                 </Row>
                                 <Row>
                                     <Col xs={12}>
-                                        <button type= "submit" className="next-button pointer">
-                                            Next
-                                        </button>
+                                        <Button bsStyle="primary" bsSize="large" type= "submit" className="full-width">
+                                            NEXT
+                                        </Button>
                                     </Col>
                                 </Row>
                         </Col>

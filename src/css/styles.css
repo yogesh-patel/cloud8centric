@@ -631,7 +631,6 @@ a.btn-xl{
     margin: 0 auto;
     border: 3px solid black;
 }
-
 .duplicate-product{
     color: #a94442;
     margin-bottom: 10px;
@@ -655,4 +654,16 @@ a.btn-xl{
     text-align: center;
     opacity: 0.3;
     font-size: 30px;
+}
+
+.successfully-msg{
+    background-image: url("../../img/true-sign.png");
+    background-repeat: no-repeat;
+    padding: 0 0 4px 41px;
+    width: 325px;
+    margin: 0 auto;
+}
+
+.login-button-link{
+    margin-top: 15px;
 }

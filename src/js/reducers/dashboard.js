@@ -17,6 +17,7 @@ export default createReducer(initialState, {
         });
     },
     'HIDE_PRODUCTS': (state, payload) => {
+        console.log("----------->>>>>>>>HIDE_PRODUCTS");
         return Object.assign({}, state, {
             showProducts:false
         });

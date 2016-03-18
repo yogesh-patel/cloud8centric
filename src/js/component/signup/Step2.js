@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, View} from 'react';
-import {Grid, Row, Col,Jumbotron,Glyphicon,Panel,Input} from 'react-bootstrap';
+import {Grid, Row, Col,Jumbotron,Button,Glyphicon,Panel,Input} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Element} from 'react-scroll';
 import { connect } from 'react-redux';
@@ -32,6 +32,22 @@ class Step2 extends Component {
                 phoneNumber:this.state.phoneNumber
             });
         }
+    }
+
+    componentWillUnmount(){
+        var{step_2_data} = this.props;
+        this.props.empActions.onComponentRemoved({
+            organizationName:this.state.organizationName,
+            organizationURL:this.state.organizationURL,
+            phoneNumber:this.state.phoneNumber,
+            city:step_2_data.city,
+            province:step_2_data.province,
+            zipCode:step_2_data.zipCode,
+            country:step_2_data.country,
+            addressLine1:step_2_data.addressLine1,
+            addressLine2:step_2_data.addressLine2,
+            addressLine3:step_2_data.addressLine3,
+        });
     }
 
     onBack(e){ 
@@ -94,14 +110,15 @@ class Step2 extends Component {
                             </Row>
                             <Row>
                                 <Col xs={6} sm={6} md={6} >
-                                    <button type= "submit" className="back-button pointer" onClick={this.onBack.bind(this)}>
-                                        Back
-                                    </button>
+                                    <Button bsStyle="warning" bsSize="large" className="full-width"
+                                        onClick={this.onBack.bind(this)}>
+                                        BACK
+                                    </Button>
                                 </Col>
                                 <Col xs={6} sm={6} md={6} >
-                                    <button type= "submit" className="next-button pointer">
-                                        Next
-                                    </button>
+                                    <Button type="submit" bsStyle="primary" bsSize="large" className="full-width">
+                                        NEXT
+                                    </Button>
                                 </Col>
                             </Row>
                     </Col>

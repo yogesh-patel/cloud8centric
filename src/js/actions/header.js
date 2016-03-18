@@ -15,17 +15,13 @@ export function hideNavigationMenu(){
 }
 
 export function showProducts(){
-    return (
-    {
+    return{
         type:'SHOW_PRODUCTS'
     }
-    )
 }
 
 export function hideProducts(){
-    return (
-    {
+    return{
         type:'HIDE_PRODUCTS'
     }
-    )
 }

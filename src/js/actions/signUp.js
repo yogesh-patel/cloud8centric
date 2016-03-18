@@ -52,6 +52,15 @@ export function onBackClick(circleStatus){
     }
 }
 
+export function onComponentRemoved(data){
+    return (dispatch)=>{
+        dispatch( {
+            type:'DATA_ADDED_ON_BACK_CLICK',
+            payload:data
+        });
+    }
+}
+
 export function submitSignupForm(signupData){
     return (dispatch)=>{
         dispatch({type:'SIGNUP_USER_REQUEST'});
@@ -59,14 +68,12 @@ export function submitSignupForm(signupData){
         post(endPointURL,signupData)
         .then((response)=>{
             dispatch({type:'SIGNUP_USER_SUCCESS'});
-            // dispatch({type:'SHOW_LOGIN'});
             dispatch({type:'SHOW_SIGN_UP_SUCCESS_COMP'});
         }).catch(error => {
             dispatch({
                 type:'SIGNUP_USER_FAILURE',
                 payload: error.message
             });
-            //dispatch({type:'SHOW_SIGN_UP_SUCCESS_COMP'});
         })
     }
 }

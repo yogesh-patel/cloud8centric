@@ -24,6 +24,7 @@ class CommonHeader extends Component{
 		this.props.appActions.cleanReducer();
 		this.props.authActions.logout()
 	}
+
 	onProductSelected(e){
 		e.preventDefault();
 		this.props.headerActions.showProducts();

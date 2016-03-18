@@ -19,7 +19,6 @@ class CreateSubscriptions extends Component {
         }
     }
 
-
     onAddProduct(){
         this.props.subscriptionAction.addNewSubscription();
     }
@@ -30,7 +29,7 @@ class CreateSubscriptions extends Component {
 
     render() {
 
-        var {selectedProducts} = this.props;
+        var {selectedProducts, productList} = this.props;
 
 
 
@@ -41,12 +40,16 @@ class CreateSubscriptions extends Component {
 
         var addBtnDisabled = false, registerBtnDisabled=false;
          _.each(selectedProducts, (data)=>{
-            if(!data.product || !data.plan || !this.state.subscriptionName ){
+            if(!data.product || !data.plan || data.plan == 'select' || data.product == 'select' || !this.state.subscriptionName || data.disabled){
                 addBtnDisabled = true;
                 registerBtnDisabled = true;
             }
 
         });
+
+        if(Object.keys(selectedProducts).length == productList.length){
+            addBtnDisabled = true;
+        }
 
         return (
             <Grid>
@@ -98,7 +101,8 @@ class CreateSubscriptions extends Component {
 
 
 const mapStateToProps = (state) => ({
-    selectedProducts: state.subscription.selectedProducts
+    selectedProducts: state.subscription.selectedProducts,
+    productList: state.subscription.productList
 });
 
 const mapDispatchToProps = (dispatch) => ({

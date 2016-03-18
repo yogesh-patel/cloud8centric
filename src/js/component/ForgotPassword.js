@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, View} from 'react';
-import {Grid, Row, Col,Jumbotron,Glyphicon,Input} from 'react-bootstrap';
+import {Grid, Row, Col, Jumbotron, Glyphicon, Input, Button} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import * as appActionCreators from '../actions/app';
 import { bindActionCreators } from 'redux';
@@ -80,15 +80,22 @@ class ForgotPassword extends Component {
                                                         <Row>
                                                             <Col xs={12}>
                                                                 <div className='txt-danger'>
-                                                                    {this.state.emailError}</div>
+                                                                    {this.state.emailError}
+                                                                </div>
                                                             </Col>
                                                         </Row>
                                                         <Row>
-                                                            <Col smOffset={3} xs={12} sm={6}>
-                                                               <div> <div className="signup-button pointer"
-                                                                     onClick={this.authenticateEmail.bind(this)}>
-                                                                    Submit
-                                                                </div><div className="forgot-password  text-center" onClick={this.gotoLoginPage.bind(this)}>Back to login</div></div>
+                                                            <Col xs={12} sm={12}>
+                                                                <div>
+                                                                    <Button bsStyle="primary" bsSize="large"
+                                                                            className="full-width"
+                                                                            onClick={this.authenticateEmail.bind(this)}>
+                                                                        SUBMIT
+                                                                    </Button>
+                                                                    <div className="forgot-password  text-center" onClick={this.gotoLoginPage.bind(this)}>
+                                                                        Back to login
+                                                                    </div>
+                                                                </div>
                                                             </Col>
                                                         </Row>
                                                     </Grid>

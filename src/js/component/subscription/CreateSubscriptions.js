@@ -27,6 +27,11 @@ class CreateSubscriptions extends Component {
        this.setState({subscriptionName:e.target.value});
     }
 
+    createSubscriptions(){
+        this.props.subscriptionAction.createNewSubscription();
+    }
+
+
     render() {
 
         var {selectedProducts, productList} = this.props;
@@ -83,6 +88,7 @@ class CreateSubscriptions extends Component {
                                 {selectedProductComps}
                                 <Row>
                                     <Button bsStyle="primary" className="pull-right right-buffer"
+                                            onClick={this.createSubscriptions.bind(this)}
                                             disabled={registerBtnDisabled}>
                                             Register
                                     </Button>

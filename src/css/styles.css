@@ -647,13 +647,23 @@ a.btn-xl{
 .subscription-status-header{
     margin-top: 7px;
 }
+
+.no-record-found-block{
+    margin-top: 40px;
+    height: 80px;
+    text-align: center;
+    opacity: 0.3;
+    font-size: 30px;
+}
+
 .successfully-msg{
-    background-image: url("../../../../img/true-sign.png");
+    background-image: url("../../img/true-sign.png");
     background-repeat: no-repeat;
     padding: 0 0 4px 41px;
     width: 325px;
     margin: 0 auto;
 }
+
 .login-button-link{
     margin-top: 15px;
 }

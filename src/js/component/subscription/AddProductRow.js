@@ -1,6 +1,3 @@
-/**
- * Created by synerzip on 12/03/16.
- */
 'use strict';
 
 import React, {Component, View} from 'react';
@@ -21,6 +18,7 @@ class AddProductRow extends React.Component{
     }
 
     onProductSelected(e){
+
         this.state.product = e.target.value;
         this.setState({product: e.target.value});
         this.props.subscriptionAction.productSelected(this.props.rowNumber, e.target.value);
@@ -28,31 +26,34 @@ class AddProductRow extends React.Component{
     }
 
     onPlanSelected(e){
+
         this.setState({plan: e.target.value});
         this.props.subscriptionAction.planSelected(this.props.rowNumber, e.target.value);
 
     }
 
     onProductDeleted(){
+
         this.props.subscriptionAction.productDeleted(this.props.rowNumber);
+
     }
 
 
     render(){
 
-        var {productList, paymentPlans, selectedProducts,rowNumber} = this.props;
+        var {productList, productTierList, selectedProducts,rowNumber} = this.props;
         let rowCount = _.keys(selectedProducts).length;
         let errorMessage = "";
 
         let productsDropDownValues = _.map(productList, (product) => {
             return (
-                <option key={product.productID} value={product.name}>{product.name}</option>
+                <option key={product.id} value={product.name}>{product.name}</option>
             );
         });
 
-        let plandDropDownValues = _.map(paymentPlans, (plan) => {
+        let plandDropDownValues = _.map(productTierList, (plan) => {
             return (
-                <option key={plan.planID} value={plan.name}>{plan.name}</option>
+                <option key={plan.id} value={plan.name}>{plan.name}</option>
             );
         });
 
@@ -78,13 +79,13 @@ class AddProductRow extends React.Component{
                     <div className="duplicate-product">{errorMessage}</div>
                 </Col>
                 <Col xs={12} sm={5} md={4}>
-                    <Input  type="select" label="Select Product Tire"
-                            placeholder="Select Product Tire"
+                    <Input  type="select" label="Select Product Tier"
+                            placeholder="Select Product Tier"
                             value={this.state.plan}
                             className="subscription-product-inputs"
                             disabled={selectedProducts[rowNumber].disabled}
                             onChange={this.onPlanSelected.bind(this)}>
-                        <option value="select">Select Product Tire</option>
+                        <option value="select">Select Product Tier</option>
 
                         {plandDropDownValues}
 
@@ -118,7 +119,7 @@ class AddProductRow extends React.Component{
 
 const mapStateToProps = (state) => ({
     productList: state.subscription.productList,
-    paymentPlans: state.subscription.paymentPlans,
+    productTierList: state.subscription.productTierList,
     selectedProducts: state.subscription.selectedProducts
 });
 

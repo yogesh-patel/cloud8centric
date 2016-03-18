@@ -3,7 +3,7 @@ import { push } from 'redux-router';
 import { get } from './common';
 import _ from 'lodash';
 
-let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS, ADD_NEW_SUBSCRIPTION, PRODUCT_SELECTED, SUBSCRIPTIONS_NAME_ADDED, PLAN_SELECTED, PRODUCT_DELETED} = constants;
+let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS, ADD_NEW_SUBSCRIPTION, PRODUCT_SELECTED, SUBSCRIPTIONS_NAME_ADDED, PLAN_SELECTED, PRODUCT_DELETED, CREATE_SUBSCRIPTION, PRODUCTS_AND_PALNS_RECEIVED} = constants;
 
 export function fetchSubscriptions(organizationId){
 
@@ -18,11 +18,13 @@ export function fetchSubscriptions(organizationId){
             var contents = response.content;
 
             _.each(contents,(subscription)=>{
-                subscriptionObject[subscription.subscriptionOption.product.id] = {
-                    id:subscription.subscriptionOption.product.id,
-                    name:subscription.subscriptionOption.product.name,
-                    detail:null,
-                    status:'Ready'
+                if(subscriptionObject[subscription.subscriptionOption]){
+                    subscriptionObject[subscription.subscriptionOption.product.id] = {
+                        id:subscription.subscriptionOption.product.id,
+                        name:subscription.subscriptionOption.product.name,
+                        detail:null,
+                        status:'Ready'
+                    }
                 }
             });
 
@@ -71,6 +73,19 @@ export function fetchProductsAndPlans(){
 
     return(dispatch) => {
         dispatch({type:'FETCH_PRODUCTS_AND_PLANS'});
+        var endPointURL = '/api/v1/products';
+
+        get(endPointURL)
+        .then((response)=>{
+
+            dispatch({type:'PRODUCTS_AND_PALNS_RECEIVED',
+                payload:{
+                    productList: response.content
+                }
+            });
+
+        })
+
         dispatch(push("dashboard/subscriptions/create"));
     }
 
@@ -115,6 +130,16 @@ export function productDeleted(rowNumber){
         payload: {
             rowNumber: rowNumber,
         }
+    }
+
+}
+
+export function createNewSubscription(){
+
+    return(dispatch) => {
+        dispatch({type:'CREATE_SUBSCRIPTION'});
+        // API call for creating subscription
+        dispatch(push("dashboard/subscriptions"));
     }
 
 }

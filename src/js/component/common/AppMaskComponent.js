@@ -1,6 +1,3 @@
-/**
- * Created by synerzip on 12/03/16.
- */
 'use strict';
 
 import React, {Component, View} from 'react';

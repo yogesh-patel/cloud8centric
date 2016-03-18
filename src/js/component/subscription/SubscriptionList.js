@@ -24,12 +24,22 @@ class SubscriptionList extends Component {
 
     render() {
         let {subscriptionList} = this.props;
-        let subscriptionDetails = _.map(_.keys(subscriptionList), (subscriptionId) => {
-            var subscription = subscriptionList[subscriptionId];
-            return (
-                <SubscriptionItem subscription={subscription} key={subscription.id} />
-            );
-        });
+        let subscriptionDetails = null;
+
+        if(_.size(subscriptionList) > 0){
+            subscriptionDetails = _.map(_.keys(subscriptionList), (subscriptionId) => {
+                var subscription = subscriptionList[subscriptionId];
+                return (
+                    <SubscriptionItem subscription={subscription} key={subscription.id} />
+                );
+            });
+        }
+
+        if(subscriptionDetails === null){
+            subscriptionDetails = <div className="subscriptions-table no-record-found-block">No Subscriptions found</div>
+        }
+
+
         return (
             <Grid>
                 <Row>

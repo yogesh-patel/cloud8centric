@@ -129,4 +129,14 @@ export default createReducer(initialState, {
     'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
         return _.cloneDeep(initialState);
     },
+    'FETCH_PRODUCTS_AND_PLANS': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:true
+        });
+    },
+    'PRODUCTS_AND_PALNS_RECEIVED': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:false
+        });
+    },
 });

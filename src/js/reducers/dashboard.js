@@ -1,6 +1,3 @@
-/**
- * Created by synerzip on 12/03/16.
- */
 import {createReducer} from '../utils';
 import {SHOW_LOGIN} from '../constants';
 import {pushState} from 'redux-router';

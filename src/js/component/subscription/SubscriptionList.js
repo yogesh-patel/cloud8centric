@@ -51,10 +51,10 @@ class SubscriptionList extends Component {
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <div className="subscription-table">
-                            <div className="subscription-table-header">
+                            <div className="subscription-table-header text-bold">
                                 <div className="subscriptions-table-serial-no">Serial No.</div>
                                 <div className="subscriptions-table-name">Subscription Name</div>
-                                <div className="subscription-table-status">Subscription Status</div>
+                                <div className="subscription-table-status subscription-status-header">Subscription Status</div>
                                 <div className="clear-both"/>
                             </div>
 

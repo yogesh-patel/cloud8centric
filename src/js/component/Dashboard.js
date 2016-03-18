@@ -20,7 +20,7 @@ class Dashboard extends Component {
                 <CommonHeader />
                 <LeftNavigation />
 
-                <div style={{marginTop:60,marginLeft:leftMargin}}>
+                <div style={{marginTop:60}}>
                     {this.props.children}
                 </div>
                 <div className="container" style={{display:showProducts ? 'block' : 'none'}}>

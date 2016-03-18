@@ -38,11 +38,11 @@ class AddProductRow extends React.Component{
     }
 
 
-
     render(){
 
         var {productList, paymentPlans, selectedProducts,rowNumber} = this.props;
-        var rowCount = _.keys(selectedProducts).length;
+        let rowCount = _.keys(selectedProducts).length;
+        let errorMessage = "";
 
         let productsDropDownValues = _.map(productList, (product) => {
             return (
@@ -55,19 +55,20 @@ class AddProductRow extends React.Component{
                 <option key={plan.planID} value={plan.name}>{plan.name}</option>
             );
         });
-        var errorMessage = "";
-        if(selectedProducts[rowNumber].error){
-            errorMessage = "Duplicate Product...";
-        }
 
+        if(selectedProducts[rowNumber].error){
+            errorMessage = "This product is already selected";
+        }
 
 
         return (
             <Row>
-                <Col xs={12} sm={5} md={4}>
+                <Col xs={12} sm={5} md={4} className="subscription-product-inputs">
                     <Input  type="select" label="Select Product"
                             placeholder="Select Product"
                             value={this.state.product}
+                            className="subscription-product-inputs"
+                            disabled={selectedProducts[rowNumber].disabled}
                             onChange={this.onProductSelected.bind(this)}>
                         <option value="select">Select Product</option>
 
@@ -77,22 +78,32 @@ class AddProductRow extends React.Component{
                     <div className="duplicate-product">{errorMessage}</div>
                 </Col>
                 <Col xs={12} sm={5} md={4}>
-                    <Input type="select" label="Select Payment Plan"
-                           placeholder="Select Payment Plan"
-                           value={this.state.plan}
-                           onChange={this.onPlanSelected.bind(this)}
-                           >
-                        <option value="select">Select Payment Plan</option>
+                    <Input  type="select" label="Select Product Tire"
+                            placeholder="Select Product Tire"
+                            value={this.state.plan}
+                            className="subscription-product-inputs"
+                            disabled={selectedProducts[rowNumber].disabled}
+                            onChange={this.onPlanSelected.bind(this)}>
+                        <option value="select">Select Product Tire</option>
 
                         {plandDropDownValues}
 
                     </Input>
                 </Col>
                 <Col xs={12} sm={5} md={4}>
-                    {rowCount == 1 ? <span> </span> : <Glyphicon glyph="minus subscription-minus-icon pointer" onClick={this.onProductDeleted.bind(this)}/>}
+                    {rowCount == 1 ? <span> </span> :   <Button   bsStyle="danger"
+                                                                bsSize="xsmall"
+                                                                className="subscription-minus-icon"
+                                                                disabled={selectedProducts[rowNumber].disabled}
+                                                                onClick={this.onProductDeleted.bind(this)}
+                                                                title="Delete a product">
+                                                            <Glyphicon glyph="minus" />
+                                                        </Button>}
+
 
                     <span> </span>
-                    <OverlayTrigger trigger={['hover', 'focus']} placement="right"
+                    <OverlayTrigger trigger={['hover', 'focus']}
+                                    placement="right"
                                     overlay={<Popover title="title" id="1">desc</Popover>}>
                         <Glyphicon glyph="question-sign subscription-question-icon pointer"/>
                     </OverlayTrigger>

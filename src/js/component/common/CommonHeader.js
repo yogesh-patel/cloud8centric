@@ -18,7 +18,6 @@ class CommonHeader extends Component{
     }
 
     toggleLeftNavigation(){
-        alert("leftMargin");
         if(this.props.toggleClass == ''){
             this.props.headerActions.showNavigationMenu();
         }
@@ -27,10 +26,10 @@ class CommonHeader extends Component{
         }
     }
 
-    onLogout(){
-        this.props.appActions.cleanReducer();
-        this.props.authActions.logout()
-    }
+	onLogout(){
+		this.props.appActions.cleanReducer();
+		this.props.authActions.logout()
+	}
 
     onProductSelected(e){
         e.preventDefault();

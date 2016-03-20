@@ -18,7 +18,7 @@ export default createReducer(initialState, {
             showProducts:false
         });
     },
-    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+    'REDUCER_CLEAN_SUCCESSFULLY': (state,payload)=>{
         return _.cloneDeep(initialState);
     },
 });

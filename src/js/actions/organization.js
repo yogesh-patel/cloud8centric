@@ -1,7 +1,7 @@
 import { get } from './common';
 import constants from '../constants';
 
-let {FETCH_ORGANIZATIONS, ORGANIZATIONS_RECEIVED} = constants;
+let {FETCH_ORGANIZATIONS, ORGANIZATIONS_RECEIVED, SET_ACTIVE_ORGANIZATION} = constants;
 
 export function fetchOrganizations(organizationId){
 
@@ -14,17 +14,34 @@ export function fetchOrganizations(organizationId){
         .then((response)=>{
 
             let organizationList = response.content;
+
+            // Set first organization as active organization
+            localStorage.setItem('active_organization', organizationList[0]);
+
             dispatch({type:ORGANIZATIONS_RECEIVED,
                 payload: {
-                    organizationList: organizationList
+                    organizationList: organizationList,
+                    activeOrganization: organizationList[0]
                 }
             });
 
-            // Set first organization as active organization
-            let active_organization = organizationList[0];
-            localStorage.setItem('active_organization', active_organization);
-
         })
+    }
+
+}
+
+export function fetchOrganizationDetails(organization){
+
+    return(dispatch) => {
+
+        localStorage.setItem('active_organization', organization);
+
+        dispatch({type:SET_ACTIVE_ORGANIZATION,
+            payload: {
+                activeOrganization: organization
+            }
+        });
+
     }
 
 }

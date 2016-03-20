@@ -130,7 +130,7 @@ export default createReducer(initialState, {
             signupSuccessComponent:true
         });
     },
-    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+    'REDUCER_CLEAN_SUCCESSFULLY': (state,payload)=>{
         return _.cloneDeep(initialState);
     },
     'FETCH_PRODUCTS_AND_PLANS': (state, payload) => {

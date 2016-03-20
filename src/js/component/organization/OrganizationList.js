@@ -5,6 +5,7 @@ import {Grid, Row, Col, Button, Table, Glyphicon, Jumbotron, Well} from 'react-b
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as organizationActionCreators from '../../actions/organization';
+import OrganizationDetails from './OrganizationDetails'
 
 class OrganizationList extends React.Component{
 
@@ -14,18 +15,25 @@ class OrganizationList extends React.Component{
 
     }
 
+    onOrganizationSelected(organization){
+
+        this.props.organizationActions.fetchOrganizationDetails(organization);
+
+    }
+
     render(){
 
-        let { organizationList } = this.props;
+        let { organizationList, activeOrganization } = this.props;
         let organizationListing = _.map(organizationList, (organization) => {
 
             return (
-                <Well key={organization.id}>
+                <Well key={organization.id} onClick={this.onOrganizationSelected.bind(this, organization)}>
                     <p>{organization.organizationName}</p>
                     <p className="normal-font">{organization.organizationURL}</p>
                     <p className="normal-font">{organization.addressLine1}</p>
                 </Well>
             );
+
         });
 
         return(
@@ -38,8 +46,11 @@ class OrganizationList extends React.Component{
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={6} sm={6} md={6} lg={6}>
+                    <Col xs={3} sm={3} md={3}>
                         {organizationListing}
+                    </Col>
+                    <Col xs={9} sm={9} md={9}>
+                        {activeOrganization ? <OrganizationDetails organization={activeOrganization}/> : <span></span>}
                     </Col>
                 </Row>
             </Grid>
@@ -51,7 +62,8 @@ class OrganizationList extends React.Component{
 
 
 const mapStateToProps = (state) => ({
-    organizationList: state.organization.organizationList
+    organizationList: state.organization.organizationList,
+    activeOrganization: state.organization.activeOrganization
 });
 
 const mapDispatchToProps = (dispatch) => ({

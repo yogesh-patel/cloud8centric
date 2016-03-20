@@ -43,7 +43,6 @@ export default createReducer(initialState, {
         });
     },
     'SHOW_FORGOT_MESSAGE': (state, payload) => {
-        console.log(payload);
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,
@@ -92,6 +91,11 @@ export default createReducer(initialState, {
         });
     },
     'SIGNUP_USER_SUCCESS': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:false
+        });
+    },
+    'SIGNUP_USER_FAILURE': (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });

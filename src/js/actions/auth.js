@@ -4,12 +4,11 @@ import config from '../config';
 import { checkHttpStatus, parseJSON } from '../utils';
 import { get } from './common';
 
-let {LOGIN_USER_REQUEST,
-    LOGIN_USER_SUCCESS} = constants;
+let {LOGIN_USER_REQUEST, LOGIN_USER_FAILURE, LOGIN_USER_SUCCESS} = constants;
 
 export function authenticateUser(username, password) {
     return (dispatch) => {
-        dispatch({type: 'LOGIN_USER_REQUEST'});
+        dispatch({type: LOGIN_USER_REQUEST});
 
         var url = 'oauth/token?grant_type=password'
             + '&client_id=' + config.CLIENT_ID
@@ -17,7 +16,7 @@ export function authenticateUser(username, password) {
             + '&username=' + username
             + '&password=' + password;
 
-        return fetch(config.BASE_URL + url, {
+        return fetch('https://localhost:8888/' + url, {
             method: 'post',
             headers: {
                 'Authorization': 'Basic bW9iaWxlOmNlbnRyaWM4'
@@ -40,7 +39,7 @@ export function authenticateUser(username, password) {
                     getOrganizations()
                     .then((orgResponse)=>{
                         dispatch({
-                            type: 'LOGIN_USER_SUCCESS',
+                            type: LOGIN_USER_SUCCESS,
                             payload: {
                                 username: username,
                                 userObject:meResponse,
@@ -68,7 +67,7 @@ export function authenticateUser(username, password) {
                 }
 
                 dispatch({
-                    type: 'LOGIN_USER_FAILURE',
+                    type: LOGIN_USER_FAILURE,
                     payload: {
                         statusText: errorDescription
                     }
@@ -78,12 +77,12 @@ export function authenticateUser(username, password) {
 }
 
 function getMe(){
-    var endPointURL = 'api/v1/me';
+    var endPointURL = 'me';
     return get(endPointURL);
 }
 
 function getOrganizations(){
-    var endPointURL = 'api/v1/organizations';
+    var endPointURL = 'organizations';
     return get(endPointURL);
 }
 
@@ -91,7 +90,7 @@ function getOrganizations(){
 export function emptyStatuxText(){
     return (dispatch) => {
         dispatch({
-            type: 'CLEAR_LOGIN_ERROR_MESSAGE',
+            type: CLEAR_LOGIN_ERROR_MESSAGE,
             payload: {
                 statusText: null
             }
@@ -103,10 +102,10 @@ export function logout() {
     return (dispatch) => {
         localStorage.clear();
         dispatch({
-            type: 'LOG_OUT'
+            type: LOG_OUT
         });
         dispatch({
-            type: 'CLEAR_LOGIN_ERROR_MESSAGE',
+            type: CLEAR_LOGIN_ERROR_MESSAGE,
             payload: {
                 statusText: null
             }

@@ -54,7 +54,6 @@ export function get(nodeURL){
 }
 
 export function post(nodeURL, data) {
-    //get token
     return fetch(config.BASE_URL + nodeURL, {
         method: 'post',
         headers: {

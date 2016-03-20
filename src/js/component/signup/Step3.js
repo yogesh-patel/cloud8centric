@@ -137,20 +137,23 @@ class Step3 extends Component {
                                     <div className='text-danger'>
                                         {this.props.statusText}
                                     </div>
-                                    <Input type="text"
-                                        defaultValue={this.state.addressLine1}
-                                        addonBefore={<span className="fa fa-home"></span>}
-                                           placeholder="Address Line1*" required onChange={this.onAddressLine1Change.bind(this)}/>
+                                    <Input  type="text"
+                                            defaultValue={this.state.addressLine1}
+                                            addonBefore={<span className="fa fa-home"></span>}
+                                            placeholder="Address Line1*"
+                                            required
+                                            onChange={this.onAddressLine1Change.bind(this)}/>
                                </div>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
                                 <div className="login-tbox">
-                                    <Input type="text"
-                                        defaultValue={this.state.addressLine2}
-                                        addonBefore={<span className="fa fa-home"></span>}
-                                           placeholder="Address Line2"  onChange={this.onAddressLine2Change.bind(this)}/>
+                                    <Input  type="text"
+                                            defaultValue={this.state.addressLine2}
+                                            addonBefore={<span className="fa fa-home"></span>}
+                                            placeholder="Address Line2"
+                                            onChange={this.onAddressLine2Change.bind(this)}/>
                                </div>
                             </Col>
                         </Row>
@@ -158,63 +161,73 @@ class Step3 extends Component {
                         <Row>
                             <Col xs={12}>
                                 <div className="login-tbox">
-                                    <Input type="text"
-                                        defaultValue={this.state.addressLine3}
-                                           addonBefore={<span className="fa fa-home"></span>}
-                                           placeholder="Address Line3" onChange={this.onAddressLine3Change.bind(this)}/>
+                                    <Input  type="text"
+                                            defaultValue={this.state.addressLine3}
+                                            addonBefore={<span className="fa fa-home"></span>}
+                                            placeholder="Address Line3"
+                                            onChange={this.onAddressLine3Change.bind(this)}/>
                                </div>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
                                 <div className="login-tbox">
-                                    <Input type="text"
-                                        defaultValue={this.state.city}
-                                        addonBefore={<span className="fa fa-road"></span>}
-                                    placeholder="City*" required onChange={this.onCityChange.bind(this)}/>
+                                    <Input  type="text"
+                                            defaultValue={this.state.city}
+                                            addonBefore={<span className="fa fa-road"></span>}
+                                            placeholder="City*"
+                                            required
+                                            onChange={this.onCityChange.bind(this)}/>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
                                 <div className="login-tbox">
-                                    <Input type="text"
-                                        defaultValue={this.state.province}
-                                        addonBefore={<span className="fa fa-university"></span>}
-                                    placeholder="Province"  onChange={this.onProvinceChange.bind(this)}/>
+                                    <Input  type="text"
+                                            defaultValue={this.state.province}
+                                            addonBefore={<span className="fa fa-university"></span>}
+                                            placeholder="Province"
+                                            onChange={this.onProvinceChange.bind(this)}/>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
                                 <div className="login-tbox">
-                                    <Input type="text"
-                                        defaultValue={this.state.zipCode}
-                                        addonBefore={<span className="fa fa-barcode"></span>}
-                                    placeholder="Zip Code*" required onChange={this.onZipCodeChange.bind(this)}/>
+                                    <Input  type="text"
+                                            defaultValue={this.state.zipCode}
+                                            addonBefore={<span className="fa fa-barcode"></span>}
+                                            placeholder="Zip Code*"
+                                            required
+                                            onChange={this.onZipCodeChange.bind(this)}/>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
                             <Col xs={12}>
                                 <div className="login-tbox">
-                                    <Input type="text"
-                                        defaultValue={this.state.country}
-                                        addonBefore={<span className="fa fa-globe"></span>}
-                                    placeholder="Country*" required onChange={this.onCountryChange.bind(this)}/>
+                                    <Input  type="text"
+                                            defaultValue={this.state.country}
+                                            addonBefore={<span className="fa fa-globe"></span>}
+                                            placeholder="Country*"
+                                            required
+                                            onChange={this.onCountryChange.bind(this)}/>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
                         <Col xs={12} sm={6}>
 
-                            <Button bsStyle="warning" bsSize="large" className="full-width"
-                                onClick={this.onBack.bind(this)}>
+                            <Button bsStyle="warning" bsSize="large"
+                                    className="full-width"
+                                    onClick={this.onBack.bind(this)}>
                                 BACK
                             </Button>
                         </Col>
                         <Col xs={12} sm={6}>
-                            <Button bsStyle="primary" type="submit" bsSize="large" className="full-width">
+                            <Button bsStyle="primary" type="submit" bsSize="large"
+                                    className="full-width">
                                 SUBMIT
                             </Button>
                         </Col>

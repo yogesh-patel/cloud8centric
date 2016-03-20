@@ -3,10 +3,10 @@
 import React, {Component, View} from 'react';
 import {Grid, Row, Col, Jumbotron, Glyphicon, Input, Button} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import * as appActionCreators from '../actions/app';
+import * as appActionCreators from '../../actions/app';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {Element} from 'react-scroll';
+import { Element } from 'react-scroll';
 
 class ForgotPassword extends Component {
 

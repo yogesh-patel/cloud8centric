@@ -3,11 +3,11 @@
 import React, {Component, View} from 'react';
 import {Grid, Row, Col, Jumbotron, Glyphicon, Input, Button} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import * as authActionCreators from '../../actions/auth';
+import * as appActionCreators from '../../actions/app';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as authActionCreators from '../actions/auth';
-import {Element} from 'react-scroll';
-import * as appActionCreators from '../actions/app';
+import { Element } from 'react-scroll';
 import { pushState } from 'redux-router';
 
 class Login extends Component {

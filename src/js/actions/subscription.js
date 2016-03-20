@@ -9,13 +9,14 @@ export function fetchSubscriptions(organizationId){
 
     return(dispatch) => {
         dispatch({type:FETCH_SUBSCRIPTIONS});
-        var endPointURL = 'organizations/'+organizationId+'/subscriptions';
+
+        let endPointURL = 'organizations/'+organizationId+'/subscriptions';
 
         get(endPointURL)
         .then((response)=>{
 
-            var subscriptionObject = {};
-            var contents = response.content;
+            let subscriptionObject = {};
+            let contents = response.content;
 
             _.each(contents,(subscription)=>{
                 if(subscriptionObject[subscription.subscriptionOption]){
@@ -42,7 +43,7 @@ export function getDetail(subscriptionId){
     return(dispatch) => {
         dispatch({type:SUBSCRIPTION_DETAIL_REQUEST_SENT});
 
-        var interval = setInterval(()=>{
+        let interval = setInterval(()=>{
             clearInterval(interval);
             dispatch({type:SUBSCRIPTION_DETAIL_RECEIVED,payload:{
                 subscriptionId:subscriptionId,
@@ -73,7 +74,8 @@ export function fetchProductsAndPlans(){
 
     return(dispatch) => {
         dispatch({type:FETCH_PRODUCTS_AND_PLANS});
-        var endPointURL = 'products';
+
+        let endPointURL = 'products';
 
         get(endPointURL)
         .then((response)=>{

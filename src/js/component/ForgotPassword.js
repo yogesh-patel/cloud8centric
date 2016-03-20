@@ -11,26 +11,33 @@ import {Element} from 'react-scroll';
 class ForgotPassword extends Component {
 
     constructor(props) {
+
         super(props);
         this.state = {
             email: '',
             emailError: ''
         };
+
     }
 
     gotoForgotMessagePage(e) {
+
         e.preventDefault();
         this.props.appActions.showForgotMessage();
         this.setState({selectedOption: 'forgotMessage'});
+
     }
 
     gotoLoginPage(e) {
+
         e.preventDefault();
         this.props.appActions.showLogin();
         this.setState({selectedOption: 'login'});
+
     }
 
     authenticateEmail(e) {
+
         if (this.state.email == "") {
             this.setState({emailError: "Email is mandatory"});
             return;
@@ -42,15 +49,20 @@ class ForgotPassword extends Component {
         else {
             this.props.appActions.showForgotMessage();
         }
+
     }
 
     onEmailChange(e) {
+
         this.setState({email: e.target.value});
         this.setState({emailError: (e.target.value !== "") ? "" : "Please enter email"});
+
     }
 
     render() {
+
         return (
+
             <Element className="splashScreen" name="splashScreen">
                 <Grid fluid>
                     <Row>
@@ -112,10 +124,10 @@ class ForgotPassword extends Component {
             </Element>
 
         )
+
     }
 
-}
-;
+};
 
 const mapStateToProps = (state) => ({});
 

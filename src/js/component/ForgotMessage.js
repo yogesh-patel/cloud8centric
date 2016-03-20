@@ -11,14 +11,17 @@ import {Element} from 'react-scroll';
 class ForgotMessage extends Component {
 
     gotoLoginPage(e) {
-        //this.props.routeDispatch(push("login"));
+
         e.preventDefault();
         this.props.appActions.showLogin();
         this.setState({selectedOption: 'login'});
+
     }
 
     render() {
+
         return (
+
             <Element className="splashScreen" name="splashScreen">
                 <Grid fluid>
                     <Row>
@@ -62,10 +65,12 @@ class ForgotMessage extends Component {
                     </Row>
                 </Grid>
             </Element>
+
         )
+
     }
-}
-;
+
+};
 
 const mapStateToProps = (state) => ({});
 
@@ -75,7 +80,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ForgotMessage);
-
-/**
- * Created by sonalb on 3/14/2016.
- */

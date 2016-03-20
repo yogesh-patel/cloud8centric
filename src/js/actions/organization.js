@@ -7,16 +7,22 @@ export function fetchOrganizations(organizationId){
 
     return(dispatch) => {
         dispatch({type:FETCH_ORGANIZATIONS});
-        var endPointURL = 'organizations';
+
+        let endPointURL = 'organizations';
 
         get(endPointURL)
         .then((response)=>{
 
+            let organizationList = response.content;
             dispatch({type:ORGANIZATIONS_RECEIVED,
                 payload: {
-                    organizationList: response.content
+                    organizationList: organizationList
                 }
             });
+
+            // Set first organization as active organization
+            let active_organization = organizationList[0];
+            localStorage.setItem('active_organization', active_organization);
 
         })
     }

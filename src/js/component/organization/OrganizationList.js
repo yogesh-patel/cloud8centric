@@ -9,12 +9,16 @@ import * as organizationActionCreators from '../../actions/organization';
 class OrganizationList extends React.Component{
 
     componentDidMount(){
+
         this.props.organizationActions.fetchOrganizations();
+
     }
 
     render(){
+
         let { organizationList } = this.props;
         let organizationListing = _.map(organizationList, (organization) => {
+
             return (
                 <Well key={organization.id}>
                     <p>{organization.organizationName}</p>

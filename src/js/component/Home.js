@@ -18,22 +18,29 @@ import { connect } from 'react-redux';
 class Home extends Component {
 
     constructor() {
+
         super();
         this.state = {
             inverseMenu: false
         };
         this.handleScroll = this.handleScroll.bind(this);
+
     }
 
     componentDidMount() {
+
         window.addEventListener('scroll', this.handleScroll);
+
     }
 
     componentWillUnmount() {
+
         window.removeEventListener('scroll', this.handleScroll);
+
     }
 
     handleScroll() {
+
         if(!this.state.inverseMenu &&
             document.body.scrollTop > 50) {
             this.setState({inverseMenu: true});
@@ -41,11 +48,14 @@ class Home extends Component {
             document.body.scrollTop <= 50) {
             this.setState({inverseMenu: false});
         }
+
     }
 
     render() {
+
         var topScreen = null;
         var {homeScreen,loginScreen,forgotPasswordScreen,forgotMessageScreen,signUpScreen,signupSuccessComponent} = this.props;
+
         if(loginScreen){
             topScreen = <Login />;
         }else if(homeScreen){
@@ -68,7 +78,9 @@ class Home extends Component {
         else if(signupSuccessComponent){
             topScreen = <SignUpSuccess />;
         }
+
         return (
+
             <Grid fluid>
                 <Row>
                     <Menu logo='img/logo.png' inverseMenu={this.state.inverseMenu}/>
@@ -84,8 +96,10 @@ class Home extends Component {
                     <HomeFooter />
                 </Row>
             </Grid>
+
         );
     }
+
 }
 
 const mapStateToProps = (state) => ({

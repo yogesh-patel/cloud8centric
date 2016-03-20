@@ -7,10 +7,11 @@ import { get } from './common';
 let {LOGIN_USER_REQUEST, LOGIN_USER_FAILURE, LOGIN_USER_SUCCESS} = constants;
 
 export function authenticateUser(username, password) {
+
     return (dispatch) => {
         dispatch({type: LOGIN_USER_REQUEST});
 
-        var url = 'oauth/token?grant_type=password'
+        let url = 'oauth/token?grant_type=password'
             + '&client_id=' + config.CLIENT_ID
             + '&client_secret=' + config.CLIENT_SECRETE
             + '&username=' + username
@@ -28,9 +29,9 @@ export function authenticateUser(username, password) {
             })
             .then(result => {
 
-                var access_token = result.access_token;
+                let access_token = result.access_token;
                 localStorage.setItem('access_token', access_token);
-                var token_type = result.token_type;
+                let token_type = result.token_type;
                 localStorage.setItem('token_type', token_type);
 
                 getMe()
@@ -56,7 +57,7 @@ export function authenticateUser(username, password) {
 
             }).catch(error=> {
 
-                var errorDescription = '';
+                let errorDescription = '';
 
                 if(error.message == 'Failed to fetch'){
                     errorDescription ='Server is down. Please try again after some time.';
@@ -74,20 +75,26 @@ export function authenticateUser(username, password) {
                 });
             })
     }
+
 }
 
 function getMe(){
-    var endPointURL = 'me';
+
+    let endPointURL = 'me';
     return get(endPointURL);
+
 }
 
 function getOrganizations(){
-    var endPointURL = 'organizations';
+
+    let endPointURL = 'organizations';
     return get(endPointURL);
+
 }
 
 
 export function emptyStatuxText(){
+
     return (dispatch) => {
         dispatch({
             type: CLEAR_LOGIN_ERROR_MESSAGE,
@@ -96,9 +103,11 @@ export function emptyStatuxText(){
             }
         });
     }
+
 }
 
 export function logout() {
+
     return (dispatch) => {
         localStorage.clear();
         dispatch({
@@ -112,4 +121,5 @@ export function logout() {
         });
         dispatch(push(null, "/"));
     }
+
 }

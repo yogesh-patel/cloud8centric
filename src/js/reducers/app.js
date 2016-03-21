@@ -89,6 +89,7 @@ export default createReducer(initialState, {
             homeScreen: false,
             signUpScreen:false,
             organizationDetailScreen:true,
+            organizationDetailItemScreen:false,
             subscriptionDetailScreen:true
         });
     },

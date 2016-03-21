@@ -1,8 +1,7 @@
 import { get, post } from './common';
 import constants from '../constants';
 import { push } from 'redux-router';
-
-let {FETCH_ORGANIZATIONS, ORGANIZATIONS_RECEIVED, SET_ACTIVE_ORGANIZATION} = constants;
+let {FETCH_ORGANIZATIONS, ORGANIZATIONS_RECEIVED,ORGANIZATION_SELECTED} = constants;
 
 export function fetchOrganizations(organizationId) {
 
@@ -31,34 +30,20 @@ export function fetchOrganizations(organizationId) {
             dispatch({type:ORGANIZATIONS_RECEIVED,
                 payload: {
                     organizationList: organizationList,
-                    activeOrganization: organizationList[0]
+                    selectedOrganization: organizationList[0]
                 }
             });
             })
     }
 }
 
-export function selectOrganization(org) {
+export function selectOrganization(organization) {
     return (dispatch)=> {
-        dispatch({
-            type: 'ORGANIZATION_SELECTED',
-            payload: org
-        });
-       // dispatch(push("/dashboard/organizationEdit"));
-        //dispatch(push("/dashboard/organizations"));
-    }
-}
-
-export function fetchOrganizationDetails(organization){
-
-    return(dispatch) => {
-
         localStorage.setItem('active_organization', organization);
 
-        dispatch({type:SET_ACTIVE_ORGANIZATION,
-            payload: {
-                activeOrganization: organization
-            }
+        dispatch({
+            type: 'ORGANIZATION_SELECTED',
+            payload: organization
         });
     }
 }

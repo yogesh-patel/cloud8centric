@@ -15,22 +15,28 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 class SignUp extends Component{
 
   constructor(props){
+
         super(props);
         this.state= {}
+
     }
 
   render(){
+
     var comp = null;
+
     if(this.props.currentStep == 'step1'){
-      comp = <Step1 />;
+        comp = <Step1 />;
     }
     else if(this.props.currentStep == 'step2'){
-      comp = <Step2 />;
+        comp = <Step2 />;
     }
     else if(this.props.currentStep == 'step3'){
-      comp = <Step3 />;
+        comp = <Step3 />;
     }
+
     return(
+
           <Element className="splashScreen" name="splashScreen">
               <Grid fluid>
                   <Row>
@@ -41,26 +47,29 @@ class SignUp extends Component{
                                                        transitionAppearTimeout={500}
                                                        transitionEnter={false}
                                                        transitionLeave={false}>
-                                                          <Grid>
-                                                              <Row className="text-center">
-                                                                <Col md={12}>
-                                                                  <StepStatus/>
-                                                                </Col>
-                                                              </Row>
-                                                              <Row>
-                                                                <Col md={12}>
-                                                                  {comp}
-                                                                </Col>
-                                                              </Row>
-                                                          </Grid>
+                                <Grid>
+                                    <Row className="text-center">
+                                        <Col md={12}>
+                                            <StepStatus/>
+                                        </Col>
+                                    </Row>
+                                    <Row>
+                                        <Col md={12}>
+                                            {comp}
+                                        </Col>
+                                    </Row>
+                                </Grid>
                               </ReactCSSTransitionGroup>
                           </div>
                       </Jumbotron>
                   </Row>
               </Grid>
           </Element>
+
       );
+
     }
+
 }
 
 const mapStateToProps = (state) => ({

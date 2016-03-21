@@ -10,12 +10,16 @@ import { connect } from 'react-redux';
 class Dashboard extends Component {
 
     render() {
+
         var {showProducts,toggleClass} = this.props;
         var leftMargin = 50;
+
         if(toggleClass == 'open'){
             leftMargin = 200;
         }
+
         return (
+
             <div>
                 <CommonHeader />
                 <LeftNavigation />
@@ -27,6 +31,7 @@ class Dashboard extends Component {
                     <Products />
                 </div>
             </div>
+
         );
 
     }

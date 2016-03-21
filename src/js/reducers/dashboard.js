@@ -14,12 +14,11 @@ export default createReducer(initialState, {
         });
     },
     'HIDE_PRODUCTS': (state, payload) => {
-        console.log("----------->>>>>>>>HIDE_PRODUCTS");
         return Object.assign({}, state, {
             showProducts:false
         });
     },
-    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+    'REDUCER_CLEAN_SUCCESSFULLY': (state,payload)=>{
         return _.cloneDeep(initialState);
     },
 });

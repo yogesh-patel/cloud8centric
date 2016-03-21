@@ -4,8 +4,11 @@ import React, {Component,View} from 'react';
 import {Navbar, NavItem, Nav, NavDropdown, MenuItem} from 'react-bootstrap';
 
 class Header extends Component{
+
     render(){
+
         return(
+
             <Navbar inverse fixedTop fluid className={'home-menu inverse-menu'}>
                 <Navbar.Header>
                     <Navbar.Brand>
@@ -19,7 +22,11 @@ class Header extends Component{
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
+
         );
+
     }
+
 }
+
 export default Header;

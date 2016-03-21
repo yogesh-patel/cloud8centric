@@ -3,34 +3,39 @@
 import React, {Component, View} from 'react';
 import {Grid, Row, Col, Jumbotron, Glyphicon, Input, Button} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import * as authActionCreators from '../../actions/auth';
+import * as appActionCreators from '../../actions/app';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as authActionCreators from '../actions/auth';
-import {Element} from 'react-scroll';
-import * as appActionCreators from '../actions/app';
+import { Element } from 'react-scroll';
 import { pushState } from 'redux-router';
 
 class Login extends Component {
 
     constructor(props) {
+
         super(props);
         this.state = {
-            username: 'kevinp',
-            password: 'kevindemo88',
+            username: 'admin',
+            password: 'saastest88',
             usernameError: '',
             passwordError: '',
             invalidError: '',
             displayBox:'block',
             serverErrorMessage: false
         };
+
     }
 
     gotoForgotPasswordPage(e) {
+
         e.preventDefault();
         this.props.appActions.showForgotPassword();
+
     }
 
     authenticate(e) {
+
         e.preventDefault();
         e.stopPropagation();
 
@@ -57,32 +62,40 @@ class Login extends Component {
     }
 
     onUsernameChange(e) {
+
         this.setState({
             username: e.target.value,
             usernameError: (e.target.value !== "") ? "" : "Username is mandatory",
             invalidError: (e.target.value !== "") ? "" : "",
             serverErrorMessage: false
         });
+
         if(e.target.value == '' && this.state.serverErrorMessage){
             this.props.authActions.emptyStatuxText();
         }
+
     }
 
     onPasswordChange(e) {
+
         this.setState({
             password: e.target.value,
             passwordError: (e.target.value !== "") ? "" : "Password is mandatory",
             invalidError: (e.target.value !== "") ? "" : "",
             serverErrorMessage: false
         });
+
         if(e.target.value == '' & this.state.serverErrorMessage){
             this.props.authActions.emptyStatuxText();
         }
+
     }
 
     gotoSignUpPage(e) {
+
         e.preventDefault();
         this.props.appActions.showSignUp();
+
     }
 
 
@@ -98,6 +111,7 @@ class Login extends Component {
         }
 
         return (
+
             <Element className="splashScreen" name="splashScreen">
                 <Grid fluid>
                     <Row>
@@ -181,6 +195,7 @@ class Login extends Component {
             </Element>
 
         )
+
     }
 
 };

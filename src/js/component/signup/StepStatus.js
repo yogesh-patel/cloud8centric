@@ -2,7 +2,6 @@
 
 import React, {Component, View} from 'react';
 import {Grid, Row, Col,Jumbotron,Glyphicon,Input} from 'react-bootstrap';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as SaveStatus from '../../actions/signUp';
@@ -12,27 +11,34 @@ import {Element} from 'react-scroll';
 class StepStatus extends Component {
 
     onStep1(){ 
+
         var {step_1_Status} = this.props;
         if(step_1_Status){
             this.props.empActions.saveStatus("step1");
         }
+
     }
 
     onStep2(){ 
+
         var {step_2_Status} = this.props;
         if(step_2_Status){
             this.props.empActions.saveStatus("step2");
         }
+
     }
 
     onStep3(){ 
+
         var {step_3_Status} = this.props;
         if(step_3_Status){
             this.props.empActions.saveStatus("step3");
         }
+
     }
 
     render() {
+
         var step_1_class = "circleBase white-circle-color";
         var step_2_class = "circleBase white-circle-color";
         var step_3_class = "circleBase white-circle-color";
@@ -64,6 +70,7 @@ class StepStatus extends Component {
         }
 
         return (
+
                 <Row>
                     <Col Col md={6} sm={8} xs={12} smPush={1} lgPush={3} className="signUp-box">
                         <Row>
@@ -90,6 +97,7 @@ class StepStatus extends Component {
                 </Row>
 
         )
+
     }
 
 };

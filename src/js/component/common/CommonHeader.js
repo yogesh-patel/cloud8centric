@@ -10,28 +10,36 @@ import * as appActionCreator from '../../actions/app';
 import {Link, Events,scroller} from 'react-scroll';
 
 class CommonHeader extends Component{
+
     constructor(props){
+
         super(props);
         this.state= {
             productStatus:'Products'
         }
+
     }
 
     toggleLeftNavigation(){
+
         if(this.props.toggleClass == ''){
             this.props.headerActions.showNavigationMenu();
         }
         else if(this.props.toggleClass == 'open'){
             this.props.headerActions.hideNavigationMenu();
         }
+
     }
 
 	onLogout(){
-		this.props.appActions.cleanReducer();
+
+    	this.props.appActions.cleanReducer();
 		this.props.authActions.logout()
-	}
+
+    }
 
     onProductSelected(e){
+
         e.preventDefault();
         if(this.state.productStatus === 'Products'){
             this.setState({productStatus:"Hide Products"})
@@ -49,9 +57,12 @@ class CommonHeader extends Component{
     }
 
     render(){
+
         var productLink = <span onClick={this.onProductSelected.bind(this)}>{this.state.productStatus}</span>;
         var {userObject} = this.props;
+
         return(
+
             <div className="common-header">
                 <Navbar inverse fixedTop fluid className={'home-menu inverse-menu'}>
                     <Navbar.Header>
@@ -79,7 +90,9 @@ class CommonHeader extends Component{
                 </Navbar>
             </div>
         );
+
         }
+
     }
 
 const mapStateToProps = (state) => ({

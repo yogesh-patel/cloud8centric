@@ -11,31 +11,42 @@ import * as appActionCreators from '../../actions/app';
 class Menu extends Component {
 
     constructor(props) {
+
         super(props);
         this.state = {};
+
     }
 
     gotoSignUpPage(e) {
+
         e.preventDefault();
         this.props.appActions.showSignUp();
         this.setState({selectedOption: 'signup'});
+
     }
 
     gotoLoginPage(e) {
+
         e.preventDefault();
         this.props.appActions.showLogin();
         this.setState({selectedOption: 'login'});
+
     }
 
     onProductSelected(){
+
         this.props.appActions.showHome();
+
     }
 
     onOptionSelected(selectedKey) {
+
         this.setState({selectedOption: selectedKey});
+
     }
 
     render() {
+
         let brandImg = (<img style={{marginTop:-10}} src={this.props.logo} alt=""/>);
         let inverseClass = this.props.inverseMenu ? 'inverse-menu' : 'menu';
         let itemColor = this.props.inverseMenu ? '' : '#FFFFFF';
@@ -76,7 +87,9 @@ class Menu extends Component {
                 </Navbar.Collapse>
             </Navbar>
         );
+
     }
+
 }
 
 

@@ -3,7 +3,7 @@
 import React, {Component, View} from 'react';
 import {Grid, Row, Col,Jumbotron,Glyphicon,Input,Alert,Button} from 'react-bootstrap';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import * as appActionCreators from '../actions/app';
+import * as appActionCreators from '../../actions/app';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {Element} from 'react-scroll';
@@ -11,14 +11,17 @@ import {Element} from 'react-scroll';
 class ForgotMessage extends Component {
 
     gotoLoginPage(e) {
-        //this.props.routeDispatch(push("login"));
+
         e.preventDefault();
         this.props.appActions.showLogin();
         this.setState({selectedOption: 'login'});
+
     }
 
     render() {
+
         return (
+
             <Element className="splashScreen" name="splashScreen">
                 <Grid fluid>
                     <Row>
@@ -39,7 +42,7 @@ class ForgotMessage extends Component {
                                                             <Row>
                                                                 <Col xs={12}>
                                                                     <div className="forgot-password-message">
-                                                                        We have sent you a reset email to the email address you have on file for your account.</div>
+                                                                        We have sent you a reset email to the registered email address.</div>
                                                                 </Col>
                                                             </Row>
                                                             <Row>
@@ -62,10 +65,12 @@ class ForgotMessage extends Component {
                     </Row>
                 </Grid>
             </Element>
+
         )
+
     }
-}
-;
+
+};
 
 const mapStateToProps = (state) => ({});
 
@@ -75,7 +80,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ForgotMessage);
-
-/**
- * Created by sonalb on 3/14/2016.
- */

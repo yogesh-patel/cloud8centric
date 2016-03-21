@@ -3,19 +3,20 @@ import { push } from 'redux-router';
 import { get } from './common';
 import _ from 'lodash';
 
-let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS, ADD_NEW_SUBSCRIPTION, PRODUCT_SELECTED, SUBSCRIPTIONS_NAME_ADDED, PLAN_SELECTED, PRODUCT_DELETED, CREATE_SUBSCRIPTION, PRODUCTS_AND_PALNS_RECEIVED} = constants;
+let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS, ADD_NEW_SUBSCRIPTION, PRODUCT_SELECTED, PLAN_SELECTED, PRODUCT_DELETED, CREATE_SUBSCRIPTION, PRODUCTS_AND_PALNS_RECEIVED, SUBSCRIPTIONS_RECEIVED, SUBSCRIPTION_DETAIL_REQUEST_SENT, SUBSCRIPTION_DETAIL_RECEIVED} = constants;
 
 export function fetchSubscriptions(organizationId){
 
     return(dispatch) => {
-        dispatch({type:'FETCH_SUBSCRIPTIONS'});
-        var endPointURL = 'api/v1/organizations/'+organizationId+'/subscriptions';
+        dispatch({type:FETCH_SUBSCRIPTIONS});
+
+        let endPointURL = 'organizations/'+organizationId+'/subscriptions';
 
         get(endPointURL)
         .then((response)=>{
 
-            var subscriptionObject = {};
-            var contents = response.content;
+            let subscriptionObject = {};
+            let contents = response.content;
 
             _.each(contents,(subscription)=>{
                 if(subscriptionObject[subscription.subscriptionOption]){
@@ -28,7 +29,7 @@ export function fetchSubscriptions(organizationId){
                 }
             });
 
-            dispatch({type:'SUBSCRIPTIONS_RECEIVED',
+            dispatch({type:SUBSCRIPTIONS_RECEIVED,
                 payload:subscriptionObject
             });
 
@@ -40,11 +41,11 @@ export function fetchSubscriptions(organizationId){
 export function getDetail(subscriptionId){
 
     return(dispatch) => {
-        dispatch({type:'SUBSCRIPTION_DETAIL_REQUEST_SENT'});
+        dispatch({type:SUBSCRIPTION_DETAIL_REQUEST_SENT});
 
-        var interval = setInterval(()=>{
+        let interval = setInterval(()=>{
             clearInterval(interval);
-            dispatch({type:'SUBSCRIPTION_DETAIL_RECEIVED',payload:{
+            dispatch({type:SUBSCRIPTION_DETAIL_RECEIVED,payload:{
                 subscriptionId:subscriptionId,
                 detail:[
                     {
@@ -72,13 +73,14 @@ export function getDetail(subscriptionId){
 export function fetchProductsAndPlans(){
 
     return(dispatch) => {
-        dispatch({type:'FETCH_PRODUCTS_AND_PLANS'});
-        var endPointURL = '/api/v1/products';
+        dispatch({type:FETCH_PRODUCTS_AND_PLANS});
+
+        let endPointURL = 'products';
 
         get(endPointURL)
         .then((response)=>{
 
-            dispatch({type:'PRODUCTS_AND_PALNS_RECEIVED',
+            dispatch({type:PRODUCTS_AND_PALNS_RECEIVED,
                 payload:{
                     productList: response.content
                 }
@@ -94,7 +96,7 @@ export function fetchProductsAndPlans(){
 export function addNewSubscription() {
 
     return {
-        type: 'ADD_NEW_SUBSCRIPTION'
+        type:ADD_NEW_SUBSCRIPTION
     }
 
 }
@@ -102,7 +104,7 @@ export function addNewSubscription() {
 export function productSelected(rowNumber, productName){
 
     return {
-        type: 'PRODUCT_SELECTED',
+        type:PRODUCT_SELECTED,
         payload: {
             rowNumber: rowNumber,
             productName: productName
@@ -114,7 +116,7 @@ export function productSelected(rowNumber, productName){
 export function planSelected(rowNumber, planName){
 
     return {
-        type: 'PLAN_SELECTED',
+        type:PLAN_SELECTED,
         payload: {
             rowNumber: rowNumber,
             planName: planName
@@ -126,7 +128,7 @@ export function planSelected(rowNumber, planName){
 export function productDeleted(rowNumber){
 
     return {
-        type: 'PRODUCT_DELETED',
+        type:PRODUCT_DELETED,
         payload: {
             rowNumber: rowNumber,
         }
@@ -137,7 +139,7 @@ export function productDeleted(rowNumber){
 export function createNewSubscription(){
 
     return(dispatch) => {
-        dispatch({type:'CREATE_SUBSCRIPTION'});
+        dispatch({type:CREATE_SUBSCRIPTION});
         // API call for creating subscription
         dispatch(push("dashboard/subscriptions"));
     }

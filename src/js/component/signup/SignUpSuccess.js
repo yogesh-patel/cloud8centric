@@ -11,17 +11,23 @@ import {Element} from 'react-scroll';
 class SignUpSuccess extends Component {
 
     constructor(props) {
+
         super(props);
         this.state = {
         };
+
     }
 
     gotoLoginPage() {
+
         this.props.appActions.showLogin();
+
     }
 
     render() {
+
         return (
+
             <Element className="splashScreen" name="splashScreen">
                 <Grid fluid>
                     <Row>
@@ -44,7 +50,7 @@ class SignUpSuccess extends Component {
                                                                 </Col>
                                                             </Row>
                                                             <Row>
-                                                                <Button bsStyle="primary" bsSize="large" type= "submit"
+                                                                <Button bsStyle="primary" bsSize="large"
                                                                     onClick={this.gotoLoginPage.bind(this)}>
                                                                     LOGIN
                                                                 </Button>
@@ -59,15 +65,14 @@ class SignUpSuccess extends Component {
                             </div>
                         </Jumbotron>
                     </Row>
-
                 </Grid>
             </Element>
 
         )
+
     }
 
-}
-;
+};
 
 const mapStateToProps = (state) => ({});
 

@@ -7,7 +7,6 @@ import DashboardHome from './js/component/DashboardHome';
 import SubscriptionList from './js/component/subscription/SubscriptionList';
 import CreateSubscriptions from './js/component/subscription/CreateSubscriptions';
 import OrganizationList from './js/component/organization/OrganizationList';
-import OrganizationDetails from './js/component/organization/OrganizationDetails';
 
     var Routes = (
         <Router>
@@ -20,7 +19,6 @@ import OrganizationDetails from './js/component/organization/OrganizationDetails
                 <Route path="subscriptions" component={SubscriptionList}/>
                 <Route path="subscriptions/create" component={CreateSubscriptions}/>
                 <Route path="organizations" component={OrganizationList}/>
-                <Route path="organizations/edit" component={OrganizationDetails}/>
             </Route>
             </Route>
         </Router>

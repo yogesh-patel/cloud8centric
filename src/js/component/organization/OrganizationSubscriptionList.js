@@ -57,7 +57,6 @@ class OrganizationSubscriptionList extends Component {
             subscriptionDetails = <div className="subscriptions-table no-record-found-block">No Subscriptions found</div>
         }
 
-
         return (
                         <div className="subscription-table">
                             <div className="subscription-table-header text-bold">

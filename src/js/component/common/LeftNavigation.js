@@ -77,14 +77,6 @@ class LeftNavigation extends Component{
                                 <span className="full-nav"> Organizations </span>
                             </a>
                         </li>
-                        <li>
-                            <a className="pointer">
-                                <span className="small-nav" data-toggle="tooltip" data-placement="right" title="Profile">
-                                    <span className="fa fa-user"></span>
-                                </span>
-                                <span className="full-nav"> Profile </span>
-                            </a>
-                        </li>
                     </Nav>
                 </Navbar>
             </div>

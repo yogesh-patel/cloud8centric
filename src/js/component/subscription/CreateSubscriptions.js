@@ -106,7 +106,6 @@ class CreateSubscriptions extends Component {
                         </form>
                     </Col>
                 </Row>
-
             </Grid>
         );
 

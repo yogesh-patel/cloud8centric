@@ -454,7 +454,7 @@ a.btn-xl{
 
 .subscription-question-icon{
     font-size: x-large;
-    top:25px;
+    top:23px;
 }
 
 .status-btn-width {
@@ -668,4 +668,9 @@ a.btn-xl{
 
 .login-button-link{
     margin-top: 15px;
+}
+
+.breadcrumb{
+    margin-top: 51px;
+    margin-left: 50px;
 }

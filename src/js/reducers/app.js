@@ -55,7 +55,6 @@ export default createReducer(initialState, {
         });
     },
     'SHOW_ORGANIZATION_DETAIL': (state, payload) => {
-        console.log(payload);
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,
@@ -68,7 +67,6 @@ export default createReducer(initialState, {
         });
     },
     'SHOW_ORGANIZATION_FORM': (state, payload) => {
-        console.log(payload);
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,
@@ -81,7 +79,6 @@ export default createReducer(initialState, {
         });
     },
     'SHOW_SUBSCRIPTION_DETAIL': (state, payload) => {
-        console.log(payload);
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,

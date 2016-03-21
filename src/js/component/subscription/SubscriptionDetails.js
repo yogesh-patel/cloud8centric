@@ -14,7 +14,7 @@ class SubscriptionDetails extends Component {
     componentDidMount(){
         var {subscription,subscriptionAction} = this.props;
         if(!subscription.detail){
-            subscriptionAction.getDetail(subscription.id);
+            subscriptionAction.getSubscriptionStatus(subscription.id);
         }
 
     }
@@ -55,7 +55,7 @@ class SubscriptionDetails extends Component {
                         </tr>
                         </thead>
                         <tbody>
-                        {rows}
+                            {rows}
                         </tbody>
                     </Table>
                 </Col>

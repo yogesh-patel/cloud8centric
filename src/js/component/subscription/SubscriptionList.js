@@ -12,8 +12,10 @@ import SubscriptionItem from './SubscriptionItem';
 class SubscriptionList extends Component {
 
     componentDidMount(){
+
         var {orgObject} = this.props;
         this.props.subscriptionActions.fetchSubscriptions(orgObject.content[0].id);
+
     }
 
     gotoAddSubscriptions() {
@@ -23,6 +25,7 @@ class SubscriptionList extends Component {
     }
 
     render() {
+
         let {subscriptionList} = this.props;
         let subscriptionDetails = null;
 

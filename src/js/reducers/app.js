@@ -79,7 +79,7 @@ export default createReducer(initialState, {
         });
 
     },
-    'SUBSCRIPTION_DETAIL_RECEIVED': (state, payload) => {
+    'SUBSCRIPTION_STATUS_RECEIVED': (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });
@@ -138,7 +138,7 @@ export default createReducer(initialState, {
             loading:true
         });
     },
-    'PRODUCTS_AND_PALNS_RECEIVED': (state, payload) => {
+    'PRODUCTS_AND_PLANS_RECEIVED': (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });

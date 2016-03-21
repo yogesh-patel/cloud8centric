@@ -1,8 +1,7 @@
 'use strict';
 
 import React, {Component, View} from 'react';
-import {Grid, Row, Col, Button, Table, Glyphicon,
-    Panel, Input,OverlayTrigger,Popover} from 'react-bootstrap';
+import {Grid, Row, Col, Button, Table, Glyphicon, Panel, Input, OverlayTrigger, Popover} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as subscriptionActionCreators from '../../actions/subscription';
@@ -12,31 +11,41 @@ import AddProductRow from './AddProductRow';
 class CreateSubscriptions extends Component {
 
     constructor(props){
+
         super(props);
         this.state = {
             subscriptionName: null
-
         }
+
     }
 
     onAddProduct(){
+
         this.props.subscriptionAction.addNewSubscription();
+
     }
 
     onSubscriptionNameChange(e) {
+
        this.setState({subscriptionName:e.target.value});
+
     }
 
     createSubscriptions(){
-        this.props.subscriptionAction.createNewSubscription();
+
+        let subscriptions = {
+            name: this.state.subscriptionName,
+            products: this.props.selectedProducts
+        }
+
+        this.props.subscriptionAction.createNewSubscription(organization);
+
     }
 
 
     render() {
 
         var {selectedProducts, productList} = this.props;
-
-
 
         var selectedProductComps = _.map(_.keys(selectedProducts),(rowNumber)=>{
             return <AddProductRow   key={rowNumber}
@@ -45,7 +54,7 @@ class CreateSubscriptions extends Component {
 
         var addBtnDisabled = false, registerBtnDisabled=false;
          _.each(selectedProducts, (data)=>{
-            if(!data.product || !data.plan || data.plan == 'select' || data.product == 'select' || !this.state.subscriptionName || data.disabled){
+            if(!data.productName || !data.planName || data.planName == 'select' || data.productName == 'select' || !this.state.subscriptionName || data.disabled){
                 addBtnDisabled = true;
                 registerBtnDisabled = true;
             }

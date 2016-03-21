@@ -75,10 +75,7 @@ class CommonHeader extends Component{
                     <Navbar.Collapse>
                         <Nav pullRight>
                             <NavItem eventKey={1}>
-                                {/*<Link to="products" href="#"
-                                onClick={this.onProductSelected.bind(this)} smooth duration={500}>*/}
                                 {productLink}
-                                {/*</Link>*/}
                             </NavItem>
                             <NavDropdown eventKey={2} title={"Welcome "+userObject.firstName } id="basic-nav-dropdown">
                                 <MenuItem eventKey={2.1}>Profile</MenuItem>

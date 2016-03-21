@@ -12,14 +12,8 @@ import SubscriptionItem from './SubscriptionItem';
 class SubscriptionList extends Component {
 
     componentDidMount(){
-        this.getInitialStateForOrganization(this.props);
-      
-    }
-
-    getInitialStateForOrganization(props) {
-        var {orgObject,selectedOrganization} = props;
-        var organizationID = (selectedOrganization !== undefined) ? selectedOrganization.id : orgObject.content[0].id;
-        this.props.subscriptionActions.fetchSubscriptions(organizationID);
+        var {orgObject} = this.props;
+        this.props.subscriptionActions.fetchSubscriptions(orgObject.content[0].id);
     }
 
     gotoAddSubscriptions() {
@@ -28,18 +22,8 @@ class SubscriptionList extends Component {
 
     }
 
-    componentWillReceiveProps(nextProps, nextState) {
-         if (nextProps.selectedOrganization != this.props.selectedOrganization) {
-            /*this.setState({
-             employeeId: nextProps.selectedEmployee.employeeId,
-             employeeName: nextProps.selectedEmployee.name,
-             project: nextProps.selectedEmployee.project
-             });*/
-            this.setState(this.getInitialStateForOrganization(nextProps));
-        }
-    }
-
     render() {
+
         let {subscriptionList} = this.props;
 
         let subscriptionDetails = null;
@@ -102,7 +86,6 @@ class SubscriptionList extends Component {
 
 const mapStateToProps = (state) => ({
     subscriptionList: state.subscription.subscriptionList,
-    selectedOrganization:state.organization.selectedOrganization,
     orgObject: state.auth.orgObject
 });
 

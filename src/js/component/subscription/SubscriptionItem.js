@@ -23,8 +23,11 @@ class SubscriptionItem extends React.Component {
     }
 
     render() {
+
         var {subscription} = this.props;
+
         return (
+
             <div className="subscriptions-table">
                 <div className="subscriptions-table-serial-no">
                     {subscription.id}</div>
@@ -37,16 +40,16 @@ class SubscriptionItem extends React.Component {
                         {subscription.status}
                     </Button>
                 </div>
+
                 <div style={{clear:'both',marginTop:-30}}>
                     <Panel className="subscription-detail-box" collapsible
                            expanded={this.state.open}>
                         {
                             this.state.open ? <SubscriptionDetails subscription={subscription}/> : <span />
                         }
-
-
                     </Panel>
                 </div>
+
             </div>
 
         )

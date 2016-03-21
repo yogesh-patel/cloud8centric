@@ -44,6 +44,59 @@ class OrganizationDetailItem extends React.Component {
         var {organizationName,organizationURL,organization} = this.state;
         return (
             <div className="content">
+
+ 	<div>
+                <Row>
+                    <Col xs={12} sm={12} md={12}>
+                        Organization Name: {organizationName}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} sm={12} md={12}>
+                        Organization URL: {organizationURL}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col xs={12} sm={12} md={12}>
+                        Organization Address Line1: {organization.addressLine1}
+                    </Col>
+                </Row>
+        <Row>
+            <Col xs={12} sm={12} md={12}>
+                Organization Address Line2: {organization.addressLine2}
+            </Col>
+        </Row>
+        <Row>
+            <Col xs={12} sm={12} md={12}>
+                Organization Address Line3: {organization.addressLine3}
+            </Col>
+        </Row>
+        <Row>
+            <Col xs={12} sm={12} md={12}>
+                Organization Phone Number: {organization.phoneNumber}
+            </Col>
+        </Row>
+        <Row>
+            <Col xs={12} sm={12} md={12}>
+                Organization City: {organization.city}
+            </Col>
+        </Row>
+        <Row>
+            <Col xs={12} sm={12} md={12}>
+                Organization Provinde: {organization.province}
+            </Col>
+        </Row>
+        <Row>
+            <Col xs={12} sm={12} md={12}>
+                Organization Zip Code: {organization.zipCode}
+            </Col>
+        </Row>
+        <Row>
+            <Col xs={12} sm={12} md={12}>
+                Organization Country: {organization.country}
+            </Col>
+        </Row>
+            </div>
                 <div>
                     <Row>
                         <Col xs={12} sm={12} md={12}>
@@ -97,6 +150,7 @@ class OrganizationDetailItem extends React.Component {
                     </Row>
                 </div>
             </div>
+
         )
     }
 }

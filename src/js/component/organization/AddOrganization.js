@@ -18,11 +18,19 @@ class AddOrganization extends React.Component{
             province:'',
             zipCode:'',
             country:'',
+            blank:'',
             organizationName:'',
             organizationURL:'',
             phoneNumber:'',
+            zipCodeError:'',
+            onCountryError:'',
+            addressLine1Error:'',
             addressLine1:'',
+            onCityError:'',
+            phoneNumberError:'',
             addressLine2:'',
+            organizationNameError:'',
+            onCityError:'',
             addressLine3:'',
         }
 
@@ -30,30 +38,54 @@ class AddOrganization extends React.Component{
 
     submitData(e) {
         e.preventDefault();
-        var organization = {
-                        organizationName:this.state.organizationName,
-                        organizationURL:this.state.organizationURL,
-                        phoneNumber:this.state.phoneNumber,
-                        city:this.state.city,
-                        province:this.state.province,
-                        zipCode:this.state.zipCode,
-                        country:this.state.country,
-                        addressLine1:this.state.addressLine1,
-                        addressLine2:this.state.addressLine2,
-                        addressLine3:this.state.addressLine3,
-                    }
-        this.props.organizationActions.addOrganizationData(organization);
+
+        if(this.state.addressLine1 == ''){
+            this.setState({addressLine1Error:"Please enter Address"});
+        }
+        if(this.state.organizationName == ''){
+            this.setState({organizationNameError:"Please enter Organization Name"});
+        }
+        if(this.state.phoneNumber.length !== 10){
+            this.setState({phoneNumberError:"Phone number must be 10 digits"});
+        }
+        if(this.state.country == ''){
+            this.setState({onCountryError:"Please enter Country"});
+        }
+        if(this.state.zipCode == ''){
+            this.setState({zipCodeError:"Please enter Zip-Code"});
+        }
+        if(this.state.city == ''){
+            this.setState({onCityError:"Please enter City"});
+        }
+        if(this.state.addressLine1!='' && this.state.organizationName!='' && this.state.phoneNumber.length ==   10 &&
+                this.state.country != '' && this.state.zipCode != '' && this.state.city != ''){
+            var organization = {
+                            organizationName:this.state.organizationName,
+                            organizationURL:this.state.organizationURL,
+                            phoneNumber:this.state.phoneNumber,
+                            city:this.state.city,
+                            province:this.state.province,
+                            zipCode:this.state.zipCode,
+                            country:this.state.country,
+                            addressLine1:this.state.addressLine1,
+                            addressLine2:this.state.addressLine2,
+                            addressLine3:this.state.addressLine3,
+                        }
+            this.props.organizationActions.addOrganizationData(organization);
+        }
     }
 
     onCountryChange(e) {
 
         this.setState({country: e.target.value});
+        this.setState({onCountryError:""});
 
     }
 
     onCityChange(e) {
 
         this.setState({city: e.target.value});
+        this.setState({onCityError:""});
 
     }
 
@@ -66,12 +98,14 @@ class AddOrganization extends React.Component{
     onZipCodeChange(e) {
 
         this.setState({zipCode: e.target.value});
+        this.setState({zipCodeError:""});
 
     }
 
     onAddressLine1Change(e) {
 
         this.setState({addressLine1: e.target.value});
+        this.setState({addressLine1Error:""});
 
     }
 
@@ -90,6 +124,7 @@ class AddOrganization extends React.Component{
     onOrganizationNameChange(e) {
 
        this.setState({organizationName: e.target.value});
+       this.setState({organizationNameError:""});
 
     }
 
@@ -102,6 +137,7 @@ class AddOrganization extends React.Component{
     onPhoneNumberChange(e) {
 
        this.setState({phoneNumber: e.target.value,phoneNumberError:''});
+       this.setState({phoneNumberError:""});
 
     }
 
@@ -115,98 +151,163 @@ class AddOrganization extends React.Component{
                         </h3>
                     </Col>
                 </Row>
-                <form className="form-horizontal" onSubmit={this.submitData.bind(this)}>
+                <form >
                     <Panel header={"Add New Organization"}>
-                        <Input
-                            type="text"
-                            placeholder="Organization Name*"
-                            label="Organization Name*"
-                            labelClassName="col-xs-2"
-                            required
-                            onChange={this.onOrganizationNameChange.bind(this)}
-                            wrapperClassName="col-xs-10" />
+                        <Row>
+                            <Col xs={6}>
+                                <Input label="Organization Name*" className="red-text" help={this.state.organizationNameError} wrapperClassName="wrapper">
+                                    <Row>
+                                        <Col xs={12}>
+                                            <input
+                                                type="text"
+                                                placeholder="Organization Name*"
+                                                required
+                                                className="form-control"
+                                                onChange={this.onOrganizationNameChange.bind(this)}/>
+                                        </Col>
+                                    </Row>
+                                </Input>
+                            </Col>
+                            <Col xs={6}>
+                                <Input label="Phone Number*"  help={this.state.phoneNumberError} wrapperClassName="wrapper">
+                                    <Row>
+                                        <Col xs={12}>
+                                            <input
+                                                type="number"
+                                                placeholder="PhoneNumber*"
+                                                required
+                                                className="form-control"
+                                                onChange={this.onPhoneNumberChange.bind(this)}/>
+                                        </Col>
+                                    </Row>
+                                </Input>
+                            </Col>
+                        </Row>
 
-                        <Input
-                            type="text"
-                            placeholder="Organization URL"
-                            label="Organization URL"
-                            onChange={this.onOrganizationURLChange.bind(this)}
-                            labelClassName="col-xs-2"
-                            wrapperClassName="col-xs-10" />
+                        <Row>
+                            <Col xs={6}>
+                                <Input label="Organization URL" wrapperClassName="wrapper">
+                                    <Row>
+                                        <Col xs={12}>
+                                            <input
+                                                type="text"
+                                                placeholder="Organization URL"
+                                                className="form-control"
+                                                onChange={this.onOrganizationURLChange.bind(this)}/>
+                                        </Col>
+                                    </Row>
+                                </Input>
+                            </Col>
+                            <Col xs={6}>
+                                <Input label="City*" help={this.state.onCityError} wrapperClassName="wrapper">
+                                    <Row>
+                                        <Col xs={12}>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                required
+                                                onChange={this.onCityChange.bind(this)}
+                                                placeholder="City*"/>
+                                        </Col>
+                                    </Row>
+                                </Input>
+                            </Col>
+                        </Row>
 
-                        <Input
-                            type="text"
-                            label="phone Number*"
-                            required
-                            onChange={this.onPhoneNumberChange.bind(this)}
-                            placeholder="phone Number*"
-                            labelClassName="col-xs-2"
-                            wrapperClassName="col-xs-10" />
+                        <Row>
+                            <Col xs={6}>
+                                <Input label="AddressLine1*" help={this.state.addressLine1Error} wrapperClassName="wrapper">
+                                    <Row>
+                                        <Col xs={12}>
+                                            <input
+                                                type="text"
+                                                placeholder="AddressLine1*"
+                                                required
+                                                className="form-control"
+                                                onChange={this.onAddressLine1Change.bind(this)}/>
+                                        </Col>
+                                    </Row>
+                                </Input>
+                            </Col>
+                            <Col xs={6}>
+                                <Input label="Province" wrapperClassName="wrapper">
+                                    <Row>
+                                        <Col xs={12}>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                onChange={this.onProvinceChange.bind(this)}
+                                                placeholder="Province"/>
+                                        </Col>
+                                    </Row>
+                                </Input>
+                            </Col>
+                        </Row>
 
-                        <Input
-                            type="text"
-                            required
-                            label="Address Line1*"
-                            onChange={this.onAddressLine1Change.bind(this)}
-                            labelClassName="col-xs-2"
-                            placeholder="Address Line1*"
-                            wrapperClassName="col-xs-10" />
+                        <Row>
+                            <Col xs={6}>
+                                <Input label="AddressLine2" wrapperClassName="wrapper">
+                                    <Row>
+                                        <Col xs={12}>
+                                            <input
+                                                type="text"
+                                                placeholder="AddressLine2"
+                                                className="form-control"
+                                                onChange={this.onAddressLine2Change.bind(this)}/>
+                                        </Col>
+                                    </Row>
+                                </Input>
+                            </Col>
+                            <Col xs={6}>
+                                <Input label="Zip Code*" help={this.state.zipCodeError}  wrapperClassName="wrapper">
+                                    <Row>
+                                        <Col xs={12}>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                required
+                                                onChange={this.onZipCodeChange.bind(this)}
+                                                placeholder="Zip Code*"/>
+                                        </Col>
+                                    </Row>
+                                </Input>
+                            </Col>
+                        </Row>
 
-                        <Input
-                            type="text"
-                            label="Address Line2"
-                            labelClassName="col-xs-2"
-                            onChange={this.onAddressLine2Change.bind(this)}
-                            placeholder="Address Line2"
-                            wrapperClassName="col-xs-10" />
+                        <Row>
+                            <Col xs={6}>
+                                <Input label="AddressLine3" wrapperClassName="wrapper">
+                                    <Row>
+                                        <Col xs={12}>
+                                            <input
+                                                type="text"
+                                                placeholder="AddressLine3"
+                                                className="form-control"
+                                                onChange={this.onAddressLine3Change.bind(this)}/>
+                                        </Col>
+                                    </Row>
+                                </Input>
+                            </Col>
+                            <Col xs={6}>
+                                <Input label="Country*" help={this.state.onCountryError} wrapperClassName="wrapper">
+                                    <Row>
+                                        <Col xs={12}>
+                                            <input
+                                                type="text"
+                                                className="form-control"
+                                                required
+                                                onChange={this.onCountryChange.bind(this)}
+                                                placeholder="Country*"/>
+                                        </Col>
+                                    </Row>
+                                </Input>
+                            </Col>
+                        </Row>
 
-                        <Input
-                            type="text"
-                            label="Address Line3"
-                            onChange={this.onAddressLine3Change.bind(this)}
-                            labelClassName="col-xs-2"
-                            placeholder="Address Line3"
-                            wrapperClassName="col-xs-10" />
-
-                        <Input
-                            type="text"
-                            label="City*"
-                            labelClassName="col-xs-2"
-                            required
-                            onChange={this.onCityChange.bind(this)}
-                            placeholder="City*"
-                            wrapperClassName="col-xs-10" />
-
-                        <Input
-                            type="text"
-                            label="Province"
-                            labelClassName="col-xs-2"
-                            placeholder="Province"
-                            onChange={this.onProvinceChange.bind(this)}
-                            wrapperClassName="col-xs-10" />
-
-                        <Input
-                            type="text"
-                            label="Zip Code*"
-                            labelClassName="col-xs-2"
-                            required
-                            placeholder="Zip Code*"
-                            onChange={this.onZipCodeChange.bind(this)}
-                            wrapperClassName="col-xs-10" />
-
-                        <Input
-                            type="text"
-                            label="Country*"
-                            labelClassName="col-xs-2"
-                            required
-                            onChange={this.onCountryChange.bind(this)}
-                            placeholder="Country*"
-                            wrapperClassName="col-xs-10" />
-
-                        <Button type="submit"
+                        <Button onClick={this.submitData.bind(this)}
                                 bsStyle="primary"
                                 className="pull-right">
-                                SUBMIT
+                                Submit
                         </Button>
                     </Panel>
                 </form>

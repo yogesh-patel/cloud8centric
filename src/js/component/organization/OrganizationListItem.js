@@ -1,6 +1,4 @@
-/**
- * Created by synerzip on 12/02/16.
- */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -81,6 +79,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationListItem);
-/**
- * Created by sonalb on 3/18/2016.
- */

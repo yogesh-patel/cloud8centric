@@ -30,11 +30,6 @@ class OrganizationSubscriptionList extends Component {
 
     componentWillReceiveProps(nextProps, nextState) {
         if (nextProps.selectedOrganization != this.props.selectedOrganization) {
-            /*this.setState({
-             employeeId: nextProps.selectedEmployee.employeeId,
-             employeeName: nextProps.selectedEmployee.name,
-             project: nextProps.selectedEmployee.project
-             });*/
             this.setState(this.getInitialStateForOrganization(nextProps));
         }
     }

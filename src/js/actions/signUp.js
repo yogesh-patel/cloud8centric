@@ -1,7 +1,7 @@
 
 import { pushState } from 'redux-router';
 import constants from '../constants';
- import { post } from './common';
+import { post } from './common';
 
 let {STEP_1_DATA_ADDED_SUCCESSFULLY, STEP_2_DATA_ADDED_SUCCESSFULLY, STEP_3_DATA_ADDED_SUCCESSFULLY, SIGNUP_USER_REQUEST, SHOW_LOGIN, SIGNUP_USER_FAILURE, SIGNUP_USER_SUCCESS, ON_BACK_CLICK, STATUS_ADDED_SUCCESSFULLY, DATA_ADDED_ON_BACK_CLICK, SHOW_SIGN_UP_SUCCESS_COMP} = constants;
 

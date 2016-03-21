@@ -5,13 +5,24 @@ import {Grid, Row, Col, Button, Table, Glyphicon, Jumbotron, Well} from 'react-b
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as organizationActionCreators from '../../actions/organization';
+import { push } from 'redux-router';
+
 
 class OrganizationDetails extends React.Component{
+
+    gotoAddSubscriptions() {
+        this.props.routeDispatch(push("/dashboard/addOrganization"));
+    }
 
     render(){
         return(
 
             <div>
+                <Button bsStyle="primary"
+                        className="pull-right"
+                        onClick={this.gotoAddSubscriptions.bind(this)}>
+                        <Glyphicon glyph="plus"/> Add Subscription
+                </Button>
                 <Row>
                     <Col xs={12} sm={12} md={12}>
                         Organization Name: {this.props.organization.organizationName}
@@ -69,5 +80,12 @@ class OrganizationDetails extends React.Component{
     }
 
 }
+const mapStateToProps = (state) => ({
 
-export default OrganizationDetails;
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    routeDispatch:dispatch
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrganizationDetails);

@@ -9,6 +9,7 @@ import header from './header';
 import subscription from './subscription';
 import dashboard from './dashboard';
 import organization from './organization';
+import breadcrumb from './breadcrumb';
 
 export default combineReducers({
     auth,
@@ -19,5 +20,6 @@ export default combineReducers({
     header,
     subscription,
     organization,
+    breadcrumb,
     router: routerStateReducer
 });

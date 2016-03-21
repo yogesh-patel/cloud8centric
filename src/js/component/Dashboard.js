@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import LeftNavigation from './common/LeftNavigation';
 import CommonHeader from './common/CommonHeader';
+import RouteBreadcrumb from './common/RouteBreadcrumb';
 import {Grid, Row, Col, Button} from 'react-bootstrap';
 import Products from './home/Products';
 import { connect } from 'react-redux';
@@ -22,6 +23,9 @@ class Dashboard extends Component {
 
             <div>
                 <CommonHeader />
+
+                <RouteBreadcrumb />
+
                 <LeftNavigation />
 
                 <div style={{marginTop:60}}>

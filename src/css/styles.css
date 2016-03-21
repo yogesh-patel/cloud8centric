@@ -236,7 +236,10 @@ a.btn-xl{
 .login-label{
     margin:29px 0;
 }
-.f-right{float: right;}
+
+.f-right{
+    float: right;
+}
 
 .login-button {
     color: #fff !important;
@@ -248,8 +251,8 @@ a.btn-xl{
     border-radius: 3px;
     font-size: 18px;
     padding: 10px 40px;
-    /*margin-top:7px;*/
 }
+
 .signup-button {
     color: #fff !important;
     background-color: #46b8da !important;
@@ -260,7 +263,6 @@ a.btn-xl{
     border-radius: 3px;
     font-size: 18px;
     padding: 10px 40px;
-    /*margin-top:7px;*/
 }
 
 .forgot-password{
@@ -452,7 +454,7 @@ a.btn-xl{
 
 .subscription-question-icon{
     font-size: x-large;
-    top:25px;
+    top:23px;
 }
 
 .status-btn-width {
@@ -670,4 +672,9 @@ a.btn-xl{
 
 .help-block{
     color: #a94442;
+}
+
+.breadcrumb{
+    margin-top: 51px;
+    margin-left: 50px;
 }

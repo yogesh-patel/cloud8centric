@@ -28,7 +28,7 @@ class AddProductRow extends React.Component{
     onPlanSelected(e){
 
         this.setState({plan: e.target.value});
-        this.props.subscriptionAction.planSelected(this.props.rowNumber, e.target.value);
+        this.props.subscriptionAction.planSelected(this.props.rowNumber, e.target.value, this.props.selectedProducts[this.props.rowNumber].productId);
 
     }
 
@@ -37,7 +37,6 @@ class AddProductRow extends React.Component{
         this.props.subscriptionAction.productDeleted(this.props.rowNumber);
 
     }
-
 
     render(){
 
@@ -105,7 +104,7 @@ class AddProductRow extends React.Component{
                     <span> </span>
                     <OverlayTrigger trigger={['hover', 'focus']}
                                     placement="right"
-                                    overlay={<Popover title="title" id="1">desc</Popover>}>
+                                    overlay={<Popover title={selectedProducts[rowNumber].productName ? selectedProducts[rowNumber].productName : 'Select a product'} id="1">{selectedProducts[rowNumber].description}</Popover>}>
                         <Glyphicon glyph="question-sign subscription-question-icon pointer"/>
                     </OverlayTrigger>
 

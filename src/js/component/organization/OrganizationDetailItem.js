@@ -8,26 +8,20 @@ class OrganizationDetailItem extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = this.getInitialStateForOrganization(props);
-
     }
 
     getInitialStateForOrganization(props) {
         var {selectedOrganization} = props;
-        if(selectedOrganization.id){
+        if (selectedOrganization != null)
+        {
+        if (selectedOrganization.id) {
             return {
-                organization : selectedOrganization,
-                organizationId: selectedOrganization.id,
-                organizationName: selectedOrganization.organizationName,
-                organizationURL: selectedOrganization.organizationURL
+                organization: selectedOrganization
             }
-        }else{
+        } }else {
             return {
-                organization : null,
-                organizationId: null,
-                organizationName: null,
-                organizationURL: null
+                organization: null
             }
         }
     }
@@ -102,13 +96,67 @@ class OrganizationDetailItem extends React.Component {
                 Organization Country: {organization.country}
             </Col>
         </Row>
-            </div> </div>
+            </div>
+                <div>
+                    <Row>
+                        <Col xs={12} sm={12} md={12}>
+                            Organization Name: {organization.organizationName}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} sm={12} md={12}>
+                            Organization URL: {organization.organizationURL}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} sm={12} md={12}>
+                            Organization Address Line1: {organization.addressLine1}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} sm={12} md={12}>
+                            Organization Address Line2: {organization.addressLine2}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} sm={12} md={12}>
+                            Organization Address Line3: {organization.addressLine3}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} sm={12} md={12}>
+                            Organization Phone Number: {organization.phoneNumber}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} sm={12} md={12}>
+                            Organization City: {organization.city}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} sm={12} md={12}>
+                            Organization Provinde: {organization.province}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} sm={12} md={12}>
+                            Organization Zip Code: {organization.zipCode}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={12} sm={12} md={12}>
+                            Organization Country: {organization.country}
+                        </Col>
+                    </Row>
+                </div>
+            </div>
+
         )
     }
 }
 const mapStateToProps = (state) => ({
-    organizationList:state.organization.organizationList,
-    selectedOrganization:state.organization.selectedOrganization
+    organizationList: state.organization.organizationList,
+    selectedOrganization: state.organization.selectedOrganization
 });
 
 const mapDispatchToProps = (dispatch) => ({

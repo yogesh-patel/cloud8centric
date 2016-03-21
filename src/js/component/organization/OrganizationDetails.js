@@ -33,12 +33,10 @@ class OrganizationDetails extends React.Component {
     }
 
     render() {
-        var topScreen = null;
         var {organizationDetailItemScreen,subscriptionDetailScreen,selectedOrganization} = this.props;
-            if(organizationDetailItemScreen)
-            topScreen = <OrganizationDetailItem selectedOrganization={selectedOrganization}/>;
+        var DetailScreen = <OrganizationDetailItem selectedOrganization={selectedOrganization}/>;
         if(subscriptionDetailScreen)
-            topScreen = <OrganizationSubscriptionList />;
+            DetailScreen = <OrganizationSubscriptionList />;
         return (
             <div>
                 <Button bsStyle="primary"
@@ -48,15 +46,15 @@ class OrganizationDetails extends React.Component {
                 </Button>
                 <Nav  bsStyle="tabs" onSelect={this.onOptionSelected.bind(this)}>
                     <li role="presentation">
-                        <Link to="products" href="#"
+                        <Link href="#"
                               onClick={this.gotoOrganizationDetailPage.bind(this)}
                               smooth duration={500}>Organization</Link>
                     </li>
                     <li role="presentation">
-                        <Link to="contact" href="#" onClick={this.gotoSubscriptionPage.bind(this)} smooth duration={500}>
+                        <Link href="#" onClick={this.gotoSubscriptionPage.bind(this)} smooth duration={500}>
                             Subscription</Link>
                     </li>
-                </Nav>{topScreen}
+                </Nav>{DetailScreen}
             </div>
         )
     }

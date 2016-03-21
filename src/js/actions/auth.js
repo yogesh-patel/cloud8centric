@@ -109,7 +109,9 @@ export function emptyStatuxText(){
 export function logout() {
 
     return (dispatch) => {
+
         localStorage.clear();
+
         dispatch({
             type: LOG_OUT
         });

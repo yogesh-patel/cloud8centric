@@ -20,12 +20,12 @@ export default createReducer(initialState, {
             'subscriptionList': payload
         });
     },
-    'PRODUCTS_AND_PALNS_RECEIVED': (state, payload) => {
+    'PRODUCTS_AND_PLANS_RECEIVED': (state, payload) => {
         return Object.assign({}, state, {
             'productList': payload.productList
         });
     },
-    'SUBSCRIPTION_DETAIL_RECEIVED': (state, payload) => {
+    'SUBSCRIPTION_STATUS_RECEIVED': (state, payload) => {
         var _state = _.cloneDeep(state);
         _state.subscriptionDetailLoading = false;
 
@@ -53,23 +53,31 @@ export default createReducer(initialState, {
     'PRODUCT_SELECTED': (state, payload) => {
         var _state = _.cloneDeep(state);
         _state.productTierList = [];
+        let description = null;
+        let productId = null;
 
         // Get all the product tier list for selected product
         _.map(_state.productList, (product) => {
             if(product.name == payload.productName){
+                description = product.description;
+                productId = product.id;
+
                 _.map(product.productPlans, (plan)=>{
                     _state.productTierList.push(plan);
                 });
+
             }
         });
 
         let hasDuplicate = false;
 
-        _state.selectedProducts[payload.rowNumber].product = payload.productName;
+        _state.selectedProducts[payload.rowNumber].productName = payload.productName;
+        _state.selectedProducts[payload.rowNumber].description = description;
+        _state.selectedProducts[payload.rowNumber].productId = productId;
 
         _.each(_.keys( _state.selectedProducts),(key)=>{
             if(key != payload.rowNumber){
-                if( _state.selectedProducts[key].product == payload.productName){
+                if( _state.selectedProducts[key].productName == payload.productName){
                     _state.selectedProducts[payload.rowNumber].error = true;
                     hasDuplicate = true;
                 }
@@ -95,9 +103,21 @@ export default createReducer(initialState, {
     },
     'PLAN_SELECTED': (state, payload) => {
         var _state = _.cloneDeep(state);
+        let planId = null;
 
-        _state.selectedProducts[payload.rowNumber].plan = payload.planName;
+        // Get the product tier id for selected product tier
+        _.map(_state.productList, (product) => {
+            if(product.id == payload.productId){
+                _.map(product.productPlans, (plan)=>{
+                    if(plan.name == payload.planName){
+                        planId = plan.id;
+                    }
+                });
+            }
+        });
 
+        _state.selectedProducts[payload.rowNumber].planName = payload.planName;
+        _state.selectedProducts[payload.rowNumber].planId = planId;
 
         return _state;
     },

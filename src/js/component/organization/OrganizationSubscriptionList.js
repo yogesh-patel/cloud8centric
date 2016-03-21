@@ -7,13 +7,13 @@ import { bindActionCreators } from 'redux';
 import { push } from 'redux-router';
 import * as subscriptionActionCreators from '../../actions/subscription';
 import _ from 'lodash';
-import SubscriptionItem from './SubscriptionItem';
+import OrganizationSubscriptionItem from './OrganizationSubscriptionItem';
 
-class SubscriptionList extends Component {
+class OrganizationSubscriptionList extends Component {
 
     componentDidMount(){
         this.getInitialStateForOrganization(this.props);
-      
+
     }
 
     getInitialStateForOrganization(props) {
@@ -29,7 +29,7 @@ class SubscriptionList extends Component {
     }
 
     componentWillReceiveProps(nextProps, nextState) {
-         if (nextProps.selectedOrganization != this.props.selectedOrganization) {
+        if (nextProps.selectedOrganization != this.props.selectedOrganization) {
             /*this.setState({
              employeeId: nextProps.selectedEmployee.employeeId,
              employeeName: nextProps.selectedEmployee.name,
@@ -57,42 +57,17 @@ class SubscriptionList extends Component {
             subscriptionDetails = <div className="subscriptions-table no-record-found-block">No Subscriptions found</div>
         }
 
-
         return (
-            <Grid>
-                <Row>
-                    <Col sm={12} md={12} lg={12} xsHidden>
-                        <h3 className="section-title">
-                            Subscriptions
-                        </h3>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        <Button bsStyle="primary"
-                                className="pull-right"
-                                onClick={this.gotoAddSubscriptions.bind(this)}>
-                                <Glyphicon glyph="plus"/> Add Subscription
-                        </Button>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
                         <div className="subscription-table">
                             <div className="subscription-table-header text-bold">
                                 <div className="subscriptions-table-serial-no">Serial No.</div>
                                 <div className="subscriptions-table-name">Subscription Name</div>
-                                <div className="subscription-table-status subscription-status-header">Subscription Status</div>
                                 <div className="clear-both"/>
                             </div>
 
                             {subscriptionDetails}
 
                         </div>
-                    </Col>
-                </Row>
-            </Grid>
-
         );
 
     }
@@ -110,4 +85,7 @@ const mapDispatchToProps = (dispatch) => ({
     subscriptionActions: bindActionCreators(subscriptionActionCreators, dispatch)
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionList);
+export default connect(mapStateToProps, mapDispatchToProps)(OrganizationSubscriptionList);
+/**
+ * Created by sonalb on 3/21/2016.
+ */

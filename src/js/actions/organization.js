@@ -1,17 +1,26 @@
 import { get } from './common';
 import constants from '../constants';
-
+import { push } from 'redux-router';
 let {FETCH_ORGANIZATIONS, ORGANIZATIONS_RECEIVED, SET_ACTIVE_ORGANIZATION} = constants;
 
-export function fetchOrganizations(organizationId){
+export function fetchOrganizations(organizationId) {
 
-    return(dispatch) => {
+      return(dispatch) => {
         dispatch({type:FETCH_ORGANIZATIONS});
 
         let endPointURL = 'organizations';
 
+
         get(endPointURL)
-        .then((response)=>{
+            .then((response)=> {
+
+
+                dispatch({
+                    type: 'ORGANIZATIONS_RECEIVED',
+                    payload: {
+                        organizationList: response.content
+                    }
+                });
 
             let organizationList = response.content;
 
@@ -24,10 +33,19 @@ export function fetchOrganizations(organizationId){
                     activeOrganization: organizationList[0]
                 }
             });
-
-        })
+            })
     }
+}
 
+export function selectOrganization(org) {
+    return (dispatch)=> {
+        dispatch({
+            type: 'ORGANIZATION_SELECTED',
+            payload: org
+        });
+       // dispatch(push("/dashboard/organizationEdit"));
+        //dispatch(push("/dashboard/organizations"));
+    }
 }
 
 export function fetchOrganizationDetails(organization){
@@ -41,7 +59,6 @@ export function fetchOrganizationDetails(organization){
                 activeOrganization: organization
             }
         });
-
     }
-
 }
+

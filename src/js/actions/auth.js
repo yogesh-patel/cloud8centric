@@ -35,25 +35,25 @@ export function authenticateUser(username, password) {
                 localStorage.setItem('token_type', token_type);
 
                 getMe()
-                .then((meResponse)=>{
+                    .then((meResponse)=>{
 
-                    getOrganizations()
-                    .then((orgResponse)=>{
-                        dispatch({
-                            type: LOGIN_USER_SUCCESS,
-                            payload: {
-                                username: username,
-                                userObject:meResponse,
-                                orgObject:orgResponse,
-                                token: "access_token",
-                                statusText: "You have been successfully logged in."
-                            }
-                        });
+                        getOrganizations()
+                            .then((orgResponse)=>{
+                                dispatch({
+                                    type: LOGIN_USER_SUCCESS,
+                                    payload: {
+                                        username: username,
+                                        userObject:meResponse,
+                                        orgObject:orgResponse,
+                                        token: "access_token",
+                                        statusText: "You have been successfully logged in."
+                                    }
+                                });
 
-                        dispatch(push("dashboard"));
+                                dispatch(push("dashboard"));
 
+                            })
                     })
-                })
 
             }).catch(error=> {
 

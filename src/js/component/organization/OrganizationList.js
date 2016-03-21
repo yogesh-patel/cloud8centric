@@ -8,29 +8,25 @@ import * as organizationActionCreators from '../../actions/organization';
 import OrganizationListItem from './OrganizationListItem'
 import OrganizationDetails from './OrganizationDetails'
 
-class OrganizationList extends React.Component{
+class OrganizationList extends React.Component {
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.organizationActions.fetchOrganizations();
     }
 
-    onOrganizationSelected(organization){
-        this.props.organizationActions.fetchOrganizationDetails(organization);
-    }
-
-    render(){
-        var {organizationList,organizationDetailScreen,activeOrganization} = this.props;
+    render() {
+        var {organizationList,organizationDetailScreen,selectedOrganization} = this.props;
         var sideScreen = null;
-        if(organizationDetailScreen){
+        if (organizationDetailScreen) {
             sideScreen = <OrganizationDetails />;
         }
         let organizationListing = _.map(organizationList, (organization) => {
             return <OrganizationListItem organization={organization}
-                                 key={organization.id}/>;
+                                         key={organization.id}/>;
 
         });
 
-        return(
+        return (
             <Grid>
                 <Row>
                     <Col sm={12} md={12} lg={12} xsHidden>
@@ -43,7 +39,11 @@ class OrganizationList extends React.Component{
                     <Col xs={3} sm={3} md={3}>
                         {organizationListing}
                     </Col>
- 					<Col xs={6} sm={6} md={6} lg={6} lgOffset={1} >{sideScreen}</Col>
+                    <Col xs={6} sm={6} md={6} lg={6} lgOffset={1}>
+                        {selectedOrganization ? <OrganizationDetails organizationDetailItemScreen="true"
+                                                                     selectedOrganization={selectedOrganization}/> :
+                            <span></span>}
+                    </Col>
                 </Row>
             </Grid>
         );
@@ -51,10 +51,9 @@ class OrganizationList extends React.Component{
 }
 
 const mapStateToProps = (state) => ({
-    organizationDetailScreen:state.app.organizationDetailScreen,
+    organizationDetailScreen: state.app.organizationDetailScreen,
     organizationList: state.organization.organizationList,
-    activeOrganization: state.organization.activeOrganization
-
+    selectedOrganization: state.organization.selectedOrganization
 });
 
 const mapDispatchToProps = (dispatch) => ({

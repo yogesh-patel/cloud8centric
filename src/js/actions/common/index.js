@@ -1,12 +1,11 @@
-/**
- * Created by synerzip on 08/12/15.
- */
 import { checkHttpStatus, parseJSON } from '../../utils';
 import config from '../../config';
 
 
 export function get(nodeURL) {
+
     let accessToken = localStorage.getItem('access_token');
+
     if (accessToken !== null) {
         return fetch(config.BASE_URL + nodeURL, {
             method: 'get',
@@ -27,10 +26,13 @@ export function get(nodeURL) {
     } else {
         dispatch(pushState(null, '/login'));
     }
+
 }
 
 export function deleteRequest(nodeURL) {
+
     let loggedinUser = localStorage.getItem('ccmLoggedinUser');
+
     if (loggedinUser !== null) {
         var loggedinUserObj = JSON.parse(loggedinUser);
         return fetch(config.BASE_URL + nodeURL, {
@@ -54,11 +56,14 @@ export function deleteRequest(nodeURL) {
                 throw error;
             })
     }
+
 }
 
 export function post(nodeURL,data) {
+
     let accessToken = localStorage.getItem('access_token');
     let tokenType = 'Bearer ';
+
     if (tokenType !== null || accessToken !== null) {
         return fetch(config.BASE_URL + nodeURL, {
             method: 'post',
@@ -79,11 +84,13 @@ export function post(nodeURL,data) {
                 throw error;
             })
     }
+
 }
 
 export function put(nodeURL,data) {
-    //get token
+
     let loggedinUser = localStorage.getItem('ccmLoggedinUser');
+
     if (loggedinUser !== null) {
         var loggedinUserObj = JSON.parse(loggedinUser);
         return fetch(config.BASE_URL + nodeURL, {
@@ -110,4 +117,5 @@ export function put(nodeURL,data) {
     } else {
         dispatch(pushState(null, '/login'));
     }
+
 }

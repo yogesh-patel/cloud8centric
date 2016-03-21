@@ -1,6 +1,3 @@
-/**
- * Created by synerzip on 12/03/16.
- */
 'use strict';
 
 import React, {Component, View} from 'react';
@@ -21,6 +18,7 @@ class AddProductRow extends React.Component{
     }
 
     onProductSelected(e){
+
         this.state.product = e.target.value;
         this.setState({product: e.target.value});
         this.props.subscriptionAction.productSelected(this.props.rowNumber, e.target.value);
@@ -28,46 +26,50 @@ class AddProductRow extends React.Component{
     }
 
     onPlanSelected(e){
+
         this.setState({plan: e.target.value});
         this.props.subscriptionAction.planSelected(this.props.rowNumber, e.target.value);
 
     }
 
     onProductDeleted(){
-        this.props.subscriptionAction.productDeleted(this.props.rowNumber);
-    }
 
+        this.props.subscriptionAction.productDeleted(this.props.rowNumber);
+
+    }
 
 
     render(){
 
-        var {productList, paymentPlans, selectedProducts,rowNumber} = this.props;
-        var rowCount = _.keys(selectedProducts).length;
+        var {productList, productTierList, selectedProducts,rowNumber} = this.props;
+        let rowCount = _.keys(selectedProducts).length;
+        let errorMessage = "";
 
         let productsDropDownValues = _.map(productList, (product) => {
             return (
-                <option key={product.productID} value={product.name}>{product.name}</option>
+                <option key={product.id} value={product.name}>{product.name}</option>
             );
         });
 
-        let plandDropDownValues = _.map(paymentPlans, (plan) => {
+        let plandDropDownValues = _.map(productTierList, (plan) => {
             return (
-                <option key={plan.planID} value={plan.name}>{plan.name}</option>
+                <option key={plan.id} value={plan.name}>{plan.name}</option>
             );
         });
-        var errorMessage = "";
-        if(selectedProducts[rowNumber].error){
-            errorMessage = "Duplicate Product...";
-        }
 
+        if(selectedProducts[rowNumber].error){
+            errorMessage = "This product is already selected";
+        }
 
 
         return (
             <Row>
-                <Col xs={12} sm={5} md={4}>
+                <Col xs={12} sm={5} md={4} className="subscription-product-inputs">
                     <Input  type="select" label="Select Product"
                             placeholder="Select Product"
                             value={this.state.product}
+                            className="subscription-product-inputs"
+                            disabled={selectedProducts[rowNumber].disabled}
                             onChange={this.onProductSelected.bind(this)}>
                         <option value="select">Select Product</option>
 
@@ -77,22 +79,32 @@ class AddProductRow extends React.Component{
                     <div className="duplicate-product">{errorMessage}</div>
                 </Col>
                 <Col xs={12} sm={5} md={4}>
-                    <Input type="select" label="Select Payment Plan"
-                           placeholder="Select Payment Plan"
-                           value={this.state.plan}
-                           onChange={this.onPlanSelected.bind(this)}
-                           >
-                        <option value="select">Select Payment Plan</option>
+                    <Input  type="select" label="Select Product Tier"
+                            placeholder="Select Product Tier"
+                            value={this.state.plan}
+                            className="subscription-product-inputs"
+                            disabled={selectedProducts[rowNumber].disabled}
+                            onChange={this.onPlanSelected.bind(this)}>
+                        <option value="select">Select Product Tier</option>
 
                         {plandDropDownValues}
 
                     </Input>
                 </Col>
                 <Col xs={12} sm={5} md={4}>
-                    {rowCount == 1 ? <span> </span> : <Glyphicon glyph="minus subscription-minus-icon pointer" onClick={this.onProductDeleted.bind(this)}/>}
+                    {rowCount == 1 ? <span> </span> :   <Button   bsStyle="danger"
+                                                                bsSize="xsmall"
+                                                                className="subscription-minus-icon"
+                                                                disabled={selectedProducts[rowNumber].disabled}
+                                                                onClick={this.onProductDeleted.bind(this)}
+                                                                title="Delete a product">
+                                                            <Glyphicon glyph="minus" />
+                                                        </Button>}
+
 
                     <span> </span>
-                    <OverlayTrigger trigger={['hover', 'focus']} placement="right"
+                    <OverlayTrigger trigger={['hover', 'focus']}
+                                    placement="right"
                                     overlay={<Popover title="title" id="1">desc</Popover>}>
                         <Glyphicon glyph="question-sign subscription-question-icon pointer"/>
                     </OverlayTrigger>
@@ -107,7 +119,7 @@ class AddProductRow extends React.Component{
 
 const mapStateToProps = (state) => ({
     productList: state.subscription.productList,
-    paymentPlans: state.subscription.paymentPlans,
+    productTierList: state.subscription.productTierList,
     selectedProducts: state.subscription.selectedProducts
 });
 

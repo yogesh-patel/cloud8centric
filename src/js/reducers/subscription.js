@@ -10,37 +10,8 @@ const initialState = {
                     },
     count: 1,
     subscriptionList: null,
-    productList:[
-                    {
-                        'productID': 1,
-                        'name': 'Web Collection Book',
-                        'description': 'Web Collection Book information'
-                    },
-                    {
-                        'productID': 2,
-                        'name': 'Field Testing',
-                        'description': 'Field Testing information'
-                    },
-                    {
-                        'productID': 3,
-                        'name': 'C8 Server',
-                        'description': 'C8 Server information'
-                    }
-                ],
-    paymentPlans:[
-                    {
-                        'planID': 1,
-                        'name': 'Gold'
-                    },
-                    {
-                        'planID': 2,
-                        'name': 'Silver'
-                    },
-                    {
-                        'planID': 3,
-                        'name': 'Bronze'
-                    }
-                ]
+    productList:[],
+    productTierList:[]
 };
 
 export default createReducer(initialState, {
@@ -49,10 +20,9 @@ export default createReducer(initialState, {
             'subscriptionList': payload
         });
     },
-    'FETCH_PRODUCTS_AND_PLANS': (state, payload) => {
+    'PRODUCTS_AND_PALNS_RECEIVED': (state, payload) => {
         return Object.assign({}, state, {
-            // 'productList': payload.productList,
-            // 'paymentPlans': payload.paymentPlans
+            'productList': payload.productList
         });
     },
     'SUBSCRIPTION_DETAIL_RECEIVED': (state, payload) => {
@@ -82,37 +52,44 @@ export default createReducer(initialState, {
     },
     'PRODUCT_SELECTED': (state, payload) => {
         var _state = _.cloneDeep(state);
+        _state.productTierList = [];
+
+        // Get all the product tier list for selected product
+        _.map(_state.productList, (product) => {
+            if(product.name == payload.productName){
+                _.map(product.productPlans, (plan)=>{
+                    _state.productTierList.push(plan);
+                });
+            }
+        });
+
+        let hasDuplicate = false;
 
         _state.selectedProducts[payload.rowNumber].product = payload.productName;
 
-        //Set error if current row has duplicate
         _.each(_.keys( _state.selectedProducts),(key)=>{
             if(key != payload.rowNumber){
                 if( _state.selectedProducts[key].product == payload.productName){
                     _state.selectedProducts[payload.rowNumber].error = true;
-                }
-            }
-        })
-
-        // Unset error message
-        _.each(_.keys( state.selectedProducts),(key)=> {
-            if (key != payload.rowNumber) {
-                var firstData = _state.selectedProducts[key];
-                var duplicate = false;
-                _.each(_.keys( state.selectedProducts),(secondKey)=> {
-                    if(secondKey != key){
-                        var secondData = _state.selectedProducts[secondKey];
-                        if(secondData.product == firstData.product){
-                            duplicate = true;
-                        }
-                    }
-                });
-
-                if(!duplicate && firstData.error == true){
-                    firstData.error = false;
+                    hasDuplicate = true;
                 }
             }
         });
+
+        if(hasDuplicate){
+            _.each(_.keys( _state.selectedProducts),(key)=>{
+                if(key != payload.rowNumber){
+                    _state.selectedProducts[key].disabled = true;
+                    _state.selectedProducts[key].error = false;
+                }
+            });
+        }
+        else{
+             _.each(_.keys( _state.selectedProducts),(key)=>{
+                _state.selectedProducts[key].disabled = false;
+                _state.selectedProducts[key].error = false;
+            });
+        }
 
         return _state;
     },
@@ -128,6 +105,16 @@ export default createReducer(initialState, {
         var _state = _.cloneDeep(state);
 
         delete _state.selectedProducts[payload.rowNumber];
+
+        _.each(_.keys( _state.selectedProducts),(key)=>{
+            _state.selectedProducts[key].disabled = false;
+            _state.selectedProducts[key].error = false;
+        });
+
+        return _state;
+    },
+    'CREATE_SUBSCRIPTION': (state, payload) => {
+        var _state = _.cloneDeep(state);
 
         return _state;
     }

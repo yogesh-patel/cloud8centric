@@ -19,7 +19,7 @@ export default createReducer(initialState, {
             toggleClass: ''
         });
     },
-    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+    'REDUCER_CLEAN_SUCCESSFULLY': (state,payload)=>{
         return _.cloneDeep(initialState);
     },
 });

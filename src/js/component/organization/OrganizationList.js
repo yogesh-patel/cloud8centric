@@ -5,7 +5,7 @@ import {Grid, Row, Col, Button, Table, Glyphicon, Jumbotron, Well, ListGroup, Li
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as organizationActionCreators from '../../actions/organization';
-import OrganizationItem from './OrganizationItem'
+import OrganizationListItem from './OrganizationListItem'
 import OrganizationDetails from './OrganizationDetails'
 
 class OrganizationList extends React.Component{
@@ -14,16 +14,20 @@ class OrganizationList extends React.Component{
         this.props.organizationActions.fetchOrganizations();
     }
 
- 
+    onOrganizationSelected(organization){
+        this.props.organizationActions.fetchOrganizationDetails(organization);
+    }
+
     render(){
-        var {organizationList,organizationDetailScreen} = this.props;
+        var {organizationList,organizationDetailScreen,activeOrganization} = this.props;
         var sideScreen = null;
         if(organizationDetailScreen){
             sideScreen = <OrganizationDetails />;
         }
         let organizationListing = _.map(organizationList, (organization) => {
-            return <OrganizationItem organization={organization}
-                                 key={organization.id}/>;           
+            return <OrganizationListItem organization={organization}
+                                 key={organization.id}/>;
+
         });
 
         return(
@@ -36,22 +40,21 @@ class OrganizationList extends React.Component{
                     </Col>
                 </Row>
                 <Row>
-                    <Col xs={3} sm={3} md={3} lg={3}>
+                    <Col xs={3} sm={3} md={3}>
                         {organizationListing}
                     </Col>
-                    <Col xs={6} sm={6} md={6} lg={6} lgOffset={1} >{sideScreen}</Col>
+ 					<Col xs={6} sm={6} md={6} lg={6} lgOffset={1} >{sideScreen}</Col>
                 </Row>
             </Grid>
         );
-
     }
-
 }
-
 
 const mapStateToProps = (state) => ({
     organizationDetailScreen:state.app.organizationDetailScreen,
-    organizationList: state.organization.organizationList
+    organizationList: state.organization.organizationList,
+    activeOrganization: state.organization.activeOrganization
+
 });
 
 const mapDispatchToProps = (dispatch) => ({

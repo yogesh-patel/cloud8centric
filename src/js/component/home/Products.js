@@ -2,7 +2,6 @@
 
 import React, {Component} from 'react';
 import {Grid, Row, Col, Jumbotron, Button} from 'react-bootstrap';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Element} from 'react-scroll';
 import { connect } from 'react-redux';
 import ProductPlans from './ProductPlans';

@@ -11,16 +11,20 @@ import * as headerActionCreators from '../../actions/header';
 class LeftNavigation extends Component{
 
     constructor(props){
+
         super(props);
         this.state = {
             selectedOption:'home'
         }
+
     }
 
     getSubscriptionList(){
+
         this.props.dashboardActions.showSubscription();
         this.props.headerActions.hideProducts();
         this.setState({selectedOption:'subscription'});
+
     }
 
     getOrganizationsList(){
@@ -39,11 +43,13 @@ class LeftNavigation extends Component{
     }
 
     render(){
+
         let {toggleClass} = this.props;
 
         let {selectedOption} = this.state;
 
         return(
+
             <div className="left-navigation">
                 <Navbar inverse className={'navbar-twitch '+toggleClass} role="navigation">
                     <Nav>

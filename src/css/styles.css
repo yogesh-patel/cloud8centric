@@ -447,17 +447,7 @@ a.btn-xl{
 }
 
 .subscription-minus-icon{
-    background: #C76868;
-    color: #FFF;
-    font-weight: bold;
-    border: 0;
-    cursor: pointer;
-    display: inline-block;
-    padding: 4px 9px;
-    vertical-align: top;
-    line-height: 100%;
-    top:27px;
-    font-size: small;
+    margin-top: 30px;
 }
 
 .subscription-question-icon{
@@ -521,7 +511,7 @@ a.btn-xl{
 }
 
 .section-title{
-    color: #4863A0;
+    color: #212121;
     border-bottom: 1px solid #ccc;
     background-repeat: repeat-x;
     background-image: none;
@@ -540,31 +530,31 @@ a.btn-xl{
 
 .subscription-table{
     margin-top:15px;
-    border:1px solid #CCC;
+    border:1px solid #212121;
 }
 
 .subscription-table-header{
-    border-bottom: 1px solid #CCC;
-    background-color: #A4B4C9;
-    color:#FFFFFF;
+    border-bottom: 1px solid #212121;
+    background-color: #cfd8dc;
+    color:#212121;
 }
 
 .subscriptions-table-serial-no{
     width:10%;
-    padding:20px;
+    padding: 20px 0 20px 15px;
     float:left;
-    border-right:1px solid #CCC;
+    border-right:1px solid #212121;
 }
 
 .subscriptions-table-name{
     width:60%;
-    padding:20px;
+    padding:20px 0 20px 15px;
     float:left;
-    border-right:1px solid #CCC;
+    border-right:1px solid #212121;
 }
 
 .subscription-table-status{
-    padding:12px;
+    padding:15px 0 15px 20px;
     width:30%;
     float:left;
 }
@@ -641,7 +631,39 @@ a.btn-xl{
     margin: 0 auto;
     border: 3px solid black;
 }
-
 .duplicate-product{
     color: #a94442;
+    margin-bottom: 10px;
+}
+
+.subscription-product-inputs .form-group{
+    margin-bottom: 5px !important;
+}
+
+.text-bold{
+    font-weight: bold;
+}
+
+.subscription-status-header{
+    margin-top: 7px;
+}
+
+.no-record-found-block{
+    margin-top: 40px;
+    height: 80px;
+    text-align: center;
+    opacity: 0.3;
+    font-size: 30px;
+}
+
+.successfully-msg{
+    background-image: url("../../img/true-sign.png");
+    background-repeat: no-repeat;
+    padding: 0 0 4px 41px;
+    width: 325px;
+    margin: 0 auto;
+}
+
+.login-button-link{
+    margin-top: 15px;
 }

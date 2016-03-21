@@ -15,6 +15,7 @@ const initialState = {
     loading:false,
     signupSuccessComponent:false,
     organizationDetailScreen:false,
+    organizationDetailItemScreen:false,
     subscriptionDetailScreen:false
 };
 
@@ -45,7 +46,6 @@ export default createReducer(initialState, {
         });
     },
     'SHOW_FORGOT_MESSAGE': (state, payload) => {
-        console.log(payload);
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,
@@ -63,7 +63,7 @@ export default createReducer(initialState, {
             homeScreen: false,
             signUpScreen:false,
             organizationDetailScreen:true,
-            organizationFormScreen:false,
+            organizationDetailItemScreen:false,
             subscriptionDetailScreen:false
         });
     },
@@ -76,7 +76,7 @@ export default createReducer(initialState, {
             homeScreen: false,
             signUpScreen:false,
             organizationDetailScreen:true,
-            organizationFormScreen:true,
+            organizationDetailItemScreen:true,
             subscriptionDetailScreen:false
         });
     },
@@ -136,6 +136,11 @@ export default createReducer(initialState, {
             loading:false
         });
     },
+    'SIGNUP_USER_FAILURE': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:false
+        });
+    },
     'FETCH_SUBSCRIPTIONS': (state, payload) => {
         return Object.assign({}, state, {
             loading:true
@@ -166,7 +171,17 @@ export default createReducer(initialState, {
             signupSuccessComponent:true
         });
     },
-    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+    'REDUCER_CLEAN_SUCCESSFULLY': (state,payload)=>{
         return _.cloneDeep(initialState);
+    },
+    'FETCH_PRODUCTS_AND_PLANS': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:true
+        });
+    },
+    'PRODUCTS_AND_PALNS_RECEIVED': (state, payload) => {
+        return Object.assign({}, state, {
+            loading:false
+        });
     },
 });

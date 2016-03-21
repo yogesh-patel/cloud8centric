@@ -27,7 +27,6 @@ export default createReducer(initialState, {
             'token': payload.token,
             'statusText': payload.statusText
         });
-
     },
     'LOGIN_USER_FAILURE': (state, payload) => {
         return Object.assign({}, state, {
@@ -39,7 +38,7 @@ export default createReducer(initialState, {
             'statusText': payload.statusText
         });
     },
-    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+    'REDUCER_CLEAN_SUCCESSFULLY': (state,payload)=>{
         return _.cloneDeep(initialState);
     },
 });

@@ -7,8 +7,11 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {Link, Events} from 'react-scroll';
 
 class SplashScreen extends Component {
+
     render() {
+
         return (
+
             <Element className="splashScreen" name="splashScreen">
                 <Grid fluid>
                     <Row>
@@ -34,8 +37,11 @@ class SplashScreen extends Component {
                     </Row>
                 </Grid>
             </Element>
+
         );
+
     }
+
 }
 
 export default SplashScreen;

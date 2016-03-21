@@ -1,15 +1,13 @@
-/**
- * Created by synerzip on 08/03/16.
- */
 import React, {Component} from 'react';
 import {Grid, Row, Col, Panel, Button,Thumbnail} from 'react-bootstrap';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import ProductPlans from './ProductPlans';
 
 class Product extends React.Component {
 
     render() {
-        var {product} = this.props;
+
+        let {product} = this.props;
+
         return (
 
             <Grid>
@@ -31,7 +29,9 @@ class Product extends React.Component {
             </Grid>
 
         );
+
     }
+
 }
 
 export default Product;

@@ -10,23 +10,28 @@ import { connect } from 'react-redux';
 class Dashboard extends Component {
 
     render() {
+
         var {showProducts,toggleClass} = this.props;
         var leftMargin = 50;
+
         if(toggleClass == 'open'){
             leftMargin = 200;
         }
+
         return (
+
             <div>
                 <CommonHeader />
                 <LeftNavigation />
 
-                <div style={{marginTop:60,marginLeft:leftMargin}}>
+                <div style={{marginTop:60}}>
                     {this.props.children}
                 </div>
                 <div className="container" style={{display:showProducts ? 'block' : 'none'}}>
                     <Products />
                 </div>
             </div>
+
         );
 
     }

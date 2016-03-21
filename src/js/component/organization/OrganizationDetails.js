@@ -44,7 +44,7 @@ class OrganizationDetails extends React.Component {
                 <Button bsStyle="primary"
                         className="pull-right"
                         onClick={this.gotoAddSubscriptions.bind(this)}>
-                        <Glyphicon glyph="plus"/> Add Subscription
+                        <Glyphicon glyph="plus"/> Add Organization
                 </Button>
                 <Nav  bsStyle="tabs" onSelect={this.onOptionSelected.bind(this)}>
                     <li role="presentation">

@@ -50,7 +50,7 @@ class OrganizationDetailItem extends React.Component {
         var {organizationName,organizationURL,organization} = this.state;
         return (
             <div className="content">
-              
+
  	<div>
                 <Row>
                     <Col xs={12} sm={12} md={12}>

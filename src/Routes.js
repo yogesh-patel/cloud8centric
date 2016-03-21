@@ -19,7 +19,7 @@ import AddOrganization from './js/component/organization/AddOrganization';
                 <Route path="subscriptions" component={SubscriptionList}/>
                 <Route path="subscriptions/create" component={CreateSubscriptions}/>
                 <Route path="organizations" component={OrganizationList}/>
-                <Route path="addOrganization" component={AddOrganization}/>
+                <Route path="organization/create" component={AddOrganization}/>
             </Route>
             </Route>
         </Router>

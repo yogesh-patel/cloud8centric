@@ -1,38 +1,32 @@
 'use strict';
 
 import React, {Component, View} from 'react';
-import {Grid, Row, Col, Button, Table, Glyphicon, Jumbotron, Well} from 'react-bootstrap';
+import {Grid, Row, Col, Button, Table, Glyphicon, Jumbotron, Well, ListGroup, ListGroupItem} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as organizationActionCreators from '../../actions/organization';
+import OrganizationListItem from './OrganizationListItem'
 import OrganizationDetails from './OrganizationDetails'
 
 class OrganizationList extends React.Component{
 
     componentDidMount(){
-
         this.props.organizationActions.fetchOrganizations();
-
     }
 
     onOrganizationSelected(organization){
-
         this.props.organizationActions.fetchOrganizationDetails(organization);
-
     }
 
     render(){
-
-        let { organizationList, activeOrganization } = this.props;
+        var {organizationList,organizationDetailScreen,activeOrganization} = this.props;
+        var sideScreen = null;
+        if(organizationDetailScreen){
+            sideScreen = <OrganizationDetails />;
+        }
         let organizationListing = _.map(organizationList, (organization) => {
-
-            return (
-                <Well key={organization.id} onClick={this.onOrganizationSelected.bind(this, organization)}>
-                    <p>{organization.organizationName}</p>
-                    <p className="normal-font">{organization.organizationURL}</p>
-                    <p className="normal-font">{organization.addressLine1}</p>
-                </Well>
-            );
+            return <OrganizationListItem organization={organization}
+                                 key={organization.id}/>;
 
         });
 
@@ -49,21 +43,18 @@ class OrganizationList extends React.Component{
                     <Col xs={3} sm={3} md={3}>
                         {organizationListing}
                     </Col>
-                    <Col xs={9} sm={9} md={9}>
-                        {activeOrganization ? <OrganizationDetails organization={activeOrganization}/> : <span></span>}
-                    </Col>
+ 					<Col xs={6} sm={6} md={6} lg={6} lgOffset={1} >{sideScreen}</Col>
                 </Row>
             </Grid>
         );
-
     }
-
 }
 
-
 const mapStateToProps = (state) => ({
+    organizationDetailScreen:state.app.organizationDetailScreen,
     organizationList: state.organization.organizationList,
     activeOrganization: state.organization.activeOrganization
+
 });
 
 const mapDispatchToProps = (dispatch) => ({

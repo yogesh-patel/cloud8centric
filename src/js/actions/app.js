@@ -3,15 +3,18 @@
  */
 
 import constants from '../constants';
-let {SHOW_LOGIN, SHOW_HOME, SHOW_FORGOT_PASSWORD, SHOW_FORGOT_MESSAGE,
-     SHOW_SIGN_UP, SHOW_SIGN_UP_SUCCESS_COMP, REDUCER_CLEAN_SUCCESSFULLY, SIGNUP_USER_SUCCESS} = constants;
+
+let {SHOW_LOGIN,SHOW_HOME,SHOW_FORGOT_PASSWORD, SHOW_FORGOT_MESSAGE,
+     SHOW_SIGN_UP, SHOW_SIGN_UP_SUCCESS_COMP,REDUCER_CLEAN_SUCCESSFULLY,SIGNUP_USER_SUCCESS,SHOW_ORGANIZATION_DETAIL,SHOW_SUBSCRIPTION_DETAIL,
+    SHOW_ORGANIZATION_FORM} = constants;
+
+
 
 export function showLogin() {
 
     return {
         type: SHOW_LOGIN
     }
-
 }
 
 export function showHome() {
@@ -35,7 +38,6 @@ export function showForgotPassword() {
     return {
         type: SHOW_FORGOT_PASSWORD
     }
-
 }
 
 export function showSignUpSuccessFully() {
@@ -46,13 +48,30 @@ export function showSignUpSuccessFully() {
 
 }
 
+export function showOrganizationDetailItem() {
+    return {
+        type: SHOW_ORGANIZATION_FORM
+    }
+}
+
+export function showOrganizationDetail() {
+    return {
+        type: SHOW_ORGANIZATION_DETAIL
+    }
+}
+
+export function showSubscriptionDetail() {
+    return {
+        type: SHOW_SUBSCRIPTION_DETAIL
+    }
+}
+
 export function showSignUp(){
 
     return (dispatch)=>{
         dispatch({type:SHOW_SIGN_UP});
         dispatch({type:SIGNUP_USER_SUCCESS});
     }
-
 }
 
 export function cleanReducer(){

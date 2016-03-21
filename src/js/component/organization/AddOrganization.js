@@ -105,7 +105,6 @@ class AddOrganization extends React.Component{
 
     }
 
-
     render(){
         return(
             <Grid>

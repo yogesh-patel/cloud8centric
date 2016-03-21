@@ -27,7 +27,6 @@ export default createReducer(initialState, {
             'token': payload.token,
             'statusText': payload.statusText
         });
-
     },
     'LOGIN_USER_FAILURE': (state, payload) => {
         return Object.assign({}, state, {

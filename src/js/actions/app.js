@@ -4,7 +4,8 @@
 
 import constants from '../constants';
 let {SHOW_LOGIN,SHOW_HOME,SHOW_FORGOT_PASSWORD, SHOW_FORGOT_MESSAGE,
-     SHOW_SIGN_UP, SHOW_SIGN_UP_SUCCESS_COMP,REDUCER_CLEAN_SUCCESSFULLY} = constants;
+     SHOW_SIGN_UP, SHOW_SIGN_UP_SUCCESS_COMP,REDUCER_CLEAN_SUCCESSFULLY,SHOW_ORGANIZATION_DETAIL,SHOW_SUBSCRIPTION_DETAIL,
+    SHOW_ORGANIZATION_FORM} = constants;
 
 export function showLogin() {
     return {
@@ -33,6 +34,24 @@ export function showForgotPassword() {
 export function showSignUpSuccessFully() {
     return {
         type: SHOW_SIGN_UP_SUCCESS_COMP
+    }
+}
+
+export function showOrganizationForm() {
+    return {
+        type: SHOW_ORGANIZATION_FORM
+    }
+}
+
+export function showOrganizationDetail() {
+    return {
+        type: SHOW_ORGANIZATION_DETAIL
+    }
+}
+
+export function showSubscriptionDetail() {
+    return {
+        type: SHOW_SUBSCRIPTION_DETAIL
     }
 }
 

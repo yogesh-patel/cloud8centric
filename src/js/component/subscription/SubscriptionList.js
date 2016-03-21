@@ -12,14 +12,33 @@ import SubscriptionItem from './SubscriptionItem';
 class SubscriptionList extends Component {
 
     componentDidMount(){
-        var {orgObject} = this.props;
-        this.props.subscriptionActions.fetchSubscriptions(orgObject.content[0].id);
+        this.getInitialStateForOrganization(this.props);
+       // var organizationID = (organObject !== undefined) ? organObject.id : orgObject.content[0].id;
+        //this.props.subscriptionActions.fetchSubscriptions(organizationID);
+    }
+
+    getInitialStateForOrganization(props) {
+        var {orgObject,selectedOrganization} = props;
+        var organizationID = (selectedOrganization !== undefined) ? selectedOrganization.id : orgObject.content[0].id;
+        this.props.subscriptionActions.fetchSubscriptions(organizationID);
     }
 
     gotoAddSubscriptions() {
 
         this.props.subscriptionActions.fetchProductsAndPlans();
 
+    }
+
+    componentWillReceiveProps(nextProps, nextState) {
+        // alert("test");
+        if (nextProps.selectedOrganization != this.props.selectedOrganization) {
+            /*this.setState({
+             employeeId: nextProps.selectedEmployee.employeeId,
+             employeeName: nextProps.selectedEmployee.name,
+             project: nextProps.selectedEmployee.project
+             });*/
+            this.setState(this.getInitialStateForOrganization(nextProps));
+        }
     }
 
     render() {
@@ -30,40 +49,26 @@ class SubscriptionList extends Component {
                 <SubscriptionItem subscription={subscription} key={subscription.id} />
             );
         });
+        var header = "";
+        if(subscriptionDetails.length > 0) {
+             header = <div className="subscription-table-header">
+                <div className="subscriptions-table-serial-no">Serial No.</div>
+                <div className="subscriptions-table-name">Subscription Name</div>
+                <div className="subscription-table-status">Subscription Status</div>
+                <div className="clear-both"/></div>
+        }
         return (
-            <Grid>
-                <Row>
-                    <Col sm={12} md={12} lg={12} xsHidden>
-                        <h3 className="section-title">
-                            Subscriptions
-                        </h3>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
-                        <Button bsStyle="primary"
+
+                        <div><Button bsStyle="primary"
                                 className="pull-right"
                                 onClick={this.gotoAddSubscriptions.bind(this)}>
                                 <Glyphicon glyph="plus"/> Add Subscription
                         </Button>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12} lg={12}>
+
                         <div className="subscription-table">
-                            <div className="subscription-table-header">
-                                <div className="subscriptions-table-serial-no">Serial No.</div>
-                                <div className="subscriptions-table-name">Subscription Name</div>
-                                <div className="subscription-table-status">Subscription Status</div>
-                                <div className="clear-both"/>
-                            </div>
+                         {header}{subscriptionDetails}
+                        </div></div>
 
-                            {subscriptionDetails}
-
-                        </div>
-                    </Col>
-                </Row>
-            </Grid>
         );
 
     }
@@ -73,6 +78,7 @@ class SubscriptionList extends Component {
 
 const mapStateToProps = (state) => ({
     subscriptionList: state.subscription.subscriptionList,
+    selectedOrganization:state.organization.selectedOrganization,
     orgObject: state.auth.orgObject
 });
 

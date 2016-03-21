@@ -64,9 +64,7 @@ class OrganizationSubscriptionList extends Component {
 
                         </div>
         );
-
     }
-
 }
 
 

@@ -8,26 +8,20 @@ class OrganizationDetailItem extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = this.getInitialStateForOrganization(props);
-
     }
 
     getInitialStateForOrganization(props) {
         var {selectedOrganization} = props;
+        if (selectedOrganization != null)
+        {
         if (selectedOrganization.id) {
             return {
-                organization: selectedOrganization,
-                organizationId: selectedOrganization.id,
-                organizationName: selectedOrganization.organizationName,
-                organizationURL: selectedOrganization.organizationURL
+                organization: selectedOrganization
             }
-        } else {
+        } }else {
             return {
-                organization: null,
-                organizationId: null,
-                organizationName: null,
-                organizationURL: null
+                organization: null
             }
         }
     }
@@ -53,12 +47,12 @@ class OrganizationDetailItem extends React.Component {
                 <div>
                     <Row>
                         <Col xs={12} sm={12} md={12}>
-                            Organization Name: {organizationName}
+                            Organization Name: {organization.organizationName}
                         </Col>
                     </Row>
                     <Row>
                         <Col xs={12} sm={12} md={12}>
-                            Organization URL: {organizationURL}
+                            Organization URL: {organization.organizationURL}
                         </Col>
                     </Row>
                     <Row>

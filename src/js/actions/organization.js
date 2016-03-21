@@ -1,4 +1,4 @@
-import { get } from './common';
+import { get, post } from './common';
 import constants from '../constants';
 import { push } from 'redux-router';
 let {FETCH_ORGANIZATIONS, ORGANIZATIONS_RECEIVED,ORGANIZATION_SELECTED} = constants;
@@ -48,3 +48,18 @@ export function selectOrganization(organization) {
     }
 }
 
+export function addOrganizationData(organization){
+    return (dispatch)=>{
+
+        let endPointURL = 'organizations';
+
+        post(endPointURL,organization)
+        .then((response)=>{
+             dispatch(push("/dashboard/organizations"));
+        }).catch(error => {
+            dispatch({
+            });
+        })
+    }
+
+}

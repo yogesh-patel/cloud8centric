@@ -13,30 +13,41 @@ import OrganizationSubscriptionList from './OrganizationSubscriptionList';
 class OrganizationDetails extends React.Component {
 
     gotoAddSubscriptions() {
+
         this.props.routeDispatch(push("/dashboard/organization/create"));
+
     }
 
     gotoSubscriptionPage(e) {
+
         e.preventDefault();
         this.props.appActions.showSubscriptionDetail();
         this.setState({selectedOption: 'subscription'});
+
     }
 
     gotoOrganizationDetailPage(e) {
+
         e.preventDefault();
         this.props.appActions.showOrganizationDetailItem();
         this.setState({selectedOption: 'organization'});
+
     }
 
     onOptionSelected(selectedKey) {
+
         this.setState({selectedOption: selectedKey});
+
     }
 
     render() {
+
         var {organizationDetailItemScreen,subscriptionDetailScreen,selectedOrganization} = this.props;
         var DetailScreen = <OrganizationDetailItem selectedOrganization={selectedOrganization}/>;
+
         if(subscriptionDetailScreen)
             DetailScreen = <OrganizationSubscriptionList />;
+
         return (
             <div>
                 <Button bsStyle="primary"

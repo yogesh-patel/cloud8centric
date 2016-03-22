@@ -2,8 +2,6 @@ import {createReducer} from '../utils';
 import constants from '../constants';
 import _ from 'lodash';
 
-let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS} = constants;
-
 const initialState = {
     selectedProducts:{
                         1:{}
@@ -15,17 +13,17 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-    'SUBSCRIPTIONS_RECEIVED': (state, payload) => {
+    SUBSCRIPTIONS_RECEIVED: (state, payload) => {
         return Object.assign({}, state, {
-            'subscriptionList': payload
+            subscriptionList: payload
         });
     },
-    'PRODUCTS_AND_PLANS_RECEIVED': (state, payload) => {
+    PRODUCTS_AND_PLANS_RECEIVED: (state, payload) => {
         return Object.assign({}, state, {
-            'productList': payload.productList
+            productList: payload.productList
         });
     },
-    'SUBSCRIPTION_STATUS_RECEIVED': (state, payload) => {
+    SUBSCRIPTION_STATUS_RECEIVED: (state, payload) => {
         var _state = _.cloneDeep(state);
         _state.subscriptionDetailLoading = false;
 
@@ -33,24 +31,24 @@ export default createReducer(initialState, {
 
         return _state;
     },
-    'LOG_OUT':(state, payload) => {
+    LOG_OUT:(state, payload) => {
         return Object.assign({}, state, {
-            'subscriptionList': null,
-            'productList':null,
-            'paymentPlans':null
+            subscriptionList: null,
+            productList:null,
+            paymentPlans:null
         });
     },
-    'REDUCER_CLEAN_SUCCESSFULLY':(state,payload)=>{
+    REDUCER_CLEAN_SUCCESSFULLY:(state,payload)=>{
         return _.cloneDeep(initialState);
     },
-    'ADD_NEW_SUBSCRIPTION': (state, payload) => {
+    ADD_NEW_SUBSCRIPTION: (state, payload) => {
         var _state = _.cloneDeep(state);
         _state.count++;
         _state.selectedProducts[_state.count] = {};
 
         return _state;
     },
-    'PRODUCT_SELECTED': (state, payload) => {
+    PRODUCT_SELECTED: (state, payload) => {
         var _state = _.cloneDeep(state);
         _state.productTierList = [];
         let description = null;
@@ -101,7 +99,7 @@ export default createReducer(initialState, {
 
         return _state;
     },
-    'PLAN_SELECTED': (state, payload) => {
+    PLAN_SELECTED: (state, payload) => {
         var _state = _.cloneDeep(state);
         let planId = null;
 
@@ -121,7 +119,7 @@ export default createReducer(initialState, {
 
         return _state;
     },
-    'PRODUCT_DELETED': (state, payload) => {
+    PRODUCT_DELETED: (state, payload) => {
         var _state = _.cloneDeep(state);
 
         delete _state.selectedProducts[payload.rowNumber];
@@ -133,7 +131,7 @@ export default createReducer(initialState, {
 
         return _state;
     },
-    'CREATE_SUBSCRIPTION': (state, payload) => {
+    CREATE_SUBSCRIPTION: (state, payload) => {
         var _state = _.cloneDeep(state);
 
         return _state;

@@ -3,8 +3,6 @@ import constants from '../constants';
 import {pushState} from 'redux-router';
 import _ from 'lodash';
 
-let {LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE} = constants;
-
 const initialState = {
     username: null,
     userObject: null,
@@ -14,31 +12,31 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-    'LOGIN_USER_REQUEST': (state, payload) => {
+    LOGIN_USER_REQUEST: (state, payload) => {
         return Object.assign({}, state, {
-            'statusText': null
+            statusText: null
         });
     },
-    'LOGIN_USER_SUCCESS': (state, payload) => {
+    LOGIN_USER_SUCCESS: (state, payload) => {
         return Object.assign({}, state, {
-            'username': payload.username,
-            'userObject': payload.userObject,
-            'orgObject': payload.orgObject,
-            'token': payload.token,
-            'statusText': payload.statusText
+            username: payload.username,
+            userObject: payload.userObject,
+            orgObject: payload.orgObject,
+            token: payload.token,
+            statusText: payload.statusText
         });
     },
-    'LOGIN_USER_FAILURE': (state, payload) => {
+    LOGIN_USER_FAILURE: (state, payload) => {
         return Object.assign({}, state, {
-            'statusText': payload.statusText
+            statusText: payload.statusText
         });
     },
-    'CLEAR_LOGIN_ERROR_MESSAGE': (state, payload) => {
+    CLEAR_LOGIN_ERROR_MESSAGE: (state, payload) => {
         return Object.assign({}, state, {
-            'statusText': payload.statusText
+            statusText: payload.statusText
         });
     },
-    'REDUCER_CLEAN_SUCCESSFULLY': (state,payload)=>{
+    REDUCER_CLEAN_SUCCESSFULLY: (state,payload)=>{
         return _.cloneDeep(initialState);
     },
 });

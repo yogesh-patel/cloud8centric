@@ -28,7 +28,7 @@ class Dashboard extends Component {
 
                 <LeftNavigation />
 
-                <div style={{marginTop:60}}>
+                <div>
                     {this.props.children}
                 </div>
                 <div className="container" style={{display:showProducts ? 'block' : 'none'}}>

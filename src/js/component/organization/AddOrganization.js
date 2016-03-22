@@ -26,7 +26,6 @@ class AddOrganization extends React.Component{
             onCountryError:'',
             addressLine1Error:'',
             addressLine1:'',
-            onCityError:'',
             phoneNumberError:'',
             addressLine2:'',
             organizationNameError:'',

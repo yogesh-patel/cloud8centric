@@ -9,19 +9,19 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-    'SHOW_PRODUCTS': (state, payload) => {
+    SHOW_PRODUCTS: (state, payload) => {
         return Object.assign({}, state, {
             showProducts:true,
             productStatus:payload
         });
     },
-    'HIDE_PRODUCTS': (state, payload) => {
+    HIDE_PRODUCTS: (state, payload) => {
         return Object.assign({}, state, {
             showProducts:false,
             productStatus:payload
         });
     },
-    'REDUCER_CLEAN_SUCCESSFULLY': (state,payload)=>{
+    REDUCER_CLEAN_SUCCESSFULLY: (state,payload)=>{
         return _.cloneDeep(initialState);
     },
 });

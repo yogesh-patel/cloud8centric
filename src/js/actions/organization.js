@@ -1,6 +1,7 @@
 import { get, post } from './common';
 import constants from '../constants';
 import { push } from 'redux-router';
+let {FETCH_ORGANIZATIONS, ORGANIZATIONS_RECEIVED, ORGANIZATION_SELECTED} = constants;
 
 export function fetchOrganizations(organizationId) {
 
@@ -8,6 +9,7 @@ export function fetchOrganizations(organizationId) {
         dispatch({type: FETCH_ORGANIZATIONS});
 
         let endPointURL = 'organizations';
+
 
         get(endPointURL)
             .then((response)=> {

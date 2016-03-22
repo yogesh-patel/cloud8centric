@@ -36,7 +36,7 @@ export function authenticateUser(username, password) {
 
 
                 getMe()
-                    .then((meResponse)=>{
+                    .then((meResponse)=> {
 
                         getOrganizations()
                             .then((orgResponse)=>{
@@ -45,15 +45,16 @@ export function authenticateUser(username, password) {
                                     type: LOGIN_USER_SUCCESS,
                                     payload: {
                                         username: username,
-                                        userObject:meResponse,
-                                        orgObject:orgResponse,
+                                        userObject: meResponse,
+                                        userRole: meResponse.roles,
+                                        orgObject: orgResponse,
                                         token: "access_token",
                                         statusText: "You have been successfully logged in."
                                     }
                                 });
 
-                                dispatch(push("dashboard"));
-
+                                var url = getDispatchUrl(meResponse.roles);
+                                dispatch(push(url));
                             })
                     })
 
@@ -61,11 +62,11 @@ export function authenticateUser(username, password) {
 
                 let errorDescription = '';
 
-                if(error.message == 'Failed to fetch'){
-                    errorDescription ='Server is down. Please try again after some time.';
+                if (error.message == 'Failed to fetch') {
+                    errorDescription = 'Server is down. Please try again after some time.';
                 }
 
-                if(error.message == 'Unauthorized' || error.message == 'Bad Request') {
+                if (error.message == 'Unauthorized' || error.message == 'Bad Request') {
                     errorDescription = 'Bad Credentials.';
                 }
 
@@ -80,14 +81,37 @@ export function authenticateUser(username, password) {
 
 }
 
-function getMe(){
+function getMe() {
 
     let endPointURL = 'me';
     return get(endPointURL);
 
 }
 
-function getOrganizations(){
+function getUserRole(response) {
+
+    var role = "";
+    let roleName = _.map(response, (roles) => {
+        role= roles.name;
+
+    });
+    return role;
+
+}
+
+function getDispatchUrl(resp) {
+    let role = getUserRole(resp);
+    switch (role) {
+        case 'Admin':
+            return "dashboard/organizations";
+        case 'AccountOwner':
+            return "dashboard/subscriptions";
+        default:
+            return "";
+    }
+}
+
+function getOrganizations() {
 
     let endPointURL = 'organizations';
     return get(endPointURL);
@@ -95,7 +119,7 @@ function getOrganizations(){
 }
 
 
-export function emptyStatuxText(){
+export function emptyStatuxText() {
 
     return (dispatch) => {
         dispatch({

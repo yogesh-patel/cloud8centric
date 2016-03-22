@@ -74,7 +74,7 @@ class CreateSubscriptions extends Component {
 
         return (
 
-            <Grid>
+            <div className="main-container">
                 <Row>
                     <Col sm={12} md={12} lg={12} xsHidden>
                         <h3 className="section-title">
@@ -123,7 +123,7 @@ class CreateSubscriptions extends Component {
                     </Col>
                 </Row>
 
-            </Grid>
+            </div>
         );
 
     }

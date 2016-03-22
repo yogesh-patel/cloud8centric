@@ -41,9 +41,10 @@ class CommonHeader extends Component{
     onProductSelected(e){
 
         e.preventDefault();
-        if(this.state.productStatus === 'Products'){
+        var {productStatus} = this.props;
+        if(this.props.productStatus === 'Products'){
             this.setState({productStatus:"Hide Products"})
-            this.props.headerActions.showProducts();
+            this.props.headerActions.showProducts("Hide Products");
             var interval = setInterval(()=>{
                 clearInterval(interval);
                 scroller.scrollTo("products",true, 500, -50);
@@ -51,14 +52,16 @@ class CommonHeader extends Component{
         }
         else{
             this.setState({productStatus:"Products"})
-            this.props.headerActions.hideProducts();
+            this.props.headerActions.hideProducts("Products");
         }
 
     }
 
-    render(){
 
-        var productLink = <span onClick={this.onProductSelected.bind(this)}>{this.state.productStatus}</span>;
+
+    render(){
+        var {productStatus} = this.props;
+        var productLink = <span onClick={this.onProductSelected.bind(this)}>{this.props.productStatus}</span>;
         var {userObject} = this.props;
 
         return(
@@ -94,8 +97,8 @@ class CommonHeader extends Component{
 
 const mapStateToProps = (state) => ({
 	toggleClass:state.header.toggleClass,
-	userObject:state.auth.userObject
-
+	userObject:state.auth.userObject,
+    productStatus:state.dashboard.productStatus
 });
 
 const mapDispatchToProps = (dispatch) => ({

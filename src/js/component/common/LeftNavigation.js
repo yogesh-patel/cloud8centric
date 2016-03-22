@@ -22,7 +22,7 @@ class LeftNavigation extends Component{
     getSubscriptionList(){
 
         this.props.dashboardActions.showSubscription();
-        this.props.headerActions.hideProducts();
+        this.props.headerActions.hideProducts("Products");
         this.setState({selectedOption:'subscription'});
 
     }
@@ -30,7 +30,7 @@ class LeftNavigation extends Component{
     getOrganizationsList(){
 
         this.props.dashboardActions.showOrganization();
-        this.props.headerActions.hideProducts();
+        this.props.headerActions.hideProducts("Products");
         this.setState({selectedOption:'organization'});
 
     }
@@ -38,7 +38,7 @@ class LeftNavigation extends Component{
     showHome(){
 
         this.props.dashboardActions.showHome();
-        this.props.headerActions.hideProducts();
+        this.props.headerActions.hideProducts("Products");
         this.setState({selectedOption:'home'});
     }
 

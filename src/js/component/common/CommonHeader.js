@@ -33,7 +33,7 @@ class CommonHeader extends Component{
 
 	onLogout(){
 
-    	this.props.appActions.cleanReducer();
+    	//zthis.props.appActions.cleanReducer();
 		this.props.authActions.logout()
 
     }
@@ -80,7 +80,7 @@ class CommonHeader extends Component{
                             <NavItem eventKey={1}>
                                 {productLink}
                             </NavItem>
-                            <NavDropdown eventKey={2} title={"Welcome "+userObject.firstName } id="basic-nav-dropdown">
+                            <NavDropdown eventKey={2} title={"Welcome "+localStorage.getItem("firstName")} id="basic-nav-dropdown">
                                 <MenuItem eventKey={2.1}>Profile</MenuItem>
                                 <MenuItem divider />
                                 <MenuItem eventKey={2.2} onClick={this.onLogout.bind(this)}>Logout</MenuItem>

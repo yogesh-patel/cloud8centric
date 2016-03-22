@@ -3,7 +3,9 @@ import { push } from 'redux-router';
 import { get } from './common';
 import _ from 'lodash';
 
-let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS, ADD_NEW_SUBSCRIPTION, PRODUCT_SELECTED, PLAN_SELECTED, PRODUCT_DELETED, CREATE_SUBSCRIPTION, PRODUCTS_AND_PLANS_RECEIVED, SUBSCRIPTIONS_RECEIVED, SUBSCRIPTION_DETAIL_REQUEST_SENT, SUBSCRIPTION_STATUS_RECEIVED} = constants;
+let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS, ADD_NEW_SUBSCRIPTION, PRODUCT_SELECTED, PLAN_SELECTED,
+    PRODUCT_DELETED, CREATE_SUBSCRIPTION, PRODUCTS_AND_PLANS_RECEIVED, SUBSCRIPTIONS_RECEIVED,
+    SUBSCRIPTION_DETAIL_REQUEST_SENT, SUBSCRIPTION_STATUS_RECEIVED, CLEAN_REDUCER_DATA} = constants;
 
 export function fetchSubscriptions(organizationId){
 
@@ -91,6 +93,7 @@ export function getSubscriptionStatus(subscriptionId){
 export function fetchProductsAndPlans(){
 
     return(dispatch) => {
+        dispatch({type:CLEAN_REDUCER_DATA});
         dispatch({type:FETCH_PRODUCTS_AND_PLANS});
 
         let endPointURL = 'products';
@@ -98,7 +101,8 @@ export function fetchProductsAndPlans(){
         get(endPointURL)
         .then((response)=>{
 
-            dispatch({type:PRODUCTS_AND_PLANS_RECEIVED,
+            dispatch({
+                type:PRODUCTS_AND_PLANS_RECEIVED,
                 payload:{
                     productList: response.content
                 }

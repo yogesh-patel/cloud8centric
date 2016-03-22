@@ -135,5 +135,8 @@ export default createReducer(initialState, {
         var _state = _.cloneDeep(state);
 
         return _state;
+    },
+    CLEAN_REDUCER_DATA: (state, payload) => {
+        return _.cloneDeep(initialState);
     }
 });

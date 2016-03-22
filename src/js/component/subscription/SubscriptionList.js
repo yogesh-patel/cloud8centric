@@ -43,7 +43,7 @@ class SubscriptionList extends Component {
 
 
         return (
-            <Grid>
+            <div className="main-container">
                 <Row>
                     <Col sm={12} md={12} lg={12} xsHidden>
                         <h3 className="section-title">
@@ -75,7 +75,7 @@ class SubscriptionList extends Component {
                         </div>
                     </Col>
                 </Row>
-            </Grid>
+            </div>
 
         );
 

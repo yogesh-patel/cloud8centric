@@ -18,18 +18,20 @@ export function hideNavigationMenu(){
 
 }
 
-export function showProducts(){
+export function showProducts(productStatus){
 
     return{
-        type:SHOW_PRODUCTS
+        type : SHOW_PRODUCTS,
+        payload : productStatus
     }
 
 }
 
-export function hideProducts(){
+export function hideProducts(productStatus){
 
     return{
-        type:HIDE_PRODUCTS
+        type : HIDE_PRODUCTS,
+        payload : productStatus
     }
 
 }

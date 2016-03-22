@@ -180,7 +180,7 @@ class Step3 extends Component {
                                                 placeholder="Address Line1*"
                                                 required
                                                 onChange={this.onAddressLine1Change.bind(this)}/>
-                                   </div>
+                                     </div>
                                 </Col>
                             </Row>
                             <Row>

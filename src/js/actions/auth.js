@@ -34,11 +34,13 @@ export function authenticateUser(username, password) {
                 let token_type = result.token_type;
                 localStorage.setItem('token_type', token_type);
 
+
                 getMe()
                     .then((meResponse)=>{
 
                         getOrganizations()
                             .then((orgResponse)=>{
+                                localStorage.setItem('firstName', meResponse.firstName);
                                 dispatch({
                                     type: LOGIN_USER_SUCCESS,
                                     payload: {

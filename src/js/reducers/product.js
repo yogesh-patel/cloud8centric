@@ -1,6 +1,5 @@
 import {createReducer} from '../utils';
 
-
 const initialState = {
 
   products:[

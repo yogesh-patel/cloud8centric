@@ -1,6 +1,3 @@
-/**
- * Created by synerzip on 10/03/16.
- */
 import {createReducer} from '../utils';
 import {SHOW_LOGIN} from '../constants';
 import {pushState} from 'redux-router';
@@ -20,7 +17,7 @@ const initialState = {
 };
 
 export default createReducer(initialState, {
-    'SHOW_LOGIN': (state, payload) => {
+    SHOW_LOGIN: (state, payload) => {
         return Object.assign({}, state, {
             loginScreen: true,
             forgotPasswordScreen: false,
@@ -28,7 +25,7 @@ export default createReducer(initialState, {
             homeScreen: false
         });
     },
-    'SHOW_FORGOT_PASSWORD': (state, payload) => {
+    SHOW_FORGOT_PASSWORD: (state, payload) => {
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: true,
@@ -36,7 +33,7 @@ export default createReducer(initialState, {
             homeScreen: false
         });
     },
-    'SHOW_HOME': (state, payload) => {
+    SHOW_HOME: (state, payload) => {
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,
@@ -45,7 +42,7 @@ export default createReducer(initialState, {
             homeScreen: true
         });
     },
-    'SHOW_FORGOT_MESSAGE': (state, payload) => {
+    SHOW_FORGOT_MESSAGE: (state, payload) => {
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,
@@ -54,8 +51,7 @@ export default createReducer(initialState, {
             signUpScreen:false,
         });
     },
-    'SHOW_ORGANIZATION_DETAIL': (state, payload) => {
-        console.log(payload);
+    SHOW_ORGANIZATION_DETAIL: (state, payload) => {
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,
@@ -67,8 +63,7 @@ export default createReducer(initialState, {
             subscriptionDetailScreen:false
         });
     },
-    'SHOW_ORGANIZATION_FORM': (state, payload) => {
-        console.log(payload);
+    SHOW_ORGANIZATION_FORM: (state, payload) => {
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,
@@ -80,8 +75,7 @@ export default createReducer(initialState, {
             subscriptionDetailScreen:false
         });
     },
-    'SHOW_SUBSCRIPTION_DETAIL': (state, payload) => {
-        console.log(payload);
+    SHOW_SUBSCRIPTION_DETAIL: (state, payload) => {
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,
@@ -93,76 +87,76 @@ export default createReducer(initialState, {
             subscriptionDetailScreen:true
         });
     },
-    'SHOW_SIGN_UP': (state, payload) => {
+    SHOW_SIGN_UP: (state, payload) => {
         return Object.assign({}, state, {
             loginScreen:false,
             signUpScreen:true,
             homeScreen:false
         });
     },
-    'LOGIN_USER_REQUEST': (state, payload) => {
+    LOGIN_USER_REQUEST: (state, payload) => {
         return Object.assign({}, state, {
             loading:true
         });
     },
-    'LOGIN_USER_FAILURE': (state, payload) => {
+    LOGIN_USER_FAILURE: (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });
     },
-    'LOGIN_USER_SUCCESS': (state, payload) => {
+    LOGIN_USER_SUCCESS: (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });
     },
-    'SUBSCRIPTION_DETAIL_REQUEST_SENT': (state, payload) => {
+    SUBSCRIPTION_DETAIL_REQUEST_SENT: (state, payload) => {
         return Object.assign({}, state, {
             loading:true
         });
 
     },
-    'SUBSCRIPTION_STATUS_RECEIVED': (state, payload) => {
+    SUBSCRIPTION_STATUS_RECEIVED: (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });
 
     },
-    'SIGNUP_USER_REQUEST': (state, payload) => {
+    SIGNUP_USER_REQUEST: (state, payload) => {
         return Object.assign({}, state, {
             loading:true
         });
     },
-    'SIGNUP_USER_SUCCESS': (state, payload) => {
+    SIGNUP_USER_SUCCESS: (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });
     },
-    'SIGNUP_USER_FAILURE': (state, payload) => {
+    SIGNUP_USER_FAILURE: (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });
     },
-    'FETCH_SUBSCRIPTIONS': (state, payload) => {
+    FETCH_SUBSCRIPTIONS: (state, payload) => {
         return Object.assign({}, state, {
             loading:true
         });
     },
-    'SUBSCRIPTIONS_RECEIVED': (state, payload) => {
+    SUBSCRIPTIONS_RECEIVED: (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });
     },
-    'FETCH_ORGANIZATIONS': (state, payload) => {
+    FETCH_ORGANIZATIONS: (state, payload) => {
         return Object.assign({}, state, {
             loading:true
         });
     },
-    'ORGANIZATIONS_RECEIVED': (state, payload) => {
+    ORGANIZATIONS_RECEIVED: (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });
     },
-    'SHOW_SIGN_UP_SUCCESS_COMP': (state, payload) => {
+    SHOW_SIGN_UP_SUCCESS_COMP: (state, payload) => {
         return Object.assign({}, state, {
             loginScreen: false,
             forgotPasswordScreen: false,
@@ -172,15 +166,15 @@ export default createReducer(initialState, {
             signupSuccessComponent:true
         });
     },
-    'REDUCER_CLEAN_SUCCESSFULLY': (state,payload)=>{
+    REDUCER_CLEAN_SUCCESSFULLY: (state,payload)=>{
         return _.cloneDeep(initialState);
     },
-    'FETCH_PRODUCTS_AND_PLANS': (state, payload) => {
+    FETCH_PRODUCTS_AND_PLANS: (state, payload) => {
         return Object.assign({}, state, {
             loading:true
         });
     },
-    'PRODUCTS_AND_PLANS_RECEIVED': (state, payload) => {
+    PRODUCTS_AND_PLANS_RECEIVED: (state, payload) => {
         return Object.assign({}, state, {
             loading:false
         });

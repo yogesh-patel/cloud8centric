@@ -11,6 +11,7 @@ import OrganizationSubscriptionList from './OrganizationSubscriptionList';
 
 class OrganizationDetails extends React.Component {
 
+
     goToAddSubscriptions() {
 
         this.props.routeDispatch(push("/dashboard/organization/create"));
@@ -40,10 +41,13 @@ class OrganizationDetails extends React.Component {
     }
 
     render() {
+
         var {organizationDetailItemScreen,subscriptionDetailScreen,selectedOrganization} = this.props;
         var DetailScreen = <OrganizationDetailItem selectedOrganization={selectedOrganization}/>;
+
         if (subscriptionDetailScreen)
             DetailScreen = <OrganizationSubscriptionList />;
+
         return (
             <div>
                 <Button bsStyle="primary"

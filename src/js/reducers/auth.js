@@ -6,6 +6,7 @@ import _ from 'lodash';
 const initialState = {
     username: null,
     userObject: null,
+    userRole: null,
     orgObject: null,
     token: null,
     statusText: null
@@ -22,6 +23,7 @@ export default createReducer(initialState, {
             username: payload.username,
             userObject: payload.userObject,
             orgObject: payload.orgObject,
+            userRole:payload.userRole,
             token: payload.token,
             statusText: payload.statusText
         });

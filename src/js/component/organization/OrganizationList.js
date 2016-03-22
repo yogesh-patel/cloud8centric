@@ -1,5 +1,4 @@
 'use strict';
-
 import React, {Component, View} from 'react';
 import {Grid, Row, Col, Button, Table, Glyphicon, Jumbotron, Well, ListGroup, ListGroupItem} from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -11,15 +10,13 @@ import OrganizationDetails from './OrganizationDetails'
 class OrganizationList extends React.Component {
 
     componentDidMount() {
+
         this.props.organizationActions.fetchOrganizations();
+
     }
 
     render() {
         var {organizationList,organizationDetailScreen,selectedOrganization} = this.props;
-        var sideScreen = null;
-        if (organizationDetailScreen) {
-            sideScreen = <OrganizationDetails />;
-        }
         let organizationListing = _.map(organizationList, (organization) => {
             return <OrganizationListItem organization={organization}
                                          key={organization.id}/>;
@@ -46,8 +43,11 @@ class OrganizationList extends React.Component {
                     </Col>
                 </Row>
             </Grid>
+
         );
+
     }
+
 }
 
 const mapStateToProps = (state) => ({

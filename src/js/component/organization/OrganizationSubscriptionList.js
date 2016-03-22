@@ -11,15 +11,18 @@ import OrganizationSubscriptionItem from './OrganizationSubscriptionItem';
 
 class OrganizationSubscriptionList extends Component {
 
-    componentDidMount(){
+    componentDidMount() {
+
         this.getInitialStateForOrganization(this.props);
 
     }
 
     getInitialStateForOrganization(props) {
+
         var {orgObject,selectedOrganization} = props;
         var organizationID = (selectedOrganization !== undefined) ? selectedOrganization.id : orgObject.content[0].id;
         this.props.subscriptionActions.fetchSubscriptions(organizationID);
+
     }
 
     gotoAddSubscriptions() {
@@ -29,9 +32,11 @@ class OrganizationSubscriptionList extends Component {
     }
 
     componentWillReceiveProps(nextProps, nextState) {
+
         if (nextProps.selectedOrganization != this.props.selectedOrganization) {
             this.setState(this.getInitialStateForOrganization(nextProps));
         }
+
     }
 
     render() {
@@ -39,30 +44,31 @@ class OrganizationSubscriptionList extends Component {
 
         let subscriptionDetails = null;
 
-        if(_.size(subscriptionList) > 0){
+        if (_.size(subscriptionList) > 0) {
             subscriptionDetails = _.map(_.keys(subscriptionList), (subscriptionId) => {
                 var subscription = subscriptionList[subscriptionId];
                 return (
-                    <SubscriptionItem subscription={subscription} key={subscription.id} />
+                    <SubscriptionItem subscription={subscription} key={subscription.id}/>
                 );
             });
         }
 
-        if(subscriptionDetails === null){
-            subscriptionDetails = <div className="subscriptions-table no-record-found-block">No Subscriptions found</div>
+        if (subscriptionDetails === null) {
+            subscriptionDetails =
+                <div className="subscriptions-table no-record-found-block">No Subscriptions found</div>
         }
 
         return (
-                        <div className="subscription-table">
-                            <div className="subscription-table-header text-bold">
-                                <div className="subscriptions-table-serial-no">Serial No.</div>
-                                <div className="subscriptions-table-name">Subscription Name</div>
-                                <div className="clear-both"/>
-                            </div>
+            <div className="subscription-table">
+                <div className="subscription-table-header text-bold">
+                    <div className="subscriptions-table-serial-no">Serial No.</div>
+                    <div className="subscriptions-table-name">Subscription Name</div>
+                    <div className="clear-both"/>
+                </div>
 
-                            {subscriptionDetails}
+                {subscriptionDetails}
 
-                        </div>
+            </div>
         );
     }
 }
@@ -70,7 +76,7 @@ class OrganizationSubscriptionList extends Component {
 
 const mapStateToProps = (state) => ({
     subscriptionList: state.subscription.subscriptionList,
-    selectedOrganization:state.organization.selectedOrganization,
+    selectedOrganization: state.organization.selectedOrganization,
     orgObject: state.auth.orgObject
 });
 
@@ -79,6 +85,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationSubscriptionList);
-/**
- * Created by sonalb on 3/21/2016.
- */

@@ -19,7 +19,9 @@ class OrganizationSubscriptionItem extends React.Component {
     }
 
     onStatusClick() {
+
         this.setState({open: !this.state.open})
+
     }
 
     render() {
@@ -30,11 +32,12 @@ class OrganizationSubscriptionItem extends React.Component {
                     {subscription.id}</div>
                 <div className="subscriptions-table-name">
                     {subscription.name}</div>
-
             </div>
 
         )
+
     }
+
 }
 
 export default OrganizationSubscriptionItem;

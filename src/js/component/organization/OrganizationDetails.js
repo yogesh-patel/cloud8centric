@@ -1,4 +1,3 @@
-
 import React, {Component,View} from 'react';
 import {Navbar, NavItem, Nav, NavDropdown, Glyphicon, Button, MenuItem} from 'react-bootstrap';
 import {Link, Events} from 'react-scroll';
@@ -12,13 +11,14 @@ import OrganizationSubscriptionList from './OrganizationSubscriptionList';
 
 class OrganizationDetails extends React.Component {
 
-    gotoAddSubscriptions() {
+
+    goToAddSubscriptions() {
 
         this.props.routeDispatch(push("/dashboard/organization/create"));
 
     }
 
-    gotoSubscriptionPage(e) {
+    goToSubscriptionPage(e) {
 
         e.preventDefault();
         this.props.appActions.showSubscriptionDetail();
@@ -26,7 +26,7 @@ class OrganizationDetails extends React.Component {
 
     }
 
-    gotoOrganizationDetailPage(e) {
+    goToOrganizationDetailPage(e) {
 
         e.preventDefault();
         this.props.appActions.showOrganizationDetailItem();
@@ -45,43 +45,46 @@ class OrganizationDetails extends React.Component {
         var {organizationDetailItemScreen,subscriptionDetailScreen,selectedOrganization} = this.props;
         var DetailScreen = <OrganizationDetailItem selectedOrganization={selectedOrganization}/>;
 
-        if(subscriptionDetailScreen)
+        if (subscriptionDetailScreen)
             DetailScreen = <OrganizationSubscriptionList />;
 
         return (
             <div>
                 <Button bsStyle="primary"
                         className="pull-right"
-                        onClick={this.gotoAddSubscriptions.bind(this)}>
-                        <Glyphicon glyph="plus"/> Add Organization
+                        onClick={this.goToAddSubscriptions.bind(this)}>
+                    <Glyphicon glyph="plus"/> Add Organization
                 </Button>
-                <Nav  bsStyle="tabs" onSelect={this.onOptionSelected.bind(this)}>
+                <Nav bsStyle="tabs" onSelect={this.onOptionSelected.bind(this)}>
                     <li role="presentation">
                         <Link href="#"
-                              onClick={this.gotoOrganizationDetailPage.bind(this)}
+                              onClick={this.goToOrganizationDetailPage.bind(this)}
                               smooth duration={500}>Organization</Link>
                     </li>
                     <li role="presentation">
-                        <Link href="#" onClick={this.gotoSubscriptionPage.bind(this)} smooth duration={500}>
+                        <Link href="#" onClick={this.goToSubscriptionPage.bind(this)} smooth duration={500}>
                             Subscription</Link>
                     </li>
                 </Nav>{DetailScreen}
             </div>
+
         )
+
     }
+
 }
 
 const mapStateToProps = (state) => ({
-    organizationDetailItemScreen:state.app.organizationDetailItemScreen,
-    subscriptionDetailScreen:state.app.subscriptionDetailScreen,
-    organizationList:state.organization.organizationList,
-    selectedOrganization:state.organization.selectedOrganization
+    organizationDetailItemScreen: state.app.organizationDetailItemScreen,
+    subscriptionDetailScreen: state.app.subscriptionDetailScreen,
+    organizationList: state.organization.organizationList,
+    selectedOrganization: state.organization.selectedOrganization
 });
 
 const mapDispatchToProps = (dispatch) => ({
     organizationActions: bindActionCreators(organizationActionCreators, dispatch),
     appActions: bindActionCreators(appActionCreators, dispatch),
-     routeDispatch:dispatch
+    routeDispatch: dispatch
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationDetails);

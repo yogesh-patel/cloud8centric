@@ -15,6 +15,7 @@ export default createConstants(
     'SHOW_LOGIN',
     'SHOW_SIGN_UP',
     'SHOW_HOME',
+    'CLEAN_REDUCER_DATA',
     'REDUCER_CLEAN_SUCCESSFULLY',
     'SIGNUP_USER_FAILURE',
     'SHOW_FORGOT_PASSWORD',

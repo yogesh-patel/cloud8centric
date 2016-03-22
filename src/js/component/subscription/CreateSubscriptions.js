@@ -14,7 +14,8 @@ class CreateSubscriptions extends Component {
 
         super(props);
         this.state = {
-            subscriptionName: null
+            subscriptionName: '',
+            bsStyle : null
         }
 
     }
@@ -27,7 +28,7 @@ class CreateSubscriptions extends Component {
 
     onSubscriptionNameChange(e) {
 
-       this.setState({subscriptionName:e.target.value});
+       this.setState({subscriptionName:e.target.value,bsStyle:'success'});
 
     }
 
@@ -46,10 +47,16 @@ class CreateSubscriptions extends Component {
     render() {
 
         var {selectedProducts, productList} = this.props;
-
         var selectedProductComps = _.map(_.keys(selectedProducts),(rowNumber)=>{
             return <AddProductRow   key={rowNumber}
                                     rowNumber={rowNumber}/>
+        });
+
+        _.each(selectedProducts, (data)=>{
+           if(data.productName && data.planName && data.planName != 'select' && data.productName != 'select' && !this.state.subscriptionName){
+               this.state.bsStyle = 'error';
+           }
+
         });
 
         var addBtnDisabled = false, registerBtnDisabled=false;
@@ -66,7 +73,8 @@ class CreateSubscriptions extends Component {
         }
 
         return (
-            <Grid>
+
+            <div className="main-container">
                 <Row>
                     <Col sm={12} md={12} lg={12} xsHidden>
                         <h3 className="section-title">
@@ -80,9 +88,17 @@ class CreateSubscriptions extends Component {
                             <Panel header={"Add New Subscription"}>
                                 <Row>
                                     <Col xs={12} sm={12} md={6}>
-                                        <Input  type="text" label="Subscription Name"
+                                        <Input
+                                                type="text"
+                                                value={this.state.subscriptionName}
+                                                label="Subscription Name"
                                                 placeholder="Subscription Name*"
-                                                onChange={this.onSubscriptionNameChange.bind(this)}/>
+                                                bsStyle={this.state.bsStyle}
+                                                hasFeedback
+                                                ref="input"
+                                                groupClassName="group-class"
+                                                labelClassName="label-class"
+                                                onChange={this.onSubscriptionNameChange.bind(this)} />
                                     </Col>
                                 </Row>
                             </Panel>
@@ -107,7 +123,7 @@ class CreateSubscriptions extends Component {
                     </Col>
                 </Row>
 
-            </Grid>
+            </div>
         );
 
     }

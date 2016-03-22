@@ -11,9 +11,6 @@ const initialState = {
     signUpScreen:false,
     loading:false,
     signupSuccessComponent:false,
-    organizationDetailScreen:false,
-    organizationDetailItemScreen:false,
-    subscriptionDetailScreen:false
 };
 
 export default createReducer(initialState, {
@@ -49,42 +46,6 @@ export default createReducer(initialState, {
             forgotMessageScreen: true,
             homeScreen: false,
             signUpScreen:false,
-        });
-    },
-    SHOW_ORGANIZATION_DETAIL: (state, payload) => {
-        return Object.assign({}, state, {
-            loginScreen: false,
-            forgotPasswordScreen: false,
-            forgotMessageScreen: false,
-            homeScreen: false,
-            signUpScreen:false,
-            organizationDetailScreen:true,
-            organizationDetailItemScreen:false,
-            subscriptionDetailScreen:false
-        });
-    },
-    SHOW_ORGANIZATION_FORM: (state, payload) => {
-        return Object.assign({}, state, {
-            loginScreen: false,
-            forgotPasswordScreen: false,
-            forgotMessageScreen: false,
-            homeScreen: false,
-            signUpScreen:false,
-            organizationDetailScreen:true,
-            organizationDetailItemScreen:true,
-            subscriptionDetailScreen:false
-        });
-    },
-    SHOW_SUBSCRIPTION_DETAIL: (state, payload) => {
-        return Object.assign({}, state, {
-            loginScreen: false,
-            forgotPasswordScreen: false,
-            forgotMessageScreen: false,
-            homeScreen: false,
-            signUpScreen:false,
-            organizationDetailScreen:true,
-            organizationDetailItemScreen:false,
-            subscriptionDetailScreen:true
         });
     },
     SHOW_SIGN_UP: (state, payload) => {

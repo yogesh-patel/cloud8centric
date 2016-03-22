@@ -1,90 +1,102 @@
 import React, {Component,View} from 'react';
 import {Navbar, NavItem, Nav, NavDropdown, Glyphicon, Button, MenuItem} from 'react-bootstrap';
-import {Link, Events} from 'react-scroll';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as organizationActionCreators from '../../actions/organization';
 import { push } from 'redux-router';
-import * as appActionCreators from '../../actions/app';
 import OrganizationDetailItem from './OrganizationDetailItem';
 import OrganizationSubscriptionList from './OrganizationSubscriptionList';
 
 class OrganizationDetails extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedOption:'organization',
+            activeKey:1
+        }
+    }
 
-    goToAddSubscriptions() {
+    goToAddOrganizations() {
 
         this.props.routeDispatch(push("/dashboard/organization/create"));
 
     }
 
-    goToSubscriptionPage(e) {
+    getSubscriptionsTab(e) {
 
         e.preventDefault();
-        this.props.appActions.showSubscriptionDetail();
-        this.setState({selectedOption: 'subscription'});
+        this.props.organizationActions.showSubscriptionDetail();
+        this.setState({
+            selectedOption: 'subscription',
+            activeKey: 2
+        });
 
     }
 
-    goToOrganizationDetailPage(e) {
+    getOrganizationDetailsTab(e) {
 
         e.preventDefault();
-        this.props.appActions.showOrganizationDetailItem();
-        this.setState({selectedOption: 'organization'});
-
-    }
-
-    onOptionSelected(selectedKey) {
-
-        this.setState({selectedOption: selectedKey});
+        this.props.organizationActions.showOrganizationDetails();
+        this.setState({
+            selectedOption: 'organization',
+            activeKey: 1
+        });
 
     }
 
     render() {
 
-        var {organizationDetailItemScreen,subscriptionDetailScreen,selectedOrganization} = this.props;
-        var DetailScreen = <OrganizationDetailItem selectedOrganization={selectedOrganization}/>;
+        let DetailScreen = null;
 
-        if (subscriptionDetailScreen)
+        let {selectedOption, activeKey} = this.state;
+        let {subscriptionDetailsTab, organizationDetailsTab} = this.props;
+
+        if(organizationDetailsTab){
+            DetailScreen = <OrganizationDetailItem />;
+        }
+
+        if (subscriptionDetailsTab){
             DetailScreen = <OrganizationSubscriptionList />;
+        }
 
         return (
             <div>
                 <Button bsStyle="primary"
                         className="pull-right"
-                        onClick={this.goToAddSubscriptions.bind(this)}>
+                        onClick={this.goToAddOrganizations.bind(this)}>
                     <Glyphicon glyph="plus"/> Add Organization
                 </Button>
-                <Nav bsStyle="tabs" onSelect={this.onOptionSelected.bind(this)}>
-                    <li role="presentation">
-                        <Link href="#"
-                              onClick={this.goToOrganizationDetailPage.bind(this)}
-                              smooth duration={500}>Organization</Link>
-                    </li>
-                    <li role="presentation">
-                        <Link href="#" onClick={this.goToSubscriptionPage.bind(this)} smooth duration={500}>
-                            Subscription</Link>
-                    </li>
-                </Nav>{DetailScreen}
+
+                <Nav bsStyle="tabs" activeKey={activeKey}>
+                    <NavItem eventKey={1}   title="Organization Details"
+                                            onClick={this.getOrganizationDetailsTab.bind(this)}>
+                        Organization
+                    </NavItem>
+                    <NavItem eventKey={2}   title="Subscriptions"
+                                            onClick={this.getSubscriptionsTab.bind(this)}>
+                        Subscriptions
+                    </NavItem>
+                </Nav>
+
+                {DetailScreen}
+
             </div>
 
-        )
+        );
 
     }
 
 }
 
 const mapStateToProps = (state) => ({
-    organizationDetailItemScreen: state.app.organizationDetailItemScreen,
-    subscriptionDetailScreen: state.app.subscriptionDetailScreen,
-    organizationList: state.organization.organizationList,
-    selectedOrganization: state.organization.selectedOrganization
+    subscriptionDetailsTab: state.organization.subscriptionDetailsTab,
+    organizationDetailsTab: state.organization.organizationDetailsTab
 });
 
 const mapDispatchToProps = (dispatch) => ({
     organizationActions: bindActionCreators(organizationActionCreators, dispatch),
-    appActions: bindActionCreators(appActionCreators, dispatch),
-    routeDispatch: dispatch
+    routeDispatch:dispatch
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationDetails);

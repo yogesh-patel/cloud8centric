@@ -4,8 +4,8 @@ import {Grid, Row, Col, Button, Table, Glyphicon, Jumbotron, Well, ListGroup, Li
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as organizationActionCreators from '../../actions/organization';
-import OrganizationListItem from './OrganizationListItem'
-import OrganizationDetails from './OrganizationDetails'
+import OrganizationListItem from './OrganizationListItem';
+import OrganizationDetails from './OrganizationDetails';
 
 class OrganizationList extends React.Component {
 
@@ -16,7 +16,7 @@ class OrganizationList extends React.Component {
     }
 
     render() {
-        var {organizationList,organizationDetailScreen,selectedOrganization} = this.props;
+        var {organizationList, selectedOrganization} = this.props;
         let organizationListing = _.map(organizationList, (organization) => {
             return <OrganizationListItem organization={organization}
                                          key={organization.id}/>;
@@ -26,19 +26,11 @@ class OrganizationList extends React.Component {
         return (
             <Grid>
                 <Row>
-                    <Col sm={12} md={12} lg={12} xsHidden>
-                        <h3 className="section-title">
-                            Organizations
-                        </h3>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={3} sm={3} md={3}>
+                    <Col xs={3} sm={3} md={3} className="organization-list">
                         {organizationListing}
                     </Col>
-                    <Col xs={6} sm={6} md={6} lg={6} lgOffset={1}>
-                        {selectedOrganization ? <OrganizationDetails organizationDetailItemScreen="true"
-                                                                     selectedOrganization={selectedOrganization}/> :
+                    <Col xs={9} sm={9} md={9} className="organization-right-panel">
+                        {selectedOrganization ? <OrganizationDetails/> :
                             <span></span>}
                     </Col>
                 </Row>
@@ -51,7 +43,6 @@ class OrganizationList extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    organizationDetailScreen: state.app.organizationDetailScreen,
     organizationList: state.organization.organizationList,
     selectedOrganization: state.organization.selectedOrganization
 });

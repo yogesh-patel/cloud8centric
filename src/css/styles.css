@@ -679,6 +679,15 @@ a.btn-xl{
     margin-left: 50px;
 }
 
+.organization-list .list-group{
+    margin-bottom: 5px;
+}
+
+.organization-right-panel{
+    padding: 30px;
+    border: 1px solid grey;
+}
+
 .main-container{
   margin-left: 65px;
 }

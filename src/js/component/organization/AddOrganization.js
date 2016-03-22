@@ -146,7 +146,7 @@ class AddOrganization extends React.Component{
                 <Row>
                     <Col sm={12} md={12} lg={12} xsHidden>
                         <h3 className="section-title">
-                            Organizations / AddOrganization
+                            Organization / Create
                         </h3>
                     </Col>
                 </Row>

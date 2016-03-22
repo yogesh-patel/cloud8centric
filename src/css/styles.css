@@ -678,3 +678,12 @@ a.btn-xl{
     margin-top: 51px;
     margin-left: 50px;
 }
+
+.organization-list .list-group{
+    margin-bottom: 5px;
+}
+
+.organization-right-panel{
+    padding: 30px;
+    border: 1px solid grey;
+}

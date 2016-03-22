@@ -5,39 +5,10 @@ import {Grid, Row, Col, Button, Table, Glyphicon} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { push } from 'redux-router';
-import * as subscriptionActionCreators from '../../actions/subscription';
 import _ from 'lodash';
 import OrganizationSubscriptionItem from './OrganizationSubscriptionItem';
 
 class OrganizationSubscriptionList extends Component {
-
-    componentDidMount() {
-
-        this.getInitialStateForOrganization(this.props);
-
-    }
-
-    getInitialStateForOrganization(props) {
-
-        var {orgObject,selectedOrganization} = props;
-        var organizationID = (selectedOrganization !== undefined) ? selectedOrganization.id : orgObject.content[0].id;
-        this.props.subscriptionActions.fetchSubscriptions(organizationID);
-
-    }
-
-    gotoAddSubscriptions() {
-
-        this.props.subscriptionActions.fetchProductsAndPlans();
-
-    }
-
-    componentWillReceiveProps(nextProps, nextState) {
-
-        if (nextProps.selectedOrganization != this.props.selectedOrganization) {
-            this.setState(this.getInitialStateForOrganization(nextProps));
-        }
-
-    }
 
     render() {
         let {subscriptionList} = this.props;
@@ -75,13 +46,10 @@ class OrganizationSubscriptionList extends Component {
 
 
 const mapStateToProps = (state) => ({
-    subscriptionList: state.subscription.subscriptionList,
-    selectedOrganization: state.organization.selectedOrganization,
-    orgObject: state.auth.orgObject
+    subscriptionList: state.subscription.subscriptionList
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    subscriptionActions: bindActionCreators(subscriptionActionCreators, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationSubscriptionList);

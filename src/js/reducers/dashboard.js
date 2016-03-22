@@ -4,18 +4,21 @@ import {pushState} from 'redux-router';
 import _ from 'lodash';
 
 const initialState = {
-    showProducts:false
+    showProducts:false,
+    productStatus:'Products'
 };
 
 export default createReducer(initialState, {
     'SHOW_PRODUCTS': (state, payload) => {
         return Object.assign({}, state, {
-            showProducts:true
+            showProducts:true,
+            productStatus:payload
         });
     },
     'HIDE_PRODUCTS': (state, payload) => {
         return Object.assign({}, state, {
-            showProducts:false
+            showProducts:false,
+            productStatus:payload
         });
     },
     'REDUCER_CLEAN_SUCCESSFULLY': (state,payload)=>{

@@ -33,8 +33,7 @@ class CommonHeader extends Component{
 
 	onLogout(){
 
-    	//zthis.props.appActions.cleanReducer();
-		this.props.authActions.logout()
+    	this.props.authActions.logout()
 
     }
 

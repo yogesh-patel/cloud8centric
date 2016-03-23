@@ -1,6 +1,3 @@
-/**
- * Created by synerzip on 11/03/16.
- */
 import React, {Component, View} from 'react';
 import {Grid, Row, Col, Button, Table, Glyphicon, Panel} from 'react-bootstrap';
 import { connect } from 'react-redux';
@@ -11,15 +8,20 @@ import _ from 'lodash';
 import SubscriptionDetails from './SubscriptionDetails';
 
 class SubscriptionItem extends React.Component {
+
     constructor(props) {
+
         super(props);
         this.state = {
             open: false
         };
+
     }
 
     onStatusClick() {
-        this.setState({open: !this.state.open})
+
+        this.setState({open: !this.state.open});
+
     }
 
     render() {
@@ -30,12 +32,12 @@ class SubscriptionItem extends React.Component {
 
             <div className="subscriptions-table">
                 <div className="subscriptions-table-serial-no">
-                    {subscription.id}</div>
+                    {subscription.counter}</div>
                 <div className="subscriptions-table-name">
                     {subscription.name}</div>
                 <div className="subscription-table-status">
                     <Button bsSize="small" className="status-btn-width"
-                            bsStyle={ subscription.status=='Ready' ? 'success' :(subscription.status=='In Progress' ? 'warning' : (subscription.status=='Error' ? 'danger': '')) }
+                            bsStyle={ subscription.status=='Ready' ? 'success' :(subscription.status=='In-progress' ? 'warning' : (subscription.status=='Error' ? 'danger': 'default')) }
                             onClick={ this.onStatusClick.bind(this)}>
                         {subscription.status}
                     </Button>
@@ -56,4 +58,12 @@ class SubscriptionItem extends React.Component {
     }
 }
 
-export default SubscriptionItem;
+const mapStateToProps = (state) => ({
+
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    subscriptionAction:bindActionCreators(subscriptionActionCreators,dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SubscriptionItem);

@@ -1,11 +1,11 @@
 import constants from '../constants';
 import { push } from 'redux-router';
-import { get } from './common';
+import { get, post } from './common';
 import _ from 'lodash';
 
 let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS, ADD_NEW_SUBSCRIPTION, PRODUCT_SELECTED, PLAN_SELECTED,
-    PRODUCT_DELETED, CREATE_SUBSCRIPTION, PRODUCTS_AND_PLANS_RECEIVED, SUBSCRIPTIONS_RECEIVED,
-    SUBSCRIPTION_DETAIL_REQUEST_SENT, SUBSCRIPTION_STATUS_RECEIVED, CLEAN_REDUCER_DATA} = constants;
+    PRODUCT_DELETED, SUBSCRIPTION_CREATED, PRODUCTS_AND_PLANS_RECEIVED, SUBSCRIPTIONS_RECEIVED,
+    SUBSCRIPTION_DETAIL_REQUEST_SENT, SUBSCRIPTION_STATUS_RECEIVED, CLEAN_REDUCER_DATA, CREATE_NEW_SUBSCRIPTION} = constants;
 
 export function fetchSubscriptions(organizationId){
 
@@ -20,13 +20,14 @@ export function fetchSubscriptions(organizationId){
             let subscriptionObject = {};
             let contents = response.content;
 
-            _.each(contents,(subscription)=>{
-                if(subscriptionObject[subscription.subscriptionOption]){
-                    subscriptionObject[subscription.subscriptionOption.product.id] = {
-                        id:subscription.subscriptionOption.product.id,
-                        name:subscription.subscriptionOption.product.name,
-                        detail:null,
-                        status:'Ready'
+            _.each(contents,(subscription, key)=>{
+                if(subscription){
+                    subscriptionObject[subscription.id] = {
+                        id:subscription.id,
+                        name:subscription.name,
+                        details:null,
+                        status:'In-progress',
+                        counter:key+1
                     }
                 }
             });
@@ -48,43 +49,25 @@ export function getSubscriptionStatus(subscriptionId){
         let endPointURL = 'product-status/'+subscriptionId;
         let subscriptionObject = null;
 
-        // get(endPointURL)
-        // .then((response)=>{
+        get(endPointURL)
+        .then((response)=>{
 
-            // subscriptionObject = {
-            //     subscriptionId:subscriptionId,
-            //     productDetails:
-
-            // }
-
-        //     dispatch({type:dispatch({type:SUBSCRIPTION_STATUS_RECEIVED,payload:{,
-        //         payload:subscriptionObject
-        //     });
-
-        // })
-
-        let interval = setInterval(()=>{
-            clearInterval(interval);
-            dispatch({type:SUBSCRIPTION_STATUS_RECEIVED,payload:{
+            subscriptionObject = {
                 subscriptionId:subscriptionId,
-                detail:[
-                    {
-                        productId:1,
-                        productName:'Product 0',
-                        status:'Ready',
-                        username:'username',
-                        productURL:'URL'
-                    },
-                    {
-                        productId:2,
-                        productName:'Product 1',
-                        status:'Error',
-                        username:'username',
-                        productURL:'URL'
-                    }
-                ]
-            }});
-        },200);
+                details: response
+
+            }
+
+            dispatch({
+                type:SUBSCRIPTION_STATUS_RECEIVED,
+                payload:subscriptionObject
+            });
+
+        })
+
+        // let interval = setInterval(()=>{
+        //     clearInterval(interval);
+        // },200);
 
     }
 
@@ -159,11 +142,25 @@ export function productDeleted(rowNumber){
 
 }
 
-export function createNewSubscription(subscriptionInfo){
+export function createNewSubscription(organizationId, subscriptionInfo){
 
     return(dispatch) => {
-        dispatch({type:CREATE_SUBSCRIPTION});
-        // API call for creating subscription
+
+        dispatch({type:CREATE_NEW_SUBSCRIPTION});
+
+        let endPointURL = 'organizations/'+organizationId+'/subscriptions';
+
+        post(endPointURL, subscriptionInfo)
+        .then((response)=>{
+
+            dispatch({
+                type:SUBSCRIPTION_CREATED
+            });
+
+        })
+
+        fetchSubscriptions(organizationId);
+
         dispatch(push("dashboard/subscriptions"));
     }
 

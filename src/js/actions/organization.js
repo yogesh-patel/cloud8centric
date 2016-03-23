@@ -21,7 +21,7 @@ export function fetchOrganizations() {
                     .then((orgResponse)=>{
 
                         // Set first organization as active organization
-                        localStorage.setItem('active_organization', organizationList[0]);
+                        localStorage.setItem('active_organization', organizationList[0].id);
 
                         dispatch({
                             type: ORGANIZATIONS_RECEIVED,
@@ -43,7 +43,7 @@ export function fetchOrganizations() {
 export function selectOrganization(organization) {
     return (dispatch)=> {
 
-        localStorage.setItem('active_organization', organization);
+        localStorage.setItem('active_organization', organization.id);
 
         getOrganizationDetails(organization.id)
             .then((orgResponse)=>{

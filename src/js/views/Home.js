@@ -1,6 +1,3 @@
-/**
- * Created by synerzip on 08/12/15.
- */
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';

@@ -12,8 +12,9 @@ import SubscriptionItem from './SubscriptionItem';
 class SubscriptionDetails extends Component {
 
     componentDidMount(){
+
         var {subscription,subscriptionAction} = this.props;
-        if(!subscription.detail){
+        if(!subscription.details){
             subscriptionAction.getSubscriptionStatus(subscription.id);
         }
 
@@ -23,20 +24,22 @@ class SubscriptionDetails extends Component {
         let {subscription} = this.props;
         var rows = [];
 
-        if(subscription.detail){
-            rows = _.map(subscription.detail,(data)=>{
-
+        if(subscription.details){
+            rows = _.map(subscription.details,(data)=>{
                 return (
                     <tr key={data.productId}>
                         <td>{data.productName}</td>
                         <td>{data.productURL}</td>
                         <td>{data.username}</td>
-                        <td><Button bsSize="xsmall" className="cursor-default status-btn-width"
-                                    bsStyle={ data.status=='Ready' ?
-                                    'success' :(data.status=='In Progress' ? 'warning' :
-                                    (data.status=='Error' ? 'danger': '')) }>
-                            {data.status}
-                        </Button></td>
+                        <td>
+                            <Button bsSize="xsmall" className="cursor-default status-btn-width"
+                                    bsStyle={ data.productStatus=='Ready' ?
+                                    'success' :(data.productStatus=='In-progress' ? 'warning' :
+                                    (data.productStatus=='Error' ? 'danger': 'default')) }>
+
+                                {data.productStatus}
+
+                            </Button></td>
                     </tr>
                 );
             })

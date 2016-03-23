@@ -17,7 +17,7 @@ export function authenticateUser(username, password) {
             + '&username=' + username
             + '&password=' + password;
 
-        return fetch('https://localhost:8888/' + url, {
+        return fetch(config.LOGIN_BASE_URL + url, {
             method: 'post',
             headers: {
                 'Authorization': 'Basic bW9iaWxlOmNlbnRyaWM4'
@@ -34,13 +34,14 @@ export function authenticateUser(username, password) {
                 let token_type = result.token_type;
                 localStorage.setItem('token_type', token_type);
 
-
                 getMe()
                     .then((meResponse)=> {
 
                         getOrganizations()
                             .then((orgResponse)=>{
+
                                 localStorage.setItem('firstName', meResponse.firstName);
+
                                 dispatch({
                                     type: LOGIN_USER_SUCCESS,
                                     payload: {
@@ -53,7 +54,13 @@ export function authenticateUser(username, password) {
                                     }
                                 });
 
-                                var url = getDispatchUrl(meResponse.roles);
+                                let url = getDispatchUrl(meResponse.roles);
+
+                                if(getUserRole(meResponse.roles) == "AccountOwner"){
+                                    // Set user organization as active organization
+                                    localStorage.setItem('active_organization', orgResponse.content[0].id);
+                                }
+
                                 dispatch(push(url));
                             })
                     })

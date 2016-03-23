@@ -25,7 +25,9 @@ class CommonHeader extends Component {
 
     onLogout() {
 
+
         this.props.authActions.logout()
+
 
     }
 

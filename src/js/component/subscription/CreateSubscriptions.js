@@ -34,12 +34,19 @@ class CreateSubscriptions extends Component {
 
     createSubscriptions(){
 
+        let organizationId = localStorage.getItem("active_organization");
+        let arrSubscriptionProducts = [];
+
+        _.each(this.props.selectedProducts, (subscriptionProduct)=>{
+            arrSubscriptionProducts.push(subscriptionProduct)
+        });
+
         let subscriptions = {
             name: this.state.subscriptionName,
-            products: this.props.selectedProducts
+            subscriptionProducts:arrSubscriptionProducts
         }
 
-        this.props.subscriptionAction.createNewSubscription(organization);
+        this.props.subscriptionAction.createNewSubscription(organizationId, subscriptions);
 
     }
 
@@ -60,7 +67,7 @@ class CreateSubscriptions extends Component {
         });
 
         var addBtnDisabled = false, registerBtnDisabled=false;
-         _.each(selectedProducts, (data)=>{
+        _.each(selectedProducts, (data)=>{
             if(!data.productName || !data.planName || data.planName == 'select' || data.productName == 'select' || !this.state.subscriptionName || data.disabled){
                 addBtnDisabled = true;
                 registerBtnDisabled = true;
@@ -133,7 +140,8 @@ class CreateSubscriptions extends Component {
 
 const mapStateToProps = (state) => ({
     selectedProducts: state.subscription.selectedProducts,
-    productList: state.subscription.productList
+    productList: state.subscription.productList,
+    orgObject: state.auth.orgObject
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,10 +1,8 @@
-/**
- * Created by nikhila on 05/12/15.
- */
 var gulp = require('gulp');
 var livereload = require('gulp-livereload');
 var nodemon = require('gulp-nodemon');
 var gwebpack = require('gulp-webpack');
+var guglify = require('gulp-uglify');
 var rimraf = require('rimraf');
 var concatCss = require('gulp-concat-css');
 var srcPath = "src";
@@ -17,6 +15,7 @@ var webpack = function(watch) {
     options = {
         watch: watch,
         cache: true,
+        //Comment in PROD
         devtool: "source-map",
         output: {
             filename: "app.js",
@@ -44,7 +43,11 @@ var webpack = function(watch) {
             ]
         }
     };
-    return gulp.src(srcPath + "/app.js").pipe(gwebpack(options)).pipe(gulp.dest(distPath));
+    return gulp.src(srcPath + "/app.js")
+        .pipe(gwebpack(options))
+        //Uncomment in PROD
+        //.pipe(guglify({mangle: true}))
+        .pipe(gulp.dest(distPath));
 };
 
 gulp.task('jsbundle', function() {
@@ -86,7 +89,7 @@ gulp.task('server', function() {
             "js": "node --harmony"
         },
         env: {
-            PORT: process.env.PORT || 3001
+            PORT: process.env.PORT || 9000
         }
     });
 });

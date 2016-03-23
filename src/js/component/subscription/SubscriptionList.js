@@ -12,8 +12,10 @@ import SubscriptionItem from './SubscriptionItem';
 class SubscriptionList extends Component {
 
     componentDidMount(){
-        var {orgObject} = this.props;
-        this.props.subscriptionActions.fetchSubscriptions(orgObject.content[0].id);
+
+        let organizationId = localStorage.getItem("active_organization");
+        this.props.subscriptionActions.fetchSubscriptions(organizationId);
+
     }
 
     gotoAddSubscriptions() {

@@ -7,7 +7,7 @@ const initialState = {
                         1:{}
                     },
     count: 1,
-    subscriptionList: null,
+    subscriptionList: [],
     productList:[],
     productTierList:[]
 };
@@ -27,7 +27,7 @@ export default createReducer(initialState, {
         var _state = _.cloneDeep(state);
         _state.subscriptionDetailLoading = false;
 
-        _state.subscriptionList[payload.subscriptionId].detail = payload.detail;
+        _state.subscriptionList[payload.subscriptionId].details = payload.details;
 
         return _state;
     },
@@ -101,21 +101,21 @@ export default createReducer(initialState, {
     },
     PLAN_SELECTED: (state, payload) => {
         var _state = _.cloneDeep(state);
-        let planId = null;
+        let productPlanId = null;
 
         // Get the product tier id for selected product tier
         _.map(_state.productList, (product) => {
             if(product.id == payload.productId){
                 _.map(product.productPlans, (plan)=>{
                     if(plan.name == payload.planName){
-                        planId = plan.id;
+                        productPlanId = plan.id;
                     }
                 });
             }
         });
 
         _state.selectedProducts[payload.rowNumber].planName = payload.planName;
-        _state.selectedProducts[payload.rowNumber].planId = planId;
+        _state.selectedProducts[payload.rowNumber].productPlanId = productPlanId;
 
         return _state;
     },
@@ -131,7 +131,7 @@ export default createReducer(initialState, {
 
         return _state;
     },
-    CREATE_SUBSCRIPTION: (state, payload) => {
+    SUBSCRIPTION_CREATED: (state, payload) => {
         var _state = _.cloneDeep(state);
 
         return _state;

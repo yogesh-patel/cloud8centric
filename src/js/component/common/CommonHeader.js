@@ -9,69 +9,64 @@ import * as authActionCreator from '../../actions/auth';
 import * as appActionCreator from '../../actions/app';
 import {Link, Events,scroller} from 'react-scroll';
 
-class CommonHeader extends Component{
+class CommonHeader extends Component {
 
-    constructor(props){
 
-        super(props);
-        this.state= {
-            productStatus:'Products'
+    toggleLeftNavigation() {
+
+        if (this.props.showNavigation) {
+            this.props.headerActions.showNavigationMenu(false);
+        }
+        else {
+            this.props.headerActions.showNavigationMenu(true);
         }
 
     }
 
-    toggleLeftNavigation(){
+    onLogout() {
 
-        if(this.props.toggleClass == ''){
-            this.props.headerActions.showNavigationMenu();
-        }
-        else if(this.props.toggleClass == 'open'){
-            this.props.headerActions.hideNavigationMenu();
-        }
+        this.props.authActions.logout()
 
     }
 
-	onLogout(){
-
-    	//zthis.props.appActions.cleanReducer();
-		this.props.authActions.logout()
-
-    }
-
-    onProductSelected(e){
+    onProductSelected(e) {
 
         e.preventDefault();
-        var {productStatus} = this.props;
-        if(this.props.productStatus === 'Products'){
-            this.setState({productStatus:"Hide Products"})
-            this.props.headerActions.showProducts("Hide Products");
-            var interval = setInterval(()=>{
-                clearInterval(interval);
-                scroller.scrollTo("products",true, 500, -50);
-            },0);
+        var {showProducts} = this.props;
+        if (this.props.showProducts) {
+            this.props.headerActions.showProducts(false);
         }
-        else{
-            this.setState({productStatus:"Products"})
-            this.props.headerActions.hideProducts("Products");
+        else {
+            this.props.headerActions.showProducts(true);
+            var interval = setInterval(()=> {
+                clearInterval(interval);
+                scroller.scrollTo("products", true, 500, -50);
+            }, 0);
         }
 
     }
 
 
+    render() {
+        var {showProducts} = this.props;
+        var productLinkText = null;
 
-    render(){
-        var {productStatus} = this.props;
-        var productLink = <span onClick={this.onProductSelected.bind(this)}>{this.props.productStatus}</span>;
+        if (showProducts)
+            productLinkText = "Hide Products";
+        else
+            productLinkText = "Products";
+
+        var productLink = <span onClick={this.onProductSelected.bind(this)}>{productLinkText}</span>;
         var {userObject} = this.props;
 
-        return(
+        return (
 
             <div className="common-header">
                 <Navbar inverse fixedTop fluid className={'home-menu inverse-menu'}>
                     <Navbar.Header>
                         <Navbar.Brand>
                             <Glyphicon glyph="align-justify pointer" onClick={this.toggleLeftNavigation.bind(this)}/>
-                            <img className='logo common-header-logo' src='img/logo.png' alt="" />
+                            <img className='logo common-header-logo' src='img/logo.png' alt=""/>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
@@ -80,9 +75,10 @@ class CommonHeader extends Component{
                             <NavItem eventKey={1}>
                                 {productLink}
                             </NavItem>
-                            <NavDropdown eventKey={2} title={"Welcome "+localStorage.getItem("firstName")} id="basic-nav-dropdown">
+                            <NavDropdown eventKey={2} title={"Welcome "+localStorage.getItem("firstName")}
+                                         id="basic-nav-dropdown">
                                 <MenuItem eventKey={2.1}>Profile</MenuItem>
-                                <MenuItem divider />
+                                <MenuItem divider/>
                                 <MenuItem eventKey={2.2} onClick={this.onLogout.bind(this)}>Logout</MenuItem>
                             </NavDropdown>
                         </Nav>
@@ -91,20 +87,20 @@ class CommonHeader extends Component{
             </div>
         );
 
-        }
-
     }
 
+}
+
 const mapStateToProps = (state) => ({
-	toggleClass:state.header.toggleClass,
-	userObject:state.auth.userObject,
-    productStatus:state.dashboard.productStatus
+    showNavigation: state.header.showNavigation,
+    userObject: state.auth.userObject,
+    showProducts: state.header.showProducts
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	headerActions: bindActionCreators(headerActionCreators, dispatch),
-	authActions: bindActionCreators(authActionCreator, dispatch),
-	appActions : bindActionCreators(appActionCreator, dispatch)
+    headerActions: bindActionCreators(headerActionCreators, dispatch),
+    authActions: bindActionCreators(authActionCreator, dispatch),
+    appActions: bindActionCreators(appActionCreator, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommonHeader);

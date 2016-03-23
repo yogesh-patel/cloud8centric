@@ -23,7 +23,7 @@ class LeftNavigation extends Component {
     getSubscriptionList() {
 
         this.props.dashboardActions.showSubscription();
-        this.props.headerActions.hideProducts("Products");
+        this.props.headerActions.showProducts(false);
         this.setState({selectedOption: 'subscription'});
 
     }
@@ -31,7 +31,7 @@ class LeftNavigation extends Component {
     getOrganizationsList() {
 
         this.props.dashboardActions.showOrganization();
-        this.props.headerActions.hideProducts("Products");
+        this.props.headerActions.showProducts(false);
         this.setState({selectedOption: 'organization'});
 
     }
@@ -39,16 +39,18 @@ class LeftNavigation extends Component {
     showHome() {
 
         this.props.dashboardActions.showHome();
-        this.props.headerActions.hideProducts("Products");
+        this.props.headerActions.showProducts(false);
         this.setState({selectedOption: 'home'});
     }
 
     render() {
         let leftBar = null;
-        let {toggleClass, userRole} = this.props;
+        let {showNavigation, userRole} = this.props;
+        let showNavigationClass = showNavigation?'open':'';
+
         let {selectedOption} = this.state;
         let roleName = _.map(userRole, (roles) => {
-           return roles.name;
+            return roles.name;
         });
         if (roleName == "Admin") {
             this.state.selectedOption = 'organization';
@@ -63,7 +65,7 @@ class LeftNavigation extends Component {
                 </a>
             </li>
         }
-        else {
+        else if(roleName == "AccountOwner") {
             this.state.selectedOption = 'subscription';
             leftBar = <li onClick={this.getSubscriptionList.bind(this)}
                           className={selectedOption == 'subscription' ? "active":""}>
@@ -79,7 +81,7 @@ class LeftNavigation extends Component {
         return (
 
             <div className="left-navigation">
-                <Navbar inverse className={'navbar-twitch '+toggleClass} role="navigation">
+                <Navbar inverse className={'navbar-twitch ' + showNavigationClass} role="navigation">
                     <Nav>
                         <li onClick={this.showHome.bind(this)} className={selectedOption == 'home' ? "active":""}>
                             <a className="pointer">
@@ -100,7 +102,7 @@ class LeftNavigation extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    toggleClass: state.header.toggleClass,
+    showNavigation: state.header.showNavigation,
     userRole: state.auth.userRole
 });
 

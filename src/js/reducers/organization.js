@@ -7,7 +7,8 @@ const initialState = {
     selectedOrganization:null,
     organizationDetails:null,
     organizationDetailsTab:true,
-    subscriptionDetailsTab:false
+    subscriptionDetailsTab:false,
+    statusText: null
 };
 
 export default createReducer(initialState, {
@@ -16,15 +17,19 @@ export default createReducer(initialState, {
         var newState = _.cloneDeep(state);
 
         if(newState.selectedOrganization === null){
-            newState.organizationList = payload.organizationList;
             newState.selectedOrganization = payload.selectedOrganization;
             newState.organizationDetails = payload.organizationDetails;
         }
 
+        newState.organizationList = payload.organizationList;
+
         return newState;
+
     },
     REDUCER_CLEAN_SUCCESSFULLY: (state,payload)=>{
+
         return _.cloneDeep(initialState);
+
     },
     ORGANIZATION_SELECTED:(state,payload)=>{
 
@@ -49,6 +54,13 @@ export default createReducer(initialState, {
             organizationDetailsTab:false,
             subscriptionDetailsTab:true
         });
+
+    },
+    ORGANIZATION_CREATION_FAILED: (state,payload)=>{
+
+        var newState = _.cloneDeep(state);
+        newState.statusText = payload;
+        return newState;
 
     }
 

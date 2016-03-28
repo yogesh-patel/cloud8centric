@@ -44,19 +44,38 @@ class SubscriptionList extends Component {
         }
 
 
+        let userRoles = localStorage.getItem("roles");
+
+        let roleName = _.map(JSON.parse(userRoles), (role) => {
+           return role.name;
+        });
+
+        let contentClass, breadcrumb, addBtnClass = null;
+
+        if (roleName[0] === "Admin") {
+            contentClass = "";
+            addBtnClass = "admin-right-panel";
+            breadcrumb = <span></span>;
+        }
+        else{
+            contentClass = "main-container";
+            addBtnClass = "";
+            breadcrumb = <Row>
+                <Col sm={12} md={12} lg={12} xsHidden>
+                    <h3 className="section-title">
+                        Subscriptions
+                    </h3>
+                </Col>
+            </Row>
+        }
+
         return (
-            <div className="main-container">
-                <Row>
-                    <Col sm={12} md={12} lg={12} xsHidden>
-                        <h3 className="section-title">
-                            Subscriptions
-                        </h3>
-                    </Col>
-                </Row>
+            <div className={contentClass}>
+
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Button bsStyle="primary"
-                                className="pull-right"
+                                className={"pull-right "+addBtnClass}
                                 onClick={this.gotoAddSubscriptions.bind(this)}>
                                 <Glyphicon glyph="plus"/> Add Subscription
                         </Button>
@@ -67,8 +86,10 @@ class SubscriptionList extends Component {
                         <div className="subscription-table">
                             <div className="subscription-table-header text-bold">
                                 <div className="subscriptions-table-serial-no">Serial No.</div>
-                                <div className="subscriptions-table-name">Subscription Name</div>
-                                <div className="subscription-table-status subscription-status-header">Subscription Status</div>
+                                <div className="subscriptions-table-name">Subscription</div>
+                                <div className="subscriptions-table-product">Product</div>
+                                <div className="subscriptions-table-version">Version</div>
+                                <div className="subscription-table-status subscription-status-header">Status</div>
                                 <div className="clear-both"/>
                             </div>
 

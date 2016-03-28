@@ -32,9 +32,17 @@ class SubscriptionItem extends React.Component {
 
             <div className="subscriptions-table">
                 <div className="subscriptions-table-serial-no">
-                    {subscription.counter}</div>
+                    {subscription.counter}
+                </div>
                 <div className="subscriptions-table-name">
-                    {subscription.name}</div>
+                    {subscription.name}
+                </div>
+                <div className="subscriptions-table-product">
+                    C8 server
+                </div>
+                <div className="subscriptions-table-version">
+                    1.1
+                </div>
                 <div className="subscription-table-status">
                     <Button bsSize="small" className="status-btn-width"
                             bsStyle={ subscription.status=='Ready' ? 'success' :(subscription.status=='In-progress' ? 'warning' : (subscription.status=='Error' ? 'danger': 'default')) }
@@ -43,7 +51,7 @@ class SubscriptionItem extends React.Component {
                     </Button>
                 </div>
 
-                <div style={{clear:'both',marginTop:-30}}>
+                <div className="subscription-details">
                     <Panel className="subscription-detail-box" collapsible
                            expanded={this.state.open}>
                         {

@@ -13,14 +13,14 @@ import AddOrganization from './js/component/organization/AddOrganization';
             <Route path="/" component={App}>
                 <IndexRoute component={Home}/>
 
-            <Route path="dashboard" component={Dashboard}>
-                <IndexRoute component={DashboardHome}/>
-                <Route path="home" component={DashboardHome}/>
-                <Route path="subscriptions" component={SubscriptionList}/>
-                <Route path="subscriptions/create" component={CreateSubscriptions}/>
-                <Route path="organizations" component={OrganizationList}/>
-                <Route path="organization/create" component={AddOrganization}/>
-            </Route>
+                <Route path="dashboard" component={Dashboard}>
+                    <IndexRoute component={DashboardHome}/>
+                    <Route path="home" component={DashboardHome}/>
+                    <Route path="subscriptions" component={SubscriptionList}/>
+                    <Route path="subscriptions/create" component={CreateSubscriptions}/>
+                    <Route path="organizations" component={OrganizationList}/>
+                    <Route path="organization/create" component={AddOrganization}/>
+                </Route>
             </Route>
         </Router>
     );

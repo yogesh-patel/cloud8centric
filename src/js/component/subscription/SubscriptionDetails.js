@@ -28,18 +28,8 @@ class SubscriptionDetails extends Component {
             rows = _.map(subscription.details,(data)=>{
                 return (
                     <tr key={data.productId}>
-                        <td>{data.productName}</td>
                         <td>{data.productURL}</td>
                         <td>{data.username}</td>
-                        <td>
-                            <Button bsSize="xsmall" className="cursor-default status-btn-width"
-                                    bsStyle={ data.productStatus=='Ready' ?
-                                    'success' :(data.productStatus=='In-progress' ? 'warning' :
-                                    (data.productStatus=='Error' ? 'danger': 'default')) }>
-
-                                {data.productStatus}
-
-                            </Button></td>
                     </tr>
                 );
             })
@@ -51,10 +41,8 @@ class SubscriptionDetails extends Component {
                     <Table responsive striped bordered condensed hover className="subscription-products-table">
                         <thead className="subscription-products-table-thead">
                         <tr>
-                            <th><b>Product Name</b></th>
                             <th><b>Product URL</b></th>
                             <th><b>User Name</b></th>
-                            <th><b>Product Status</b></th>
                         </tr>
                         </thead>
                         <tbody>

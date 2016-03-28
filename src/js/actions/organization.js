@@ -1,8 +1,9 @@
 import { get, post } from './common';
 import constants from '../constants';
 import { push } from 'redux-router';
+import { checkHttpStatus, parseJSON } from '../utils';
 
-let {FETCH_ORGANIZATIONS, ORGANIZATIONS_RECEIVED, ORGANIZATION_SELECTED, SHOW_ORGANIZATION_DETAILS, SHOW_SUBSCRIPTION_DETAILS} = constants;
+let {FETCH_ORGANIZATIONS, ORGANIZATIONS_RECEIVED, ORGANIZATION_SELECTED, SHOW_ORGANIZATION_DETAILS, SHOW_SUBSCRIPTION_DETAILS, ORGANIZATION_CREATED, ORGANIZATION_CREATION_FAILED} = constants;
 
 export function fetchOrganizations() {
 
@@ -69,10 +70,20 @@ export function addOrganizationData(organization) {
 
         post(endPointURL, organization)
             .then((response)=> {
+                dispatch({
+                    type:ORGANIZATION_CREATED
+                })
+
                 dispatch(push("/dashboard/organizations"));
-            }).catch(error => {
-            dispatch({});
-        })
+
+            }).catch(error=>{
+                parseJSON(error).then((errorObj)=>{
+                     dispatch({
+                        type:ORGANIZATION_CREATION_FAILED,
+                        payload: errorObj.message
+                    });
+                })
+            })
     }
 
 }

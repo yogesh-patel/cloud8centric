@@ -45,54 +45,51 @@ class LeftNavigation extends Component {
 
     render() {
         let leftBar = null;
-        let {toggleClass, userRole} = this.props;
+        let {toggleClass} = this.props;
+
         let {selectedOption} = this.state;
-        let roleName = _.map(userRole, (roles) => {
-           return roles.name;
+
+        let userRoles = localStorage.getItem("roles");
+
+        let roleName = _.map(JSON.parse(userRoles), (role) => {
+           return role.name;
         });
-        if (roleName == "Admin") {
-            this.state.selectedOption = 'organization';
-            leftBar = <li onClick={this.getOrganizationsList.bind(this)}
-                          className={selectedOption == 'organization' ? "active":""}>
-                <a className="pointer">
-                                <span className="small-nav" data-toggle="tooltip" data-placement="right"
-                                      title="Organizations">
-                                    <span className="fa fa-users"></span>
-                                </span>
-                    <span className="full-nav"> Organizations </span>
-                </a>
-            </li>
+
+        if (roleName[0] === "Admin") {
+            leftBar = <span></span>
         }
         else {
             this.state.selectedOption = 'subscription';
-            leftBar = <li onClick={this.getSubscriptionList.bind(this)}
-                          className={selectedOption == 'subscription' ? "active":""}>
-                <a className="pointer">
-                                <span className="small-nav" data-toggle="tooltip" data-placement="right"
-                                      title="Subscriptions">
-                                    <span className="fa-fw fa fa-rss"></span>
-                                </span>
-                    <span className="full-nav"> Subscriptions </span>
-                </a>
-            </li>
+            leftBar =
+                <div className="left-navigation">
+                    <Navbar inverse className={'navbar-twitch '+toggleClass} role="navigation">
+                        <Nav>
+                            <li onClick={this.showHome.bind(this)} className={selectedOption == 'home' ? "active":""}>
+                                <a className="pointer">
+                                    <span className="small-nav" data-toggle="tooltip" data-placement="right" title="Home">
+                                        <span className="glyphicon glyphicon-home"></span>
+                                    </span>
+                                    <span className="full-nav"> Home </span>
+                                </a>
+                            </li>
+                            <li onClick={this.getSubscriptionList.bind(this)}
+                              className={selectedOption == 'subscription' ? "active":""}>
+                                <a className="pointer">
+                                                <span className="small-nav" data-toggle="tooltip" data-placement="right"
+                                                      title="Subscriptions">
+                                                    <span className="fa-fw fa fa-rss"></span>
+                                                </span>
+                                    <span className="full-nav"> Subscriptions </span>
+                                </a>
+                            </li>
+                        </Nav>
+                    </Navbar>
+                </div>
         }
         return (
-
-            <div className="left-navigation">
-                <Navbar inverse className={'navbar-twitch '+toggleClass} role="navigation">
-                    <Nav>
-                        <li onClick={this.showHome.bind(this)} className={selectedOption == 'home' ? "active":""}>
-                            <a className="pointer">
-                                <span className="small-nav" data-toggle="tooltip" data-placement="right" title="Home">
-                                    <span className="glyphicon glyphicon-home"></span>
-                                </span>
-                                <span className="full-nav"> Home </span>
-                            </a>
-                        </li>
-                        {leftBar}
-                    </Nav>
-                </Navbar>
-            </div>
+            <span>
+                {leftBar}
+            </span>
         );
 
     }

@@ -61,17 +61,33 @@ class CommonHeader extends Component{
     render(){
         var {productStatus} = this.props;
         var productLink = <span onClick={this.onProductSelected.bind(this)}>{this.props.productStatus}</span>;
-        var {userObject} = this.props;
+
+        let userRoles = localStorage.getItem("roles");
+
+        let roleName = _.map(JSON.parse(userRoles), (role) => {
+           return role.name;
+        });
+
+        let navBrand = null;
+
+        if (roleName[0] === "Admin") {
+            navBrand =  <Navbar.Brand>
+                            <img className='logo admin-common-header-logo' src='img/logo.png' alt="" />
+                        </Navbar.Brand>
+        }
+        else{
+            navBrand =  <Navbar.Brand>
+                            <Glyphicon glyph="align-justify pointer" onClick={this.toggleLeftNavigation.bind(this)}/>
+                            <img className='logo common-header-logo' src='img/logo.png' alt="" />
+                        </Navbar.Brand>
+        }
 
         return(
 
             <div className="common-header">
                 <Navbar inverse fixedTop fluid className={'home-menu inverse-menu'}>
                     <Navbar.Header>
-                        <Navbar.Brand>
-                            <Glyphicon glyph="align-justify pointer" onClick={this.toggleLeftNavigation.bind(this)}/>
-                            <img className='logo common-header-logo' src='img/logo.png' alt="" />
-                        </Navbar.Brand>
+                        {navBrand}
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>
@@ -96,8 +112,7 @@ class CommonHeader extends Component{
 
 const mapStateToProps = (state) => ({
 	toggleClass:state.header.toggleClass,
-	userObject:state.auth.userObject,
-    productStatus:state.dashboard.productStatus
+	productStatus:state.dashboard.productStatus
 });
 
 const mapDispatchToProps = (dispatch) => ({

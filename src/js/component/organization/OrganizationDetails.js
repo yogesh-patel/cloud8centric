@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as organizationActionCreators from '../../actions/organization';
 import { push } from 'redux-router';
 import OrganizationDetailItem from './OrganizationDetailItem';
-import OrganizationSubscriptionList from './OrganizationSubscriptionList';
+import SubscriptionList from '../subscription/SubscriptionList';
 
 class OrganizationDetails extends React.Component {
 
@@ -15,12 +15,6 @@ class OrganizationDetails extends React.Component {
             selectedOption:'organization',
             activeKey:1
         }
-    }
-
-    goToAddOrganizations() {
-
-        this.props.routeDispatch(push("/dashboard/organization/create"));
-
     }
 
     getSubscriptionsTab(e) {
@@ -57,16 +51,11 @@ class OrganizationDetails extends React.Component {
         }
 
         if (subscriptionDetailsTab){
-            DetailScreen = <OrganizationSubscriptionList />;
+            DetailScreen = <SubscriptionList />;
         }
 
         return (
             <div>
-                <Button bsStyle="primary"
-                        className="pull-right"
-                        onClick={this.goToAddOrganizations.bind(this)}>
-                    <Glyphicon glyph="plus"/> Add Organization
-                </Button>
 
                 <Nav bsStyle="tabs" activeKey={activeKey}>
                     <NavItem eventKey={1}   title="Organization Details"

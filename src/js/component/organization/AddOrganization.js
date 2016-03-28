@@ -39,22 +39,22 @@ class AddOrganization extends React.Component{
         e.preventDefault();
 
         if(this.state.addressLine1 == ''){
-            this.setState({addressLine1Error:"Please enter Address"});
+            this.setState({addressLine1Error:"Address is mandatory"});
         }
         if(this.state.organizationName == ''){
-            this.setState({organizationNameError:"Please enter Organization Name"});
+            this.setState({organizationNameError:"Organization Name is mandatory"});
         }
         if(this.state.phoneNumber.length !== 10){
             this.setState({phoneNumberError:"Phone number must be 10 digits"});
         }
         if(this.state.country == ''){
-            this.setState({onCountryError:"Please enter Country"});
+            this.setState({onCountryError:"Country is mandatory"});
         }
         if(this.state.zipCode == ''){
-            this.setState({zipCodeError:"Please enter Zip-Code"});
+            this.setState({zipCodeError:"Zip Code is mandatory"});
         }
         if(this.state.city == ''){
-            this.setState({onCityError:"Please enter City"});
+            this.setState({onCityError:"City is mandatory"});
         }
         if(this.state.addressLine1!='' && this.state.organizationName!='' && this.state.phoneNumber.length ==   10 &&
                 this.state.country != '' && this.state.zipCode != '' && this.state.city != ''){
@@ -142,7 +142,7 @@ class AddOrganization extends React.Component{
 
     render(){
         return(
-            <Grid>
+            <div className="main-container">
                 <Row>
                     <Col sm={12} md={12} lg={12} xsHidden>
                         <h3 className="section-title">
@@ -151,7 +151,12 @@ class AddOrganization extends React.Component{
                     </Col>
                 </Row>
                 <form >
-                    <Panel header={"Add New Organization"}>
+                    <Panel header={"Add Organization"}>
+                        <Row>
+                            <Col xs={6}>
+                                <p className="help-block">{this.props.statusText}</p>
+                            </Col>
+                        </Row>
                         <Row>
                             <Col xs={6}>
                                 <Input label="Organization Name*" className="red-text" help={this.state.organizationNameError} wrapperClassName="wrapper">
@@ -310,14 +315,14 @@ class AddOrganization extends React.Component{
                         </Button>
                     </Panel>
                 </form>
-            </Grid>
+            </div>
         );
 
     }
 
 }
 const mapStateToProps = (state) => ({
-
+    statusText: state.organization.statusText
 });
 
 const mapDispatchToProps = (dispatch) => ({

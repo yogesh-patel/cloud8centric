@@ -549,20 +549,35 @@ a.btn-xl{
 }
 
 .subscriptions-table-name{
-    width:60%;
+    width:30%;
     padding:20px 0 20px 15px;
+    float:left;
+    border-right:1px solid #212121;
+}
+
+.subscriptions-table-product{
+    width:30%;
+    padding: 20px 0 20px 15px;
+    float:left;
+    border-right:1px solid #212121;
+}
+
+.subscriptions-table-version{
+    width:10%;
+    padding: 20px 0 20px 15px;
     float:left;
     border-right:1px solid #212121;
 }
 
 .subscription-table-status{
     padding:15px 0 15px 20px;
-    width:30%;
+    width:10%;
     float:left;
 }
 
 .subscription-products-table{
     background-color:#FFFFFF;
+    margin-bottom: 0px;
 }
 
 .subscription-products-table-thead{
@@ -626,6 +641,7 @@ a.btn-xl{
   font-size: 15px;
   color: #a94442;
 }
+
 .blue-circle-color {
     width: 30px;
     height: 30px;
@@ -679,10 +695,6 @@ a.btn-xl{
     margin-left: 50px;
 }
 
-.organization-list .list-group{
-    margin-bottom: 5px;
-}
-
 .organization-right-panel{
     padding: 30px;
     border: 1px solid grey;
@@ -690,4 +702,43 @@ a.btn-xl{
 
 .main-container{
   margin-left: 65px;
+  margin-top: 70px;
+}
+
+.subscription-details{
+    clear:both;
+    margin-top:-30px;
+}
+
+.content-footer{
+    margin-bottom: 20px;
+}
+
+.orgs-content{
+    margin-top: 65px;
+}
+
+.admin-common-header-logo {
+    margin-left: 0 !important;
+}
+
+.admin-right-panel{
+    margin-top: 16px;
+}
+
+.organization-list button.list-group-item{
+    background-color: #263238;
+    color: white;
+}
+
+.organization-list  .list-group-item{
+    border: 1px solid black;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+    background-image: linear-gradient(to bottom,black 0,black 100%);
+}
+
+.admin-add-subscription-content{
+    margin-top: 30px;
 }

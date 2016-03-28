@@ -5,43 +5,22 @@ import { bindActionCreators } from 'redux';
 import * as organizationActionCreators from '../../actions/organization';
 import { push } from 'redux-router';
 import OrganizationDetailItem from './OrganizationDetailItem';
-import OrganizationSubscriptionList from './OrganizationSubscriptionList';
+import SubscriptionList from '../subscription/SubscriptionList';
 
 class OrganizationDetails extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedOption:'organization',
-            activeKey:1
-        }
-    }
-
-    goToAddOrganizations() {
-
-        this.props.routeDispatch(push("/dashboard/organization/create"));
-
-    }
 
     getSubscriptionsTab(e) {
 
         e.preventDefault();
-        this.props.organizationActions.showSubscriptionDetail();
-        this.setState({
-            selectedOption: 'subscription',
-            activeKey: 2
-        });
+        this.props.organizationActions.showSubscriptionDetail('subscription', 2);
 
     }
 
     getOrganizationDetailsTab(e) {
 
         e.preventDefault();
-        this.props.organizationActions.showOrganizationDetails();
-        this.setState({
-            selectedOption: 'organization',
-            activeKey: 1
-        });
+        this.props.organizationActions.showOrganizationDetails('organization', 1);
 
     }
 
@@ -49,24 +28,21 @@ class OrganizationDetails extends React.Component {
 
         let DetailScreen = null;
 
-        let {selectedOption, activeKey} = this.state;
-        let {subscriptionDetailsTab, organizationDetailsTab} = this.props;
+        let {subscriptionDetailsTab, organizationDetailsTab, selectedOption, activeKey} = this.props;
 
         if(organizationDetailsTab){
             DetailScreen = <OrganizationDetailItem />;
         }
 
         if (subscriptionDetailsTab){
-            DetailScreen = <OrganizationSubscriptionList />;
+            DetailScreen = <SubscriptionList />;
         }
+
+        console.log(selectedOption);
+        console.log(activeKey);
 
         return (
             <div>
-                <Button bsStyle="primary"
-                        className="pull-right"
-                        onClick={this.goToAddOrganizations.bind(this)}>
-                    <Glyphicon glyph="plus"/> Add Organization
-                </Button>
 
                 <Nav bsStyle="tabs" activeKey={activeKey}>
                     <NavItem eventKey={1}   title="Organization Details"
@@ -91,7 +67,9 @@ class OrganizationDetails extends React.Component {
 
 const mapStateToProps = (state) => ({
     subscriptionDetailsTab: state.organization.subscriptionDetailsTab,
-    organizationDetailsTab: state.organization.organizationDetailsTab
+    organizationDetailsTab: state.organization.organizationDetailsTab,
+    selectedOption: state.organization.selectedOption,
+    activeKey: state.organization.activeKey
 });
 
 const mapDispatchToProps = (dispatch) => ({

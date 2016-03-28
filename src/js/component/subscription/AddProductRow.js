@@ -62,6 +62,22 @@ class AddProductRow extends React.Component{
 
 
         return (
+            <Col xs={12} sm={12} md={6} className="subscription-product-inputs">
+                <Input  type="select" label="Select Product"
+                        placeholder="Select Product"
+                        value={this.state.product}
+                        className="subscription-product-inputs"
+                        disabled={selectedProducts[rowNumber].disabled}
+                        onChange={this.onProductSelected.bind(this)}>
+                    <option value="select">Select Product</option>
+
+                    {productsDropDownValues}
+
+                </Input>
+                <div className="duplicate-product">{errorMessage}</div>
+
+
+            {/*
             <Row>
                 <Col xs={12} sm={5} md={4} className="subscription-product-inputs">
                     <Input  type="select" label="Select Product"
@@ -110,6 +126,8 @@ class AddProductRow extends React.Component{
 
                 </Col>
             </Row>
+            */}
+            </Col>
         )
 
     }

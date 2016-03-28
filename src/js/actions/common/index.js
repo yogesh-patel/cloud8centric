@@ -73,7 +73,7 @@ export function post(nodeURL,data) {
             },
             body:JSON.stringify(data)
 
-        }).then(checkHttpStatus)
+        })  .then(checkHttpStatus)
             .then((response) => {
                 return parseJSON(response);
             })

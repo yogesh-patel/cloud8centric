@@ -7,7 +7,10 @@ const initialState = {
     selectedOrganization:null,
     organizationDetails:null,
     organizationDetailsTab:true,
-    subscriptionDetailsTab:false
+    subscriptionDetailsTab:false,
+    statusText: null,
+    selectedOption:'organization',
+    activeKey:1
 };
 
 export default createReducer(initialState, {
@@ -16,15 +19,19 @@ export default createReducer(initialState, {
         var newState = _.cloneDeep(state);
 
         if(newState.selectedOrganization === null){
-            newState.organizationList = payload.organizationList;
             newState.selectedOrganization = payload.selectedOrganization;
             newState.organizationDetails = payload.organizationDetails;
         }
 
+        newState.organizationList = payload.organizationList;
+
         return newState;
+
     },
     REDUCER_CLEAN_SUCCESSFULLY: (state,payload)=>{
+
         return _.cloneDeep(initialState);
+
     },
     ORGANIZATION_SELECTED:(state,payload)=>{
 
@@ -39,7 +46,9 @@ export default createReducer(initialState, {
 
         return Object.assign({}, state, {
             organizationDetailsTab:true,
-            subscriptionDetailsTab:false
+            subscriptionDetailsTab:false,
+            selectedOption: payload.selectedOption,
+            activeKey: payload.activeKey
         });
 
     },
@@ -47,8 +56,17 @@ export default createReducer(initialState, {
 
         return Object.assign({}, state, {
             organizationDetailsTab:false,
-            subscriptionDetailsTab:true
+            subscriptionDetailsTab:true,
+            selectedOption: payload.selectedOption,
+            activeKey: payload.activeKey
         });
+
+    },
+    ORGANIZATION_CREATION_FAILED: (state,payload)=>{
+
+        var newState = _.cloneDeep(state);
+        newState.statusText = payload;
+        return newState;
 
     }
 

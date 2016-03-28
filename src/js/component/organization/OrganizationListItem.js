@@ -20,10 +20,10 @@ class OrganizationListItem extends React.Component {
 
         if(subscriptionDetailsTab){
             subscriptionActions.fetchSubscriptions(organization.id);
-            organizationActions.showSubscriptionDetail();
+            organizationActions.showSubscriptionDetail('subscription', 2);
         }
         else{
-            organizationActions.showOrganizationDetails();
+            organizationActions.showOrganizationDetails('organization', 1);
         }
 
     }
@@ -51,7 +51,9 @@ class OrganizationListItem extends React.Component {
 
 const mapStateToProps = (state) => ({
     selectedOrganization: state.organization.selectedOrganization,
-    subscriptionDetailsTab: state.organization.subscriptionDetailsTab
+    subscriptionDetailsTab: state.organization.subscriptionDetailsTab,
+    selectedOption: state.organization.selectedOption,
+    activeKey: state.activeKey
 });
 
 const mapDispatchToProps = (dispatch) => ({

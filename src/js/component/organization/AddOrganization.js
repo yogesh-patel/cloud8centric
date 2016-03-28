@@ -142,7 +142,7 @@ class AddOrganization extends React.Component{
 
     render(){
         return(
-            <div className="main-container">
+            <div className="admin-add-subscription-content">
                 <Row>
                     <Col sm={12} md={12} lg={12} xsHidden>
                         <h3 className="section-title">

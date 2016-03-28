@@ -9,33 +9,18 @@ import SubscriptionList from '../subscription/SubscriptionList';
 
 class OrganizationDetails extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedOption:'organization',
-            activeKey:1
-        }
-    }
 
     getSubscriptionsTab(e) {
 
         e.preventDefault();
-        this.props.organizationActions.showSubscriptionDetail();
-        this.setState({
-            selectedOption: 'subscription',
-            activeKey: 2
-        });
+        this.props.organizationActions.showSubscriptionDetail('subscription', 2);
 
     }
 
     getOrganizationDetailsTab(e) {
 
         e.preventDefault();
-        this.props.organizationActions.showOrganizationDetails();
-        this.setState({
-            selectedOption: 'organization',
-            activeKey: 1
-        });
+        this.props.organizationActions.showOrganizationDetails('organization', 1);
 
     }
 
@@ -43,8 +28,7 @@ class OrganizationDetails extends React.Component {
 
         let DetailScreen = null;
 
-        let {selectedOption, activeKey} = this.state;
-        let {subscriptionDetailsTab, organizationDetailsTab} = this.props;
+        let {subscriptionDetailsTab, organizationDetailsTab, selectedOption, activeKey} = this.props;
 
         if(organizationDetailsTab){
             DetailScreen = <OrganizationDetailItem />;
@@ -53,6 +37,9 @@ class OrganizationDetails extends React.Component {
         if (subscriptionDetailsTab){
             DetailScreen = <SubscriptionList />;
         }
+
+        console.log(selectedOption);
+        console.log(activeKey);
 
         return (
             <div>
@@ -80,7 +67,9 @@ class OrganizationDetails extends React.Component {
 
 const mapStateToProps = (state) => ({
     subscriptionDetailsTab: state.organization.subscriptionDetailsTab,
-    organizationDetailsTab: state.organization.organizationDetailsTab
+    organizationDetailsTab: state.organization.organizationDetailsTab,
+    selectedOption: state.organization.selectedOption,
+    activeKey: state.organization.activeKey
 });
 
 const mapDispatchToProps = (dispatch) => ({

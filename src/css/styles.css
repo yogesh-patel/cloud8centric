@@ -702,7 +702,7 @@ a.btn-xl{
 
 .main-container{
   margin-left: 65px;
-  margin-top: 35px;
+  margin-top: 70px;
 }
 
 .subscription-details{
@@ -715,7 +715,7 @@ a.btn-xl{
 }
 
 .orgs-content{
-    margin-top: 80px;
+    margin-top: 65px;
 }
 
 .admin-common-header-logo {
@@ -724,4 +724,21 @@ a.btn-xl{
 
 .admin-right-panel{
     margin-top: 16px;
+}
+
+.organization-list button.list-group-item{
+    background-color: #263238;
+    color: white;
+}
+
+.organization-list  .list-group-item{
+    border: 1px solid black;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover{
+    background-image: linear-gradient(to bottom,black 0,black 100%);
+}
+
+.admin-add-subscription-content{
+    margin-top: 30px;
 }

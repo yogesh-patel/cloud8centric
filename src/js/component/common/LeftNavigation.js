@@ -15,7 +15,7 @@ class LeftNavigation extends Component {
 
         super(props);
         this.state = {
-            selectedOption: 'home'
+            selectedOption: 'subscription'
         }
 
     }
@@ -64,14 +64,14 @@ class LeftNavigation extends Component {
                 <div className="left-navigation">
                     <Navbar inverse className={'navbar-twitch '+toggleClass} role="navigation">
                         <Nav>
-                            <li onClick={this.showHome.bind(this)} className={selectedOption == 'home' ? "active":""}>
+                            {/*<li onClick={this.showHome.bind(this)} className={selectedOption == 'home' ? "active":""}>
                                 <a className="pointer">
                                     <span className="small-nav" data-toggle="tooltip" data-placement="right" title="Home">
                                         <span className="glyphicon glyphicon-home"></span>
                                     </span>
                                     <span className="full-nav"> Home </span>
                                 </a>
-                            </li>
+                            </li>*/}
                             <li onClick={this.getSubscriptionList.bind(this)}
                               className={selectedOption == 'subscription' ? "active":""}>
                                 <a className="pointer">

@@ -8,7 +8,9 @@ const initialState = {
     organizationDetails:null,
     organizationDetailsTab:true,
     subscriptionDetailsTab:false,
-    statusText: null
+    statusText: null,
+    selectedOption:'organization',
+    activeKey:1
 };
 
 export default createReducer(initialState, {
@@ -44,7 +46,9 @@ export default createReducer(initialState, {
 
         return Object.assign({}, state, {
             organizationDetailsTab:true,
-            subscriptionDetailsTab:false
+            subscriptionDetailsTab:false,
+            selectedOption: payload.selectedOption,
+            activeKey: payload.activeKey
         });
 
     },
@@ -52,7 +56,9 @@ export default createReducer(initialState, {
 
         return Object.assign({}, state, {
             organizationDetailsTab:false,
-            subscriptionDetailsTab:true
+            subscriptionDetailsTab:true,
+            selectedOption: payload.selectedOption,
+            activeKey: payload.activeKey
         });
 
     },

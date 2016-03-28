@@ -88,18 +88,26 @@ export function addOrganizationData(organization) {
 
 }
 
-export function showOrganizationDetails() {
+export function showOrganizationDetails(selectedOption, activeKey) {
 
     return {
-        type: SHOW_ORGANIZATION_DETAILS
+        type: SHOW_ORGANIZATION_DETAILS,
+        payload: {
+            selectedOption: selectedOption,
+            activeKey: activeKey
+        }
     }
 
 }
 
-export function showSubscriptionDetail() {
+export function showSubscriptionDetail(selectedOption, activeKey) {
 
     return {
-        type: SHOW_SUBSCRIPTION_DETAILS
+        type: SHOW_SUBSCRIPTION_DETAILS,
+        payload: {
+            selectedOption: selectedOption,
+            activeKey: activeKey
+        }
     }
 
 }

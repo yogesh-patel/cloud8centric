@@ -88,8 +88,22 @@ class CreateSubscriptions extends Component {
             addBtnDisabled = true;
         }
 
+        let userRoles = localStorage.getItem("roles");
+        let createSubscriptionContentClass = null;
+
+        let roleName = _.map(JSON.parse(userRoles), (role) => {
+           return role.name;
+        });
+
+        if (roleName[0] === "Admin") {
+            createSubscriptionContentClass = "admin-add-subscription-content";
+        }
+        else{
+            createSubscriptionContentClass = "main-container"
+        }
+
         return (
-            <div className="main-container">
+            <div className={createSubscriptionContentClass}>
                 <Row>
                     <Col sm={12} md={12} lg={12} xsHidden>
                         <h3 className="section-title">

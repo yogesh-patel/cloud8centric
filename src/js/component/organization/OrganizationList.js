@@ -69,6 +69,8 @@ class OrganizationList extends React.Component {
                             <span></span>}
                     </Col>
                 </Row>
+                <Row>&nbsp;</Row>
+                <Row>&nbsp;</Row>
             </div>
         );
 

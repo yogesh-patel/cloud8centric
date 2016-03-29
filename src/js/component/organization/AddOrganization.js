@@ -140,6 +140,10 @@ class AddOrganization extends React.Component{
 
     }
 
+    onCancel() {
+        this.props.routeDispatch(push("/dashboard/organizations"));
+    }
+
     render(){
         return(
             <div className="admin-add-subscription-content">
@@ -150,7 +154,7 @@ class AddOrganization extends React.Component{
                         </h3>
                     </Col>
                 </Row>
-                <form >
+                <form>
                     <Panel header={"Add Organization"}>
                         <Row>
                             <Col xs={6}>
@@ -307,12 +311,15 @@ class AddOrganization extends React.Component{
                                 </Input>
                             </Col>
                         </Row>
-
-                        <Button onClick={this.submitData.bind(this)}
-                                bsStyle="primary"
-                                className="pull-right">
-                                Submit
+                    <Row>
+                         <Button bsStyle="primary" bsSize="large" className="org-button" onClick={this.submitData.bind(this)}>
+                        Submit
                         </Button>
+                        <Button type="reset" bsStyle="primary" bsSize="large" className="org-button"
+        onClick={this.onCancel.bind(this)}>
+                        Cancel
+                        </Button>
+                    </Row>
                     </Panel>
                 </form>
             </div>
@@ -326,7 +333,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    organizationActions: bindActionCreators(organizationActionCreators, dispatch)
+    organizationActions: bindActionCreators(organizationActionCreators, dispatch),
+    routeDispatch:dispatch
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddOrganization);

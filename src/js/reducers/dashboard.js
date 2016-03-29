@@ -3,25 +3,10 @@ import {SHOW_LOGIN} from '../constants';
 import {pushState} from 'redux-router';
 import _ from 'lodash';
 
-const initialState = {
-    showProducts:false,
-    productStatus:'Products'
-};
+const initialState = {};
 
 export default createReducer(initialState, {
-    SHOW_PRODUCTS: (state, payload) => {
-        return Object.assign({}, state, {
-            showProducts:true,
-            productStatus:payload
-        });
-    },
-    HIDE_PRODUCTS: (state, payload) => {
-        return Object.assign({}, state, {
-            showProducts:false,
-            productStatus:payload
-        });
-    },
-    REDUCER_CLEAN_SUCCESSFULLY: (state,payload)=>{
+    REDUCER_CLEAN_SUCCESSFULLY: (state, payload)=> {
         return _.cloneDeep(initialState);
     },
 });

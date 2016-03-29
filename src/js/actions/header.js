@@ -2,36 +2,20 @@ import constants from '../constants';
 
 let {SHOW_NAVIGATION_MENU, HIDE_NAVIGATION_MENU, HIDE_PRODUCTS, SHOW_PRODUCTS} = constants;
 
-export function showNavigationMenu(){
+export function showNavigationMenu(showNavigation) {
 
     return {
-        type:SHOW_NAVIGATION_MENU
+        type: SHOW_NAVIGATION_MENU,
+        payload:showNavigation
     }
 
 }
 
-export function hideNavigationMenu(){
+export function showProducts(productStatus) {
 
     return {
-        type:HIDE_NAVIGATION_MENU
-    }
-
-}
-
-export function showProducts(productStatus){
-
-    return{
-        type : SHOW_PRODUCTS,
-        payload : productStatus
-    }
-
-}
-
-export function hideProducts(productStatus){
-
-    return{
-        type : HIDE_PRODUCTS,
-        payload : productStatus
+        type: SHOW_PRODUCTS,
+        payload: productStatus
     }
 
 }

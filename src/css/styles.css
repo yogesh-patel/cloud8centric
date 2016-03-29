@@ -241,6 +241,11 @@ a.btn-xl{
     float: right;
 }
 
+.org-button{
+    float: right;
+    margin: 15px;
+}
+
 .login-button {
     color: #fff !important;
     background-color: #fed136 !important;

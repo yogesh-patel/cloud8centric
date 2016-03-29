@@ -23,7 +23,7 @@ class LeftNavigation extends Component {
     getSubscriptionList() {
 
         this.props.dashboardActions.showSubscription();
-        this.props.headerActions.hideProducts("Products");
+        this.props.headerActions.showProducts(false);
         this.setState({selectedOption: 'subscription'});
 
     }
@@ -31,7 +31,7 @@ class LeftNavigation extends Component {
     getOrganizationsList() {
 
         this.props.dashboardActions.showOrganization();
-        this.props.headerActions.hideProducts("Products");
+        this.props.headerActions.showProducts(false);
         this.setState({selectedOption: 'organization'});
 
     }
@@ -39,13 +39,14 @@ class LeftNavigation extends Component {
     showHome() {
 
         this.props.dashboardActions.showHome();
-        this.props.headerActions.hideProducts("Products");
+        this.props.headerActions.showProducts(false);
         this.setState({selectedOption: 'home'});
     }
 
     render() {
         let leftBar = null;
-        let {toggleClass} = this.props;
+        let {showNavigation} = this.props;
+ 		let showNavigationClass = showNavigation?'open':'';
 
         let {selectedOption} = this.state;
 
@@ -62,7 +63,7 @@ class LeftNavigation extends Component {
             this.state.selectedOption = 'subscription';
             leftBar =
                 <div className="left-navigation">
-                    <Navbar inverse className={'navbar-twitch '+toggleClass} role="navigation">
+                   <Navbar inverse className={'navbar-twitch ' + showNavigationClass} role="navigation">
                         <Nav>
                             {/*<li onClick={this.showHome.bind(this)} className={selectedOption == 'home' ? "active":""}>
                                 <a className="pointer">
@@ -97,7 +98,7 @@ class LeftNavigation extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    toggleClass: state.header.toggleClass,
+    showNavigation: state.header.showNavigation,
     userRole: state.auth.userRole
 });
 

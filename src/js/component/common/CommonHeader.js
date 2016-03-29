@@ -9,67 +9,85 @@ import * as authActionCreator from '../../actions/auth';
 import * as appActionCreator from '../../actions/app';
 import {Link, Events,scroller} from 'react-scroll';
 
-class CommonHeader extends Component {
+class CommonHeader extends Component{
 
+    constructor(props){
 
-    toggleLeftNavigation() {
-
-        if (this.props.showNavigation) {
-            this.props.headerActions.showNavigationMenu(false);
-        }
-        else {
-            this.props.headerActions.showNavigationMenu(true);
+        super(props);
+        this.state= {
+            productStatus:'Products'
         }
 
     }
 
-    onLogout() {
+    toggleLeftNavigation(){
 
-
-        this.props.authActions.logout()
-
+        if(this.props.toggleClass == ''){
+            this.props.headerActions.showNavigationMenu();
+        }
+        else if(this.props.toggleClass == 'open'){
+            this.props.headerActions.hideNavigationMenu();
+        }
 
     }
 
-    onProductSelected(e) {
+	onLogout(){
+
+    	this.props.authActions.logout()
+
+    }
+
+    onProductSelected(e){
 
         e.preventDefault();
-        var {showProducts} = this.props;
-        if (this.props.showProducts) {
-            this.props.headerActions.showProducts(false);
-        }
-        else {
-            this.props.headerActions.showProducts(true);
-            var interval = setInterval(()=> {
+        var {productStatus} = this.props;
+        if(this.props.productStatus === 'Products'){
+            this.setState({productStatus:"Hide Products"})
+            this.props.headerActions.showProducts("Hide Products");
+            var interval = setInterval(()=>{
                 clearInterval(interval);
-                scroller.scrollTo("products", true, 500, -50);
-            }, 0);
+                scroller.scrollTo("products",true, 500, -50);
+            },0);
+        }
+        else{
+            this.setState({productStatus:"Products"})
+            this.props.headerActions.hideProducts("Products");
         }
 
     }
 
 
-    render() {
-        var {showProducts} = this.props;
-        var productLinkText = null;
 
-        if (showProducts)
-            productLinkText = "Hide Products";
-        else
-            productLinkText = "Products";
+    render(){
+        var {productStatus} = this.props;
+        var productLink = <span onClick={this.onProductSelected.bind(this)}>{this.props.productStatus}</span>;
 
-        var productLink = <span onClick={this.onProductSelected.bind(this)}>{productLinkText}</span>;
-        var {userObject} = this.props;
+        let userRoles = localStorage.getItem("roles");
 
-        return (
+        let roleName = _.map(JSON.parse(userRoles), (role) => {
+           return role.name;
+        });
+
+        let navBrand = null;
+
+        if (roleName[0] === "Admin") {
+            navBrand =  <Navbar.Brand>
+                            <img className='logo admin-common-header-logo' src='img/logo.png' alt="" />
+                        </Navbar.Brand>
+        }
+        else{
+            navBrand =  <Navbar.Brand>
+                            <Glyphicon glyph="align-justify pointer" onClick={this.toggleLeftNavigation.bind(this)}/>
+                            <img className='logo common-header-logo' src='img/logo.png' alt="" />
+                        </Navbar.Brand>
+        }
+
+        return(
 
             <div className="common-header">
                 <Navbar inverse fixedTop fluid className={'home-menu inverse-menu'}>
                     <Navbar.Header>
-                        <Navbar.Brand>
-                            <Glyphicon glyph="align-justify pointer" onClick={this.toggleLeftNavigation.bind(this)}/>
-                            <img className='logo common-header-logo' src='img/logo.png' alt=""/>
-                        </Navbar.Brand>
+                        {navBrand}
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>
@@ -77,10 +95,9 @@ class CommonHeader extends Component {
                             <NavItem eventKey={1}>
                                 {productLink}
                             </NavItem>
-                            <NavDropdown eventKey={2} title={"Welcome "+localStorage.getItem("firstName")}
-                                         id="basic-nav-dropdown">
+                            <NavDropdown eventKey={2} title={"Welcome "+localStorage.getItem("firstName")} id="basic-nav-dropdown">
                                 <MenuItem eventKey={2.1}>Profile</MenuItem>
-                                <MenuItem divider/>
+                                <MenuItem divider />
                                 <MenuItem eventKey={2.2} onClick={this.onLogout.bind(this)}>Logout</MenuItem>
                             </NavDropdown>
                         </Nav>
@@ -89,20 +106,19 @@ class CommonHeader extends Component {
             </div>
         );
 
+        }
+
     }
 
-}
-
 const mapStateToProps = (state) => ({
-    showNavigation: state.header.showNavigation,
-    userObject: state.auth.userObject,
-    showProducts: state.header.showProducts
+	toggleClass:state.header.toggleClass,
+	productStatus:state.dashboard.productStatus
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    headerActions: bindActionCreators(headerActionCreators, dispatch),
-    authActions: bindActionCreators(authActionCreator, dispatch),
-    appActions: bindActionCreators(appActionCreator, dispatch)
+	headerActions: bindActionCreators(headerActionCreators, dispatch),
+	authActions: bindActionCreators(authActionCreator, dispatch),
+	appActions : bindActionCreators(appActionCreator, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommonHeader);

@@ -73,6 +73,11 @@ export default createReducer(initialState, {
         _state.selectedProducts[payload.rowNumber].description = description;
         _state.selectedProducts[payload.rowNumber].productId = productId;
 
+        // temporary: as there will always be one product and assign default plan for it
+        // delete this later when product tier dropdown is implemented in UI
+        _state.selectedProducts[payload.rowNumber].planName = _state.productTierList[0].name;
+        _state.selectedProducts[payload.rowNumber].productPlanId = _state.productTierList[0].id;
+
         _.each(_.keys( _state.selectedProducts),(key)=>{
             if(key != payload.rowNumber){
                 if( _state.selectedProducts[key].productName == payload.productName){

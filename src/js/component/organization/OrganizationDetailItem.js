@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {Grid, Row, Col, Button, Table} from 'react-bootstrap';
+import {Grid, Row, Col, Button, Table, FormControls} from 'react-bootstrap';
 
 class OrganizationDetailItem extends React.Component {
 
@@ -10,59 +10,19 @@ class OrganizationDetailItem extends React.Component {
         var {selectedOrganization, organizationDetails} = this.props;
 
         return (
-            <div>
 
-                <Row>
-                    <Col xs={12} sm={12} md={12}>
-                        Organization Name: {selectedOrganization.organizationName}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12}>
-                        Organization URL: {selectedOrganization.organizationURL}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12}>
-                        Organization Address Line1: {organizationDetails.addressLine1}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12}>
-                        Organization Address Line2: {organizationDetails.addressLine2}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12}>
-                        Organization Address Line3: {organizationDetails.addressLine3}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12}>
-                        Organization Phone Number: {organizationDetails.phoneNumber}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12}>
-                        Organization City: {organizationDetails.city}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12}>
-                        Organization Provinde: {organizationDetails.province}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12}>
-                        Organization Zip Code: {organizationDetails.zipCode}
-                    </Col>
-                </Row>
-                <Row>
-                    <Col xs={12} sm={12} md={12}>
-                        Organization Country: {organizationDetails.country}
-                    </Col>
-                </Row>
-            </div>
+            <form className="form-horizontal admin-right-panel">
+                <FormControls.Static label="Name: " labelClassName="col-xs-2" wrapperClassName="col-xs-10" value={selectedOrganization.organizationName} />
+                <FormControls.Static label="URL: " labelClassName="col-xs-2" wrapperClassName="col-xs-10" value={selectedOrganization.organizationURL} />
+                <FormControls.Static label="Address Line1: " labelClassName="col-xs-2" wrapperClassName="col-xs-10" value={organizationDetails.addressLine1} />
+                <FormControls.Static label="Address Line2: " labelClassName="col-xs-2" wrapperClassName="col-xs-10" value={organizationDetails.addressLine2} />
+                <FormControls.Static label="Address Line3: " labelClassName="col-xs-2" wrapperClassName="col-xs-10" value={organizationDetails.addressLine3} />
+                <FormControls.Static label="Phone Number: " labelClassName="col-xs-2" wrapperClassName="col-xs-10" value={organizationDetails.phoneNumber} />
+                <FormControls.Static label="City: " labelClassName="col-xs-2" wrapperClassName="col-xs-10" value={organizationDetails.city} />
+                <FormControls.Static label="Province: " labelClassName="col-xs-2" wrapperClassName="col-xs-10" value={organizationDetails.province} />
+                <FormControls.Static label="Zip Code: " labelClassName="col-xs-2" wrapperClassName="col-xs-10" value={organizationDetails.zipCode} />
+                <FormControls.Static label="Country: " labelClassName="col-xs-2" wrapperClassName="col-xs-10" value={organizationDetails.country} />
+            </form>
 
         )
     }

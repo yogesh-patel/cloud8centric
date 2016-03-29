@@ -24,7 +24,7 @@ class Dashboard extends Component {
             <div>
                 <CommonHeader />
 
-                <RouteBreadcrumb />
+                {/*<RouteBreadcrumb />*/}
 
                 <LeftNavigation />
 

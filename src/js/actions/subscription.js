@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS, ADD_NEW_SUBSCRIPTION, PRODUCT_SELECTED, PLAN_SELECTED,
     PRODUCT_DELETED, SUBSCRIPTION_CREATED, PRODUCTS_AND_PLANS_RECEIVED, SUBSCRIPTIONS_RECEIVED,
-    SUBSCRIPTION_DETAIL_REQUEST_SENT, SUBSCRIPTION_STATUS_RECEIVED, CLEAN_REDUCER_DATA, CREATE_NEW_SUBSCRIPTION} = constants;
+    SUBSCRIPTION_DETAIL_REQUEST_SENT, SUBSCRIPTION_STATUS_RECEIVED, CLEAN_REDUCER_DATA, CREATE_NEW_SUBSCRIPTION, SUBSCRIPTION_CREATION_FAILED} = constants;
 
 export function fetchSubscriptions(organizationId){
 
@@ -146,22 +146,40 @@ export function createNewSubscription(organizationId, subscriptionInfo){
 
     return(dispatch) => {
 
+        let userRoles = localStorage.getItem("roles");
+
+        let roleName = _.map(JSON.parse(userRoles), (role) => {
+           return role.name;
+        });
+
         dispatch({type:CREATE_NEW_SUBSCRIPTION});
 
         let endPointURL = 'organizations/'+organizationId+'/subscriptions';
 
         post(endPointURL, subscriptionInfo)
-        .then((response)=>{
+            .then((response)=>{
 
-            dispatch({
-                type:SUBSCRIPTION_CREATED
-            });
+                dispatch({
+                    type:SUBSCRIPTION_CREATED
+                });
 
-        })
+                if (roleName[0] === "Admin") {
+                    dispatch(push("dashboard/organizations"));
+                }
+                else{
+                    dispatch(push("dashboard/subscriptions"));
+                }
+            }).catch(error=>{
+                parseJSON(error).then((errorObj)=>{
+                     dispatch({
+                        type:SUBSCRIPTION_CREATION_FAILED,
+                        payload: errorObj.message
+                    });
+                })
+            })
 
         fetchSubscriptions(organizationId);
 
-        dispatch(push("dashboard/subscriptions"));
     }
 
 }

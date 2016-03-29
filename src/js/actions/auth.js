@@ -61,6 +61,7 @@ export function authenticateUser(username, password) {
                                     localStorage.setItem('active_organization', orgResponse.content[0].id);
                                 }
 
+                                localStorage.setItem('roles', JSON.stringify(meResponse.roles));
                                 dispatch(push(url));
                             })
                     })

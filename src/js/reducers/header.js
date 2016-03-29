@@ -3,21 +3,22 @@ import constants from '../constants';
 import _ from 'lodash';
 
 const initialState = {
-    toggleClass: ''
+    showNavigation: false,
+    showProducts: false
 };
 
 export default createReducer(initialState, {
     SHOW_NAVIGATION_MENU: (state, payload) => {
         return Object.assign({}, state, {
-            toggleClass: 'open'
+            showNavigation: payload
         });
     },
-    HIDE_NAVIGATION_MENU: (state, payload) => {
-        return Object.assign({}, state, {
-            toggleClass: ''
-        });
-    },
-    REDUCER_CLEAN_SUCCESSFULLY: (state,payload)=>{
+    REDUCER_CLEAN_SUCCESSFULLY: (state, payload)=> {
         return _.cloneDeep(initialState);
     },
+    SHOW_PRODUCTS: (state, payload) => {
+        return Object.assign({}, state, {
+            showProducts: payload
+        });
+    }
 });

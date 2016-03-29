@@ -12,10 +12,10 @@ class Dashboard extends Component {
 
     render() {
 
-        var {showProducts,toggleClass} = this.props;
+        var {showProducts,showNavigation} = this.props;
         var leftMargin = 50;
 
-        if(toggleClass == 'open'){
+        if (showNavigation) {
             leftMargin = 200;
         }
 
@@ -42,8 +42,8 @@ class Dashboard extends Component {
 
 }
 const mapStateToProps = (state) => ({
-    showProducts: state.dashboard.showProducts,
-    toggleClass:state.header.toggleClass
+    showProducts: state.header.showProducts,
+    showNavigation: state.header.showNavigation
 });
 
 const mapDispatchToProps = (dispatch) => ({});

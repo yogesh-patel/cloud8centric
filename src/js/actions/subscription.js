@@ -10,38 +10,61 @@ let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS, ADD_NEW_SUBSCRIPTION, PRODUC
 export function fetchSubscriptions(organizationId){
 
     return(dispatch) => {
+
         dispatch({type:FETCH_SUBSCRIPTIONS});
 
         let endPointURL = 'organizations/'+organizationId+'/subscriptions';
+        let subscriptionResponse = [];
+        let count = 0;
 
         get(endPointURL)
         .then((response)=>{
 
             let subscriptionObject = {};
-            let contents = response.content;
+            subscriptionResponse = response;
+            let recursiveUpdate = false;
 
-            _.each(contents,(subscription, key)=>{
+            _.each(subscriptionResponse,(subscription)=>{
                 if(subscription){
-                    subscriptionObject[subscription.id] = {
-                        id:subscription.id,
-                        name:subscription.name,
-                        details:null,
-                        status:'In-progress',
-                        counter:key+1
-                    }
+
+                    _.each(subscription.subscriptionProductList,(product, key)=>{
+
+                        subscriptionObject[count] = {
+                            id: subscription.id,
+                            name: subscription.name,
+                            details: {
+                                        deployedUrl: product.productUrl ? product.productUrl : null,
+                                        adminUserName: product.productAdminUserName ? product.productAdminUserName :  null
+                                    },
+                            status: product.provisioningStatus,
+                            productName: product.productName,
+                            version: product.productVersion,
+                            counter:key+1,
+                        }
+
+                        if(subscriptionObject[count].status == 'In-progress'){
+                            recursiveUpdate = true;
+                        }
+                        count += 1;
+                    });
+
                 }
             });
 
             dispatch({type:SUBSCRIPTIONS_RECEIVED,
-                payload:subscriptionObject
+                payload:{
+                    subscriptionObject:subscriptionObject,
+                    recursiveUpdate:recursiveUpdate
+                }
             });
 
         })
+
     }
 
 }
 
-export function getSubscriptionStatus(subscriptionId){
+export function getSubscriptionStatus(subscriptionId, rowId){
 
     return(dispatch) => {
         dispatch({type:SUBSCRIPTION_DETAIL_REQUEST_SENT});
@@ -53,7 +76,8 @@ export function getSubscriptionStatus(subscriptionId){
         .then((response)=>{
 
             subscriptionObject = {
-                subscriptionId:subscriptionId,
+                rowId: rowId,
+                subscriptionId: subscriptionId,
                 details: response
 
             }
@@ -64,10 +88,6 @@ export function getSubscriptionStatus(subscriptionId){
             });
 
         })
-
-        // let interval = setInterval(()=>{
-        //     clearInterval(interval);
-        // },200);
 
     }
 

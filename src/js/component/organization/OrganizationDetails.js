@@ -38,9 +38,6 @@ class OrganizationDetails extends React.Component {
             DetailScreen = <SubscriptionList />;
         }
 
-        console.log(selectedOption);
-        console.log(activeKey);
-
         return (
             <div>
 

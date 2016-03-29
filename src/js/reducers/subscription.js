@@ -9,13 +9,16 @@ const initialState = {
     count: 1,
     subscriptionList: [],
     productList:[],
-    productTierList:[]
+    productTierList:[],
+    recursiveUpdate:false
+
 };
 
 export default createReducer(initialState, {
     SUBSCRIPTIONS_RECEIVED: (state, payload) => {
         return Object.assign({}, state, {
-            subscriptionList: payload
+            subscriptionList: payload.subscriptionObject,
+            recursiveUpdate:payload.recursiveUpdate
         });
     },
     PRODUCTS_AND_PLANS_RECEIVED: (state, payload) => {
@@ -27,7 +30,7 @@ export default createReducer(initialState, {
         var _state = _.cloneDeep(state);
         _state.subscriptionDetailLoading = false;
 
-        _state.subscriptionList[payload.subscriptionId].details = payload.details;
+        _state.subscriptionList[payload.rowId].details = payload.details;
 
         return _state;
     },

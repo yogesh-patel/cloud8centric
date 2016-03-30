@@ -22,7 +22,7 @@ export function fetchSubscriptions(organizationId){
             subscriptionResponse = response;
             let recursiveUpdate = false;
 
-            if(_.size(organizationList) > 0){
+            if(_.size(subscriptionResponse) > 0){
 
                 dispatch({type:FETCH_SUBSCRIPTIONS});
 
@@ -34,8 +34,9 @@ export function fetchSubscriptions(organizationId){
                             subscriptionObject[count] = {
                                 id: subscription.id,
                                 name: subscription.name,
+                                startDate: subscription.startDate,
                                 details: {
-                                            deployedUrl: product.productUrl ? product.productUrl : null,
+                                            deployedUrl: product.provisionedProductUrl ? product.provisionedProductUrl : null,
                                             adminUserName: product.productAdminUserName ? product.productAdminUserName :  null
                                         },
                                 status: product.provisioningStatus,

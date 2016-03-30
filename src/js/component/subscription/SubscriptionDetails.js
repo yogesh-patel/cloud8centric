@@ -8,6 +8,7 @@ import { push } from 'redux-router';
 import * as subscriptionActionCreators from '../../actions/subscription';
 import _ from 'lodash';
 import SubscriptionItem from './SubscriptionItem';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 class SubscriptionDetails extends Component {
 
@@ -27,9 +28,14 @@ class SubscriptionDetails extends Component {
 
             rows = (
                     <tr key={count}>
-                        <td>{subscription.details.deployedUrl ? subscription.details.deployedUrl : ''}</td>
-                        <td>{subscription.details.adminUserName ?subscription.details.adminUserName : ''}</td>
-                        <td><Glyphicon glyph="ok" /></td>
+                        <td className="url-width">{subscription.status == 'Ready' ? <a target="_blank" href={subscription.details.deployedUrl}>{subscription.details.deployedUrl}</a> : subscription.details.deployedUrl ? subscription.details.deployedUrl : ''}
+                        </td>
+                        <td className="subscription-username-width">{subscription.details.adminUserName ? subscription.details.adminUserName : ''}</td>
+                        <td className="subscription-username-width">
+                            <CopyToClipboard text={"URL = "+subscription.details.deployedUrl+" , Admin UserName = "+subscription.details.adminUserName}>
+                              <Glyphicon glyph="copy" className="pointer copy-to-clipboard-size" title="Copy to clipboard"/>
+                            </CopyToClipboard>
+                        </td>
                     </tr>
                 );
                 count +=1;

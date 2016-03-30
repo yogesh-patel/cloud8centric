@@ -26,13 +26,14 @@ class SubscriptionItem extends React.Component {
 
     render() {
 
-        var {subscription, rowId} = this.props;
+        let {subscription, rowId} = this.props;
+        let arrStartDate = subscription.startDate.split("T");
 
         return (
 
             <div className="subscriptions-table">
                 <div className="subscriptions-table-serial-no">
-                    {subscription.counter}
+                    {arrStartDate[0]}
                 </div>
                 <div className="subscriptions-table-name">
                     {subscription.name}

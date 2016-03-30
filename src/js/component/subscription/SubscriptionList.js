@@ -61,7 +61,7 @@ class SubscriptionList extends Component {
         let {subscriptionList} = this.props;
         let disabled = false;
         let organizationId = localStorage.getItem('active_organization');
-        console.log(organizationId);
+
         if(!organizationId){
             disabled = true;
         }

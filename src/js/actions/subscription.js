@@ -54,14 +54,13 @@ export function fetchSubscriptions(organizationId){
                     }
                 });
 
-                dispatch({type:SUBSCRIPTIONS_RECEIVED,
-                    payload:{
-                        subscriptionObject:subscriptionObject,
-                        recursiveUpdate:recursiveUpdate
-                    }
-                });
             }
-
+            dispatch({type:SUBSCRIPTIONS_RECEIVED,
+                payload:{
+                    subscriptionObject:subscriptionObject,
+                    recursiveUpdate:recursiveUpdate
+                }
+            });
         })
 
     }

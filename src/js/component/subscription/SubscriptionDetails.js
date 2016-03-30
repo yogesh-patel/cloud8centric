@@ -21,6 +21,15 @@ class SubscriptionDetails extends Component {
 
     render() {
         let {subscription} = this.props;
+        let deployedUrl = subscription.details.deployedUrl;
+
+        if(deployedUrl === null){
+            deployedUrl = '';
+        }
+        else{
+            deployedUrl = "URL = " + deployedUrl + " , "
+        }
+
         var rows = [];
         let count = 0;
 
@@ -32,7 +41,7 @@ class SubscriptionDetails extends Component {
                         </td>
                         <td className="subscription-username-width">{subscription.details.adminUserName ? subscription.details.adminUserName : ''}</td>
                         <td className="subscription-username-width">
-                            <CopyToClipboard text={"URL = "+subscription.details.deployedUrl+" , Admin UserName = "+subscription.details.adminUserName}>
+                            <CopyToClipboard text={deployedUrl + "Admin UserName = "+subscription.details.adminUserName}>
                               <Glyphicon glyph="copy" className="pointer copy-to-clipboard-size" title="Copy to clipboard"/>
                             </CopyToClipboard>
                         </td>
@@ -44,7 +53,7 @@ class SubscriptionDetails extends Component {
 
         return (
             <Row>
-                <Col sm={12}>   
+                <Col sm={12}>
                     <Table responsive striped bordered condensed hover className="subscription-products-table">
                         <thead className="subscription-products-table-thead">
                         <tr>

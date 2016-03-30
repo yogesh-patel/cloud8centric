@@ -747,3 +747,15 @@ a.btn-xl{
 .admin-add-subscription-content{
     margin-top: 30px;
 }
+
+.copy-to-clipboard-size{
+    font-size: 20px;
+}
+
+.url-width{
+    width: 70%;
+}
+
+.subscription-username-width{
+    width: 15%;
+}

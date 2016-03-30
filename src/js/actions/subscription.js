@@ -10,7 +10,6 @@ let {FETCH_SUBSCRIPTIONS, FETCH_PRODUCTS_AND_PLANS, ADD_NEW_SUBSCRIPTION, PRODUC
 export function fetchSubscriptions(organizationId){
 
     return(dispatch) => {
-        dispatch({type:FETCH_SUBSCRIPTIONS});
 
         let endPointURL = 'organizations/'+organizationId+'/subscriptions';
 
@@ -20,29 +19,33 @@ export function fetchSubscriptions(organizationId){
             let subscriptionObject = {};
             let contents = response.content;
 
-            _.each(contents,(subscription, key)=>{
-                if(subscription){
-                    subscriptionObject[subscription.id] = {
-                        id:subscription.id,
-                        name:subscription.name,
-                        details:null,
-                        status:'In-progress',
-                        counter:key+1
+            if(_.size(contents) > 0){
+
+                dispatch({type:FETCH_SUBSCRIPTIONS});
+
+                _.each(contents,(subscription, key)=>{
+                    if(subscription){
+                        subscriptionObject[subscription.id] = {
+                            id:subscription.id,
+                            name:subscription.name,
+                            details:null,
+                            status:'In-progress',
+                            counter:key+1
+                        }
                     }
-                }
-            });
+                });
 
-            dispatch({type:SUBSCRIPTIONS_RECEIVED,
-                payload:subscriptionObject
-            });
-
+                dispatch({type:SUBSCRIPTIONS_RECEIVED,
+                    payload:subscriptionObject
+                });
+            }
         })
     }
 
 }
 
 export function getSubscriptionStatus(subscriptionId){
-
+    alert('erj')
     return(dispatch) => {
         dispatch({type:SUBSCRIPTION_DETAIL_REQUEST_SENT});
 

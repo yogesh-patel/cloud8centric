@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, View} from 'react';
-import {Grid, Row, Col, Button, ListGroup, Glyphicon, Input} from 'react-bootstrap';
+import {Grid, Row, Col, Button, ListGroup, Glyphicon, Input, Pagination} from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { push } from 'redux-router';
@@ -12,9 +12,18 @@ import OrganizationDetails from './OrganizationDetails';
 
 class OrganizationList extends React.Component {
 
+    constructor(props){
+
+        super(props);
+        this.state= {
+            activePage: 1
+        }
+
+    }
+
     componentDidMount() {
 
-        this.props.organizationActions.fetchOrganizations();
+        this.props.organizationActions.fetchOrganizations(this.props.currentPage);
 
         let {organizationActions, subscriptionActions, subscriptionDetailsTab} = this.props;
 
@@ -35,13 +44,46 @@ class OrganizationList extends React.Component {
 
     }
 
-    render() {
-        var {organizationList, selectedOrganization} = this.props;
-        let organizationListing = _.map(organizationList, (organization) => {
-            return <OrganizationListItem organization={organization}
-                                         key={organization.id}/>;
+    handleSelect(event, selectedEvent) {
+
+        this.props.organizationActions.saveCurrentPageNumber(selectedEvent.eventKey);
+
+        this.setState({
+
+          activePage: selectedEvent.eventKey
 
         });
+
+    }
+
+    render() {
+
+
+        var {organizationList, selectedOrganization} = this.props;
+        let organizationListing = null;
+        let pagination = null;
+        if(_.size(organizationList) > 0){
+
+             organizationListing = _.map(organizationList, (organization) => {
+                return <OrganizationListItem organization={organization}
+                                             key={organization.id}/>;
+
+            });
+
+            pagination = <Pagination
+                              bsSize="medium"
+                              items={5}
+                              activePage={this.state.activePage}
+                              onSelect={this.handleSelect.bind(this)} />
+
+
+        }
+        else if(organizationListing === null){
+            organizationListing = <div className="subscriptions-table no-record-found-block">No Organization List found</div>
+            pagination = null;
+        }
+
+
 
         return (
             <div className="orgs-content">
@@ -66,9 +108,15 @@ class OrganizationList extends React.Component {
                     </Col>
                     <Col xs={9} sm={9} md={9}>
                         {selectedOrganization ? <OrganizationDetails/> :
-                            <span></span>}
+                            <OrganizationDetails/>}
                     </Col>
                 </Row>
+                <Row className="text-center">
+                    <Col xs={3} sm={3} md={3}>
+                        {pagination}
+                    </Col>
+                </Row>
+
             </div>
         );
 
@@ -81,6 +129,7 @@ const mapStateToProps = (state) => ({
     selectedOrganization: state.organization.selectedOrganization,
     subscriptionDetailsTab: state.organization.subscriptionDetailsTab,
     selectedOption: state.organization.selectedOption,
+    currentPage : state.organization.currentPage,
     activeKey: state.activeKey
 });
 

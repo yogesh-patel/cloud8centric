@@ -70,16 +70,18 @@ class OrganizationList extends React.Component {
 
             });
 
-            pagination = <Pagination
-                              bsSize="medium"
-                              items={5}
-                              activePage={this.state.activePage}
-                              onSelect={this.handleSelect.bind(this)} />
+            pagination = null;
+
+            // pagination = <Pagination
+            //                   bsSize="medium"
+            //                   items={5}
+            //                   activePage={this.state.activePage}
+            //                   onSelect={this.handleSelect.bind(this)} />
 
 
         }
         else if(organizationListing === null){
-            organizationListing = <div className="subscriptions-table no-record-found-block">No Organization List found</div>
+            organizationListing = <div className="subscriptions-table no-record-found-block">No Organizations found</div>
             pagination = null;
         }
 
@@ -116,6 +118,9 @@ class OrganizationList extends React.Component {
                         {pagination}
                     </Col>
                 </Row>
+
+                <Row>&nbsp;</Row>
+                <Row>&nbsp;</Row>
 
             </div>
         );

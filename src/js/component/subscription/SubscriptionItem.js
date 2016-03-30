@@ -26,7 +26,7 @@ class SubscriptionItem extends React.Component {
 
     render() {
 
-        var {subscription} = this.props;
+        var {subscription, rowId} = this.props;
 
         return (
 
@@ -38,10 +38,10 @@ class SubscriptionItem extends React.Component {
                     {subscription.name}
                 </div>
                 <div className="subscriptions-table-product">
-                    C8 server
+                    {subscription.productName}
                 </div>
                 <div className="subscriptions-table-version">
-                    1.1
+                    {subscription.version}
                 </div>
                 <div className="subscription-table-status">
                     <Button bsSize="small" className="status-btn-width"
@@ -55,7 +55,7 @@ class SubscriptionItem extends React.Component {
                     <Panel className="subscription-detail-box" collapsible
                            expanded={this.state.open}>
                         {
-                            this.state.open ? <SubscriptionDetails subscription={subscription}/> : <span />
+                            this.state.open ? <SubscriptionDetails subscription={subscription} rowId={rowId}/> : <span />
                         }
                     </Panel>
                 </div>
@@ -67,7 +67,7 @@ class SubscriptionItem extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-
+    subscriptionList: state.subscription.subscriptionList
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -11,11 +11,21 @@ import SubscriptionItem from './SubscriptionItem';
 
 class SubscriptionList extends Component {
 
+    constructor(props){
+        super(props);
+        this.state={},
+        this.timerExpired = (40 * 60 * 1000); // set Max timeout to 40mins
+        this.scheduler = null;
+    }
+
     componentDidMount(){
 
-        let organizationId = localStorage.getItem("active_organization");
-        this.props.subscriptionActions.fetchSubscriptions(organizationId);
+        this.fetchSubscriptions();
+    }
 
+    fetchSubscriptions(){
+         let organizationId = localStorage.getItem("active_organization");
+        this.props.subscriptionActions.fetchSubscriptions(organizationId);
     }
 
     gotoAddSubscriptions() {
@@ -24,17 +34,45 @@ class SubscriptionList extends Component {
 
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.recursiveUpdate == true){
+            if(this.scheduler == null){
+                this.scheduler = setInterval(()=>{
+                    this.fetchSubscriptions();
+                    this.timerExpired =  this.timerExpired - (1*60*1000);
+
+                    if( this.timerExpired <= 0){
+                        clearInterval(this.scheduler);
+                        this.scheduler  = null;
+                    }
+
+                },(1 * 60 * 1000));
+            }
+        }else{
+            if(this.scheduler != null){
+                clearInterval(this.scheduler);
+                this.scheduler  = null;
+            }
+        }
+    }
+
     render() {
 
         let {subscriptionList} = this.props;
+        let disabled = false;
+        let organizationId = localStorage.getItem('active_organization');
+        console.log(organizationId);
+        if(!organizationId){
+            disabled = true;
+        }
 
         let subscriptionDetails = null;
 
         if(_.size(subscriptionList) > 0){
-            subscriptionDetails = _.map(_.keys(subscriptionList), (subscriptionId) => {
-                var subscription = subscriptionList[subscriptionId];
+            subscriptionDetails = _.map(_.keys(subscriptionList), (key) => {
+                var subscription = subscriptionList[key];
                 return (
-                    <SubscriptionItem subscription={subscription} key={subscription.id} />
+                    <SubscriptionItem subscription={subscription} key={subscription.id} rowId={key}/>
                 );
             });
         }
@@ -75,6 +113,7 @@ class SubscriptionList extends Component {
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Button bsStyle="primary"
+                                disabled={disabled}
                                 className={"pull-right "+addBtnClass}
                                 onClick={this.gotoAddSubscriptions.bind(this)}>
                                 <Glyphicon glyph="plus"/> Add Subscription
@@ -85,7 +124,7 @@ class SubscriptionList extends Component {
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <div className="subscription-table">
                             <div className="subscription-table-header text-bold">
-                                <div className="subscriptions-table-serial-no">Serial No.</div>
+                                <div className="subscriptions-table-serial-no">Creation Date</div>
                                 <div className="subscriptions-table-name">Subscription</div>
                                 <div className="subscriptions-table-product">Product</div>
                                 <div className="subscriptions-table-version">Version</div>
@@ -109,7 +148,8 @@ class SubscriptionList extends Component {
 
 const mapStateToProps = (state) => ({
     subscriptionList: state.subscription.subscriptionList,
-    orgObject: state.auth.orgObject
+    orgObject: state.auth.orgObject,
+    recursiveUpdate:state.subscription.recursiveUpdate
 });
 
 const mapDispatchToProps = (dispatch) => ({

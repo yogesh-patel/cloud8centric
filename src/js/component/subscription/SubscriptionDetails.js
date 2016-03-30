@@ -13,26 +13,27 @@ class SubscriptionDetails extends Component {
 
     componentDidMount(){
 
-        var {subscription,subscriptionAction} = this.props;
-        if(!subscription.details){
-            subscriptionAction.getSubscriptionStatus(subscription.id);
-        }
+        var {subscription, subscriptionAction, rowId} = this.props;
+        //subscriptionAction.getSubscriptionStatus(subscription.id, rowId);
 
     }
 
     render() {
         let {subscription} = this.props;
         var rows = [];
+        let count = 0;
 
         if(subscription.details){
-            rows = _.map(subscription.details,(data)=>{
-                return (
-                    <tr key={data.productId}>
-                        <td>{data.productURL}</td>
-                        <td>{data.username}</td>
+
+            rows = (
+                    <tr key={count}>
+                        <td>{subscription.details.deployedUrl ? subscription.details.deployedUrl : ''}</td>
+                        <td>{subscription.details.adminUserName ?subscription.details.adminUserName : ''}</td>
+                        <td><Glyphicon glyph="ok" /></td>
                     </tr>
                 );
-            })
+                count +=1;
+
         }
 
         return (
@@ -41,8 +42,9 @@ class SubscriptionDetails extends Component {
                     <Table responsive striped bordered condensed hover className="subscription-products-table">
                         <thead className="subscription-products-table-thead">
                         <tr>
-                            <th><b>Product URL</b></th>
-                            <th><b>User Name</b></th>
+                            <th><b>URL</b></th>
+                            <th><b>UserName</b></th>
+                            <th><b>Copy to clipboard</b></th>
                         </tr>
                         </thead>
                         <tbody>

@@ -241,6 +241,11 @@ a.btn-xl{
     float: right;
 }
 
+.org-button{
+    float: right;
+    margin: 15px;
+}
+
 .login-button {
     color: #fff !important;
     background-color: #fed136 !important;
@@ -542,7 +547,7 @@ a.btn-xl{
 }
 
 .subscriptions-table-serial-no{
-    width:10%;
+    width:12%;
     padding: 20px 0 20px 15px;
     float:left;
     border-right:1px solid #212121;
@@ -727,7 +732,7 @@ a.btn-xl{
 }
 
 .organization-list button.list-group-item{
-    background-color: #263238;
+    background-color: #37474f;
     color: white;
 }
 

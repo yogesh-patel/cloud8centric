@@ -39,7 +39,7 @@ class OrganizationListItem extends React.Component {
 
         return (
 
-            <ListGroupItem className={styleClass} onClick={this.showOrganizationInfo.bind(this)}>
+            <ListGroupItem className={styleClass + "text-wrap"} onClick={this.showOrganizationInfo.bind(this)}>
                 {organization.organizationName}
             </ListGroupItem>
 

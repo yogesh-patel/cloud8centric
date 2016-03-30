@@ -59,6 +59,12 @@ class SubscriptionList extends Component {
     render() {
 
         let {subscriptionList} = this.props;
+        let disabled = false;
+        let organizationId = localStorage.getItem('active_organization');
+        console.log(organizationId);
+        if(!organizationId){
+            disabled = true;
+        }
 
         let subscriptionDetails = null;
 
@@ -107,6 +113,7 @@ class SubscriptionList extends Component {
                 <Row>
                     <Col xs={12} sm={12} md={12} lg={12}>
                         <Button bsStyle="primary"
+                                disabled={disabled}
                                 className={"pull-right "+addBtnClass}
                                 onClick={this.gotoAddSubscriptions.bind(this)}>
                                 <Glyphicon glyph="plus"/> Add Subscription

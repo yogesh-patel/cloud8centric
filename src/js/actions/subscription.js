@@ -11,8 +11,6 @@ export function fetchSubscriptions(organizationId){
 
     return(dispatch) => {
 
-        dispatch({type:FETCH_SUBSCRIPTIONS});
-
         let endPointURL = 'organizations/'+organizationId+'/subscriptions';
         let subscriptionResponse = [];
         let count = 0;
@@ -24,39 +22,44 @@ export function fetchSubscriptions(organizationId){
             subscriptionResponse = response;
             let recursiveUpdate = false;
 
-            _.each(subscriptionResponse,(subscription)=>{
-                if(subscription){
+            if(_.size(organizationList) > 0){
 
-                    _.each(subscription.subscriptionProductList,(product, key)=>{
+                dispatch({type:FETCH_SUBSCRIPTIONS});
 
-                        subscriptionObject[count] = {
-                            id: subscription.id,
-                            name: subscription.name,
-                            details: {
-                                        deployedUrl: product.productUrl ? product.productUrl : null,
-                                        adminUserName: product.productAdminUserName ? product.productAdminUserName :  null
-                                    },
-                            status: product.provisioningStatus,
-                            productName: product.productName,
-                            version: product.productVersion,
-                            counter:key+1,
-                        }
+                _.each(subscriptionResponse,(subscription)=>{
+                    if(subscription){
 
-                        if(subscriptionObject[count].status == 'In-progress'){
-                            recursiveUpdate = true;
-                        }
-                        count += 1;
-                    });
+                        _.each(subscription.subscriptionProductList,(product, key)=>{
 
-                }
-            });
+                            subscriptionObject[count] = {
+                                id: subscription.id,
+                                name: subscription.name,
+                                details: {
+                                            deployedUrl: product.productUrl ? product.productUrl : null,
+                                            adminUserName: product.productAdminUserName ? product.productAdminUserName :  null
+                                        },
+                                status: product.provisioningStatus,
+                                productName: product.productName,
+                                version: product.productVersion,
+                                counter:key+1,
+                            }
 
-            dispatch({type:SUBSCRIPTIONS_RECEIVED,
-                payload:{
-                    subscriptionObject:subscriptionObject,
-                    recursiveUpdate:recursiveUpdate
-                }
-            });
+                            if(subscriptionObject[count].status == 'In-progress'){
+                                recursiveUpdate = true;
+                            }
+                            count += 1;
+                        });
+
+                    }
+                });
+
+                dispatch({type:SUBSCRIPTIONS_RECEIVED,
+                    payload:{
+                        subscriptionObject:subscriptionObject,
+                        recursiveUpdate:recursiveUpdate
+                    }
+                });
+            }
 
         })
 

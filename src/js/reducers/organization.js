@@ -10,7 +10,8 @@ const initialState = {
     subscriptionDetailsTab:false,
     statusText: null,
     selectedOption:'organization',
-    activeKey:1
+    activeKey:1,
+    currentPage : 0
 };
 
 export default createReducer(initialState, {
@@ -66,6 +67,13 @@ export default createReducer(initialState, {
 
         var newState = _.cloneDeep(state);
         newState.statusText = payload;
+        return newState;
+
+    },
+    CURRENT_PAGE_OF_ORGANIZATION_LIST: (state,payload)=>{
+
+        var newState = _.cloneDeep(state);
+        newState.currentPage = payload;
         return newState;
 
     }

@@ -311,15 +311,16 @@ class AddOrganization extends React.Component{
                                 </Input>
                             </Col>
                         </Row>
-                    <Row>
-                         <Button bsStyle="primary" bsSize="large" className="org-button" onClick={this.submitData.bind(this)}>
-                        Submit
-                        </Button>
-                        <Button type="reset" bsStyle="primary" bsSize="large" className="org-button"
-        onClick={this.onCancel.bind(this)}>
-                        Cancel
-                        </Button>
-                    </Row>
+
+                            <Button bsStyle="primary" className="pull-right" onClick={this.submitData.bind(this)}>
+                                 Submit
+                            </Button>
+
+                            <Button type="reset" className="pull-right right-buffer"
+                                onClick={this.onCancel.bind(this)}>
+                                Cancel
+                            </Button>
+
                     </Panel>
                 </form>
             </div>

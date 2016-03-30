@@ -140,9 +140,4 @@ export default createReducer(initialState, {
             loading:false
         });
     },
-    SHOW_SUBSCRIPTION_DETAILS: (state, payload) => {
-        return Object.assign({}, state, {
-            loading:true
-        });
-    },
 });

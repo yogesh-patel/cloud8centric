@@ -8,10 +8,10 @@ class OrganizationDetailItem extends React.Component {
     render() {
 
         var {selectedOrganization, organizationDetails} = this.props;
-        let selectedOrganization1 = null;
+        let organizationItemDetails = null;
         if(_.size(selectedOrganization) > 0){
 
-             selectedOrganization1 = <Row>
+             organizationItemDetails = <Row>
                                          <Col md = {6}>
                                              <FormControls.Static label="Name : " labelClassName="col-xs-4" wrapperClassName="col-xs-8" value={selectedOrganization.organizationName} />
                                              <FormControls.Static label="URL : " labelClassName="col-xs-4" wrapperClassName="col-xs-8" value={selectedOrganization.organizationURL} />
@@ -32,13 +32,13 @@ class OrganizationDetailItem extends React.Component {
 
         }
         else if(selectedOrganization === null){
-            selectedOrganization1  = <div className="subscriptions-table no-record-found-block">No Organization found</div>
+            organizationItemDetails  = <div className="subscriptions-table no-record-found-block">No Organization found</div>
         }
         return (
 
             <form className="form-horizontal admin-right-panel">
 
-                {selectedOrganization1}
+                {organizationItemDetails}
 
             </form>
 

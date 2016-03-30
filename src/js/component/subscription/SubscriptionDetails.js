@@ -44,7 +44,7 @@ class SubscriptionDetails extends Component {
 
         return (
             <Row>
-                <Col sm={12}>
+                <Col sm={12}>   
                     <Table responsive striped bordered condensed hover className="subscription-products-table">
                         <thead className="subscription-products-table-thead">
                         <tr>

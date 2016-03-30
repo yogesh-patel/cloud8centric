@@ -90,9 +90,11 @@ class OrganizationList extends React.Component {
         return (
             <div className="orgs-content">
                 <Row>
+                    
                     <Col xs={2} sm={2} md={2}>
                         <Input type="text" placeholder="Search"/>
                     </Col>
+
                     <Col xs={1} sm={1} md={1}>
                         <Button bsStyle="primary"
                             className="pull-right"
@@ -117,6 +119,13 @@ class OrganizationList extends React.Component {
                 <Row className="text-center">
                     <Col xs={3} sm={3} md={3}>
                         {pagination}
+                    </Col>
+                </Row>
+
+                <Row>
+                    <Col md = {12} xs={12} sm={12}>
+                        <div className = "page-footer">
+                        </div>
                     </Col>
                 </Row>
 

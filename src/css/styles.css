@@ -759,3 +759,11 @@ a.btn-xl{
 .subscription-username-width{
     width: 15%;
 }
+
+.text-wrap{
+    overflow-wrap: break-word;
+}
+
+.page-footer{
+  margin-bottom: 30px;
+}

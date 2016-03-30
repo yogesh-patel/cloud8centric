@@ -11,9 +11,7 @@ let {FETCH_ORGANIZATIONS, ORGANIZATIONS_RECEIVED, ORGANIZATION_SELECTED,
 export function fetchOrganizations(offset) {
 
     return (dispatch) => {
-        // dispatch({type: FETCH_ORGANIZATIONS});
 
-        //let endPointURL = 'organizations';
         let endPointURL = 'organizations?offset=' + offset + '&limit=10&sortBy=id&sort=ASC'
 
         get(endPointURL)
@@ -129,10 +127,7 @@ function getOrganizationDetails(organizationId){
 
 export function saveCurrentPageNumber(page) {
     let offset = (page - 1) * 10;
-    // return {
-    //     type: CURRENT_PAGE_OF_ORGANIZATION_LIST,
-    //     payload: offset
-    // }
+
     return (dispatch) => {
         dispatch({
 

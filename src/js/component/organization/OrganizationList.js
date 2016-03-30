@@ -102,6 +102,7 @@ class OrganizationList extends React.Component {
                         </Button>
                     </Col>
                 </Row>
+
                 <Row>
                     <Col xs={3} sm={3} md={3} className="organization-list">
                         <ListGroup>
@@ -109,18 +110,15 @@ class OrganizationList extends React.Component {
                         </ListGroup>
                     </Col>
                     <Col xs={9} sm={9} md={9}>
-                        {selectedOrganization ? <OrganizationDetails/> :
-                            <OrganizationDetails/>}
+                            <OrganizationDetails/>
                     </Col>
                 </Row>
+
                 <Row className="text-center">
                     <Col xs={3} sm={3} md={3}>
                         {pagination}
                     </Col>
                 </Row>
-
-                <Row>&nbsp;</Row>
-                <Row>&nbsp;</Row>
 
             </div>
         );
